@@ -204,6 +204,59 @@ td input,td select{max-width:180px;padding:8px;border:1px solid var(--line);bord
 @media(max-width:520px){.address-top{padding:10px 13px}.address-brand{font-size:16px}.address-brand-mark{width:39px;height:39px;border-radius:13px}.address-back{font-size:11px;padding:10px 11px;gap:6px}.address-shell{padding:14px 12px 15px}.address-hero{padding:23px 20px;border-radius:24px;min-height:0}.address-hero h1{font-size:34px}.address-hero-copy>p{font-size:12px}.address-perks span{font-size:10px}.address-panel{padding:18px 15px;border-radius:22px}.address-panel-head{gap:9px}.address-panel-head h2{font-size:18px}.address-panel-head p{font-size:10px}.address-footer{font-size:9px}.address-card{padding:14px}}
 @media(prefers-reduced-motion:reduce){.address-page,.address-page *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
+
+/* All store sections open as immersive full-screen experiences */
+.backdrop{padding:0;align-items:stretch;justify-content:stretch;overflow:auto;background:linear-gradient(135deg,#f8faff 0%,#f0f2ff 48%,#fff7fc 100%);backdrop-filter:none;overscroll-behavior:contain}
+.backdrop:before,.backdrop:after{content:"";position:fixed;z-index:0;pointer-events:none;width:420px;height:420px;border-radius:50%;filter:blur(85px);opacity:.42}
+.backdrop:before{top:-200px;right:-110px;background:#b8c4ff}
+.backdrop:after{bottom:-220px;left:-100px;background:#ffd0e8}
+.backdrop.open{animation:storePageIn .35s cubic-bezier(.2,.8,.2,1) both}
+.backdrop .modal{position:relative;z-index:1;width:100%;max-width:none;height:100%;height:100dvh;max-height:none;overflow:auto;overscroll-behavior:contain;border-radius:0;padding:clamp(16px,3vw,38px);background:transparent;box-shadow:none;animation:storeContentIn .4s both}
+.backdrop .modalhead{position:sticky;top:calc(clamp(16px,3vw,38px) * -1);z-index:6;max-width:1180px;margin:0 auto 24px;padding:12px 0 17px;background:#f7f8ffdc;backdrop-filter:blur(20px);border-bottom:1px solid #dfe4fa;display:flex}
+.backdrop .modalhead h2{font-size:clamp(25px,3vw,36px);color:#30385f}
+.backdrop .modalhead .close{background:#fff;border:1px solid #e4e8fb;box-shadow:0 5px 18px #6574b01c;color:#6570a0}
+.backdrop #accountContent,.backdrop #cartContent,.backdrop #checkoutContent,.backdrop #detailContent{width:min(1120px,100%);margin:0 auto;position:relative}
+#accountModal .welcome{padding:clamp(25px,4vw,45px);border-radius:28px;background:linear-gradient(115deg,#6479f7,#8b6ded 58%,#e68ac9);box-shadow:0 20px 55px #8174ec42}
+#accountModal .welcome:after{content:"✦";position:absolute;left:7%;top:0;font-size:130px;line-height:1;color:#ffffff19;transform:rotate(15deg);pointer-events:none}
+#accountModal .welcome h2{font-size:clamp(27px,4vw,43px);position:relative;z-index:1}
+#accountModal .welcome p{font-size:clamp(12px,1.3vw,15px);max-width:640px;position:relative;z-index:1}
+#accountModal #accountContent>form{max-width:650px;margin:25px auto;padding:clamp(20px,3vw,34px);border:1px solid #ffffff;background:#ffffffc9;border-radius:25px;box-shadow:0 16px 45px #6675bd17;backdrop-filter:blur(18px)}
+#accountModal #accountContent>.muted,#accountModal #accountContent>.noticebar{max-width:650px;margin:18px auto}
+#accountModal .field{margin:17px 0}
+#accountModal .field input,#accountModal .field textarea,#accountModal .field select{background:#fff;border-color:#e3e7f8;border-radius:15px;padding:15px}
+#accountModal .tabs{max-width:1120px;margin:22px auto;padding:7px;gap:8px;border:1px solid #fff;border-radius:18px;background:#ffffffa8;box-shadow:0 10px 30px #7782b00b}
+#accountModal .tab{flex:1;min-width:100px;border-radius:13px;padding:13px 15px;background:transparent;color:#727b9e;font-size:12px}
+#accountModal .tab.active{background:linear-gradient(100deg,#687cf7,#9866ed);color:white;box-shadow:0 7px 18px #8e7af344}
+#accountModal #profilePanel{max-width:1120px;margin:0 auto}
+#accountModal #profilePanel .order{padding:clamp(17px,2.5vw,26px);background:#ffffffd9;border:1px solid #fff;border-radius:22px;box-shadow:0 12px 35px #7782b010}
+#accountModal #profilePanel .empty{border:1px dashed #d9def4;border-radius:22px;background:#ffffffa8;margin:14px 0}
+#accountModal #accountContent>button{display:block;max-width:1120px;margin:20px auto 0!important;padding:14px 20px;border-radius:15px}
+#cartModal #cartContent{max-width:950px}
+#cartModal .cartitem{grid-template-columns:88px minmax(0,1fr) auto;padding:19px;border:1px solid #ffffff;background:#ffffffc9;border-radius:21px;box-shadow:0 10px 30px #6976b410}
+#cartModal .mini{height:104px;border-radius:15px;font-size:17px}
+#cartModal .totals,#checkoutModal .totals{padding:22px;border:1px solid #fff;background:#ffffffc9;border-radius:22px;box-shadow:0 10px 30px #6976b410}
+#cartModal #cartContent>.btn,#checkoutModal #checkoutContent form>.btn{padding:15px 22px;border-radius:15px}
+#checkoutModal #checkoutContent>form{max-width:850px;margin:22px auto;padding:clamp(19px,3vw,34px);border:1px solid #fff;border-radius:25px;background:#ffffffc9;box-shadow:0 15px 45px #6976b414}
+#checkoutModal .field input,#checkoutModal .field textarea,#checkoutModal .field select{background:#fff;border-radius:14px;padding:14px}
+#detailModal .modalhead{max-width:1180px}
+#detailModal .detail-layout{max-width:1180px;margin:0 auto;padding:16px 0 40px}
+#detailModal .detailcover{top:100px;box-shadow:0 25px 70px #6270a02b;border:1px solid #ffffff70}
+#detailModal .detailbody{padding:clamp(12px,2vw,24px);border:1px solid #ffffffc9;border-radius:28px;background:#ffffffad;box-shadow:0 15px 45px #6976b410;backdrop-filter:blur(14px)}
+#detailModal .detailbullets{background:linear-gradient(135deg,#f1f3ff,#fff4fb);border:1px solid #fff}
+@keyframes storePageIn{from{opacity:0}to{opacity:1}}@keyframes storeContentIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){
+ .backdrop .modal{padding:15px}
+ .backdrop .modalhead{top:-15px;padding:8px 0 13px;margin-bottom:17px}
+ #accountModal .welcome{border-radius:23px}
+ #accountModal .tabs{display:grid;grid-template-columns:1fr 1fr}
+ #cartModal .cartitem{grid-template-columns:58px minmax(0,1fr) auto;padding:11px;gap:9px}
+ #cartModal .mini{height:76px;font-size:12px}
+ #detailModal .detail-layout{grid-template-columns:1fr;gap:17px}
+ #detailModal .detailcover{position:relative;top:auto;min-height:250px;max-width:330px;width:100%;margin:0 auto;font-size:32px}
+ #detailModal .detailbody{padding:17px;border-radius:22px}
+}
+@media(prefers-reduced-motion:reduce){.backdrop,.backdrop *{animation:none!important;transition:none!important}}
+
 </style>
 </head>
 <body>
