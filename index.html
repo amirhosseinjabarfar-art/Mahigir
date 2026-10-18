@@ -257,6 +257,18 @@ td input,td select{max-width:180px;padding:8px;border:1px solid var(--line);bord
 }
 @media(prefers-reduced-motion:reduce){.backdrop,.backdrop *{animation:none!important;transition:none!important}}
 
+
+.checkout-address-wrap{padding:clamp(18px,3vw,30px);margin:0 auto 18px;max-width:850px;border:1px solid #fff;border-radius:24px;background:#ffffffc9;box-shadow:0 14px 38px #6976b410}
+.checkout-address-card{padding:17px;border-radius:16px;background:linear-gradient(135deg,#f2f4ff,#fff5fb);border:1px solid #e8e9fb;line-height:2;margin:13px 0}
+.checkout-address-card p{margin:2px 0;color:#737c9e;font-size:12px}
+#checkoutModal .field select{width:100%;padding:14px;border:1px solid #e0e4f5;border-radius:13px;background:#fff;font:inherit}
+.admin-login-card{width:min(560px,100%);margin:clamp(24px,8vh,90px) auto;padding:clamp(24px,4vw,42px);border-radius:28px;border:1px solid #fff;background:#ffffffd9;box-shadow:0 25px 80px #6d79bb22;backdrop-filter:blur(20px);text-align:center}
+.admin-login-card .address-brand-mark{margin:0 auto 17px;width:60px;height:60px}
+.admin-login-card h1,.admin-login-card h2{font-family:Lalezar,Vazirmatn,sans-serif;color:#30385f;font-size:clamp(25px,4vw,36px);margin:12px 0}
+.admin-login-card>p{color:#828bad;font-size:12px;line-height:2}
+.admin-login-card form{text-align:right;margin-top:25px}
+.admin-login-card .field input{width:100%;padding:15px;border:1px solid #e1e5f7;border-radius:14px;background:#fff}
+
 </style>
 </head>
 <body>
@@ -674,68 +686,93 @@ function deleteAddress(i){
  renderAddresses();notify("نشانی حذف شد.");
 }
 function useAddress(i){const a=readAddresses()[i];if(!a)return;closeAddressPage();renderCheckout(a);openModal("checkoutModal")}
+let selectedCheckoutAddress=0;
 function startCheckout(){
- if(!cart.length){notify("سبد خرید خالی است.");return}
+ if(!cart.some(i=>getBook(i.id)&&!getBook(i.id).comingSoon)){notify("سبد خرید خالی است.");return}
  if(!currentUser){closeModal("cartModal");openAccount();notify("برای ثبت سفارش وارد حساب شو.");return}
- closeModal("cartModal");renderCheckout(readAddresses()[0]||{});openModal("checkoutModal");
+ const saved=readAddresses();
+ if(!saved.length){closeModal("cartModal");openAddresses();notify("ابتدا از بخش نشانی‌های من یک نشانی ذخیره کن.");return}
+ selectedCheckoutAddress=Math.max(0,Math.min(saved.length-1,Number(localStorage.getItem("mh_checkout_address_"+currentUser.id)||0)));
+ closeModal("cartModal");renderCheckout();openModal("checkoutModal");
 }
-function renderCheckout(a={}){
- document.getElementById("checkoutContent").innerHTML=`<div class="totals"><div class="totalrow"><span>جمع کتاب‌ها</span><strong>${money(subtotal())}</strong></div><div class="totalrow"><span>ارسال تیپاکس</span><strong>${money(SHIPPING)}</strong></div><div class="totalrow final"><span>مبلغ نهایی</span><strong>${money(subtotal()+SHIPPING)}</strong></div></div>
- <form onsubmit="submitOrder(event)"><div class="field"><label>نام و نام خانوادگی گیرنده</label><input name="recipient" required maxlength="100" value="${esc(a.recipient||"")}"></div>
- <div class="field"><label>شماره تماس</label><input name="phone" required maxlength="20" value="${esc(a.phone||"")}"></div><div class="field"><label>استان و شهر</label><input name="city" required maxlength="100" value="${esc(a.city||"")}"></div>
- <div class="field"><label>نشانی کامل</label><textarea name="address" required maxlength="1000">${esc(a.address||"")}</textarea></div>
- <div class="field"><label>کد پستی ۱۰ رقمی</label><input name="postal_code" required inputmode="numeric" pattern="[0-9۰-۹]{10}" maxlength="10" value="${esc(a.postal_code||"")}"></div>
- <div class="field"><label>روش ارسال</label><select name="shipping_method"><option value="تیپاکس">تیپاکس</option></select></div>
- <button type="submit" class="btn primary" style="width:100%">ثبت سفارش نهایی</button></form>`;
+function checkoutAddressChanged(){
+ const sel=document.getElementById("checkoutAddressSelect");if(!sel)return;
+ selectedCheckoutAddress=Number(sel.value)||0;
+ if(currentUser)localStorage.setItem("mh_checkout_address_"+currentUser.id,String(selectedCheckoutAddress));
+ renderCheckout();
+}
+function renderCheckout(){
+ const saved=readAddresses();
+ if(!saved.length){document.getElementById("checkoutContent").innerHTML='<div class="address-empty"><div class="address-empty-icon">⌖</div><strong>هنوز نشانی‌ای ذخیره نکرده‌ای</strong><p>برای ثبت سفارش، ابتدا یک نشانی بساز.</p><button type="button" class="btn primary" onclick="closeModal(\'checkoutModal\');openAddresses()">افزودن نشانی</button></div>';return}
+ if(selectedCheckoutAddress>=saved.length)selectedCheckoutAddress=0;
+ const a=saved[selectedCheckoutAddress]||saved[0];
+ document.getElementById("checkoutContent").innerHTML=`<div class="checkout-address-wrap"><div class="address-panel-head"><span class="address-panel-icon list-icon">⌖</span><div><h2>انتخاب نشانی ارسال</h2><p>نشانی را از موارد ذخیره‌شده انتخاب کن؛ نیازی به ورود دوباره آدرس نیست.</p></div></div>
+ <div class="field"><label for="checkoutAddressSelect">نشانی‌های ذخیره‌شده</label><select id="checkoutAddressSelect" onchange="checkoutAddressChanged()">${saved.map((x,i)=>`<option value="${i}" ${i===selectedCheckoutAddress?"selected":""}>${esc(x.recipient)} — ${esc(x.city)} — ${esc(x.phone)}</option>`).join("")}</select></div>
+ <div class="checkout-address-card"><strong>${esc(a.recipient)}</strong><p>${esc(a.phone)}</p><p>${esc(a.city)}، ${esc(a.address)}</p><p>کد پستی: ${esc(a.postal_code)}</p></div><button type="button" class="address-action" onclick="closeModal('checkoutModal');openAddresses()">مدیریت نشانی‌ها ✎</button></div>
+ <div class="totals"><div class="totalrow"><span>جمع کتاب‌ها</span><strong>${money(subtotal())}</strong></div><div class="totalrow"><span>ارسال تیپاکس</span><strong>${money(SHIPPING)}</strong></div><div class="totalrow final"><span>مبلغ نهایی</span><strong>${money(subtotal()+SHIPPING)}</strong></div></div>
+ <form onsubmit="submitOrder(event)"><div class="field"><label>روش ارسال</label><select name="shipping_method"><option value="تیپاکس">تیپاکس</option></select></div><button type="submit" class="btn primary" style="width:100%">ثبت سفارش نهایی ✨</button></form>`;
 }
 async function submitOrder(e){
- e.preventDefault();if(!db){notify("اتصال Supabase برقرار نیست.");return}if(!currentUser||!cart.length)return;
- const f=new FormData(e.target),recipient=String(f.get("recipient")).trim(),phone=String(f.get("phone")).trim(),city=String(f.get("city")).trim(),address=String(f.get("address")).trim(),postal_code=normalizeDigits(f.get("postal_code")).trim();
- if(!/^\d{10}$/.test(postal_code)){notify("کد پستی باید ۱۰ رقم باشد.");return}
+ e.preventDefault();
+ if(!db){notify("اتصال Supabase برقرار نیست.");return}
+ if(!currentUser){notify("برای ثبت سفارش وارد حساب شو.");return}
+ if(!cart.length){notify("سبد خرید خالی است.");return}
+ const saved=readAddresses(),idx=Number(document.getElementById("checkoutAddressSelect")?.value),a=saved[idx];
+ if(!a){notify("یک نشانی ذخیره‌شده انتخاب کن.");return}
  const items=cart.map(i=>{const b=getBook(i.id);return b&&!b.comingSoon?{id:i.id,title:b.title,price:Number(b.price),qty:i.qty}:null}).filter(Boolean);
  if(!items.length){notify("سبد خرید خالی است.");return}
  const itemsTotal=items.reduce((n,i)=>n+i.price*i.qty,0);
- const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient,phone,city,address,postal_code,shipping_method:"تیپاکس",items,total_price:itemsTotal+SHIPPING,shipping_price:SHIPPING,stage_id:stages[0]?.id||1};
- const btn=e.target.querySelector("button[type=submit]");btn.disabled=true;btn.textContent="در حال ثبت سفارش...";
+ const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:normalizeDigits(a.postal_code).trim(),shipping_method:"تیپاکس",items,total_price:itemsTotal+SHIPPING,stage_id:stages[0]?.id||1};
+ const btn=e.target.querySelector('button[type="submit"]');if(btn){btn.disabled=true;btn.textContent="در حال ثبت سفارش..."}
  try{
-  const {error}=await db.from("mahigir_orders").insert(payload);if(error)throw error;
-  addresses=readAddresses();if(!addresses.some(a=>a.recipient===recipient&&a.phone===phone&&a.address===address)){addresses.push({recipient,phone,city,address,postal_code,shipping_method:"تیپاکس"});saveAddresses()}
-  cart=[];saveCart();renderCart();renderBooks();renderBestsellers();closeModal("checkoutModal");notify("سفارش با موفقیت ثبت شد.");renderProfile();openModal("accountModal");
- }catch(err){console.error(err);notify("ثبت سفارش انجام نشد؛ جدول و مجوزهای Supabase را بررسی کن.")}
- finally{btn.disabled=false;btn.textContent="ثبت سفارش نهایی"}
+  const {error}=await db.from("mahigir_orders").insert(payload).select("id").single();
+  if(error)throw error;
+  cart=[];saveCart();renderCart();renderBooks();renderBestsellers();closeModal("checkoutModal");notify("سفارش با موفقیت ثبت شد ✨");
+  try{await loadOrders()}catch(err){console.warn("Order saved but order list could not refresh:",err)}
+  openAccount();
+ }catch(err){
+  console.error("Mahigir order insert failed:",err);const msg=String(err?.message||err?.details||err?.hint||"");
+  if(/row-level security|permission denied|policy/i.test(msg))notify("ثبت سفارش به‌دلیل مجوزهای Supabase انجام نشد (RLS).");
+  else if(/column .* does not exist|schema cache/i.test(msg))notify("ساختار جدول سفارش‌ها با کد هماهنگ نیست: "+msg.slice(0,130));
+  else if(/not-null|null value/i.test(msg))notify("یک ستون اجباری در جدول سفارش‌ها مقدار ندارد: "+msg.slice(0,130));
+  else notify("ثبت سفارش ناموفق بود: "+(msg||"خطای نامشخص؛ کنسول مرورگر را بررسی کن.").slice(0,170));
+ }finally{if(btn){btn.disabled=false;btn.textContent="ثبت سفارش نهایی ✨"}}
 }
 
-/* پنل مدیریت تمام‌صفحه؛ برای عملیات سفارش‌ها، حساب مدیر و مجوزهای دیتابیس لازم است. */
+/* پنل مدیریت: رمز فقط از طریق Edge Function سمت سرور */
+let adminPassword="";
+async function adminApi(action,extra={}){
+ const response=await fetch(PROJECT_URL+"/functions/v1/admin-api",{method:"POST",headers:{"Content-Type":"application/json","apikey":PUBLIC_KEY,"Authorization":"Bearer "+PUBLIC_KEY},body:JSON.stringify({password:adminPassword,action,...extra})});
+ let result={};try{result=await response.json()}catch{}
+ if(!response.ok||result.error)throw new Error(result.error||("خطای سرور ("+response.status+")"));
+ return result;
+}
 function openAdmin(){
- document.getElementById("adminPage").classList.add("open");document.body.style.overflow="hidden";
- if(!currentUser){
-  document.getElementById("adminContent").innerHTML='<div class="welcome"><h2>ورود مدیر</h2><p>ابتدا وارد حساب مدیریتی خودت شو.</p></div><button class="btn primary" style="margin-top:15px" onclick="closeAdmin();openAccount()">ورود به حساب کاربری</button>';
-  return;
+ const page=document.getElementById("adminPage");page.classList.add("open");document.body.style.overflow="hidden";adminUnlocked=false;adminPassword="";
+ document.getElementById("adminContent").innerHTML=`<div class="admin-login-card"><div class="address-brand-mark">م</div><span class="address-kicker"><i></i> SECURE ADMIN ACCESS</span><h1>ورود به پنل مدیریت</h1><p>برای دسترسی به سفارش‌ها و تنظیمات، رمز اختصاصی مدیریت را وارد کن.</p><form onsubmit="submitAdminPassword(event)"><div class="field"><label>رمز مدیریت</label><input name="admin_password" type="password" autocomplete="current-password" required autofocus placeholder="رمز اختصاصی" dir="ltr"></div><button class="btn primary" type="submit" style="width:100%">ورود امن ←</button></form><p class="muted">رمز در کد صفحه ذخیره نمی‌شود و باید سمت سرور بررسی شود.</p></div>`;
+}
+function closeAdmin(){document.getElementById("adminPage").classList.remove("open");document.body.style.overflow="";adminUnlocked=false;adminPassword="";adminOrders=[]}
+async function submitAdminPassword(e){
+ e.preventDefault();const input=e.target.elements.admin_password,candidate=String(input?.value||"");if(!candidate)return;
+ adminPassword=candidate;const host=document.getElementById("adminContent"),btn=e.target.querySelector('button[type="submit"]');if(btn){btn.disabled=true;btn.textContent="در حال بررسی..."}
+ try{await adminApi("admin-login");adminUnlocked=true;await loadStages();await loadAdminOrders();renderAdmin();notify("ورود مدیر موفق بود.");}
+ catch(err){
+  console.error("Admin login failed:",err);adminPassword="";adminUnlocked=false;const message=String(err?.message||"");
+  if(/Failed to fetch|NetworkError/i.test(message)){host.innerHTML='<div class="admin-login-card"><h2>اتصال پنل برقرار نشد</h2><p>تابع امن admin-api روی پروژه Supabase هنوز در دسترس نیست یا منتشر نشده است.</p><button class="btn soft" onclick="openAdmin()">تلاش دوباره</button><button class="btn white" onclick="closeAdmin()">بستن</button></div>';}
+  else{notify("ورود ناموفق بود: "+message.slice(0,150));if(input)input.value="";if(btn){btn.disabled=false;btn.textContent="ورود امن ←"}}
  }
- unlockAdmin();
 }
-function closeAdmin(){document.getElementById("adminPage").classList.remove("open");document.body.style.overflow="";adminUnlocked=false}
-async function unlockAdmin(){
- const host=document.getElementById("adminContent");host.innerHTML='<div class="empty">در حال بررسی دسترسی مدیریت...</div>';
- try{
-  const {data,error}=await db.from("mahigir_profiles").select("is_admin,username,display_name").eq("id",currentUser.id).single();
-  if(error)throw error;
-  profile={...profile,...data};
-  if(data.is_admin!==true){host.innerHTML='<div class="order"><h2>دسترسی مجاز نیست</h2><p class="muted">این حساب مدیر نیست. دسترسی مدیریت باید در Supabase برای حساب مدیر فعال شده باشد.</p></div>';return}
-  adminUnlocked=true;await loadStages();await loadAdminOrders();renderAdmin();
- }catch(err){console.error(err);host.innerHTML='<div class="order"><h2>خطا در بررسی دسترسی</h2><p class="muted">جدول پروفایل یا سیاست‌های دسترسی Supabase را بررسی کن.</p><button class="btn soft" onclick="unlockAdmin()">تلاش دوباره</button></div>'}
-}
-async function loadAdminOrders(){
- const {data,error}=await db.from("mahigir_orders").select("*").order("created_at",{ascending:false});
- if(error)throw error;adminOrders=data||[];
+async function loadAdminOrders(){if(!adminUnlocked)throw new Error("ابتدا رمز مدیریت را وارد کن.");const result=await adminApi("admin-orders");adminOrders=Array.isArray(result.orders)?result.orders:[]}
+async function loadStages(){
+ if(adminUnlocked){const result=await adminApi("admin-stages");stages=Array.isArray(result.stages)&&result.stages.length?result.stages:STAGES;}
+ else if(db){const {data,error}=await db.from("mahigir_order_stages").select("*").order("position");if(error){console.warn(error);stages=STAGES;return}stages=data?.length?data:STAGES}
 }
 function renderAdmin(){
- if(!adminUnlocked)return;
- const total=adminOrders.reduce((n,o)=>n+Number(o.total_price||0),0);
- document.getElementById("adminContent").innerHTML=`<div class="welcome"><h2>سلام ${esc(profile?.display_name||profile?.username||"مدیر")} 👋</h2><p>مدیریت سفارش‌ها و کدهای رهگیری فروشگاه ماهیگیر</p></div>
+ if(!adminUnlocked)return;const total=adminOrders.reduce((n,o)=>n+Number(o.total_price||0),0);
+ document.getElementById("adminContent").innerHTML=`<div class="welcome"><h2>پنل مدیریت ماهیگیر ✨</h2><p>مدیریت سفارش‌ها و کدهای رهگیری؛ ورود با رمز اختصاصی</p></div>
  <div class="adminstats"><div class="adminstat"><strong>${adminOrders.length.toLocaleString("fa-IR")}</strong><span>تعداد سفارش‌ها</span></div><div class="adminstat"><strong>${adminOrders.filter(o=>!o.tracking_code).length.toLocaleString("fa-IR")}</strong><span>بدون کد رهگیری</span></div><div class="adminstat"><strong>${money(total)}</strong><span>جمع مبالغ سفارش‌ها</span></div></div>
- <div class="tabs"><button class="tab active" onclick="adminTab('orders',this)">سفارش‌ها و نشانی‌ها</button><button class="tab" onclick="adminTab('stages',this)">مراحل سفارش</button><button class="tab" onclick="loadAdminOrders().then(renderAdmin).catch(()=>notify('دریافت مجدد سفارش‌ها ناموفق بود.'))">بروزرسانی</button></div>
- <div id="adminPanel">${adminOrdersHTML()}</div><button class="btn white" style="margin-top:16px" onclick="closeAdmin()">خروج از پنل مدیریت</button>`;
+ <div class="tabs"><button class="tab active" onclick="adminTab('orders',this)">سفارش‌ها و نشانی‌ها</button><button class="tab" onclick="adminTab('stages',this)">مراحل سفارش</button><button class="tab" onclick="loadAdminOrders().then(renderAdmin).catch(e=>notify('خطا: '+e.message))">بروزرسانی</button></div>
+ <div id="adminPanel">${adminOrdersHTML()}</div><button class="btn white" style="margin-top:16px" onclick="closeAdmin()">خروج امن از پنل مدیریت</button>`;
 }
 function adminTab(tab,el){
  document.querySelectorAll("#adminContent .tab").forEach(x=>x.classList.remove("active"));el.classList.add("active");
@@ -753,20 +790,17 @@ function adminOrdersHTML(){
  </tr>`).join("")}</tbody></table></div>`;
 }
 async function saveOrder(id){
- if(!adminUnlocked)return;
- const stage_id=document.getElementById("stage-"+id).value,tracking_code=document.getElementById("track-"+id).value.trim()||null;
- const {error}=await db.from("mahigir_orders").update({stage_id,tracking_code}).eq("id",id);
- if(error){console.error(error);notify("ذخیره انجام نشد؛ سیاست مدیریت را بررسی کن.");return}
- await loadAdminOrders();renderAdmin();notify("سفارش به‌روزرسانی شد.");
+ if(!adminUnlocked)return;const stage_id=document.getElementById("stage-"+id).value,tracking_code=document.getElementById("track-"+id).value.trim()||null;
+ try{await adminApi("admin-save-order",{id,stage_id,tracking_code});await loadAdminOrders();renderAdmin();notify("سفارش به‌روزرسانی شد.");}
+ catch(err){console.error(err);notify("ذخیره سفارش ناموفق بود: "+String(err.message||"").slice(0,150))}
 }
 function adminStagesHTML(){
  return `<h3>مراحل پیگیری</h3><p class="muted">نام مراحل برای نمایش وضعیت سفارش‌ها استفاده می‌شود.</p><div class="tablewrap"><table><thead><tr><th>ترتیب</th><th>نام مرحله</th><th>ذخیره</th></tr></thead><tbody>${stages.map(s=>`<tr><td>${s.position||s.id}</td><td><input id="stageName-${s.id}" value="${esc(s.title)}"></td><td><button class="btn soft" onclick="renameStage('${s.id}')">ذخیره</button></td></tr>`).join("")}</tbody></table></div>`;
 }
 async function renameStage(id){
  if(!adminUnlocked)return;const title=document.getElementById("stageName-"+id).value.trim();if(!title)return;
- const {error}=await db.from("mahigir_order_stages").update({title}).eq("id",id);
- if(error){console.error(error);notify("تغییر مرحله انجام نشد.");return}
- await loadStages();renderAdmin();notify("مرحله ذخیره شد.");
+ try{await adminApi("admin-rename-stage",{id,title});await loadStages();renderAdmin();notify("مرحله ذخیره شد.");}
+ catch(err){console.error(err);notify("ذخیره مرحله ناموفق بود: "+String(err.message||"").slice(0,150))}
 }
 async function initialize(){
  renderBooks();renderBestsellers();updateCount();
