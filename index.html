@@ -170,6 +170,40 @@ td input,td select{max-width:180px;padding:8px;border:1px solid var(--line);bord
  #detailModal .modal{padding:15px}.detailbody p{font-size:13px}.detailbullets{font-size:12px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Full-screen address book */
+.address-page{position:fixed;inset:0;z-index:1200;display:none;overflow-y:auto;isolation:isolate;background:linear-gradient(135deg,#f9fbff 0%,#f1f4ff 48%,#fff7fb 100%);color:#20294a}
+.address-page.open{display:block;animation:addressPageIn .45s cubic-bezier(.2,.8,.2,1) both}
+.address-page *{box-sizing:border-box}
+.address-glow{position:fixed;z-index:-2;width:440px;height:440px;border-radius:50%;filter:blur(75px);opacity:.43;pointer-events:none;animation:addressFloat 12s ease-in-out infinite alternate}
+.ag-one{top:-190px;right:-80px;background:#a9b9ff}.ag-two{bottom:-210px;left:-100px;background:#ffc4e3;animation-delay:-4s}
+.address-noise{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.2;background-image:radial-gradient(#9aa9d8 1px,transparent 1px);background-size:23px 23px;mask-image:linear-gradient(to bottom,black,transparent 90%)}
+.address-top{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px max(22px,calc((100vw - 1180px)/2));background:rgba(255,255,255,.72);backdrop-filter:blur(20px);border-bottom:1px solid rgba(140,155,210,.2)}
+.address-brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:#252e58;font-weight:900;font-size:19px}.address-brand small{display:block;font-size:11px;color:#8790b2;font-weight:700;margin-top:1px}
+.address-brand-mark{display:grid;place-items:center;width:45px;height:45px;border-radius:16px;color:white;background:linear-gradient(140deg,#6c7cff,#a45cf2 60%,#ef83c0);box-shadow:0 9px 25px #8994f366;font-family:Lalezar,cursive;font-size:25px;animation:addressLogoGlow 3s ease-in-out infinite}
+.address-back{display:flex;align-items:center;gap:12px;padding:12px 17px;border:1px solid #e0e5fb;border-radius:15px;background:#fff;color:#515d8c;font-family:inherit;font-weight:800;cursor:pointer;transition:.25s;box-shadow:0 5px 18px #5c6ab00b}.address-back:hover{transform:translateY(-2px);box-shadow:0 10px 24px #7181cf24;border-color:#b8c2ff}.address-back span{font-size:20px;color:#7a6df1}
+.address-shell{max-width:1180px;margin:0 auto;padding:30px 24px 20px}
+.address-hero{position:relative;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;min-height:270px;padding:34px 42px;overflow:hidden;border:1px solid rgba(255,255,255,.9);border-radius:32px;background:linear-gradient(115deg,rgba(255,255,255,.94),rgba(244,241,255,.84));box-shadow:0 25px 80px #7482bd18}
+.address-hero:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;padding:1px;background:linear-gradient(130deg,#fff,#c6cfff88,#ffc9e788);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
+.address-kicker{display:inline-flex;align-items:center;gap:8px;color:#7a69d9;font-size:10px;letter-spacing:2px;font-weight:900}.address-kicker i{width:7px;height:7px;border-radius:50%;background:#8d7bff;box-shadow:0 0 12px #9586ff;animation:addressPulse 1.8s infinite}
+.address-hero h1{font-family:Lalezar,Vazirmatn,sans-serif;font-size:clamp(34px,4.2vw,52px);line-height:1.3;margin:10px 0;color:#273158}.address-hero h1 span{background:linear-gradient(90deg,#6677f4,#a15fe8,#ed80b7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.address-hero-copy>p{max-width:520px;color:#7780a2;line-height:2;margin:0;font-size:14px}.address-perks{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}.address-perks span{padding:8px 12px;border:1px solid #e6e8fb;border-radius:100px;background:#fff9;color:#7079a3;font-size:11px;font-weight:800}
+.address-hero-art{position:relative;min-height:210px;display:grid;place-items:center}.address-ring{position:absolute;border:1px solid #aeb5ff75;border-radius:50%;animation:addressSpin 18s linear infinite}.ring-a{width:190px;height:190px}.ring-b{width:145px;height:145px;border-style:dashed;animation-direction:reverse;animation-duration:25s}.address-pin{display:grid;place-items:center;width:100px;height:100px;border-radius:34px 34px 34px 12px;transform:rotate(-8deg);font-size:61px;color:white;background:linear-gradient(145deg,#6f7eff,#9b64ef 70%,#ec86c5);box-shadow:0 18px 50px #9c7cf27a, inset 0 1px 1px #fff9;animation:addressBob 4s ease-in-out infinite}
+.address-float{position:absolute;padding:10px 13px;border-radius:13px;border:1px solid #ffffff;background:#ffffffd9;box-shadow:0 10px 30px #6f7dc51a;color:#6e7199;font-size:11px;font-weight:900;backdrop-filter:blur(12px);animation:addressBob 4s ease-in-out infinite}.af-one{top:20px;right:2%}.af-two{bottom:17px;left:1%;animation-delay:-2s}
+.address-columns{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:20px;margin-top:22px;align-items:start}
+.address-panel{min-width:0;padding:25px;border:1px solid #ffffffd9;border-radius:26px;background:#ffffffc9;backdrop-filter:blur(18px);box-shadow:0 15px 50px #6e7ab814;animation:addressRise .55s both}.address-list-panel{animation-delay:.12s}
+.address-panel-head{display:flex;align-items:center;gap:12px;margin-bottom:23px}.address-panel-icon{display:grid;place-items:center;flex:0 0 44px;height:44px;border-radius:15px;background:linear-gradient(140deg,#e9ecff,#f7e9ff);color:#7c70eb;font-size:25px;box-shadow:inset 0 1px 0 white}.list-icon{background:linear-gradient(140deg,#e3f7ff,#f1eaff);color:#6688df}
+.address-panel-head h2{font-family:Lalezar,Vazirmatn,sans-serif;font-size:21px;margin:0;color:#30385f}.address-panel-head p{font-size:11px;color:#8c93b0;margin:2px 0 0}.address-counter{margin-right:auto;display:grid;place-items:center;min-width:32px;height:32px;padding:0 9px;border-radius:11px;background:#eeefff;color:#7d70e7;font-weight:900}
+.address-form{display:grid;gap:14px}.address-field label{display:block;margin:0 0 7px;color:#626b91;font-size:12px;font-weight:900}.address-field input,.address-field textarea{display:block;width:100%;padding:13px 14px;border:1px solid #e5e8f6;border-radius:14px;outline:none;background:#fafbff;color:#293254;font:inherit;font-size:13px;transition:border-color .2s,box-shadow .2s,background .2s}.address-field textarea{min-height:91px;resize:vertical}.address-field input:focus,.address-field textarea:focus{border-color:#9b94ff;background:#fff;box-shadow:0 0 0 4px #9586ff1b}.address-field input::placeholder,.address-field textarea::placeholder{color:#b0b5ca}
+.address-form-actions{display:flex;gap:9px;margin-top:3px}.address-save{flex:1;border:0;border-radius:15px;padding:14px 17px;color:#fff;font:inherit;font-weight:900;cursor:pointer;background:linear-gradient(100deg,#687cf7,#9866ed 55%,#dc7ec4);box-shadow:0 10px 25px #8e7af34f;transition:transform .22s,box-shadow .22s}.address-save:hover{transform:translateY(-2px);box-shadow:0 15px 30px #8e7af366}.address-cancel{border:1px solid #e5e7f5;border-radius:14px;padding:0 15px;background:#fff;color:#7d84a5;font:inherit;font-weight:800;cursor:pointer}
+.address-cards{display:grid;gap:12px}.address-card{position:relative;padding:17px;border:1px solid #e8eaf7;border-radius:19px;background:linear-gradient(135deg,#fff,#fbfaff);transition:transform .22s,border-color .22s,box-shadow .22s;overflow:hidden}.address-card:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(#6f7ff7,#c77be9,#f18cbb);opacity:.75}.address-card:hover{transform:translateY(-2px);border-color:#d3d6fb;box-shadow:0 12px 26px #7681c41a}.address-card-top{display:flex;align-items:center;gap:10px}.address-avatar{display:grid;place-items:center;width:39px;height:39px;border-radius:13px;background:linear-gradient(145deg,#e8ecff,#fae7f6);color:#7c6fe1;font-size:18px}.address-recipient{font-weight:900;color:#333c65;font-size:14px}.address-phone{font-size:11px;color:#858eaf;margin-top:3px;direction:ltr;text-align:right}.address-details{margin:12px 0 15px;padding:11px 12px;border-radius:12px;background:#f7f8ff;color:#737c9e;font-size:12px;line-height:2;overflow-wrap:anywhere}.address-card-actions{display:flex;gap:7px;flex-wrap:wrap}.address-action{border:1px solid #e5e7f6;border-radius:11px;padding:8px 11px;background:#fff;color:#737da0;font:inherit;font-size:11px;font-weight:900;cursor:pointer;transition:.2s}.address-action:hover{border-color:#a9afff;color:#6d65d7}.address-action.choose{background:linear-gradient(100deg,#6e7df6,#9a6be9);border-color:transparent;color:#fff;box-shadow:0 5px 13px #8878e833}.address-action.delete:hover{border-color:#ffc8d7;color:#d6577a;background:#fff6f8}
+.address-empty{padding:28px 16px;border:1px dashed #dfe3f5;border-radius:18px;text-align:center;color:#939ab5}.address-empty-icon{font-size:35px;margin-bottom:7px;opacity:.8}.address-empty strong{display:block;color:#667096;margin-bottom:5px}.address-empty p{font-size:12px;margin:0;line-height:1.9}
+.address-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:23px 5px 10px;color:#9aa1bc;font-size:10px;font-weight:700}
+@keyframes addressPageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes addressRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}@keyframes addressFloat{to{transform:translate3d(35px,-20px,0) scale(1.08)}}@keyframes addressBob{0%,100%{translate:0 0}50%{translate:0 -9px}}@keyframes addressSpin{to{transform:rotate(360deg)}}@keyframes addressPulse{50%{box-shadow:0 0 0 7px #9586ff1c,0 0 17px #9586ff}}@keyframes addressLogoGlow{50%{box-shadow:0 10px 32px #8994f388,0 0 0 5px #a6aaff18}}
+@media(max-width:850px){.address-hero{grid-template-columns:1fr;padding:28px}.address-hero-art{position:absolute;left:15px;top:25px;opacity:.17;width:220px;pointer-events:none}.address-hero-copy{position:relative;z-index:1}.address-columns{grid-template-columns:1fr}.address-shell{padding-top:20px}.address-form-panel{order:1}.address-list-panel{order:2}}
+@media(max-width:520px){.address-top{padding:10px 13px}.address-brand{font-size:16px}.address-brand-mark{width:39px;height:39px;border-radius:13px}.address-back{font-size:11px;padding:10px 11px;gap:6px}.address-shell{padding:14px 12px 15px}.address-hero{padding:23px 20px;border-radius:24px;min-height:0}.address-hero h1{font-size:34px}.address-hero-copy>p{font-size:12px}.address-perks span{font-size:10px}.address-panel{padding:18px 15px;border-radius:22px}.address-panel-head{gap:9px}.address-panel-head h2{font-size:18px}.address-panel-head p{font-size:10px}.address-footer{font-size:9px}.address-card{padding:14px}}
+@media(prefers-reduced-motion:reduce){.address-page,.address-page *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
 </style>
 </head>
 <body>
@@ -234,9 +268,16 @@ td input,td select{max-width:180px;padding:8px;border:1px solid var(--line);bord
 <div class="backdrop" id="detailModal" onclick="backdrop(event,'detailModal')"><div class="modal wide">
  <div class="modalhead"><h2>معرفی کتاب</h2><button class="close" onclick="closeModal('detailModal')">×</button></div><div id="detailContent"></div>
 </div></div>
-<div class="backdrop" id="addressModal" onclick="backdrop(event,'addressModal')"><div class="modal">
- <div class="modalhead"><h2>نشانی‌های من</h2><button class="close" onclick="closeModal('addressModal')">×</button></div><div id="addressContent"></div>
-</div></div>
+<section class="address-page" id="addressPage" aria-hidden="true">
+ <div class="address-glow ag-one"></div><div class="address-glow ag-two"></div><div class="address-noise"></div>
+ <header class="address-top"><a class="address-brand" href="#home" onclick="closeAddressPage()"><span class="address-brand-mark">م</span><span>ماهیگیر<small>نشانی‌های من</small></span></a><button class="address-back" onclick="closeAddressPage()">بازگشت به فروشگاه <span>←</span></button></header>
+ <main class="address-shell">
+  <section class="address-hero"><div class="address-hero-copy"><span class="address-kicker"><i></i> MY SHIPPING ADDRESSES</span><h1>نشانی‌ها،<br><span>با خیال راحت ✨</span></h1><p>نشانی‌های موردعلاقه‌ات را ذخیره کن تا موقع سفارش، سریع‌تر و راحت‌تر خریدت را نهایی کنی.</p><div class="address-perks"><span>✦ ذخیره و ویرایش آسان</span><span>⌁ آماده برای سفارش بعدی</span></div></div><div class="address-hero-art"><div class="address-ring ring-a"></div><div class="address-ring ring-b"></div><div class="address-pin">⌖</div><span class="address-float af-one">آدرس‌های تو، یک‌جا</span><span class="address-float af-two">امن و مرتب ✨</span></div></section>
+  <div class="address-columns"><section class="address-panel address-form-panel"><div class="address-panel-head"><span class="address-panel-icon">＋</span><div><h2 id="addressFormTitle">افزودن نشانی تازه</h2><p>اطلاعات گیرنده را با دقت وارد کن.</p></div></div><div id="addressFormContent"></div></section>
+  <section class="address-panel address-list-panel"><div class="address-panel-head"><span class="address-panel-icon list-icon">⌂</span><div><h2>نشانی‌های ذخیره‌شده</h2><p>برای سفارش، نشانی دلخواهت را انتخاب کن.</p></div><span class="address-counter" id="addressCounter">۰</span></div><div id="addressListContent"></div></section></div>
+  <footer class="address-footer"><span>✦ ماهیگیر؛ هر داستان، یک مقصد تازه</span><span>نشانی‌های تو برای حساب فعلی</span></footer>
+ </main>
+</section>
 <div class="backdrop" id="checkoutModal" onclick="backdrop(event,'checkoutModal')"><div class="modal">
  <div class="modalhead"><h2>ثبت سفارش</h2><button class="close" onclick="closeModal('checkoutModal')">×</button></div><div id="checkoutContent"></div>
 </div></div>
@@ -518,35 +559,68 @@ function ordersHTML(){
 }
 async function copyText(s){try{await navigator.clipboard.writeText(s);notify("کپی شد.")}catch{notify("کد رهگیری را انتخاب و کپی کن.")}}
 
-/* نشانی‌ها: برای هر حساب روی همین مرورگر ذخیره می‌شوند. */
+/* دفتر نشانی تمام‌صفحه ماهیگیر */
 function addressKey(){return "mh_addresses_"+(currentUser?.id||"guest")}
 function readAddresses(){try{return JSON.parse(localStorage.getItem(addressKey())||"[]")}catch{return []}}
 function saveAddresses(){localStorage.setItem(addressKey(),JSON.stringify(addresses))}
-function openAddresses(){if(!currentUser){openAccount();notify("برای مدیریت نشانی‌ها وارد حساب شو.");return}addresses=readAddresses();renderAddresses();openModal("addressModal")}
-let addresses=[];
-function addressesHTML(){
+let addresses=[],editingAddressIndex=-1;
+function openAddresses(){
+ if(!currentUser){openAccount();notify("برای مدیریت نشانی‌ها وارد حساب شو.");return}
  addresses=readAddresses();
- return `<button class="btn primary" onclick="addressForm()">＋ افزودن نشانی</button>${addresses.length?addresses.map((a,i)=>`<div class="order"><strong>${esc(a.recipient)}</strong><p class="muted">${esc(a.phone)} · ${esc(a.postal_code)}</p><p class="muted">${esc(a.city)}، ${esc(a.address)}</p><button class="btn soft" onclick="useAddress(${i})">انتخاب برای سفارش</button> <button class="btn white" onclick="deleteAddress(${i})">حذف</button></div>`).join(""):'<div class="empty">هنوز نشانی‌ای ذخیره نکرده‌ای.</div>'}`;
+ const page=document.getElementById("addressPage");
+ page.classList.add("open");page.setAttribute("aria-hidden","false");
+ document.body.style.overflow="hidden";
+ renderAddresses();addressForm();
 }
-function renderAddresses(){document.getElementById("addressContent").innerHTML=addressesHTML()}
+function closeAddressPage(){
+ const page=document.getElementById("addressPage");
+ page.classList.remove("open");page.setAttribute("aria-hidden","true");
+ document.body.style.overflow="";
+}
+function renderAddresses(){
+ addresses=readAddresses();
+ const count=document.getElementById("addressCounter");
+ if(count)count.textContent=String(addresses.length).replace(/\\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+ const target=document.getElementById("addressListContent");
+ if(!target)return;
+ if(!addresses.length){
+  target.innerHTML='<div class="address-empty"><div class="address-empty-icon">⌖</div><strong>هنوز نشانی‌ای ذخیره نکرده‌ای</strong><p>از فرم کناری، اولین نشانی‌ات را اضافه کن تا برای سفارش بعدی آماده باشد.</p></div>';
+  return;
+ }
+ target.innerHTML='<div class="address-cards">'+addresses.map((a,i)=>`<article class="address-card"><div class="address-card-top"><span class="address-avatar">⌂</span><div><div class="address-recipient">${esc(a.recipient)}</div><div class="address-phone">${esc(a.phone)}</div></div></div><div class="address-details"><strong>${esc(a.city)}</strong><br>${esc(a.address)}<br>کد پستی: ${esc(a.postal_code)}</div><div class="address-card-actions"><button class="address-action choose" onclick="useAddress(${i})">انتخاب برای سفارش ←</button><button class="address-action" onclick="editAddress(${i})">ویرایش ✎</button><button class="address-action delete" onclick="deleteAddress(${i})">حذف</button></div></article>`).join("")+'</div>';
+}
 function addressForm(a={}){
- document.getElementById("addressContent").innerHTML=`<form onsubmit="saveAddress(event)">
- <div class="field"><label>نام و نام خانوادگی گیرنده</label><input name="recipient" required maxlength="100" value="${esc(a.recipient||"")}"></div>
- <div class="field"><label>شماره تماس</label><input name="phone" required maxlength="20" value="${esc(a.phone||"")}"></div>
- <div class="field"><label>استان و شهر</label><input name="city" required maxlength="100" value="${esc(a.city||"")}"></div>
- <div class="field"><label>نشانی کامل</label><textarea name="address" required maxlength="1000">${esc(a.address||"")}</textarea></div>
- <div class="field"><label>کد پستی ۱۰ رقمی</label><input name="postal_code" required inputmode="numeric" pattern="[0-9۰-۹]{10}" maxlength="10" value="${esc(a.postal_code||"")}"></div>
- <button class="btn primary" style="width:100%">ذخیره نشانی</button></form>`;
+ const title=document.getElementById("addressFormTitle");
+ if(title)title.textContent=editingAddressIndex>=0?"ویرایش نشانی":"افزودن نشانی تازه";
+ document.getElementById("addressFormContent").innerHTML=`<form class="address-form" onsubmit="saveAddress(event)">
+ <div class="address-field"><label>نام و نام خانوادگی گیرنده</label><input name="recipient" autocomplete="name" placeholder="مثلاً امیر جبارفر" required maxlength="100" value="${esc(a.recipient||"")}"></div>
+ <div class="address-field"><label>شماره تماس</label><input name="phone" autocomplete="tel" inputmode="tel" placeholder="شماره تماس گیرنده" required maxlength="20" value="${esc(a.phone||"")}"></div>
+ <div class="address-field"><label>استان و شهر</label><input name="city" autocomplete="address-level2" placeholder="مثلاً تهران، تهران" required maxlength="100" value="${esc(a.city||"")}"></div>
+ <div class="address-field"><label>نشانی کامل</label><textarea name="address" autocomplete="street-address" placeholder="خیابان، کوچه، پلاک، واحد..." required maxlength="1000">${esc(a.address||"")}</textarea></div>
+ <div class="address-field"><label>کد پستی ۱۰ رقمی</label><input name="postal_code" autocomplete="postal-code" inputmode="numeric" pattern="[0-9۰-۹٠-٩]{10}" placeholder="۱۰ رقم کد پستی" required maxlength="10" value="${esc(a.postal_code||"")}"></div>
+ <div class="address-form-actions"><button type="submit" class="address-save">${editingAddressIndex>=0?"ذخیره تغییرات ✓":"ذخیره نشانی ✨"}</button>${editingAddressIndex>=0?'<button type="button" class="address-cancel" onclick="cancelAddressEdit()">انصراف</button>':""}</div></form>`;
 }
+function editAddress(i){addresses=readAddresses();if(!addresses[i])return;editingAddressIndex=i;addressForm(addresses[i]);document.getElementById("addressFormContent").scrollIntoView({behavior:"smooth",block:"start"})}
+function cancelAddressEdit(){editingAddressIndex=-1;addressForm();notify("ویرایش لغو شد.")}
 function normalizeDigits(s){return String(s).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d))}
 function saveAddress(e){
  e.preventDefault();const f=new FormData(e.target);
  const a={recipient:String(f.get("recipient")).trim(),phone:String(f.get("phone")).trim(),city:String(f.get("city")).trim(),address:String(f.get("address")).trim(),postal_code:normalizeDigits(f.get("postal_code")).trim(),shipping_method:"تیپاکس"};
- if(!/^\d{10}$/.test(a.postal_code)){notify("کد پستی باید ۱۰ رقم باشد.");return}
- addresses=readAddresses();addresses.push(a);saveAddresses();renderAddresses();notify("نشانی ذخیره شد.");
+ if(!/^\\d{10}$/.test(a.postal_code)){notify("کد پستی باید ۱۰ رقم باشد.");return}
+ addresses=readAddresses();
+ if(editingAddressIndex>=0&&addresses[editingAddressIndex]){addresses[editingAddressIndex]=a;notify("نشانی با موفقیت ویرایش شد.")}
+ else{addresses.push(a);notify("نشانی تازه ذخیره شد.")}
+ localStorage.setItem(addressKey(),JSON.stringify(addresses));editingAddressIndex=-1;renderAddresses();addressForm();
 }
-function deleteAddress(i){addresses=readAddresses();addresses.splice(i,1);saveAddresses();renderAddresses()}
-function useAddress(i){const a=readAddresses()[i];if(!a)return;closeModal("addressModal");renderCheckout(a);openModal("checkoutModal")}
+function deleteAddress(i){
+ addresses=readAddresses();if(!addresses[i])return;
+ if(!confirm("این نشانی حذف شود؟"))return;
+ addresses.splice(i,1);localStorage.setItem(addressKey(),JSON.stringify(addresses));
+ if(editingAddressIndex===i){editingAddressIndex=-1;addressForm()}
+ else if(editingAddressIndex>i)editingAddressIndex--;
+ renderAddresses();notify("نشانی حذف شد.");
+}
+function useAddress(i){const a=readAddresses()[i];if(!a)return;closeAddressPage();renderCheckout(a);openModal("checkoutModal")}
 function startCheckout(){
  if(!cart.length){notify("سبد خرید خالی است.");return}
  if(!currentUser){closeModal("cartModal");openAccount();notify("برای ثبت سفارش وارد حساب شو.");return}
@@ -671,6 +745,7 @@ if(db)db.auth.onAuthStateChange((event,session)=>{
 document.addEventListener("keydown",e=>{
  if(e.key==="Escape"){
   document.querySelectorAll(".backdrop.open").forEach(el=>closeModal(el.id));
+  if(document.getElementById("addressPage")?.classList.contains("open"))closeAddressPage();
   if(document.getElementById("adminPage").classList.contains("open"))closeAdmin();
  }
 });
