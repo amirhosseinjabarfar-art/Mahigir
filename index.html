@@ -359,11 +359,13 @@ const PUBLIC_KEY="sb_publishable_gd2B7ZWcbE1x6yo-JedAeQ_LTcK7dVk";
 const SHIPPING=300000;
 const STAGES=[
  {id:1,title:"ثبت سفارش",position:1},
- {id:2,title:"تأیید سفارش",position:2},
- {id:3,title:"آماده‌سازی کتاب",position:3},
- {id:4,title:"تحویل به تیپاکس",position:4},
- {id:5,title:"تحویل به مشتری",position:5}
+ {id:2,title:"در حال انجام",position:2},
+ {id:3,title:"ارسال به واحد پستی",position:3},
+ {id:4,title:"ارسال شده",position:4},
+ {id:5,title:"تحویل داده شده",position:5}
 ];
+function stagePosition(stage){const n=Number(stage?.position||stage?.id||1);return Math.max(1,Math.min(5,n))}
+function stageLabel(stage){return ["ثبت سفارش","در حال انجام","ارسال به واحد پستی","ارسال شده","تحویل داده شده"][stagePosition(stage)-1]}
 const PALETTES=[
  "linear-gradient(145deg,#f77991,#7b4edb)",
  "linear-gradient(145deg,#16a6a6,#174f81)",
@@ -592,9 +594,10 @@ async function loadOrders(){
  if(error)throw error;orders=data||[];
 }
 async function loadStages(){
- if(!db)return;
+ if(!db){stages=STAGES;return}
  const {data,error}=await db.from("mahigir_order_stages").select("*").order("position");
- if(error){console.warn(error);stages=STAGES;return}stages=data?.length?data:STAGES;
+ if(error){console.warn(error);stages=STAGES;return}
+ stages=data?.length?data.map((x,i)=>({...x,position:Number(x.position||i+1),title:STAGES[Math.min(4,Math.max(0,Number(x.position||i+1)-1))].title})):STAGES;
 }
 function renderProfile(){
  const name=profile?.display_name||profile?.username||"دوست عزیز";
@@ -612,15 +615,16 @@ function profileTab(tab,el){
  if(tab==="info")p.innerHTML=`<div class="order"><p><strong>نام کاربری:</strong> ${esc(profile?.username||"")}</p><p><strong>نام نمایشی:</strong> ${esc(profile?.display_name||"")}</p></div>`;
 }
 function ordersHTML(){
- if(!orders.length)return '<div class="empty">هنوز سفارشی ثبت نکرده‌ای.<br><button class="btn primary" onclick="closeModal(\'accountModal\');document.getElementById(\'books\').scrollIntoView()">انتخاب کتاب</button></div>';
- return orders.map(o=>{
- const s=stages.find(x=>String(x.id)===String(o.stage_id))||stages[0]||STAGES[0],items=Array.isArray(o.items)?o.items:[];
- return `<div class="order"><div class="orderhead"><strong>سفارش ${esc(String(o.id).slice(0,8))}</strong><span class="status">${esc(s?.title||"ثبت سفارش")}</span></div>
- <p class="muted">${items.map(i=>esc(i.title)+" × "+Number(i.qty||1)).join("، ")}</p><p class="muted">گیرنده: ${esc(o.recipient||"")} · ${esc(o.phone||"")}</p><p class="muted">نشانی: ${esc(o.city||"")}، ${esc(o.address||"")} · کد پستی: ${esc(o.postal_code||"")}</p>
- <p class="muted">ارسال: ${esc(o.shipping_method||"تیپاکس")}</p><div class="price">${money(o.total_price)}</div>
- <div class="progress">${stages.map(x=>`<div class="step ${Number(x.position||x.id)<=Number(s?.position||s?.id||1)?"done":""}"><div class="dot">${Number(x.position||x.id)<=Number(s?.position||s?.id||1)?"✓":x.position||x.id}</div>${esc(x.title)}</div>`).join("")}</div>
- <div class="track"><span>کد رهگیری تیپاکس</span>${o.tracking_code?`<strong>${esc(o.tracking_code)}</strong><button class="btn soft" onclick="copyText('${esc(o.tracking_code)}')">کپی</button>`:'<span class="muted">پس از ثبت توسط مدیریت نمایش داده می‌شود.</span>'}</div></div>`;
- }).join("");
+ if(!orders.length)return '<div class="orders-empty"><div class="orders-empty-orb">✦</div><h3>هنوز سفارشی نداری</h3><p>کتاب موردعلاقه‌ات را انتخاب کن؛ مسیر رسیدنش را همین‌جا دنبال می‌کنی.</p><button class="btn primary" onclick="closeModal(\'accountModal\');document.getElementById(\'books\').scrollIntoView({behavior:\'smooth\'})">کشف کتاب‌ها ←</button></div>';
+ return '<div class="orders-grid">'+orders.map((o,i)=>{
+ const st=stages.find(x=>String(x.id)===String(o.stage_id))||stages.find(x=>stagePosition(x)===Number(o.stage_id))||STAGES[0],pos=stagePosition(st),items=Array.isArray(o.items)?o.items:[];
+ return `<article class="order-float-card" style="--card-index:${i%6}"><div class="order-card-shine"></div><div class="order-card-top"><span class="order-glyph">✦</span><span class="order-live-pill"><i></i> پیگیری سفارش</span></div>
+ <div class="order-card-id">سفارش #${esc(String(o.id).slice(0,8))}</div><h3 class="order-card-title">${esc(items[0]?.title||"سفارش ماهیگیر")}${items.length>1?" و "+(items.length-1).toLocaleString("fa-IR")+" محصول دیگر":""}</h3>
+ <div class="order-card-meta"><span>◷ ${esc(o.created_at?new Date(o.created_at).toLocaleDateString("fa-IR"):"تاریخ ثبت")}</span><span>▣ ${items.reduce((n,x)=>n+Number(x.qty||1),0).toLocaleString("fa-IR")} کالا</span></div>
+ <div class="order-mini-track"><div class="order-mini-line"><span style="width:${(pos-1)*25}%"></span></div>${STAGES.map((x,j)=>`<div class="order-mini-step ${j<pos?"reached":""}"><i>${j<pos?"✓":j+1}</i><small>${esc(x.title)}</small></div>`).join("")}</div>
+ <div class="order-card-bottom"><div><small>مبلغ سفارش</small><strong>${money(o.total_price)}</strong></div><span class="order-status-orb stage-${pos}">${esc(stageLabel(st))}</span></div>
+ <button class="order-track-button" onclick="openTracking('${esc(o.id)}')">مشاهده مسیر سفارش <span>↗</span></button></article>`;
+ }).join("")+'</div>';
 }
 async function copyText(s){try{await navigator.clipboard.writeText(s);notify("کپی شد.")}catch{notify("کد رهگیری را انتخاب و کپی کن.")}}
 
