@@ -296,6 +296,7 @@ td input,td select{max-width:180px;padding:8px;border:1px solid var(--line);bord
 @media(max-width:760px){.tracking-hero{grid-template-columns:1fr}.tracking-orbit-art{height:190px}.tracking-summary{grid-template-columns:1fr}.tracking-timeline:before,.tracking-timeline-progress{right:38px}.tracking-timeline-step{grid-template-columns:45px minmax(0,1fr);gap:10px}.tracking-step-badge{grid-column:2;justify-self:start;margin-top:-5px}.tracking-code-card{align-items:flex-start;flex-direction:column}.tracking-code-card button{align-self:stretch}.tracking-footer{font-size:9px}.admin-order-info{grid-template-columns:1fr}.admin-order-controls{grid-template-columns:1fr}.admin-order-controls button{width:100%}.tracking-top{padding:12px 15px}.tracking-brand-mark{width:38px;height:38px;border-radius:13px}.tracking-back{padding:10px 12px;font-size:10px}.tracking-shell{width:calc(100% - 24px)}.tracking-hero{padding:22px;border-radius:25px}.tracking-hero h1{font-size:36px}.tracking-timeline{padding:18px 13px}.tracking-timeline:before,.tracking-timeline-progress{right:33px}.tracking-timeline-step{grid-template-columns:40px minmax(0,1fr);gap:8px}.tracking-step-icon{width:36px;height:36px;border-radius:13px}.tracking-step-copy strong{font-size:12px}.tracking-step-copy small{font-size:9px}.order-float-card{padding:17px}.order-mini-step small{font-size:7px}}
 @media(prefers-reduced-motion:reduce){.tracking-page *,.order-float-card,.order-float-card *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
+.admin-stage-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:20px}.admin-stage-item{padding:18px;border:1px solid #e8eafa;border-radius:18px;background:#ffffffc9;transition:transform .25s,box-shadow .25s}.admin-stage-item:hover{transform:translateY(-5px);box-shadow:0 15px 30px #7b83b31c}.admin-stage-item>span{display:grid;place-items:center;width:35px;height:35px;border-radius:12px;background:linear-gradient(135deg,#637df4,#c17ce9);color:white;font-weight:1000;box-shadow:0 7px 16px #8b7ce633}.admin-stage-item strong{display:block;margin:12px 0 7px;color:#4a5278}.admin-stage-item small{font-size:10px;color:#969cb7}
 </style>
 </head>
 <body>
@@ -829,13 +830,13 @@ function adminOrdersHTML(){
  <div class="admin-order-info"><div><small>تماس و نشانی</small><p>${esc(o.phone||"")} · ${esc(o.city||"")}</p><p>${esc(o.address||"")} · کد پستی ${esc(o.postal_code||"")}</p></div><div><small>محصولات</small><p>${(Array.isArray(o.items)?o.items:[]).map(i=>esc(i.title)+" × "+Number(i.qty||1)).join("، ")||"—"}</p></div></div>
  <div class="admin-order-controls"><label>وضعیت همین سفارش<select id="stage-${esc(o.id)}">${STAGES.map(st=>`<option value="${esc(st.id)}" ${String(st.id)===String(o.stage_id)?"selected":""}>${esc(st.title)}</option>`).join("")}</select></label><label>کد رهگیری مرسوله<input id="track-${esc(o.id)}" value="${esc(o.tracking_code||"")}" placeholder="کد رهگیری، در صورت وجود"></label><button class="btn primary" onclick="saveOrder('${esc(o.id)}')">ذخیره وضعیت این سفارش ✨</button></div></article>`).join("")}</div>`;
 }
-async function saveOrder(id){
+async async function saveOrder(id){
  if(!adminUnlocked)return;const stage_id=document.getElementById("stage-"+id).value,tracking_code=document.getElementById("track-"+id).value.trim()||null;
  try{await adminApi("admin-save-order",{id,stage_id,tracking_code});await loadAdminOrders();renderAdmin();notify("سفارش به‌روزرسانی شد.");}
  catch(err){console.error(err);notify("ذخیره سفارش ناموفق بود: "+String(err.message||"").slice(0,150))}
 }
 function adminStagesHTML(){
- return `<h3>مراحل پیگیری</h3><p class="muted">نام مراحل برای نمایش وضعیت سفارش‌ها استفاده می‌شود.</p><div class="tablewrap"><table><thead><tr><th>ترتیب</th><th>نام مرحله</th><th>ذخیره</th></tr></thead><tbody>${stages.map(s=>`<tr><td>${s.position||s.id}</td><td><input id="stageName-${s.id}" value="${esc(s.title)}"></td><td><button class="btn soft" onclick="renameStage('${s.id}')">ذخیره</button></td></tr>`).join("")}</tbody></table></div>`;
+ return `<div class="admin-order-card"><div class="admin-order-kicker">ORDER TRACKING WORKFLOW</div><h2 style="font-family:Lalezar,Vazirmatn,sans-serif;color:#394166;font-size:28px">مراحل ثابت رهگیری سفارش</h2><p class="muted">برای تغییر وضعیت یک مشتری، از بخش سفارش‌ها همان سفارش را پیدا کن و وضعیت مخصوص همان سفارش را ذخیره کن. تغییر وضعیت یک سفارش، سفارش‌های دیگر را تغییر نمی‌دهد.</p><div class="admin-stage-list">${STAGES.map((st,i)=>`<div class="admin-stage-item"><span>${i+1}</span><strong>${esc(st.title)}</strong><small>${i===0?"سفارش دریافت شد":i===1?"در حال پردازش سفارش":i===2?"آماده ارسال به پست":i===3?"مرسوله ارسال شده":"سفارش به مشتری رسیده"}</small></div>`).join("")}</div></div>`;
 }
 async function renameStage(id){
  if(!adminUnlocked)return;const title=document.getElementById("stageName-"+id).value.trim();if(!title)return;
@@ -897,6 +898,7 @@ document.addEventListener("keydown",e=>{
   document.querySelectorAll(".backdrop.open").forEach(el=>closeModal(el.id));
   if(document.getElementById("addressPage")?.classList.contains("open"))closeAddressPage();
   if(document.getElementById("adminPage").classList.contains("open"))closeAdmin();
+  if(document.getElementById("trackingPage")?.classList.contains("open"))closeTracking();
  }
 });
 initialize();
