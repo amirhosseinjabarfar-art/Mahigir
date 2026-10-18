@@ -725,8 +725,16 @@ async function submitOrder(e){
  const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:normalizeDigits(a.postal_code).trim(),shipping_method:"تیپاکس",items,total_price:itemsTotal+SHIPPING,stage_id:stages[0]?.id||1};
  const btn=e.target.querySelector('button[type="submit"]');if(btn){btn.disabled=true;btn.textContent="در حال ثبت سفارش..."}
  try{
-  const {error}=await db.from("mahigir_orders").insert(payload).select("id").single();
-  if(error)throw error;
+  const {data:sessionData,error:sessionError}=await db.auth.getSession();
+  if(sessionError)throw sessionError;
+  if(!sessionData?.session?.access_token)throw new Error("نشست ورود پیدا نشد؛ دوباره وارد حساب شو.");
+  const response=await fetch(PROJECT_URL+"/functions/v1/admin-api",{
+   method:"POST",
+   headers:{"Content-Type":"application/json","apikey":PUBLIC_KEY,"Authorization":"Bearer "+sessionData.session.access_token},
+   body:JSON.stringify({action:"create-order",payload})
+  });
+  let result={};try{result=await response.json()}catch{}
+  if(!response.ok||result.error)throw new Error(result.error||("خطای سرور ("+response.status+")"));
   cart=[];saveCart();renderCart();renderBooks();renderBestsellers();closeModal("checkoutModal");notify("سفارش با موفقیت ثبت شد ✨");
   try{await loadOrders()}catch(err){console.warn("Order saved but order list could not refresh:",err)}
   openAccount();
