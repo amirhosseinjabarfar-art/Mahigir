@@ -798,7 +798,7 @@ function openAdmin(){
  document.getElementById("adminContent").innerHTML=`<div class="admin-login-card"><div class="address-brand-mark">م</div><span class="address-kicker"><i></i> SECURE ADMIN ACCESS</span><h1>ورود به پنل مدیریت</h1><p>برای دسترسی به سفارش‌ها و تنظیمات، رمز اختصاصی مدیریت را وارد کن.</p><form onsubmit="submitAdminPassword(event)"><div class="field"><label>رمز مدیریت</label><input name="admin_password" type="password" autocomplete="current-password" required autofocus placeholder="رمز اختصاصی" dir="ltr"></div><button class="btn primary" type="submit" style="width:100%">ورود امن ←</button></form><p class="muted">رمز در کد صفحه ذخیره نمی‌شود و باید سمت سرور بررسی شود.</p></div>`;
 }
 function closeAdmin(){document.getElementById("adminPage").classList.remove("open");document.body.style.overflow="";adminUnlocked=false;adminPassword="";adminOrders=[]}
-async async function submitAdminPassword(e){
+async function submitAdminPassword(e){
  e.preventDefault();const input=e.target.elements.admin_password,candidate=String(input?.value||"");if(!candidate)return;
  adminPassword=candidate;const host=document.getElementById("adminContent"),btn=e.target.querySelector('button[type="submit"]');if(btn){btn.disabled=true;btn.textContent="در حال بررسی..."}
  try{await adminApi("admin-login");adminUnlocked=true;await loadStages();await loadAdminOrders();renderAdmin();notify("ورود مدیر موفق بود.");}
@@ -830,7 +830,7 @@ function adminOrdersHTML(){
  <div class="admin-order-info"><div><small>تماس و نشانی</small><p>${esc(o.phone||"")} · ${esc(o.city||"")}</p><p>${esc(o.address||"")} · کد پستی ${esc(o.postal_code||"")}</p></div><div><small>محصولات</small><p>${(Array.isArray(o.items)?o.items:[]).map(i=>esc(i.title)+" × "+Number(i.qty||1)).join("، ")||"—"}</p></div></div>
  <div class="admin-order-controls"><label>وضعیت همین سفارش<select id="stage-${esc(o.id)}">${(stages.length?stages:STAGES).map((st,i)=>`<option value="${esc(st.id)}" ${String(st.id)===String(o.stage_id)?"selected":""}>${esc(STAGES[Math.min(4,Math.max(0,Number(st.position||i+1)-1))].title)}</option>`).join("")}</select></label><label>کد رهگیری مرسوله<input id="track-${esc(o.id)}" value="${esc(o.tracking_code||"")}" placeholder="کد رهگیری، در صورت وجود"></label><button class="btn primary" onclick="saveOrder('${esc(o.id)}')">ذخیره وضعیت این سفارش ✨</button></div></article>`).join("")}</div>`;
 }
-async async async function saveOrder(id){
+async async function saveOrder(id){
  if(!adminUnlocked)return;const stage_id=document.getElementById("stage-"+id).value,tracking_code=document.getElementById("track-"+id).value.trim()||null;
  try{await adminApi("admin-save-order",{id,stage_id,tracking_code});await loadAdminOrders();renderAdmin();notify("سفارش به‌روزرسانی شد.");}
  catch(err){console.error(err);notify("ذخیره سفارش ناموفق بود: "+String(err.message||"").slice(0,150))}
