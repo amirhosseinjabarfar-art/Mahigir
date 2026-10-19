@@ -686,7 +686,7 @@ const db=window.supabase?.createClient(PROJECT_URL,PUBLIC_KEY,{auth:{persistSess
 
 let books=INITIAL_BOOKS.map(b=>({...b}));
 let cart=readCart(),currentUser=null,profile=null,orders=[],stages=STAGES.map(s=>({...s}));
-let category="همه",adminUnlocked=false,adminOrders=[],adminSelectedUser=null;
+let category="همه",adminUnlocked=false,adminOrders=[],adminSelectedUser=null,adminUsers=[];
 let toastTimer=null,authBusy=false;
 
 function readCart(){
@@ -1091,19 +1091,22 @@ function renderAdmin(){
  const total=activeOrders.reduce((n,o)=>n+Number(o.total_price||0),0);
  document.getElementById("adminContent").innerHTML=`<div class="welcome"><h2>پنل مدیریت ماهیگیر ✨</h2><p>روی شناسه یا نام کاربر بزن تا سفارش‌های فعال همان کاربر را ببینی. سفارش تحویل‌شده از فهرست مدیریت حذف می‌شود اما در حساب مشتری باقی می‌ماند.</p></div>
  <div class="adminstats"><div class="adminstat"><strong>${activeOrders.length.toLocaleString("fa-IR")}</strong><span>سفارش‌های فعال</span></div><div class="adminstat"><strong>${activeOrders.filter(o=>!o.tracking_code).length.toLocaleString("fa-IR")}</strong><span>بدون کد رهگیری</span></div><div class="adminstat"><strong>${money(total)}</strong><span>جمع سفارش‌های فعال</span></div></div>
- <div class="tabs"><button class="tab active" onclick="adminTab('orders',this)">سفارش‌ها و نشانی‌ها</button><button class="tab" onclick="adminTab('stages',this)">مراحل سفارش</button><button class="tab" onclick="loadAdminOrders().then(renderAdmin).catch(e=>notify('خطا: '+e.message))">بروزرسانی</button></div>
+ <div class="tabs"><button class="tab active" onclick="adminTab('orders',this)">سفارش‌ها و نشانی‌ها</button><button class="tab" onclick="adminTab('users',this)">کاربران ثبت‌نام‌شده</button><button class="tab" onclick="adminTab('stages',this)">مراحل سفارش</button><button class="tab" onclick="loadAdminOrders().then(renderAdmin).catch(e=>notify('خطا: '+e.message))">بروزرسانی</button></div>
  <div id="adminPanel">${adminOrdersHTML()}</div><button class="btn white" style="margin-top:16px" onclick="closeAdmin()">خروج امن از پنل مدیریت</button>`;
 }
-function adminTab(tab,el){
+async function adminTab(tab,el){
  document.querySelectorAll("#adminContent .tab").forEach(x=>x.classList.remove("active"));
  if(el)el.classList.add("active");
- if(tab==="orders")adminSelectedUser=null;
- document.getElementById("adminPanel").innerHTML=tab==="orders"?adminOrdersHTML():adminStagesHTML();
-}
-function viewAdminUserOrders(userId){
- adminSelectedUser=String(userId||"");
  const panel=document.getElementById("adminPanel");
- if(panel)panel.innerHTML=adminOrdersHTML();
+ if(tab==="orders"){adminSelectedUser=null;panel.innerHTML=adminOrdersHTML();return}
+ if(tab==="stages"){panel.innerHTML=adminStagesHTML();return}
+ panel.innerHTML='<div class="orders-empty">در حال دریافت فهرست کاربران...</div>';
+ try{const result=await adminApi("admin-users");adminUsers=Array.isArray(result.users)?result.users:[];panel.innerHTML=adminUsersHTML()}
+ catch(err){console.error(err);panel.innerHTML='<div class="orders-empty"><h3>فهرست کاربران دریافت نشد</h3><p>'+esc(err.message||"خطای نامشخص")+'</p></div>'}
+}
+function adminUsersHTML(){
+ if(!adminUsers.length)return '<div class="orders-empty"><h3>هنوز کاربری پیدا نشد</h3><p>اگر حساب ساخته‌ای، تابع admin-api باید نسخه جدید داشته باشد و Deploy شده باشد.</p></div>';
+ return '<div class="admin-order-list">'+adminUsers.map((u,i)=>'<article class="admin-order-card" style="--card-index:'+i%6+'"><div class="admin-order-head"><div><span class="admin-order-kicker">REGISTERED USER · '+esc(String(u.id||"").slice(0,8))+'</span><h3>'+esc(u.display_name||u.username||"کاربر بدون نام")+'</h3><small>نام کاربری: '+esc(u.username||"—")+'</small></div><span class="order-live-pill"><i></i> ثبت‌نام‌شده</span></div><div class="admin-order-info"><div><small>شناسه حساب</small><p dir="ltr">'+esc(u.id||"—")+'</p></div><div><small>تاریخ ثبت‌نام</small><p>'+esc(u.created_at?new Date(u.created_at).toLocaleString("fa-IR"):"—")+'</p></div></div></article>').join("")+'</div>';
 }
 function adminOrdersHTML(){
  const activeOrders=adminOrders.filter(o=>!(o.approval_status==="approved"&&stagePosition(stages.find(s=>String(s.id)===String(o.stage_id))||{id:o.stage_id})===5));
@@ -1240,7 +1243,7 @@ function showPurchaseSuccess(orderId="ثبت‌شده",payment="card",receipt={}
  const total=Number(receipt.total||0),ship=Number(receipt.shipping||SHIPPING);
  const message="سلام، سفارش ماهیگیر ثبت شد. شماره سفارش: "+orderId+". مبلغ: "+money(total)+". پرداخت با کارت‌به‌کارت به شماره 5047061663227839 به نام جبارفر انجام می‌شود. حتماً تصویر رسید پرداخت را برای @amirtbpedit ارسال می‌کنم."
  const el=document.createElement("div");el.id="purchaseSuccessOverlay";el.className="purchase-success receipt-overlay";
- el.innerHTML='<div class="purchase-success-box receipt-card"><div class="receipt-confetti" aria-hidden="true">✦　✧　✦</div><div class="success-mark">✓</div><div class="success-number">MAHIGIR · DIGITAL RECEIPT</div><h2>رسید سفارش شما ثبت شد!</h2><p class="receipt-subtitle">وضعیت سفارش: در حال بررسی ... رسید را نگه دار و پس از کارت‌به‌کارت، تصویر رسید پرداخت را حتماً برای فروشگاه بفرست.</p><div class="receipt-number"><span>شماره سفارش</span><strong dir="ltr">#'+esc(String(orderId))+'</strong><button type="button" class="receipt-copy" onclick="GenUIUnavailableReceiptCopy(\''+esc(String(orderId))+'\')">کپی شماره</button></div><div class="receipt-lines">'+(lines||'<div class="receipt-row"><span class="receipt-name">اقلام سفارش</span><strong>ثبت‌شده</strong></div>')+'</div><div class="receipt-row"><span>ارسال با تیپاکس</span><strong>'+money(ship)+'</strong></div><div class="receipt-row receipt-total"><span>مبلغ کل</span><strong>'+money(total)+'</strong></div><div class="receipt-meta"><span>روش پرداخت</span><strong>فقط کارت‌به‌کارت</strong><span>وضعیت سفارش</span><strong>در حال بررسی ...</strong></div><div style="margin-top:14px;padding:20px;border:1px solid #8c9bff66;border-radius:20px;background:linear-gradient(135deg,#17254b,#251b4c);text-align:center"><div style="font-size:12px;color:#bdc9f0">شماره کارت مقصد</div><strong dir="ltr" style="display:block;font-size:clamp(22px,5vw,31px);letter-spacing:1px;margin:12px 0;color:#fff">5047 0616 6322 7839</strong><div style="font-size:15px;color:#dce4ff">به نام جبارفر</div><button type="button" class="receipt-copy" style="margin-top:12px;padding:11px 18px" onclick="GenUIUnavailableReceiptCopy(&quot;5047061663227839&quot;)">کپی شماره کارت ⧉</button><div dir="ltr" style="font-size:23px;font-weight:1000;margin-top:18px;color:#a9f5f0">@amirtbpedit</div><button type="button" class="receipt-copy" style="margin-top:8px;padding:10px 16px" onclick="GenUIUnavailableReceiptCopy(&quot;@amirtbpedit&quot;)">کپی آیدی ⧉</button><p class="payment-warning" style="margin-bottom:0">حتماً پس از پرداخت، تصویر رسید کارت‌به‌کارت را به آیدی روبیکا ارسال کن.</p></div><div class="receipt-address"><strong>نشانی گیرنده</strong><p>'+esc(receipt.recipient||"")+' · '+esc(receipt.phone||"")+'</p><p>'+esc(receipt.city||"")+'، '+esc(receipt.address||"")+'</p><p>کد پستی: '+esc(receipt.postal_code||"")+'</p></div><p class="payment-warning">این رسید تأیید پرداخت بانکی نیست. پس از هماهنگی با فروشگاه، رسید کارت‌به‌کارت را در روبیکا ارسال کن.</p><button class="btn primary" id="receiptRubikaBtn">هماهنگی و ارسال رسید در روبیکا ←</button><button class="btn white" style="margin-right:8px" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove();openAccount()">مشاهده سفارش در حساب</button><button class="btn white" style="margin-top:10px;width:100%" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove()">ادامه خرید</button></div>';
+ el.innerHTML='<div class="purchase-success-box receipt-card"><div class="receipt-confetti" aria-hidden="true">✦　✧　✦</div><div class="success-mark">✓</div><div class="success-number">MAHIGIR · DIGITAL RECEIPT</div><h2>رسید سفارش شما ثبت شد!</h2><p class="receipt-subtitle">وضعیت سفارش: در حال بررسی ... رسید را نگه دار و پس از کارت‌به‌کارت، تصویر رسید پرداخت را حتماً برای فروشگاه بفرست.</p><div class="receipt-number"><span>شماره سفارش</span><strong dir="ltr">#'+esc(String(orderId))+'</strong></div><div class="receipt-lines">'+(lines||'<div class="receipt-row"><span class="receipt-name">اقلام سفارش</span><strong>ثبت‌شده</strong></div>')+'</div><div class="receipt-row"><span>ارسال با تیپاکس</span><strong>'+money(ship)+'</strong></div><div class="receipt-row receipt-total"><span>مبلغ کل</span><strong>'+money(total)+'</strong></div><div class="receipt-meta"><span>روش پرداخت</span><strong>فقط کارت‌به‌کارت</strong><span>وضعیت سفارش</span><strong>در حال بررسی ...</strong></div><div style="margin-top:14px;padding:20px;border:1px solid #8c9bff66;border-radius:20px;background:linear-gradient(135deg,#17254b,#251b4c);text-align:center"><div style="font-size:12px;color:#bdc9f0">شماره کارت مقصد</div><strong dir="ltr" style="display:block;font-size:clamp(22px,5vw,31px);letter-spacing:1px;margin:12px 0;color:#fff">5047 0616 6322 7839</strong><div style="font-size:15px;color:#dce4ff">به نام جبارفر</div><button type="button" class="receipt-copy" style="margin-top:12px;padding:11px 18px" onclick="GenUIUnavailableReceiptCopy(&quot;5047061663227839&quot;)">کپی شماره کارت ⧉</button><div dir="ltr" style="font-size:23px;font-weight:1000;margin-top:18px;color:#a9f5f0">@amirtbpedit</div><p class="payment-warning" style="margin-bottom:0">حتماً پس از پرداخت، تصویر رسید کارت‌به‌کارت را به آیدی روبیکا ارسال کن.</p></div><div class="receipt-address"><strong>نشانی گیرنده</strong><p>'+esc(receipt.recipient||"")+' · '+esc(receipt.phone||"")+'</p><p>'+esc(receipt.city||"")+'، '+esc(receipt.address||"")+'</p><p>کد پستی: '+esc(receipt.postal_code||"")+'</p></div><p class="payment-warning">این رسید تأیید پرداخت بانکی نیست. پس از هماهنگی با فروشگاه، رسید کارت‌به‌کارت را در روبیکا ارسال کن.</p><button class="btn primary" id="receiptRubikaBtn">هماهنگی و ارسال رسید در روبیکا ←</button><button class="btn white" style="margin-right:8px" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove();openAccount()">مشاهده سفارش در حساب</button><button class="btn white" style="margin-top:10px;width:100%" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove()">ادامه خرید</button></div>';
  document.body.appendChild(el);
  document.getElementById("receiptRubikaBtn").onclick=()=>{try{navigator.clipboard?.writeText(message)}catch{};window.open("https://rubika.ir/amirtbpedit","_blank","noopener")};
  setTimeout(()=>{if(el.isConnected)el.querySelector(".success-mark")?.classList.add("success-mark-ready")},80);
@@ -1310,9 +1313,8 @@ async function submitCheckoutOrder(){
   let result={};try{result=await response.json()}catch{}
   if(!response.ok||result.error)throw new Error(result.error||("خطای سرور ("+response.status+")"));
   cart=[];saveCart();renderCart();renderBooks();renderBestsellers();closeCheckoutPage();
-  try{await loadOrders()}catch(err){console.warn("Order saved but order list refresh failed:",err)}
-  try{openAccount()}catch(err){console.warn("Could not open account order history:",err)}
   showPurchaseSuccess(result.id||"ثبت‌شده",selectedPaymentMethod,{items,total:total+SHIPPING,shipping:SHIPPING,recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:a.postal_code});
+  try{await loadOrders()}catch(err){console.warn("Order saved but order list refresh failed:",err)}
  }catch(err){console.error("Mahigir checkout failed:",err);notify("سفارش ثبت نشد: "+String(err?.message||"خطای نامشخص").slice(0,180))}
  finally{checkoutSubmitting=false;if(btn){btn.disabled=false;btn.textContent="تأیید و ثبت سفارش ✨"}}
 }
