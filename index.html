@@ -392,6 +392,71 @@ button:focus-visible,a:focus-visible{outline:2px solid #38d9f4;outline-offset:3p
 .purchase-success .success-number{font-size:11px;color:#a7b6ff;letter-spacing:2px;margin-bottom:18px}
 @media(max-width:620px){.hero h1{font-size:46px}.art{border-radius:25px}.card:hover{transform:translateY(-3px)}.purchase-success-box{padding:28px 18px}}
 
+
+/* MAHIGIR CINEMATIC NEON REFRESH */
+:root{color-scheme:dark;--bg:#070b1a;--paper:#111936;--ink:#f5f7ff;--muted:#b7c2e6;--line:#6479d84d;--blue:#6d85ff;--purple:#bf67ff}
+html,body{background:#070b1a!important;color:#f5f7ff!important}
+body{background:radial-gradient(ellipse at 8% 0%,#243d8c80,transparent 34%),radial-gradient(ellipse at 94% 15%,#782c9b55,transparent 30%),radial-gradient(ellipse at 45% 100%,#08788a24,transparent 44%),#070b1a!important}
+header{background:#080d20ed!important;border-bottom:1px solid #8295ff2c!important;backdrop-filter:blur(22px);box-shadow:0 10px 40px #0003}
+h1,h2,h3,h4,strong,label,.brand,.book-info h3,.heading h2,.detailbody h2,.modalhead h2{color:#f5f7ff}
+p,small,.muted,.book-info p,.heading p,.detailbody p{color:#b7c2e6}
+.card,.detailbody,.cartitem,.order,.totals,.adminstat,.admin-order-card,.admin-login-card,.order-float-card,.address-panel,.address-card,.address-empty,.checkout-address-card,.checkout-address-wrap,.tracking-card,.tracking-panel{background:linear-gradient(145deg,#141e42ee,#0b1229f2)!important;border:1px solid #8397ff3c!important;box-shadow:0 18px 50px #0003!important}
+.card:hover,.address-card:hover{transform:translateY(-5px);border-color:#a3b1ff99!important;box-shadow:0 18px 55px #6e78ff24,0 0 26px #a855f722!important}
+.btn,.iconbtn,.cat,.address-back,.tracking-back,.address-action,.address-save{background:linear-gradient(115deg,#506cff,#9b52f5 58%,#12bcd0)!important;color:#fff!important;border:1px solid #c2caff55!important;box-shadow:0 8px 26px #675cff38!important}
+.btn:hover,.iconbtn:hover,.address-action:hover,.address-save:hover{transform:translateY(-3px);box-shadow:0 12px 34px #746cff66!important}
+.btn.white,.btn.soft,.iconbtn,.cat{background:#172247!important;color:#f4f6ff!important}
+input,textarea,select,.field input,.field textarea,.field select,.address-page input,.address-page textarea,.address-page select{background:#080f27!important;color:#f7f8ff!important;border:1px solid #7185d96b!important;border-radius:14px!important}
+input::placeholder,textarea::placeholder{color:#8f9bc4!important}
+.backdrop{background:#030615d9!important;backdrop-filter:blur(18px)!important}
+.modal{background:linear-gradient(145deg,#141d3d,#090f25)!important;border:1px solid #8fa0ff55!important;box-shadow:0 35px 120px #000a,0 0 50px #6d72ff1c!important}
+#cartModal .totals,#checkoutModal .totals,#checkoutModal #checkoutContent>form,#checkoutModal .checkout-address-card,#detailModal .detailbody{background:#111a38!important;border:1px solid #6f83d84d!important}
+.welcome,.shipping{background:linear-gradient(120deg,#263d91,#572d83,#075b75)!important;border:1px solid #9baaff55!important}
+footer{background:#060a17!important;border-top:1px solid #8295ff2c!important}
+.address-page,.tracking-page{background:radial-gradient(ellipse at 10% 0%,#243d8c66,transparent 34%),radial-gradient(ellipse at 90% 25%,#782c9b44,transparent 32%),#070b1a!important;color:#f5f7ff!important}
+.address-top,.tracking-top{background:#080d20ed!important;border-color:#8295ff2c!important;backdrop-filter:blur(22px)}
+.address-brand,.tracking-brand,.address-panel-head h2,.address-recipient,.address-details{color:#f5f7ff!important}
+.address-hero{background:linear-gradient(125deg,#111b3d,#1c2051,#301b4c)!important;border:1px solid #8998ff44!important;border-radius:30px;box-shadow:0 20px 60px #0004}
+.address-hero h1,.address-hero h1 span{color:#fff!important}
+.address-panel,.address-form-panel,.address-list-panel{background:linear-gradient(145deg,#121b3aee,#0b1228f5)!important;border:1px solid #8193ff3b!important;border-radius:24px!important}
+.address-page .address-empty{background:#111a38!important;color:#f5f7ff!important;border:1px dashed #8397ff55!important}
+@keyframes cinematicBlurIn{0%{opacity:0;filter:blur(22px);transform:translateY(18px) scale(1.025)}100%{opacity:1;filter:blur(0);transform:translateY(0) scale(1)}}
+@keyframes neonRise{from{opacity:0;transform:translateY(18px) scale(.98);filter:blur(7px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+.address-page.open,.tracking-page.open,.admin-page.open,.backdrop.open{animation:cinematicBlurIn .48s cubic-bezier(.2,.8,.2,1) both}
+.hero-grid>div,.heading,.grid>.card,.detail-layout,.modal,.welcome{animation:neonRise .55s both}
+.checkout-page{position:fixed;inset:0;z-index:1300;display:none;overflow:auto;background:radial-gradient(ellipse at 5% 0%,#263c8b80,transparent 35%),radial-gradient(ellipse at 95% 15%,#762b9a55,transparent 30%),#070b1a;color:#f5f7ff;padding-bottom:45px}
+.checkout-page.open{display:block;animation:cinematicBlurIn .5s both}
+.checkout-top{position:sticky;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:15px max(18px,calc((100vw - 1180px)/2));background:#080d20ef;border-bottom:1px solid #8295ff2c;backdrop-filter:blur(22px)}
+.checkout-brand{display:flex;align-items:center;gap:10px;font:28px Lalezar;color:#fff}
+.checkout-brand-mark,.choice-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:15px;background:linear-gradient(135deg,#526dff,#b44cff,#13bfd1);box-shadow:0 0 25px #756cff66}
+.checkout-main{width:min(1050px,calc(100% - 32px));margin:32px auto}
+.checkout-hero{padding:clamp(22px,5vw,44px);border-radius:30px;background:linear-gradient(125deg,#111b3d,#1c2051,#301b4c);border:1px solid #8998ff44;box-shadow:0 20px 60px #0004;margin-bottom:24px}
+.checkout-hero h1{font:clamp(34px,5vw,54px) Lalezar;margin:10px 0;color:#fff}
+.checkout-hero p,.checkout-panel>p{color:#c0caee;line-height:2}
+.checkout-kicker{font-size:11px;letter-spacing:2px;color:#aebcff}
+.checkout-stepbar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0 26px}
+.checkout-step{padding:14px;border:1px solid #7185d955;border-radius:17px;background:#111a38;text-align:center;color:#b7c2e6;font-size:13px}
+.checkout-step.active{background:linear-gradient(125deg,#293e8e,#522d7d);color:#fff;border-color:#9eafff;box-shadow:0 0 28px #706cff2a}
+.checkout-panel{padding:clamp(18px,3vw,30px);border-radius:26px;background:linear-gradient(145deg,#121b3aee,#0b1228f5);border:1px solid #8193ff3b;box-shadow:0 22px 60px #0003;margin-bottom:20px}
+.checkout-panel h2{font:29px Lalezar;margin:0 0 8px;color:#fff}
+.address-choice-grid,.pay-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:18px 0}
+.address-select-card,.pay-choice{display:block;width:100%;text-align:right;padding:18px;border-radius:21px;background:#101936;border:1px solid #6d80d64d;color:#f4f6ff;cursor:pointer;transition:.25s;position:relative;overflow:hidden}
+.address-select-card.selected,.pay-choice.selected{border-color:#9baaff;background:linear-gradient(145deg,#202e69,#261c4c);box-shadow:0 0 0 2px #8293ff22,0 0 30px #746cff2b}
+.address-select-card:hover,.pay-choice:hover{transform:translateY(-4px);box-shadow:0 0 30px #746cff35}
+.choice-title{display:flex;align-items:center;gap:10px;font-weight:900;color:#fff;margin-bottom:10px}
+.choice-icon{flex:none;width:42px;height:42px;border-radius:14px;font-size:22px}
+.choice-detail{font-size:12px;line-height:2;color:#c0caee;overflow-wrap:anywhere}
+.choice-check{margin-right:auto;color:#81f5e4;font-size:19px}
+.checkout-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.checkout-continue,.checkout-back{border:1px solid #b9c5ff55;border-radius:16px;padding:14px 22px;font-weight:900;cursor:pointer;transition:.25s}
+.checkout-continue{flex:1;min-width:210px;background:linear-gradient(115deg,#506cff,#9b52f5 58%,#12bcd0);color:#fff;box-shadow:0 8px 26px #675cff38}
+.checkout-back{background:#172247;color:#fff}
+.checkout-tip{padding:17px;border-radius:18px;background:#0c1733;border:1px solid #7185d955;color:#dce4ff;line-height:2;font-size:13px}
+.checkout-tip strong{color:#fff}.payment-warning{color:#ffdf9b!important;font-size:12px;line-height:2}
+.checkout-empty{padding:25px;text-align:center;color:#dce4ff;border:1px dashed #8397ff55;border-radius:20px}
+.purchase-success-box{background:linear-gradient(145deg,#18234d,#10152f 70%,#281644)!important;border-color:#a3afff66!important;color:#fff}
+.purchase-success h2,.purchase-success p{color:#fff!important}
+@media(max-width:650px){.checkout-top{padding:12px 16px}.checkout-brand{font-size:23px}.checkout-main{margin:18px auto}.address-choice-grid,.pay-choice-grid{grid-template-columns:1fr}.checkout-step{font-size:11px;padding:11px 4px}.checkout-hero,.checkout-panel{border-radius:22px}}
+
 </style>
 </head>
 <body>
@@ -466,6 +531,13 @@ button:focus-visible,a:focus-visible{outline:2px solid #38d9f4;outline-offset:3p
   <footer class="address-footer"><span>✦ ماهیگیر؛ هر داستان، یک مقصد تازه</span><span>نشانی‌های تو برای حساب فعلی</span></footer>
  </main>
 </section>
+<section class="checkout-page" id="checkoutPage" aria-hidden="true">
+<header class="checkout-top"><a class="checkout-brand" href="#home" onclick="closeCheckoutPage();return false"><span class="checkout-brand-mark">م</span><span>ماهیگیر<small style="display:block;font:11px Vazirmatn;color:#b7c2e6">مسیر خرید ویژه</small></span></a><button class="checkout-back" onclick="closeCheckoutPage()">بازگشت ←</button></header>
+<main class="checkout-main"><section class="checkout-hero"><span class="checkout-kicker">MAHIGIR · PREMIUM CHECKOUT</span><h1>فقط چند قدم تا کتابت ✨</h1><p>نشانی را انتخاب کن، روش ارسال و پرداخت را مشخص کن و سفارش را با خیال راحت ثبت کن.</p><div class="checkout-stepbar"><div class="checkout-step active" id="checkoutStep1">۱ · نشانی ارسال</div><div class="checkout-step active" id="checkoutStep2">۲ · روش پرداخت</div><div class="checkout-step" id="checkoutStep3">۳ · تأیید سفارش</div></div></section>
+<section class="checkout-panel"><h2>⌖ انتخاب نشانی</h2><p>روی کادر نشانی دلخواه بزن تا انتخاب شود. همه نشانی‌های ذخیره‌شده در همین صفحه نمایش داده می‌شوند.</p><div id="checkoutAddressChoices" class="address-choice-grid"></div><div class="checkout-actions"><button class="checkout-back" onclick="closeCheckoutPage();openAddresses()">＋ افزودن یا مدیریت نشانی‌ها</button></div></section>
+<section class="checkout-panel"><h2>📦 روش ارسال</h2><p>روش ارسال فروشگاه تیپاکس است؛ هزینه ارسال در جمع نهایی محاسبه می‌شود.</p><div class="pay-choice selected"><div class="choice-title"><span class="choice-icon">📦</span><span>ارسال با تیپاکس</span><span class="choice-check">✓</span></div><div class="choice-detail">هزینه ارسال: ۳۰۰٬۰۰۰ تومان · کد پستی و نشانی انتخاب‌شده همراه سفارش ثبت می‌شود.</div></div></section>
+<section class="checkout-panel"><h2>💳 روش پرداخت</h2><p>پس از ثبت سفارش، برای دریافت اطلاعات کارت مقصد و فرستادن رسید، با فروشگاه در روبیکا هماهنگ کن.</p><div class="pay-choice-grid"><button class="pay-choice selected" id="paymentCard" type="button" onclick="selectPayment('card')"><div class="choice-title"><span class="choice-icon">💳</span><span>کارت‌به‌کارت</span><span class="choice-check">✓</span></div><div class="choice-detail">پس از ثبت سفارش، اطلاعات کارت را از فروشگاه بگیر و تصویر رسید را در روبیکا بفرست.</div></button><button class="pay-choice" id="paymentCoord" type="button" onclick="selectPayment('coord')"><div class="choice-title"><span class="choice-icon">💬</span><span>هماهنگی در روبیکا</span></div><div class="choice-detail">ابتدا سفارش را ثبت کن؛ سپس برای هماهنگی پرداخت و ارسال رسید پیام بده.</div></button></div><div class="checkout-tip"><strong>اطلاعات پرداخت</strong><br>شماره کارت مقصد هنوز در تنظیمات فروشگاه موجود نیست؛ برای جلوگیری از اشتباه، شماره‌ای حدس زده نمی‌شود. بعد از ثبت سفارش به <b dir="ltr">@amirtbpedit</b> پیام بده و رسید را ارسال کن.</div><p class="payment-warning">ثبت سفارش به معنی تأیید پرداخت نیست؛ رسید باید توسط فروشگاه بررسی شود.</p></section>
+<section class="checkout-panel"><h2>🧾 خلاصه خرید</h2><div id="checkoutSummary"></div><div class="checkout-actions"><button class="checkout-back" onclick="openCart()">بازگشت به سبد خرید</button><button class="checkout-continue" onclick="submitCheckoutOrder()">تأیید و ثبت سفارش ✨</button></div></section></main></section>
 <section class="tracking-page" id="trackingPage" aria-hidden="true">
  <div class="tracking-glow tg-one"></div><div class="tracking-glow tg-two"></div><div class="tracking-grid-bg"></div>
  <header class="tracking-top"><a class="tracking-brand" href="#home" onclick="closeTracking()"><span class="tracking-brand-mark">م</span><span>ماهیگیر<small>مرکز رهگیری سفارش</small></span></a><button class="tracking-back" onclick="closeTracking()">بازگشت به حساب <span>←</span></button></header>
@@ -873,7 +945,7 @@ async function submitOrder(e){
   });
   let result={};try{result=await response.json()}catch{}
   if(!response.ok||result.error)throw new Error(result.error||("خطای سرور ("+response.status+")"));
-  cart=[];saveCart();renderCart();renderBooks();renderBestsellers();closeModal("checkoutModal");showPurchaseSuccess();notify("سفارش با موفقیت ثبت شد ✨");
+  cart=[];saveCart();renderCart();renderBooks();renderBestsellers();closeModal("checkoutModal");showPurchaseSuccess(result.id||"ثبت‌شده",selectedPaymentMethod);notify("سفارش با موفقیت ثبت شد ✨");
   try{await loadOrders()}catch(err){console.warn("Order saved but order list could not refresh:",err)}
   openAccount();
  }catch(err){
@@ -1067,6 +1139,83 @@ function showPurchaseSuccess(){
  el.innerHTML='<div class="purchase-success-box"><div class="success-mark">✓</div><div class="success-number">MAHIGIR · ORDER CONFIRMED</div><h2>سفارش ثبت شد!</h2><p>خریدت با موفقیت ثبت شد و حالا می‌توانی وضعیت سفارش را از بخش حساب کاربری دنبال کنی.</p><button class="btn primary" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove();openAccount()">مشاهده سفارش من ←</button><button class="btn white" style="margin-right:8px" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove()">ادامه خرید</button></div>';
  document.body.appendChild(el);
  setTimeout(()=>{if(el.isConnected)el.querySelector(".success-mark")?.classList.add("success-mark-ready")},80);
+}
+
+
+let selectedCheckoutAddress=0,selectedPaymentMethod="card",checkoutSubmitting=false;
+function openCheckoutPage(){
+ if(!currentUser){openAccount();notify("برای خرید ابتدا وارد حساب کاربری شو.");return}
+ const page=document.getElementById("checkoutPage");page.classList.add("open");page.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+ const saved=readAddresses();const stored=Number(localStorage.getItem("mh_checkout_address_"+currentUser.id)||0);
+ if(!saved[selectedCheckoutAddress])selectedCheckoutAddress=Math.max(0,Math.min(Math.max(0,saved.length-1),stored));
+ renderCheckoutPage();
+}
+function closeCheckoutPage(){
+ const page=document.getElementById("checkoutPage");if(!page)return;
+ page.classList.remove("open");page.setAttribute("aria-hidden","true");
+ if(!document.querySelector(".backdrop.open")&&!document.getElementById("addressPage")?.classList.contains("open")&&!document.getElementById("adminPage").classList.contains("open"))document.body.style.overflow="";
+}
+function startCheckout(){
+ if(!cart.some(i=>getBook(i.id)&&!getBook(i.id).comingSoon)){notify("سبد خرید خالی است.");return}
+ if(!currentUser){closeModal("cartModal");openAccount();notify("برای ثبت سفارش وارد حساب شو.");return}
+ closeModal("cartModal");openCheckoutPage();
+}
+function useAddress(i){const a=readAddresses()[i];if(!a)return;selectedCheckoutAddress=i;closeAddressPage();openCheckoutPage()}
+function chooseCheckoutAddress(i){
+ const saved=readAddresses();if(!saved[i])return;selectedCheckoutAddress=i;
+ localStorage.setItem("mh_checkout_address_"+currentUser.id,String(i));renderCheckoutPage();
+ const card=document.querySelector('[data-address-choice="'+i+'"]');if(card)card.animate([{transform:"scale(.97)"},{transform:"scale(1.02)"},{transform:"scale(1)"}],{duration:350,easing:"ease-out"});
+}
+function selectPayment(method){
+ selectedPaymentMethod=method;
+ ["paymentCard","paymentCoord"].forEach(id=>{const b=document.getElementById(id);if(!b)return;b.classList.toggle("selected",id===(method==="card"?"paymentCard":"paymentCoord"));const check=b.querySelector(".choice-check");if(check)check.remove()});
+ const target=document.getElementById(method==="card"?"paymentCard":"paymentCoord");if(target)target.querySelector(".choice-title")?.insertAdjacentHTML("beforeend",'<span class="choice-check">✓</span>');
+}
+function renderCheckoutPage(){
+ const saved=readAddresses(),choices=document.getElementById("checkoutAddressChoices");
+ if(choices){
+  if(!saved.length)choices.innerHTML='<div class="checkout-empty" style="grid-column:1/-1"><h3>هنوز نشانی ثبت نکرده‌ای</h3><p>یک نشانی اضافه کن تا برای سفارش انتخابش کنی.</p><button class="checkout-continue" onclick="closeCheckoutPage();openAddresses()">＋ افزودن نشانی</button></div>';
+  else{if(!saved[selectedCheckoutAddress])selectedCheckoutAddress=0;
+   choices.innerHTML=saved.map((a,i)=>'<button type="button" class="address-select-card '+(i===selectedCheckoutAddress?'selected':'')+'" data-address-choice="'+i+'" onclick="chooseCheckoutAddress('+i+')"><div class="choice-title"><span class="choice-icon">⌂</span><span>'+esc(a.recipient||"گیرنده")+'</span>'+(i===selectedCheckoutAddress?'<span class="choice-check">✓</span>':'')+'</div><div class="choice-detail">'+esc(a.phone||"")+'<br>'+esc(a.city||"")+'<br>'+esc(a.address||"")+'<br>کد پستی: '+esc(a.postal_code||"")+'</div><div style="margin-top:12px;color:#aebcff;font-size:11px">انتخاب این نشانی ←</div></button>').join("");
+  }
+ }
+ const summary=document.getElementById("checkoutSummary");
+ if(summary){
+  const valid=cart.map(i=>({item:i,book:getBook(i.id)})).filter(x=>x.book&&!x.book.comingSoon);
+  const total=valid.reduce((n,x)=>n+(Number(x.book.price)||0)*x.item.qty,0);
+  summary.innerHTML='<div class="checkout-tip">'+valid.map(x=>'<div style="display:flex;justify-content:space-between;gap:12px;padding:7px 0"><span>'+esc(x.book.title)+' × '+x.item.qty+'</span><strong>'+money(x.book.price*x.item.qty)+'</strong></div>').join("")+'<hr style="border-color:#7185d933"><div style="display:flex;justify-content:space-between;padding:7px 0"><span>جمع کتاب‌ها</span><strong>'+money(total)+'</strong></div><div style="display:flex;justify-content:space-between;padding:7px 0"><span>ارسال تیپاکس</span><strong>'+money(SHIPPING)+'</strong></div><div style="display:flex;justify-content:space-between;padding:12px 0 0;color:#fff;font-size:17px"><strong>مبلغ نهایی</strong><strong>'+money(total+SHIPPING)+'</strong></div></div>';
+ }
+}
+async function submitCheckoutOrder(){
+ if(checkoutSubmitting)return;
+ if(!db){notify("اتصال Supabase برقرار نیست؛ سفارش ثبت نشد.");return}
+ if(!currentUser){notify("برای ثبت سفارش وارد حساب شو.");return}
+ const saved=readAddresses(),a=saved[selectedCheckoutAddress];
+ if(!a){notify("ابتدا یک نشانی اضافه و انتخاب کن.");return}
+ const items=cart.map(i=>{const b=getBook(i.id);return b&&!b.comingSoon?{id:i.id,title:b.title,price:Number(b.price),qty:i.qty}:null}).filter(Boolean);
+ if(!items.length){notify("سبد خرید خالی است.");return}
+ const total=items.reduce((n,i)=>n+i.price*i.qty,0);
+ const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:normalizeDigits(a.postal_code).trim(),shipping_method:"تیپاکس",items,total_price:total+SHIPPING,stage_id:stages[0]?.id||1};
+ const btn=document.querySelector(".checkout-continue");checkoutSubmitting=true;if(btn){btn.disabled=true;btn.textContent="در حال ثبت سفارش..."}
+ try{
+  const {data:sessionData,error:sessionError}=await db.auth.getSession();if(sessionError)throw sessionError;
+  if(!sessionData?.session?.access_token)throw new Error("نشست ورود پیدا نشد؛ دوباره وارد حساب شو.");
+  const response=await fetch(PROJECT_URL+"/functions/v1/admin-api",{method:"POST",headers:{"Content-Type":"application/json","apikey":PUBLIC_KEY,"Authorization":"Bearer "+sessionData.session.access_token},body:JSON.stringify({action:"create-order",payload})});
+  let result={};try{result=await response.json()}catch{}
+  if(!response.ok||result.error)throw new Error(result.error||("خطای سرور ("+response.status+")"));
+  cart=[];saveCart();renderCart();renderBooks();renderBestsellers();closeCheckoutPage();showPurchaseSuccess(result.id||"ثبت‌شده",selectedPaymentMethod);
+  try{await loadOrders()}catch(err){console.warn("Order saved but order list refresh failed:",err)}
+ }catch(err){console.error("Mahigir checkout failed:",err);notify("سفارش ثبت نشد: "+String(err?.message||"خطای نامشخص").slice(0,180))}
+ finally{checkoutSubmitting=false;if(btn){btn.disabled=false;btn.textContent="تأیید و ثبت سفارش ✨"}}
+}
+function renderCheckout(a){if(a){const saved=readAddresses();const ix=saved.findIndex(x=>x.id&&x.id===a.id);if(ix>=0)selectedCheckoutAddress=ix}renderCheckoutPage()}
+function showPurchaseSuccess(orderId="ثبت‌شده",payment="card"){
+ const old=document.getElementById("purchaseSuccessOverlay");if(old)old.remove();
+ const message="سلام، سفارش کتابم در ماهیگیر ثبت شد. شماره سفارش: "+orderId+". روش پرداخت: "+(payment==="card"?"کارت‌به‌کارت":"هماهنگی در روبیکا")+". لطفاً اطلاعات کارت مقصد را اعلام کنید تا رسید را ارسال کنم.";
+ const el=document.createElement("div");el.id="purchaseSuccessOverlay";el.className="purchase-success";
+ el.innerHTML='<div class="purchase-success-box"><div class="success-mark">✓</div><div class="success-number">MAHIGIR · ORDER CONFIRMED</div><h2>سفارش ثبت شد!</h2><p>سفارش ثبت شده است. برای دریافت اطلاعات کارت مقصد و فرستادن رسید، از طریق روبیکا با فروشگاه هماهنگ کن.</p><div class="checkout-tip" style="text-align:right;margin:15px 0">شماره سفارش: <b>'+esc(String(orderId))+'</b><br>روش پرداخت: '+(payment==="card"?"کارت‌به‌کارت":"هماهنگی در روبیکا")+'</div><button class="btn primary" id="rubikaReceiptButton">رفتن به روبیکا و ارسال رسید ←</button><button class="btn white" style="margin-top:10px" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove();openAccount()">مشاهده حساب کاربری</button></div>';
+ document.body.appendChild(el);
+ document.getElementById("rubikaReceiptButton").onclick=()=>{try{navigator.clipboard?.writeText(message)}catch{};window.open("https://rubika.ir/amirtbpedit","_blank","noopener")};
 }
 
 </script>
