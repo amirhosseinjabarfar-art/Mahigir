@@ -1105,8 +1105,14 @@ async function adminTab(tab,el){
  catch(err){console.error(err);panel.innerHTML='<div class="orders-empty"><h3>فهرست کاربران دریافت نشد</h3><p>'+esc(err.message||"خطای نامشخص")+'</p></div>'}
 }
 function adminUsersHTML(){
- if(!adminUsers.length)return '<div class="orders-empty"><h3>هنوز کاربری پیدا نشد</h3><p>اگر حساب ساخته‌ای، تابع admin-api باید نسخه جدید داشته باشد و Deploy شده باشد.</p></div>';
- return '<div class="admin-order-list">'+adminUsers.map((u,i)=>'<article class="admin-order-card" style="--card-index:'+i%6+'"><div class="admin-order-head"><div><span class="admin-order-kicker">REGISTERED USER · '+esc(String(u.id||"").slice(0,8))+'</span><h3>'+esc(u.display_name||u.username||"کاربر بدون نام")+'</h3><small>نام کاربری: '+esc(u.username||"—")+'</small></div><span class="order-live-pill"><i></i> ثبت‌نام‌شده</span></div><div class="admin-order-info"><div><small>شناسه حساب</small><p dir="ltr">'+esc(u.id||"—")+'</p></div><div><small>تاریخ ثبت‌نام</small><p>'+esc(u.created_at?new Date(u.created_at).toLocaleString("fa-IR"):"—")+'</p></div></div></article>').join("")+'</div>';
+ if(!adminUsers.length)return '<div class="orders-empty"><h3>هنوز کاربری پیدا نشد</h3><p>برای دریافت فهرست کاربران، تابع admin-api باید با موفقیت Deploy شده باشد.</p></div>';
+ return '<div class="admin-order-list">'+adminUsers.map((u,i)=>'<button type="button" class="admin-order-card" data-user="'+esc(u.id||"")+'" onclick="viewAdminUserOrders(this.dataset.user)" style="--card-index:'+i%6+';display:block;width:100%;text-align:right;cursor:pointer;color:inherit"><div class="admin-order-head"><div><h3 style="margin:0 0 5px">'+esc(u.display_name||u.username||"کاربر")+'</h3><small>نام کاربری: '+esc(u.username||"—")+'</small></div><span class="order-live-pill"><i></i> ثبت‌نام‌شده</span></div><div style="margin-top:12px;color:#635bdb;font-weight:800">مشاهده سفارش‌های این کاربر ←</div></button>').join("")+'</div>';
+}
+function viewAdminUserOrders(id){
+ if(!id)return notify("شناسه این کاربر پیدا نشد.");
+ adminSelectedUser=String(id);
+ const tab=document.querySelector("#adminContent .tabs .tab");
+ adminTab("orders",tab);
 }
 function adminOrdersHTML(){
  const activeOrders=adminOrders.filter(o=>!(o.approval_status==="approved"&&stagePosition(stages.find(s=>String(s.id)===String(o.stage_id))||{id:o.stage_id})===5));
