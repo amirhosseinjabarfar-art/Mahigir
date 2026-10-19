@@ -881,7 +881,7 @@ async function logout(){
 }
 async async function loadOrders(){
  if(!db||!currentUser)return;
- const {data,error}=await db.from("mahigir_orders").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false});
+ const {data,error}=await db.from("mahigir_orders").select("*").eq("user_id",currentUser.id).eq("approval_status","approved").order("created_at",{ascending:false});
  if(error)throw error;orders=data||[];
 }
 async function loadStages(){
@@ -1288,7 +1288,7 @@ async function submitCheckoutOrder(){
  const items=cart.map(i=>{const b=getBook(i.id);return b&&!b.comingSoon?{id:i.id,title:b.title,price:Number(b.price),qty:i.qty}:null}).filter(Boolean);
  if(!items.length){notify("سبد خرید خالی است.");return}
  const total=items.reduce((n,i)=>n+i.price*i.qty,0);
- const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:normalizeDigits(a.postal_code).trim(),shipping_method:"تیپاکس",items,total_price:total+SHIPPING,stage_id:stages[0]?.id||1};
+ const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:normalizeDigits(a.postal_code).trim(),shipping_method:"تیپاکس",items,total_price:total+SHIPPING,stage_id:stages[0]?.id||1,approval_status:"pending_review"};
  const btn=document.querySelector(".checkout-continue");checkoutSubmitting=true;if(btn){btn.disabled=true;btn.textContent="در حال ثبت سفارش..."}
  try{
   const {data:sessionData,error:sessionError}=await db.auth.getSession();if(sessionError)throw sessionError;
