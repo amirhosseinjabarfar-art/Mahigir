@@ -648,6 +648,11 @@ function profileTab(tab,el){
  if(tab==="addresses")p.innerHTML=addressesHTML();
  if(tab==="info")p.innerHTML=`<div class="order"><p><strong>نام کاربری:</strong> ${esc(profile?.username||"")}</p><p><strong>نام نمایشی:</strong> ${esc(profile?.display_name||"")}</p></div>`;
 }
+function addressesHTML(){
+ const saved=readAddresses();
+ if(!saved.length)return `<div class="orders-empty"><div class="orders-empty-orb">⌂</div><h3>هنوز نشانی‌ای ذخیره نکرده‌ای</h3><p>یک نشانی ذخیره کن تا هنگام سفارش همان را انتخاب کنی و دوباره واردش نکنی.</p><button class="btn primary" onclick="openAddresses()">افزودن نشانی ✨</button></div>`;
+ return `<div class="orders-grid">${saved.map((a,i)=>`<article class="order-float-card" style="--card-index:${i%6}"><div class="order-card-top"><span class="order-glyph">⌂</span><span class="order-live-pill"><i></i> نشانی ذخیره‌شده</span></div><h3 class="order-card-title">${esc(a.recipient||"گیرنده")}</h3><div class="order-card-meta"><span>☎ ${esc(a.phone||"")}</span></div><p>${esc(a.city||"")}<br>${esc(a.address||"")}<br>کد پستی: ${esc(a.postal_code||"")}</p><button class="order-track-button" onclick="openAddresses()">مدیریت و ویرایش نشانی‌ها <span>↗</span></button></article>`).join("")}</div><button class="btn primary" style="margin-top:16px" onclick="openAddresses()">افزودن یا مدیریت نشانی‌ها ✨</button>`;
+}
 function ordersHTML(){
  if(!orders.length)return '<div class="orders-empty"><div class="orders-empty-orb">✦</div><h3>هنوز سفارشی نداری</h3><p>کتاب موردعلاقه‌ات را انتخاب کن؛ مسیر رسیدنش را همین‌جا دنبال می‌کنی.</p><button class="btn primary" onclick="closeModal(\'accountModal\');document.getElementById(\'books\').scrollIntoView({behavior:\'smooth\'})">کشف کتاب‌ها ←</button></div>';
  return '<div class="orders-grid">'+orders.map((o,i)=>{
@@ -810,8 +815,20 @@ async function submitAdminPassword(e){
 }
 async function loadAdminOrders(){if(!adminUnlocked)throw new Error("ابتدا رمز مدیریت را وارد کن.");const result=await adminApi("admin-orders");adminOrders=Array.isArray(result.orders)?result.orders:[]}
 async function loadStages(){
- if(adminUnlocked){const result=await adminApi("admin-stages");stages=Array.isArray(result.stages)&&result.stages.length?result.stages.map((x,i)=>({...x,position:Number(x.position||i+1),title:STAGES[Math.min(4,Math.max(0,Number(x.position||i+1)-1))].title})):STAGES;}
- else if(db){const {data,error}=await db.from("mahigir_order_stages").select("*").order("position");if(error){console.warn(error);stages=STAGES;return}stages=data?.length?data:STAGES}
+ if(adminUnlocked){
+  try{
+   const result=await adminApi("admin-stages");
+   stages=Array.isArray(result.stages)&&result.stages.length?result.stages.map((x,i)=>({...x,position:Number(x.position||i+1),title:STAGES[Math.min(4,Math.max(0,Number(x.position||i+1)-1))].title})):STAGES;
+  }catch(error){
+   // نبودن ستون position نباید ورود مدیر را متوقف کند.
+   console.warn("Admin stages unavailable; using built-in stages:",error);
+   stages=STAGES;
+  }
+ }else if(db){
+  const {data,error}=await db.from("mahigir_order_stages").select("*").order("position");
+  if(error){console.warn(error);stages=STAGES;return}
+  stages=data?.length?data.map((x,i)=>({...x,position:Number(x.position||i+1),title:STAGES[Math.min(4,Math.max(0,Number(x.position||i+1)-1))].title})):STAGES;
+ }
 }
 function renderAdmin(){
  if(!adminUnlocked)return;const total=adminOrders.reduce((n,o)=>n+Number(o.total_price||0),0);
