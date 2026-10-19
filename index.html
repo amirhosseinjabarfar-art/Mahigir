@@ -879,7 +879,7 @@ async function logout(){
  document.getElementById("accountBtn").textContent="ورود / ثبت‌نام";
  renderAuth("login");notify("از حساب خارج شدی.");
 }
-async async function loadOrders(){
+async function loadOrders(){
  if(!db||!currentUser)return;
  const {data,error}=await db.from("mahigir_orders").select("*").eq("user_id",currentUser.id).eq("approval_status","approved").order("created_at",{ascending:false});
  if(error)throw error;orders=data||[];
@@ -1047,7 +1047,7 @@ async function submitOrder(e){
 
 /* پنل مدیریت: رمز فقط از طریق Edge Function سمت سرور */
 let adminPassword="";
-async async function adminApi(action,extra={}){
+async function adminApi(action,extra={}){
  const response=await fetch(PROJECT_URL+"/functions/v1/admin-api",{method:"POST",headers:{"Content-Type":"application/json","apikey":PUBLIC_KEY,"Authorization":"Bearer "+PUBLIC_KEY},body:JSON.stringify({password:adminPassword,action,...extra})});
  let result={};try{result=await response.json()}catch{}
  if(!response.ok||result.error)throw new Error(result.error||("خطای سرور ("+response.status+")"));
@@ -1068,7 +1068,7 @@ async function submitAdminPassword(e){
   else{notify("ورود ناموفق بود: "+message.slice(0,150));if(input)input.value="";if(btn){btn.disabled=false;btn.textContent="ورود امن ←"}}
  }
 }
-async async function loadAdminOrders(){if(!adminUnlocked)throw new Error("ابتدا رمز مدیریت را وارد کن.");const result=await adminApi("admin-orders");adminOrders=Array.isArray(result.orders)?result.orders:[]}
+async function loadAdminOrders(){if(!adminUnlocked)throw new Error("ابتدا رمز مدیریت را وارد کن.");const result=await adminApi("admin-orders");adminOrders=Array.isArray(result.orders)?result.orders:[]}
 async function loadStages(){
  if(adminUnlocked){
   try{
