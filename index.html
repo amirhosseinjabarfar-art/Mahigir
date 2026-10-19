@@ -297,6 +297,101 @@ td input,td select{max-width:180px;padding:8px;border:1px solid var(--line);bord
 @media(prefers-reduced-motion:reduce){.tracking-page *,.order-float-card,.order-float-card *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 .admin-stage-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:20px}.admin-stage-item{padding:18px;border:1px solid #e8eafa;border-radius:18px;background:#ffffffc9;transition:transform .25s,box-shadow .25s}.admin-stage-item:hover{transform:translateY(-5px);box-shadow:0 15px 30px #7b83b31c}.admin-stage-item>span{display:grid;place-items:center;width:35px;height:35px;border-radius:12px;background:linear-gradient(135deg,#637df4,#c17ce9);color:white;font-weight:1000;box-shadow:0 7px 16px #8b7ce633}.admin-stage-item strong{display:block;margin:12px 0 7px;color:#4a5278}.admin-stage-item small{font-size:10px;color:#969cb7}
+
+/* MAHIGIR NEON REBUILD — vivid glass, glowing selections, and cinematic motion */
+:root{--bg:#090d20;--paper:rgba(20,27,57,.88);--ink:#f5f6ff;--muted:#a9b4dc;--blue:#6e82ff;--purple:#bd67ff;--line:rgba(137,157,255,.22);--shadow:0 20px 65px rgba(40,65,180,.25)}
+html{background:#090d20}
+body{background:radial-gradient(ellipse at 5% 0%,#293c8c80,transparent 35%),radial-gradient(ellipse at 92% 10%,#7d2ca955,transparent 32%),radial-gradient(ellipse at 50% 100%,#075c7b40,transparent 45%),#090d20;color:#f5f6ff}
+header{background:rgba(8,12,30,.78);border-color:rgba(135,154,255,.22);box-shadow:0 8px 35px #0002}
+.brand{color:#aebaff}.navlinks a{color:#b9c3ea}
+.logo{background:linear-gradient(135deg,#5c78ff,#c052ff,#22d3ee);box-shadow:0 0 28px #6e82ff66}
+.btn,.iconbtn,.cat,.card,.search,.modal,.field input,.field textarea,.field select,.cartitem,.order,.adminstat,.totals,.track,.tab,.close{transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s,border-color .28s,background .28s}
+.btn{position:relative;overflow:hidden}
+.btn:before{content:"";position:absolute;inset:-2px;background:linear-gradient(110deg,transparent 25%,#ffffff45 48%,transparent 70%);transform:translateX(-130%);transition:transform .7s;pointer-events:none}
+.btn:hover:before{transform:translateX(130%)}
+.primary{background:linear-gradient(115deg,#526dff,#9a52ff 55%,#11bfd1);box-shadow:0 8px 30px #695dff55;color:#fff}
+.soft,.white,.iconbtn,.cat,.search{background:rgba(24,32,67,.85);border:1px solid var(--line);color:#edf0ff}
+.iconbtn:hover,.cat:hover,.white:hover,.soft:hover{box-shadow:0 0 22px #6d7cff55;border-color:#9caaff;transform:translateY(-3px)}
+.hero{padding-top:65px}
+.hero h1{color:#fff;text-shadow:0 0 35px #7d75ff25}
+.tag{background:#172047;border-color:#6e82ff55;color:#d5d9ff;box-shadow:0 0 25px #6e82ff20}
+.hero p,.heading p{color:#a9b4dc}
+.art{background:linear-gradient(135deg,#111c45,#291a4c,#073b53);border:1px solid #8d9bff44;box-shadow:0 0 50px #5b65ff1e,inset 0 0 40px #fff08}
+.orb{background:linear-gradient(140deg,#667aff,#bd67ff,#21d2e6);filter:saturate(1.2);box-shadow:0 0 65px #8a66ff77}
+.bubble{background:rgba(16,24,54,.88);border:1px solid #a3adff44;color:#f7f7ff;backdrop-filter:blur(18px)}
+.heading h2{color:#f2f4ff}
+.card{background:linear-gradient(155deg,rgba(26,35,76,.95),rgba(13,19,43,.96));border:1px solid rgba(134,153,255,.22);box-shadow:0 12px 30px #0002;position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,#8b9aff77,transparent 35%,#d16dff44 70%,#20d4e944);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.75}
+.card:hover{transform:translateY(-8px) scale(1.012);border-color:#8d9bff88;box-shadow:0 18px 48px #625cff2a,0 0 24px #a855f722}
+.cover{box-shadow:inset 0 0 45px #ffffff12}
+.book-info h3{color:#fff}
+.book-info p{color:#aab5dc}
+.price{color:#a8b9ff;text-shadow:0 0 18px #7488ff33}
+.cat.active{background:linear-gradient(120deg,#526dff,#ad59ff);border-color:#a9aaff;box-shadow:0 0 25px #796cff55}
+.shipping{background:linear-gradient(115deg,#111b3b,#242d6b,#512d7e);border:1px solid #8d9bff55;box-shadow:0 15px 45px #0003}
+.shipping p,.shipping .cost small{color:#d5dcff}
+footer{background:#070b1b;border-top:1px solid #7d8aff33}
+footer p{color:#aab5dc}
+.admin-fab{background:linear-gradient(140deg,#526dff,#b24eff,#10bdd1);box-shadow:0 0 35px #796cff66}
+.backdrop{background:#030615c9;backdrop-filter:blur(16px)}
+.modal{background:linear-gradient(145deg,#151d40,#0d132d);border:1px solid #8797ff44;color:#f5f6ff;box-shadow:0 30px 110px #0008,0 0 35px #6c70ff18}
+.modalhead{border-bottom:1px solid #8391ff22;padding-bottom:12px}
+.close{background:#242e5c;color:#fff;border:1px solid #7b8cff44}
+.field label{color:#dce1ff}
+.field input,.field textarea,.field select{background:#0c1431;color:#f8f8ff;border-color:#6476bb66}
+.field input::placeholder,.field textarea::placeholder{color:#7887b7}
+.welcome{background:linear-gradient(120deg,#526dff,#9b4dff,#12b9cf);box-shadow:0 15px 40px #665bff30}
+.tab{background:#20294e;color:#dbe0ff;border:1px solid #7483d833}
+.tab.active{background:linear-gradient(120deg,#526dff,#ad59ff);box-shadow:0 0 20px #796cff55}
+.cartitem,.order,.totals,.track,.adminstat{background:rgba(25,34,71,.8);border-color:#6f80d044;color:#f3f5ff}
+.totalrow.final{border-color:#6e7ed044}
+.progress .dot{background:#26325e;color:#fff}
+.step{color:#9eabd5}.step.done{color:#b7c3ff}
+.empty,.muted{color:#a9b4dc}
+.tablewrap{border-color:#596cb044}
+th{background:#20294e;color:#e9edff}td{border-color:#5869a533}
+.toast{background:linear-gradient(110deg,#243568,#5d3a94);border:1px solid #a7b4ff66;box-shadow:0 10px 35px #0005}
+.detailcover{box-shadow:0 0 45px #746bff2b}
+.detailbullets,.noticebar{background:#20294e;color:#e9edff}
+.admin-page{background:#090d20;color:#f5f6ff}
+.admin-top{background:#0b1027ed;border-color:#7485ff33}
+.address-page{background:linear-gradient(135deg,#080d22,#111738 50%,#1d1035);color:#f5f6ff}
+.address-top{background:#0b1027dc;border-color:#7586ff33}
+.address-brand{color:#f1f3ff}.address-brand small{color:#a6b3e0}
+.address-back{background:#192247;color:#e9edff;border-color:#7485ff44}
+.address-panel,.address-card,.address-form-panel,.address-list-panel{background:rgba(19,27,59,.88)!important;border-color:#7485ff44!important;color:#f5f6ff!important;box-shadow:0 18px 45px #0003,0 0 28px #6e82ff12}
+.address-page p,.address-page .address-perks,.address-page .address-panel-head p{color:#a9b4dc}
+.address-page input,.address-page textarea,.address-page select{background:#0b1430!important;color:#f5f6ff!important;border-color:#7283d855!important}
+.address-page label{color:#dfe4ff!important}
+.address-page .address-save,.address-page .address-action{background:linear-gradient(110deg,#526dff,#ad59ff,#13bbd1)!important;color:#fff!important;box-shadow:0 0 28px #796cff33}
+.address-page .address-empty{background:#151e41!important;color:#dfe4ff!important;border-color:#7a8cff33!important}
+.address-page .address-counter,.address-page .address-live-pill{background:#26315e!important;color:#cfd7ff!important}
+.address-page .address-hero h1{color:#fff}
+.address-page .address-hero h1 span{color:#bcb2ff}
+.address-page .address-footer{color:#a9b4dc}
+.tracking-page{background:linear-gradient(135deg,#090d20,#141b3e,#1d1035)!important;color:#f5f6ff!important}
+.tracking-top{background:#0b1027dc!important;border-color:#7586ff33!important}
+.tracking-brand{color:#f5f6ff!important}.tracking-brand small{color:#a6b3e0!important}
+.tracking-back{background:#192247!important;color:#e9edff!important;border-color:#7485ff44!important}
+.tracking-card,.tracking-panel,.tracking-info-card{background:#141d40!important;border-color:#7182ff44!important;color:#f4f6ff!important}
+input:focus,textarea:focus,select:focus{outline:none!important;border-color:#9baaff!important;box-shadow:0 0 0 3px #7283ff24,0 0 22px #7283ff22!important}
+button:focus-visible,a:focus-visible{outline:2px solid #38d9f4;outline-offset:3px}
+@keyframes neonBreath{0%,100%{box-shadow:0 0 0 #7b76ff00}50%{box-shadow:0 0 35px #7b76ff20}}
+@keyframes selectionPop{0%{transform:scale(.96);opacity:.4}100%{transform:scale(1);opacity:1}}
+@keyframes successBurst{0%{transform:scale(.25) rotate(-25deg);opacity:0}65%{transform:scale(1.12) rotate(6deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+@keyframes successRing{0%{transform:scale(.25);opacity:.9}100%{transform:scale(1.9);opacity:0}}
+@keyframes purchaseSweep{0%{transform:translateX(120%) rotate(15deg)}100%{transform:translateX(-120%) rotate(15deg)}}
+.purchase-success{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;padding:20px;background:rgba(3,6,20,.86);backdrop-filter:blur(18px);animation:fade .25s}
+.purchase-success-box{position:relative;overflow:hidden;width:min(470px,100%);padding:35px 24px;text-align:center;border:1px solid #a3afff66;border-radius:30px;background:linear-gradient(145deg,#18234d,#10152f 70%,#281644);box-shadow:0 25px 100px #0008,0 0 60px #776dff35;animation:modalin .35s}
+.purchase-success-box:after{content:"";position:absolute;top:-20%;bottom:-20%;width:55%;background:#ffffff12;filter:blur(10px);animation:purchaseSweep 2.8s infinite;pointer-events:none}
+.success-mark{position:relative;display:grid;place-items:center;width:94px;height:94px;margin:0 auto 18px;border-radius:30px;background:linear-gradient(145deg,#5f7bff,#b35aff,#10c7d9);font-size:48px;box-shadow:0 0 45px #8275ff66;animation:successBurst .65s cubic-bezier(.2,.8,.2,1)}
+.success-mark:before,.success-mark:after{content:"";position:absolute;inset:-8px;border:1px solid #a8b4ff88;border-radius:35px;animation:successRing 1.8s infinite}
+.success-mark:after{animation-delay:.7s}
+.purchase-success h2{font:36px Lalezar;margin:0 0 8px;color:#fff}
+.purchase-success p{font-size:13px;line-height:2;color:#c3ccef;margin:0 0 20px}
+.purchase-success .success-number{font-size:11px;color:#a7b6ff;letter-spacing:2px;margin-bottom:18px}
+@media(max-width:620px){.hero h1{font-size:46px}.art{border-radius:25px}.card:hover{transform:translateY(-3px)}.purchase-success-box{padding:28px 18px}}
+
 </style>
 </head>
 <body>
@@ -778,7 +873,7 @@ async function submitOrder(e){
   });
   let result={};try{result=await response.json()}catch{}
   if(!response.ok||result.error)throw new Error(result.error||("خطای سرور ("+response.status+")"));
-  cart=[];saveCart();renderCart();renderBooks();renderBestsellers();closeModal("checkoutModal");notify("سفارش با موفقیت ثبت شد ✨");
+  cart=[];saveCart();renderCart();renderBooks();renderBestsellers();closeModal("checkoutModal");showPurchaseSuccess();notify("سفارش با موفقیت ثبت شد ✨");
   try{await loadOrders()}catch(err){console.warn("Order saved but order list could not refresh:",err)}
   openAccount();
  }catch(err){
@@ -919,6 +1014,61 @@ document.addEventListener("keydown",e=>{
  }
 });
 initialize();
+
+/* Reliable address persistence + purchase animation patch */
+function readAddresses(){
+ try{
+  const local=JSON.parse(localStorage.getItem(addressKey())||"null");
+  if(Array.isArray(local))return local;
+ }catch{}
+ const remote=currentUser?.user_metadata?.mahigir_addresses;
+ return Array.isArray(remote)?remote:[];
+}
+async function persistAddresses(next){
+ addresses=next;
+ localStorage.setItem(addressKey(),JSON.stringify(next));
+ if(db&&currentUser){
+  try{
+   const {data,error}=await db.auth.updateUser({data:{mahigir_addresses:next}});
+   if(error)throw error;
+   if(data?.user)currentUser=data.user;
+   return true;
+  }catch(err){console.warn("Address cloud sync unavailable; local copy retained:",err);return false}
+ }
+ return false;
+}
+async function saveAddress(e){
+ e.preventDefault();
+ const form=e.currentTarget||e.target;
+ if(!form.reportValidity())return;
+ const f=new FormData(form);
+ const a={id:crypto?.randomUUID?.()||("addr-"+Date.now()),recipient:String(f.get("recipient")||"").trim(),phone:normalizeDigits(String(f.get("phone")||"")).trim(),city:String(f.get("city")||"").trim(),address:String(f.get("address")||"").trim(),postal_code:normalizeDigits(String(f.get("postal_code")||"")).trim(),shipping_method:"تیپاکس"};
+ if(!/^\d{10}$/.test(a.postal_code)){notify("کد پستی باید دقیقاً ۱۰ رقم باشد.");return}
+ if(!a.recipient||!a.phone||!a.city||!a.address){notify("لطفاً همه اطلاعات نشانی را کامل کن.");return}
+ const old=readAddresses();
+ if(editingAddressIndex>=0&&old[editingAddressIndex])old[editingAddressIndex]=a;else old.push(a);
+ const btn=form.querySelector('button[type="submit"]');
+ if(btn){btn.disabled=true;btn.dataset.original=btn.textContent;btn.textContent="در حال ذخیره امن..."}
+ const synced=await persistAddresses(old);
+ editingAddressIndex=-1;renderAddresses();addressForm();
+ if(synced)notify("نشانی ذخیره شد و به حساب کاربری همگام‌سازی شد ✨");
+ else notify("نشانی ذخیره شد؛ برای اطمینان در همین دستگاه هم نگه‌داری شد. اگر اینترنت وصل است دوباره وارد حساب شو تا همگام‌سازی شود.");
+}
+async function deleteAddress(i){
+ const list=readAddresses();if(!list[i])return;
+ if(!confirm("این نشانی حذف شود؟"))return;
+ list.splice(i,1);await persistAddresses(list);
+ if(editingAddressIndex===i){editingAddressIndex=-1;addressForm()}else if(editingAddressIndex>i)editingAddressIndex--;
+ renderAddresses();notify("نشانی حذف شد.");
+}
+function showPurchaseSuccess(){
+ const previous=document.getElementById("purchaseSuccessOverlay");if(previous)previous.remove();
+ const el=document.createElement("div");el.id="purchaseSuccessOverlay";el.className="purchase-success";
+ el.innerHTML='<div class="purchase-success-box"><div class="success-mark">✓</div><div class="success-number">MAHIGIR · ORDER CONFIRMED</div><h2>سفارش ثبت شد!</h2><p>خریدت با موفقیت ثبت شد و حالا می‌توانی وضعیت سفارش را از بخش حساب کاربری دنبال کنی.</p><button class="btn primary" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove();openAccount()">مشاهده سفارش من ←</button><button class="btn white" style="margin-right:8px" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove()">ادامه خرید</button></div>';
+ document.body.appendChild(el);
+ setTimeout(()=>{if(el.isConnected)el.querySelector(".success-mark")?.classList.add("success-mark-ready")},80);
+}
+
 </script>
 </body>
 </html>
