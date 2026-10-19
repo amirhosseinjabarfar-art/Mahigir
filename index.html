@@ -686,7 +686,7 @@ const db=window.supabase?.createClient(PROJECT_URL,PUBLIC_KEY,{auth:{persistSess
 
 let books=INITIAL_BOOKS.map(b=>({...b}));
 let cart=readCart(),currentUser=null,profile=null,orders=[],stages=STAGES.map(s=>({...s}));
-let category="همه",adminUnlocked=false,adminOrders=[];
+let category="همه",adminUnlocked=false,adminOrders=[],adminSelectedUser=null;
 let toastTimer=null,authBusy=false;
 
 function readCart(){
@@ -1086,19 +1086,31 @@ async function loadStages(){
  }
 }
 function renderAdmin(){
- if(!adminUnlocked)return;const total=adminOrders.reduce((n,o)=>n+Number(o.total_price||0),0);
- document.getElementById("adminContent").innerHTML=`<div class="welcome"><h2>پنل مدیریت ماهیگیر ✨</h2><p>مدیریت سفارش‌ها و کدهای رهگیری؛ ورود با رمز اختصاصی</p></div>
- <div class="adminstats"><div class="adminstat"><strong>${adminOrders.length.toLocaleString("fa-IR")}</strong><span>تعداد سفارش‌ها</span></div><div class="adminstat"><strong>${adminOrders.filter(o=>!o.tracking_code).length.toLocaleString("fa-IR")}</strong><span>بدون کد رهگیری</span></div><div class="adminstat"><strong>${money(total)}</strong><span>جمع مبالغ سفارش‌ها</span></div></div>
+ if(!adminUnlocked)return;
+ const activeOrders=adminOrders.filter(o=>!(o.approval_status==="approved"&&stagePosition(stages.find(s=>String(s.id)===String(o.stage_id))||{id:o.stage_id})===5));
+ const total=activeOrders.reduce((n,o)=>n+Number(o.total_price||0),0);
+ document.getElementById("adminContent").innerHTML=`<div class="welcome"><h2>پنل مدیریت ماهیگیر ✨</h2><p>روی شناسه یا نام کاربر بزن تا سفارش‌های فعال همان کاربر را ببینی. سفارش تحویل‌شده از فهرست مدیریت حذف می‌شود اما در حساب مشتری باقی می‌ماند.</p></div>
+ <div class="adminstats"><div class="adminstat"><strong>${activeOrders.length.toLocaleString("fa-IR")}</strong><span>سفارش‌های فعال</span></div><div class="adminstat"><strong>${activeOrders.filter(o=>!o.tracking_code).length.toLocaleString("fa-IR")}</strong><span>بدون کد رهگیری</span></div><div class="adminstat"><strong>${money(total)}</strong><span>جمع سفارش‌های فعال</span></div></div>
  <div class="tabs"><button class="tab active" onclick="adminTab('orders',this)">سفارش‌ها و نشانی‌ها</button><button class="tab" onclick="adminTab('stages',this)">مراحل سفارش</button><button class="tab" onclick="loadAdminOrders().then(renderAdmin).catch(e=>notify('خطا: '+e.message))">بروزرسانی</button></div>
  <div id="adminPanel">${adminOrdersHTML()}</div><button class="btn white" style="margin-top:16px" onclick="closeAdmin()">خروج امن از پنل مدیریت</button>`;
 }
 function adminTab(tab,el){
- document.querySelectorAll("#adminContent .tab").forEach(x=>x.classList.remove("active"));el.classList.add("active");
+ document.querySelectorAll("#adminContent .tab").forEach(x=>x.classList.remove("active"));
+ if(el)el.classList.add("active");
+ if(tab==="orders")adminSelectedUser=null;
  document.getElementById("adminPanel").innerHTML=tab==="orders"?adminOrdersHTML():adminStagesHTML();
 }
+function viewAdminUserOrders(userId){
+ adminSelectedUser=String(userId||"");
+ const panel=document.getElementById("adminPanel");
+ if(panel)panel.innerHTML=adminOrdersHTML();
+}
 function adminOrdersHTML(){
- if(!adminOrders.length)return '<div class="orders-empty"><div class="orders-empty-orb">✦</div><h3>هنوز سفارشی ثبت نشده</h3><p>سفارش‌های کاربران پس از ثبت در اینجا نمایش داده می‌شوند.</p></div>';
- return `<div class="admin-order-list">${adminOrders.map((o,i)=>`<article class="admin-order-card" style="--card-index:${i%6}"><div class="admin-order-head"><div><span class="admin-order-kicker">ORDER MANAGEMENT · ${esc(String(o.id).slice(0,8))}</span><h3>${esc(o.recipient||"گیرنده سفارش")}</h3><small>کاربر: ${esc(o.username||o.user_id||"—")} · ${esc(o.created_at?new Date(o.created_at).toLocaleDateString("fa-IR"):"")}</small></div><strong class="admin-order-price">${money(o.total_price)}</strong></div>
+ const activeOrders=adminOrders.filter(o=>!(o.approval_status==="approved"&&stagePosition(stages.find(s=>String(s.id)===String(o.stage_id))||{id:o.stage_id})===5));
+ const visibleOrders=adminSelectedUser?activeOrders.filter(o=>String(o.user_id||"")===adminSelectedUser):activeOrders;
+ const back=adminSelectedUser?'<button class="btn white" style="margin-bottom:14px" onclick="adminSelectedUser=null;document.getElementById(\'adminPanel\').innerHTML=adminOrdersHTML()">← نمایش همه سفارش‌های فعال</button>':"";
+ if(!visibleOrders.length)return back+'<div class="orders-empty"><div class="orders-empty-orb">✦</div><h3>'+(adminSelectedUser?'این کاربر سفارش فعالِ تحویل‌نشده‌ای ندارد':'سفارش فعالی وجود ندارد')+'</h3><p>سفارش‌هایی که وضعیتشان «تحویل داده شده» است از این فهرست پنهان می‌شوند؛ تاریخچه آن‌ها برای مشتری باقی می‌ماند.</p></div>';
+ return back+`<div class="admin-order-list">${visibleOrders.map((o,i)=>`<article class="admin-order-card" style="--card-index:${i%6}"><div class="admin-order-head"><div><span class="admin-order-kicker">ORDER MANAGEMENT · ${esc(String(o.id).slice(0,8))}</span><h3>${esc(o.recipient||"گیرنده سفارش")}</h3><small>کاربر: <button class="user-order-link" data-user="${esc(o.user_id||"")}" onclick="viewAdminUserOrders(this.dataset.user)" style="border:0;background:transparent;color:#635bdb;text-decoration:underline;cursor:pointer;font:inherit;font-weight:800;padding:0">${esc(o.username||o.user_id||"—")}</button> · ${esc(o.created_at?new Date(o.created_at).toLocaleDateString("fa-IR"):"")}</small></div><strong class="admin-order-price">${money(o.total_price)}</strong></div>
  <div class="admin-order-info"><div><small>تماس و نشانی</small><p>${esc(o.phone||"")} · ${esc(o.city||"")}</p><p>${esc(o.address||"")} · کد پستی ${esc(o.postal_code||"")}</p></div><div><small>محصولات</small><p>${(Array.isArray(o.items)?o.items:[]).map(i=>esc(i.title)+" × "+Number(i.qty||1)).join("، ")||"—"}</p></div></div>
  <div class="admin-order-controls"><div class="approval-state">وضعیت بررسی: <strong>${o.approval_status==="approved"?"تأیید شده":"در انتظار بررسی"}</strong></div>${o.approval_status!=="approved"?`<button class="btn primary" data-order="${esc(o.id)}" onclick="approveOrder(this.dataset.order)">تأیید سفارش و نمایش برای مشتری ✓</button>`:""}<label>وضعیت همین سفارش<select id="stage-${esc(o.id)}">${(stages.length?stages:STAGES).map((st,i)=>`<option value="${esc(st.id)}" ${String(st.id)===String(o.stage_id)?"selected":""}>${esc(STAGES[Math.min(4,Math.max(0,Number(st.position||i+1)-1))].title)}</option>`).join("")}</select></label><label>کد رهگیری مرسوله<input id="track-${esc(o.id)}" value="${esc(o.tracking_code||"")}" placeholder="کد رهگیری، در صورت وجود"></label><button class="btn primary" onclick="saveOrder('${esc(o.id)}')">ذخیره وضعیت این سفارش ✨</button></div></article>`).join("")}</div>`;
 }
