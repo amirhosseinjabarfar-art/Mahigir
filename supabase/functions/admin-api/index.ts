@@ -47,9 +47,23 @@ Deno.serve(async (req: Request) => {
       }
       if (!/^\d{10}$/.test(String(p.postal_code))) return json({ error: "کد پستی باید ۱۰ رقم باشد." }, 400);
       if (!Array.isArray(p.items) || !p.items.length) return json({ error: "سبد خرید خالی است." }, 400);
-      const { data, error } = await service.from("mahigir_orders").insert(p).select("id").single();
-      if (error) return json({ error: "ثبت سفارش در پایگاه داده ناموفق بود: " + error.message }, 400);
-      return json({ ok: true, id: data.id });
+      // A few older Mahigir installations do not have the optional username/shipping_method columns.
+      // Retry only for those optional missing columns; never silently drop approval_status.
+      let orderPayload = { ...p };
+      let inserted = await service.from("mahigir_orders").insert(orderPayload).select("id").single();
+      if (inserted.error && /column .*?(username|shipping_method).*? does not exist|Could not find the .*?(username|shipping_method).*? column/i.test(inserted.error.message)) {
+        if (/username/i.test(inserted.error.message)) delete orderPayload.username;
+        if (/shipping_method/i.test(inserted.error.message)) delete orderPayload.shipping_method;
+        inserted = await service.from("mahigir_orders").insert(orderPayload).select("id").single();
+      }
+      if (inserted.error) {
+        const message = inserted.error.message || "خطای نامشخص پایگاه داده";
+        if (/approval_status/i.test(message) && /column|schema cache|Could not find/i.test(message)) {
+          return json({ error: "ستون approval_status در جدول mahigir_orders وجود ندارد. ابتدا SQL اصلاح جدول را در Supabase اجرا کن، سپس دوباره سفارش ثبت کن." }, 400);
+        }
+        return json({ error: "ثبت سفارش در پایگاه داده ناموفق بود: " + message }, 400);
+      }
+      return json({ ok: true, id: inserted.data.id });
     }
 
     if (String(body.password || "") !== adminPassword) {
