@@ -57,7 +57,7 @@ Deno.serve(async (req: Request) => {
     }
 
     if (action === "admin-login") return json({ ok: true });
-    if (action === "admin-orders") {
+    if (action === "admin-users") {\n      const { data, error } = await service.auth.admin.listUsers({ page: 1, perPage: 200 });\n      if (error) return json({ error: error.message }, 400);\n      return json({ users: (data.users || []).map((u) => ({ id: u.id, username: String(u.user_metadata?.username || u.email || ""), display_name: String(u.user_metadata?.display_name || u.user_metadata?.username || u.email || ""), created_at: u.created_at })) });\n    }\n    if (action === "admin-approve-order") {\n      const { error } = await service.from("mahigir_orders").update({ approval_status: "approved" }).eq("id", body.id);\n      if (error) return json({ error: error.message }, 400);\n      return json({ ok: true });\n    }\n    if (action === "admin-orders") {
       const { data, error } = await service.from("mahigir_orders").select("*").order("created_at", { ascending: false });
       if (error) return json({ error: error.message }, 400);
       return json({ orders: data || [] });
