@@ -1047,7 +1047,7 @@ async function submitOrder(e){
 
 /* پنل مدیریت: رمز فقط از طریق Edge Function سمت سرور */
 let adminPassword="";
-async async function adminApi(action,extra={}){
+async function adminApi(action,extra={}){
  const response=await fetch(PROJECT_URL+"/functions/v1/admin-api",{method:"POST",headers:{"Content-Type":"application/json","apikey":PUBLIC_KEY,"Authorization":"Bearer "+PUBLIC_KEY},body:JSON.stringify({password:adminPassword,action,...extra})});
  let result={};try{result=await response.json()}catch{}
  if(!response.ok||result.error)throw new Error(result.error||("خطای سرور ("+response.status+")"));
@@ -1302,16 +1302,6 @@ async async function submitCheckoutOrder(){
  finally{checkoutSubmitting=false;if(btn){btn.disabled=false;btn.textContent="تأیید و ثبت سفارش ✨"}}
 }
 function renderCheckout(a){if(a){const saved=readAddresses();const ix=saved.findIndex(x=>x.id&&x.id===a.id);if(ix>=0)selectedCheckoutAddress=ix}renderCheckoutPage()}
-function showPurchaseSuccess(orderId="ثبت‌شده",payment="card"){
- const old=document.getElementById("purchaseSuccessOverlay");if(old)old.remove();
- const message="سلام، سفارش کتابم در ماهیگیر ثبت شد. شماره سفارش: "+orderId+". روش پرداخت: "+(payment==="card"?"کارت‌به‌کارت":"هماهنگی در روبیکا")+". لطفاً اطلاعات کارت مقصد را اعلام کنید تا رسید را ارسال کنم.";
- const el=document.createElement("div");el.id="purchaseSuccessOverlay";el.className="purchase-success";
- el.innerHTML='<div class="purchase-success-box"><div class="success-mark">✓</div><div class="success-number">MAHIGIR · ORDER CONFIRMED</div><h2>سفارش ثبت شد!</h2><p>سفارش ثبت شده است. برای دریافت اطلاعات کارت مقصد و فرستادن رسید، از طریق روبیکا با فروشگاه هماهنگ کن.</p><div class="checkout-tip" style="text-align:right;margin:15px 0">شماره سفارش: <b>'+esc(String(orderId))+'</b><br>روش پرداخت: '+(payment==="card"?"کارت‌به‌کارت":"هماهنگی در روبیکا")+'</div><button class="btn primary" id="rubikaReceiptButton">رفتن به روبیکا و ارسال رسید ←</button><button class="btn white" style="margin-top:10px" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove();openAccount()">مشاهده حساب کاربری</button></div>';
- document.body.appendChild(el);
- document.getElementById("rubikaReceiptButton").onclick=()=>{try{navigator.clipboard?.writeText(message)}catch{};window.open("https://rubika.ir/amirtbpedit","_blank","noopener")};
-}
-
-
 /* Address persistence repair v4: local-first, cloud sync, then continue to checkout */
 function readAddresses(){
  let local=null;
