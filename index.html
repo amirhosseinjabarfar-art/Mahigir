@@ -1218,6 +1218,43 @@ function showPurchaseSuccess(orderId="ثبت‌شده",payment="card"){
  document.getElementById("rubikaReceiptButton").onclick=()=>{try{navigator.clipboard?.writeText(message)}catch{};window.open("https://rubika.ir/amirtbpedit","_blank","noopener")};
 }
 
+
+/* Address persistence repair v4: local-first, cloud sync, then continue to checkout */
+function readAddresses(){
+ let local=null;
+ try{const value=JSON.parse(localStorage.getItem(addressKey())||"null");if(Array.isArray(value))local=value}catch{}
+ const remote=currentUser?.user_metadata?.mahigir_addresses;
+ if(local&&local.length)return local;
+ if(Array.isArray(remote)&&remote.length){
+  try{localStorage.setItem(addressKey(),JSON.stringify(remote))}catch{}
+  return remote;
+ }
+ return local|| (Array.isArray(remote)?remote:[]);
+}
+async function saveAddress(e){
+ e.preventDefault();
+ const form=e.currentTarget||e.target;
+ if(!form.reportValidity())return;
+ const f=new FormData(form);
+ const a={id:(window.crypto&&window.crypto.randomUUID)?window.crypto.randomUUID():"addr-"+Date.now(),recipient:String(f.get("recipient")||"").trim(),phone:normalizeDigits(String(f.get("phone")||"")).trim(),city:String(f.get("city")||"").trim(),address:String(f.get("address")||"").trim(),postal_code:normalizeDigits(String(f.get("postal_code")||"")).trim(),shipping_method:"تیپاکس"};
+ if(!/^\d{10}$/.test(a.postal_code)){notify("کد پستی باید دقیقاً ۱۰ رقم باشد.");return}
+ if(!a.recipient||!a.phone||!a.city||!a.address){notify("لطفاً همه اطلاعات نشانی را کامل کن.");return}
+ const list=readAddresses();
+ if(editingAddressIndex>=0&&list[editingAddressIndex])list[editingAddressIndex]=a;else list.push(a);
+ const btn=form.querySelector('button[type="submit"]');
+ if(btn){btn.disabled=true;btn.textContent="در حال ذخیره..."}
+ let synced=false;
+ try{synced=await persistAddresses(list)}catch(err){console.error("Address save failed:",err);try{localStorage.setItem(addressKey(),JSON.stringify(list))}catch{}}
+ editingAddressIndex=-1;
+ renderAddresses();addressForm();
+ notify(synced?"نشانی ذخیره و با حساب همگام‌سازی شد ✨":"نشانی روی همین دستگاه ذخیره شد؛ همگام‌سازی حساب هنوز تأیید نشده است.");
+ setTimeout(()=>{
+  closeAddressPage();
+  selectedCheckoutAddress=Math.max(0,readAddresses().findIndex(x=>x.id===a.id));
+  openCheckoutPage();
+ },450);
+}
+
 </script>
 </body>
 </html>
