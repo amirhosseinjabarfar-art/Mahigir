@@ -63,13 +63,19 @@ Deno.serve(async (req: Request) => {
       return json({ orders: data || [] });
     }
     if (action === "admin-stages") {
-      const { data, error } = await service.from("mahigir_order_stages").select("*").order("position");
+      // Older installations may not have a "position" column. Do not order by it in SQL.
+      const { data, error } = await service.from("mahigir_order_stages").select("*");
       if (error) return json({ error: error.message }, 400);
-      return json({ stages: data?.length ? data : [
-        { id: 1, title: "ثبت سفارش", position: 1 }, { id: 2, title: "تأیید سفارش", position: 2 },
-        { id: 3, title: "آماده‌سازی کتاب", position: 3 }, { id: 4, title: "تحویل به تیپاکس", position: 4 },
-        { id: 5, title: "تحویل به مشتری", position: 5 },
-      ] });
+      const defaults = [
+        { id: 1, title: "ثبت سفارش", position: 1 }, { id: 2, title: "در حال انجام", position: 2 },
+        { id: 3, title: "ارسال به واحد پستی", position: 3 }, { id: 4, title: "ارسال شده", position: 4 },
+        { id: 5, title: "تحویل داده شده", position: 5 },
+      ];
+      const stages = (data || []).map((row, i) => ({
+        ...row,
+        position: Number(row.position || row.id || i + 1),
+      })).sort((a, b) => a.position - b.position);
+      return json({ stages: stages.length ? stages : defaults });
     }
     if (action === "admin-save-order") {
       const id = body.id;
