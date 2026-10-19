@@ -1279,7 +1279,7 @@ function renderCheckoutPage(){
   summary.innerHTML='<div class="checkout-tip">'+valid.map(x=>'<div style="display:flex;justify-content:space-between;gap:12px;padding:7px 0"><span>'+esc(x.book.title)+' × '+x.item.qty+'</span><strong>'+money(x.book.price*x.item.qty)+'</strong></div>').join("")+'<hr style="border-color:#7185d933"><div style="display:flex;justify-content:space-between;padding:7px 0"><span>جمع کتاب‌ها</span><strong>'+money(total)+'</strong></div><div style="display:flex;justify-content:space-between;padding:7px 0"><span>ارسال تیپاکس</span><strong>'+money(SHIPPING)+'</strong></div><div style="display:flex;justify-content:space-between;padding:12px 0 0;color:#fff;font-size:17px"><strong>مبلغ نهایی</strong><strong>'+money(total+SHIPPING)+'</strong></div></div>';
  }
 }
-async async function submitCheckoutOrder(){
+async function submitCheckoutOrder(){
  if(checkoutSubmitting)return;
  if(!db){notify("اتصال Supabase برقرار نیست؛ سفارش ثبت نشد.");return}
  if(!currentUser){notify("برای ثبت سفارش وارد حساب شو.");return}
