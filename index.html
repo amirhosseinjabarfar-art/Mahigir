@@ -918,11 +918,9 @@ function useAddress(i){const a=readAddresses()[i];if(!a)return;closeAddressPage(
 let selectedCheckoutAddress=0;
 function startCheckout(){
  if(!cart.some(i=>getBook(i.id)&&!getBook(i.id).comingSoon)){notify("سبد خرید خالی است.");return}
- if(!currentUser){closeModal("cartModal");openAccount();notify("برای ثبت سفارش وارد حساب شو.");return}
- const saved=readAddresses();
- if(!saved.length){closeModal("cartModal");openAddresses();notify("ابتدا از بخش نشانی‌های من یک نشانی ذخیره کن.");return}
- selectedCheckoutAddress=Math.max(0,Math.min(saved.length-1,Number(localStorage.getItem("mh_checkout_address_"+currentUser.id)||0)));
- closeModal("cartModal");renderCheckout();openModal("checkoutModal");
+ if(!currentUser){closeModal("cartModal");openAccount();notify("برای ثبت سفارش ابتدا وارد حساب شو.");return}
+ closeModal("cartModal");
+ openCheckoutPage();
 }
 function checkoutAddressChanged(){
  const sel=document.getElementById("checkoutAddressSelect");if(!sel)return;
@@ -1161,7 +1159,7 @@ function showPurchaseSuccess(){
 }
 
 
-let selectedCheckoutAddress=0,selectedPaymentMethod="card",checkoutSubmitting=false;
+selectedCheckoutAddress=0;let selectedPaymentMethod="card",checkoutSubmitting=false;
 function openCheckoutPage(){
  if(!currentUser){openAccount();notify("برای خرید ابتدا وارد حساب کاربری شو.");return}
  const page=document.getElementById("checkoutPage");page.classList.add("open");page.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
