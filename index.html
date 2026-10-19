@@ -457,6 +457,25 @@ footer{background:#060a17!important;border-top:1px solid #8295ff2c!important}
 .purchase-success h2,.purchase-success p{color:#fff!important}
 @media(max-width:650px){.checkout-top{padding:12px 16px}.checkout-brand{font-size:23px}.checkout-main{margin:18px auto}.address-choice-grid,.pay-choice-grid{grid-template-columns:1fr}.checkout-step{font-size:11px;padding:11px 4px}.checkout-hero,.checkout-panel{border-radius:22px}}
 
+
+/* Last-pass contrast patch: remove legacy white panels behind text */
+#accountModal .modal,#accountModal .modalhead,#accountModal #accountContent,#accountModal .order,#accountModal .orders-empty,#accountModal .order-float-card,#accountModal .profile-panel,#accountModal .account-panel,#accountModal .tabs,#accountModal .tab,#accountModal .empty,
+#detailModal .modal,#detailModal .modalhead,#detailModal .detailbody,#detailModal .detailbullets,#detailModal .soon-notice,
+#cartModal .modal,#cartModal .modalhead,#cartModal .mini,#cartModal .totals,#cartModal #cartContent,
+#checkoutModal .modal,#checkoutModal .modalhead,#checkoutModal #checkoutContent,#checkoutModal .totals,#checkoutModal #checkoutContent>form,#checkoutModal .checkout-address-wrap,#checkoutModal .checkout-address-card{
+ background:linear-gradient(145deg,#141e42f5,#0b1229f8)!important;color:#f5f7ff!important;border-color:#8397ff48!important
+}
+#accountModal p,#accountModal small,#accountModal label,#accountModal .muted,#accountModal .empty,
+#detailModal p,#detailModal li,#detailModal .detailbullets div,
+#cartModal p,#cartModal small,#cartModal label,#cartModal .muted,
+#checkoutModal p,#checkoutModal small,#checkoutModal label,#checkoutModal .muted{color:#c0caee!important}
+#accountModal h1,#accountModal h2,#accountModal h3,#accountModal strong,
+#detailModal h1,#detailModal h2,#detailModal h3,#detailModal strong,
+#cartModal h1,#cartModal h2,#cartModal h3,#cartModal strong,
+#checkoutModal h1,#checkoutModal h2,#checkoutModal h3,#checkoutModal strong{color:#fff!important}
+#accountModal .tab.active,#accountModal .btn.primary,#detailModal .btn.primary,#cartModal .btn.primary,#checkoutModal .btn.primary{color:#fff!important}
+#accountModal .order-float-card,#accountModal .orders-empty{border:1px solid #8397ff48!important;border-radius:20px!important;box-shadow:0 18px 48px #0004!important}
+
 </style>
 </head>
 <body>
