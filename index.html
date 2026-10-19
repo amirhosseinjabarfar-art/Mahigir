@@ -1111,8 +1111,11 @@ function adminUsersHTML(){
 function viewAdminUserOrders(id){
  if(!id)return notify("شناسه این کاربر پیدا نشد.");
  adminSelectedUser=String(id);
- const tab=document.querySelector("#adminContent .tabs .tab");
- adminTab("orders",tab);
+ const tabs=document.querySelectorAll("#adminContent .tabs .tab");
+ tabs.forEach(x=>x.classList.remove("active"));
+ if(tabs[0])tabs[0].classList.add("active");
+ const panel=document.getElementById("adminPanel");
+ if(panel)panel.innerHTML=adminOrdersHTML();
 }
 function adminOrdersHTML(){
  const activeOrders=adminOrders.filter(o=>!(o.approval_status==="approved"&&stagePosition(stages.find(s=>String(s.id)===String(o.stage_id))||{id:o.stage_id})===5));
