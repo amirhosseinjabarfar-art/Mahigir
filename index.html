@@ -522,6 +522,31 @@ footer{background:#060a17!important;border-top:1px solid #8295ff2c!important;col
 .hero,.section-title,#bookGrid>.book-card,.bestseller-grid>.book-card,.modal,.address-page.open,.checkout-page.open{animation:mahigirEntrance .65s cubic-bezier(.2,.8,.2,1) both}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 
+
+/* Animated order receipt */
+.receipt-overlay{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;padding:18px;overflow:auto;background:#030615e8;backdrop-filter:blur(20px);animation:receiptFade .35s ease both}
+.receipt-card{position:relative;width:min(620px,100%);max-height:calc(100dvh - 36px);overflow:auto;padding:clamp(22px,5vw,38px)!important;border-radius:30px!important;background:radial-gradient(ellipse at 90% 0%,#7c55ff30,transparent 36%),linear-gradient(145deg,#141e42,#080f25)!important;border:1px solid #a6b5ff7a!important;box-shadow:0 30px 100px #000b,0 0 55px #756cff24!important;animation:receiptPop .6s cubic-bezier(.2,.9,.2,1) both}
+.receipt-card:before{content:"";position:absolute;top:0;left:10%;right:10%;height:2px;background:linear-gradient(90deg,transparent,#8df9ee,#b28aff,transparent);box-shadow:0 0 18px #9b8bff;animation:receiptLine 2.5s ease-in-out infinite}
+.receipt-confetti{text-align:center;color:#b6a7ff;font-size:28px;letter-spacing:8px;animation:receiptFloat 3s ease-in-out infinite}
+.receipt-card .success-mark{display:grid;place-items:center;width:72px;height:72px;border-radius:24px;margin:8px auto 15px;background:linear-gradient(135deg,#44dfb2,#27b6d4);color:#07182a;font-size:38px;font-weight:1000;box-shadow:0 0 40px #3fe3ce55;transform:scale(.7);opacity:.2;transition:.45s}
+.receipt-card .success-mark-ready{transform:scale(1);opacity:1}
+.receipt-card h2{text-align:center;font:clamp(28px,5vw,38px) Lalezar;color:#fff;margin:8px 0}
+.receipt-subtitle{text-align:center;color:#bfcaf0!important;line-height:1.9}
+.receipt-number{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:15px;margin:20px 0;border:1px dashed #8a9bff80;border-radius:18px;background:#0b1430}
+.receipt-number span{color:#aebbe3;font-size:12px}.receipt-number strong{margin-inline-start:auto;color:#fff;font-size:18px}
+.receipt-copy{border:1px solid #7f92ef55;background:#202a53;color:#fff;padding:7px 10px;border-radius:10px;cursor:pointer}
+.receipt-lines{border:1px solid #7284d444;border-radius:18px;padding:8px 14px;margin:12px 0;background:#091128}
+.receipt-row{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #7184d426;color:#e6ebff;font-size:13px}
+.receipt-row:last-child{border-bottom:0}.receipt-row>strong{margin-inline-start:auto;color:#fff;white-space:nowrap}
+.receipt-index{color:#94a4ff;font-size:11px;font-weight:900}.receipt-name{flex:1;line-height:1.8}.receipt-name small{color:#aab8e6}
+.receipt-total{font-size:17px;font-weight:900;border-top:1px solid #8b9cff66;margin-top:4px;color:#fff}.receipt-total strong{font-size:20px;color:#91f4e5}
+.receipt-meta{display:grid;grid-template-columns:105px 1fr;gap:12px;padding:16px;margin-top:12px;border-radius:17px;background:#111b39;border:1px solid #7487d833;font-size:12px;line-height:1.8}
+.receipt-meta span{color:#9eacd6}.receipt-meta strong{color:#f2f4ff}
+.receipt-address{padding:15px;margin-top:12px;border-radius:17px;background:#111b39;border:1px solid #7487d833;color:#e6ebff;font-size:12px;line-height:1.9;overflow-wrap:anywhere}
+.receipt-address p{margin:4px 0;color:#c2ccef!important}.receipt-card .payment-warning{color:#ffdfa0!important;font-size:11px;line-height:1.9;margin:15px 0}
+@keyframes receiptFade{from{opacity:0}to{opacity:1}}@keyframes receiptPop{from{opacity:0;transform:translateY(26px) scale(.95);filter:blur(12px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}@keyframes receiptFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}@keyframes receiptLine{0%,100%{opacity:.5;transform:scaleX(.65)}50%{opacity:1;transform:scaleX(1)}}
+@media(max-width:480px){.receipt-meta{grid-template-columns:1fr;gap:4px}.receipt-number strong{margin-inline-start:0}}
+
 </style>
 </head>
 <body>
@@ -1008,7 +1033,7 @@ async function submitOrder(e){
   });
   let result={};try{result=await response.json()}catch{}
   if(!response.ok||result.error)throw new Error(result.error||("خطای سرور ("+response.status+")"));
-  cart=[];saveCart();renderCart();renderBooks();renderBestsellers();closeModal("checkoutModal");showPurchaseSuccess(result.id||"ثبت‌شده",selectedPaymentMethod);notify("سفارش با موفقیت ثبت شد ✨");
+  cart=[];saveCart();renderCart();renderBooks();renderBestsellers();closeCheckoutPage();showPurchaseSuccess(result.id||"ثبت‌شده",selectedPaymentMethod,{items,total:total+SHIPPING,shipping:SHIPPING,recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:a.postal_code});notify("سفارش با موفقیت ثبت شد ✨");
   try{await loadOrders()}catch(err){console.warn("Order saved but order list could not refresh:",err)}
   openAccount();
  }catch(err){
@@ -1022,7 +1047,7 @@ async function submitOrder(e){
 
 /* پنل مدیریت: رمز فقط از طریق Edge Function سمت سرور */
 let adminPassword="";
-async function adminApi(action,extra={}){
+async async function adminApi(action,extra={}){
  const response=await fetch(PROJECT_URL+"/functions/v1/admin-api",{method:"POST",headers:{"Content-Type":"application/json","apikey":PUBLIC_KEY,"Authorization":"Bearer "+PUBLIC_KEY},body:JSON.stringify({password:adminPassword,action,...extra})});
  let result={};try{result=await response.json()}catch{}
  if(!response.ok||result.error)throw new Error(result.error||("خطای سرور ("+response.status+")"));
@@ -1196,13 +1221,18 @@ async function deleteAddress(i){
  if(editingAddressIndex===i){editingAddressIndex=-1;addressForm()}else if(editingAddressIndex>i)editingAddressIndex--;
  renderAddresses();notify("نشانی حذف شد.");
 }
-function showPurchaseSuccess(){
+function showPurchaseSuccess(orderId="ثبت‌شده",payment="card",receipt={}){
  const previous=document.getElementById("purchaseSuccessOverlay");if(previous)previous.remove();
- const el=document.createElement("div");el.id="purchaseSuccessOverlay";el.className="purchase-success";
- el.innerHTML='<div class="purchase-success-box"><div class="success-mark">✓</div><div class="success-number">MAHIGIR · ORDER CONFIRMED</div><h2>سفارش ثبت شد!</h2><p>خریدت با موفقیت ثبت شد و حالا می‌توانی وضعیت سفارش را از بخش حساب کاربری دنبال کنی.</p><button class="btn primary" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove();openAccount()">مشاهده سفارش من ←</button><button class="btn white" style="margin-right:8px" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove()">ادامه خرید</button></div>';
+ const lines=(receipt.items||[]).map((x,i)=>'<div class="receipt-row"><span class="receipt-index">'+String(i+1).padStart(2,"0")+'</span><span class="receipt-name">'+esc(x.title||"کتاب")+' <small>× '+Number(x.qty||1)+'</small></span><strong>'+money(Number(x.price||0)*Number(x.qty||1))+'</strong></div>').join("");
+ const total=Number(receipt.total||0),ship=Number(receipt.shipping||SHIPPING);
+ const message="سلام، سفارش ماهیگیر ثبت شد. شماره سفارش: "+orderId+". مبلغ: "+money(total)+". روش پرداخت: "+(payment==="card"?"کارت‌به‌کارت":"هماهنگی در روبیکا")+". لطفاً اطلاعات پرداخت را اعلام کنید تا رسید را ارسال کنم.";
+ const el=document.createElement("div");el.id="purchaseSuccessOverlay";el.className="purchase-success receipt-overlay";
+ el.innerHTML='<div class="purchase-success-box receipt-card"><div class="receipt-confetti" aria-hidden="true">✦　✧　✦</div><div class="success-mark">✓</div><div class="success-number">MAHIGIR · DIGITAL RECEIPT</div><h2>رسید خرید شما آماده است!</h2><p class="receipt-subtitle">سفارش با موفقیت ثبت شد. این رسید را نگه دار.</p><div class="receipt-number"><span>شماره سفارش</span><strong dir="ltr">#'+esc(String(orderId))+'</strong><button type="button" class="receipt-copy" onclick="GenUIUnavailableReceiptCopy(\''+esc(String(orderId))+'\')">کپی شماره</button></div><div class="receipt-lines">'+(lines||'<div class="receipt-row"><span class="receipt-name">اقلام سفارش</span><strong>ثبت‌شده</strong></div>')+'</div><div class="receipt-row"><span>ارسال با تیپاکس</span><strong>'+money(ship)+'</strong></div><div class="receipt-row receipt-total"><span>مبلغ کل</span><strong>'+money(total)+'</strong></div><div class="receipt-meta"><span>پرداخت</span><strong>'+(payment==="card"?"کارت‌به‌کارت · ارسال رسید در روبیکا":"هماهنگی در روبیکا")+'</strong><span>وضعیت</span><strong>ثبت اولیه · در انتظار بررسی پرداخت</strong></div><div class="receipt-address"><strong>نشانی گیرنده</strong><p>'+esc(receipt.recipient||"")+' · '+esc(receipt.phone||"")+'</p><p>'+esc(receipt.city||"")+'، '+esc(receipt.address||"")+'</p><p>کد پستی: '+esc(receipt.postal_code||"")+'</p></div><p class="payment-warning">این رسید تأیید پرداخت بانکی نیست. پس از هماهنگی با فروشگاه، رسید کارت‌به‌کارت را در روبیکا ارسال کن.</p><button class="btn primary" id="receiptRubikaBtn">هماهنگی و ارسال رسید در روبیکا ←</button><button class="btn white" style="margin-right:8px" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove();openAccount()">مشاهده سفارش در حساب</button><button class="btn white" style="margin-top:10px;width:100%" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove()">ادامه خرید</button></div>';
  document.body.appendChild(el);
+ document.getElementById("receiptRubikaBtn").onclick=()=>{try{navigator.clipboard?.writeText(message)}catch{};window.open("https://rubika.ir/amirtbpedit","_blank","noopener")};
  setTimeout(()=>{if(el.isConnected)el.querySelector(".success-mark")?.classList.add("success-mark-ready")},80);
 }
+function GenUIUnavailableReceiptCopy(orderId){try{const area=document.createElement("textarea");area.value=String(orderId);area.style.position="fixed";area.style.opacity="0";document.body.appendChild(area);area.select();document.execCommand("copy");area.remove();notify("شماره سفارش کپی شد.")}catch{notify("شماره سفارش: "+orderId)}}
 
 
 selectedCheckoutAddress=0;let selectedPaymentMethod="card",checkoutSubmitting=false;
