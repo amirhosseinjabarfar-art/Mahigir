@@ -47,18 +47,17 @@ Deno.serve(async (req: Request) => {
       }
       if (!/^\d{10}$/.test(String(p.postal_code))) return json({ error: "کد پستی باید ۱۰ رقم باشد." }, 400);
       if (!Array.isArray(p.items) || !p.items.length) return json({ error: "سبد خرید خالی است." }, 400);
-      // Older Mahigir databases may not yet contain newer optional order columns.
-      // Retry only when Postgres/PostgREST explicitly reports a missing column.
+      // Older Mahigir databases may lack the optional username/shipping_method columns.
+      // Retry only for those fields; approval_status and stage_id remain required.
       const orderPayload = { ...p };
       let inserted = await service.from("mahigir_orders").insert(orderPayload).select("id").single();
       const missingColumn = (message: string) => {
-        const match = message.match(/column [\"']?([a-zA-Z_][a-zA-Z0-9_]*)[\"']? .*does not exist|Could not find the [\"']?([a-zA-Z_][a-zA-Z0-9_]*)[\"']? column|Could not find the [\"']?([a-zA-Z_][a-zA-Z0-9_]*)[\"']? column of [\"']?mahigir_orders/i);
-        return match ? (match[1] || match[2] || match[3]) : "";
+        const match = message.match(/column\s+(?:[a-zA-Z_][a-zA-Z0-9_]*\.)?([a-zA-Z_][a-zA-Z0-9_]*)\s+does not exist|Could not find the\s+['"]?([a-zA-Z_][a-zA-Z0-9_]*)['"]?\s+column/i);
+        return match ? (match[1] || match[2] || "") : "";
       };
-      const retryableColumns = new Set(["username", "shipping_method", "stage_id", "approval_status"]);
-      for (let attempt = 0; inserted.error && attempt < 4; attempt++) {
+      for (let attempt = 0; inserted.error && attempt < 2; attempt++) {
         const missing = missingColumn(inserted.error.message || "");
-        if (!missing || !retryableColumns.has(missing) || !(missing in orderPayload)) break;
+        if (!["username", "shipping_method"].includes(missing) || !(missing in orderPayload)) break;
         delete orderPayload[missing];
         inserted = await service.from("mahigir_orders").insert(orderPayload).select("id").single();
       }
