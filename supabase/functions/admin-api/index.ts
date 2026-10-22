@@ -47,13 +47,19 @@ Deno.serve(async (req: Request) => {
       }
       if (!/^\d{10}$/.test(String(p.postal_code))) return json({ error: "کد پستی باید ۱۰ رقم باشد." }, 400);
       if (!Array.isArray(p.items) || !p.items.length) return json({ error: "سبد خرید خالی است." }, 400);
-      // A few older Mahigir installations do not have the optional username/shipping_method columns.
-      // Retry only for those optional missing columns; never silently drop approval_status.
-      let orderPayload = { ...p };
+      // Older Mahigir databases may not yet contain newer optional order columns.
+      // Retry only when Postgres/PostgREST explicitly reports a missing column.
+      const orderPayload = { ...p };
       let inserted = await service.from("mahigir_orders").insert(orderPayload).select("id").single();
-      if (inserted.error && /column .*?(username|shipping_method).*? does not exist|Could not find the .*?(username|shipping_method).*? column/i.test(inserted.error.message)) {
-        if (/username/i.test(inserted.error.message)) delete orderPayload.username;
-        if (/shipping_method/i.test(inserted.error.message)) delete orderPayload.shipping_method;
+      const missingColumn = (message: string) => {
+        const match = message.match(/column [\"']?([a-zA-Z_][a-zA-Z0-9_]*)[\"']? .*does not exist|Could not find the [\"']?([a-zA-Z_][a-zA-Z0-9_]*)[\"']? column|Could not find the [\"']?([a-zA-Z_][a-zA-Z0-9_]*)[\"']? column of [\"']?mahigir_orders/i);
+        return match ? (match[1] || match[2] || match[3]) : "";
+      };
+      const retryableColumns = new Set(["username", "shipping_method", "stage_id", "approval_status"]);
+      for (let attempt = 0; inserted.error && attempt < 4; attempt++) {
+        const missing = missingColumn(inserted.error.message || "");
+        if (!missing || !retryableColumns.has(missing) || !(missing in orderPayload)) break;
+        delete orderPayload[missing];
         inserted = await service.from("mahigir_orders").insert(orderPayload).select("id").single();
       }
       if (inserted.error) {
