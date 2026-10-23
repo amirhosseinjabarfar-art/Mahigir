@@ -1029,7 +1029,7 @@ async function submitOrder(e){
  const items=cart.map(i=>{const b=getBook(i.id);return b&&!b.comingSoon?{id:i.id,title:b.title,price:Number(b.price),qty:i.qty}:null}).filter(Boolean);
  if(!items.length){notify("سبد خرید خالی است.");return}
  const itemsTotal=items.reduce((n,i)=>n+i.price*i.qty,0);
- const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:normalizeDigits(a.postal_code).trim(),shipping_method:"تیپاکس",items,total_price:itemsTotal+SHIPPING,stage_id:stages[0]?.id||1};
+ const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:normalizeDigits(a.postal_code).trim(),shipping_method:"تیپاکس",items,total_price:itemsTotal+SHIPPING,approval_status:"pending_review"};
  const btn=e.target.querySelector('button[type="submit"]');if(btn){btn.disabled=true;btn.textContent="در حال ثبت سفارش..."}
  try{
   const {data:sessionData,error:sessionError}=await db.auth.getSession();
