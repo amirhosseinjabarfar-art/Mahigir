@@ -20,8 +20,8 @@ Deno.serve(async (req: Request) => {
   const anonKey = Deno.env.get("SUPABASE_ANON_KEY");
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   const adminPassword = Deno.env.get("MAHIGIR_ADMIN_PASSWORD");
-  if (!url || !anonKey || !serviceKey || !adminPassword) {
-    return json({ error: "تنظیمات سمت سرور ناقص است؛ متغیرهای محیطی تابع را بررسی کن." }, 500);
+  if (!url || !anonKey || !serviceKey) {
+    return json({ error: "تنظیمات اصلی سمت سرور ناقص است؛ متغیرهای محیطی تابع را بررسی کن." }, 500);
   }
 
   let body: Record<string, unknown>;
@@ -71,6 +71,9 @@ Deno.serve(async (req: Request) => {
       return json({ ok: true, id: inserted.data.id });
     }
 
+    if (!adminPassword) {
+      return json({ error: "رمز مدیریت در تنظیمات تابع تعریف نشده است." }, 500);
+    }
     if (String(body.password || "") !== adminPassword) {
       return json({ error: "رمز مدیریت اشتباه است." }, 401);
     }
