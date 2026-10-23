@@ -45,30 +45,40 @@ Deno.serve(async (req: Request) => {
       for (const field of ["recipient", "phone", "city", "address", "postal_code"] as const) {
         if (typeof p[field] !== "string" || !(p[field] as string).trim()) return json({ error: "اطلاعات نشانی کامل نیست." }, 400);
       }
-      if (!/^\d{10}$/.test(String(p.postal_code))) return json({ error: "کد پستی باید ۱۰ رقم باشد." }, 400);
+      const postalCode = String(p.postal_code).replace(/[۰-۹]/g, d => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d))).replace(/[٠-٩]/g, d => String("٠١٢٣٤٥٦٧٨٩".indexOf(d)));
+      if (!/^\d{10}$/.test(postalCode)) return json({ error: "کد پستی باید ۱۰ رقم باشد." }, 400);
       if (!Array.isArray(p.items) || !p.items.length) return json({ error: "سبد خرید خالی است." }, 400);
-      // Older Mahigir databases may lack the optional username/shipping_method columns.
-      // Retry only for those fields; approval_status and stage_id remain required.
-      const orderPayload = { ...p };
-      let inserted = await service.from("mahigir_orders").insert(orderPayload).select("id").single();
-      const missingColumn = (message: string) => {
-        const match = message.match(/column\s+(?:[a-zA-Z_][a-zA-Z0-9_]*\.)?([a-zA-Z_][a-zA-Z0-9_]*)\s+does not exist|Could not find the\s+['"]?([a-zA-Z_][a-zA-Z0-9_]*)['"]?\s+column/i);
-        return match ? (match[1] || match[2] || "") : "";
+      const items = (p.items as Record<string, unknown>[]).map((raw) => {
+        const item = raw && typeof raw === "object" ? raw : {};
+        return {
+          id: String(item.id ?? ""),
+          title: String(item.title ?? "کتاب").slice(0, 200),
+          price: Math.max(0, Math.round(Number(item.price) || 0)),
+          qty: Math.max(1, Math.min(99, Math.round(Number(item.qty) || 1))),
+        };
+      });
+      const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+      const shippingCost = 300000;
+      const orderPayload = {
+        user_id: userData.user.id,
+        items,
+        subtotal,
+        shipping_cost: shippingCost,
+        total: subtotal + shippingCost,
+        recipient: String(p.recipient).trim(),
+        phone: String(p.phone).trim(),
+        city: String(p.city).trim(),
+        address: String(p.address).trim(),
+        postal_code: postalCode,
+        shipping_method: "تیپاکس",
+        status: "ثبت سفارش",
+        tracking_code: "",
+        admin_note: "",
+        approval_status: "pending_review",
       };
-      for (let attempt = 0; inserted.error && attempt < 2; attempt++) {
-        const missing = missingColumn(inserted.error.message || "");
-        if (!["username", "shipping_method"].includes(missing) || !(missing in orderPayload)) break;
-        delete orderPayload[missing];
-        inserted = await service.from("mahigir_orders").insert(orderPayload).select("id").single();
-      }
-      if (inserted.error) {
-        const message = inserted.error.message || "خطای نامشخص پایگاه داده";
-        if (/approval_status/i.test(message) && /column|schema cache|Could not find/i.test(message)) {
-          return json({ error: "ستون approval_status در جدول mahigir_orders وجود ندارد. ابتدا SQL اصلاح جدول را در Supabase اجرا کن، سپس دوباره سفارش ثبت کن." }, 400);
-        }
-        return json({ error: "ثبت سفارش در پایگاه داده ناموفق بود: " + message }, 400);
-      }
-      return json({ ok: true, id: inserted.data.id });
+      const inserted = await service.from("mahigir_orders").insert(orderPayload).select("id,order_number").single();
+      if (inserted.error) return json({ error: "ثبت سفارش در پایگاه داده ناموفق بود: " + inserted.error.message }, 400);
+      return json({ ok: true, id: inserted.data.order_number ?? inserted.data.id });
     }
 
     if (!adminPassword) {
@@ -103,22 +113,23 @@ Deno.serve(async (req: Request) => {
         { id: 3, title: "ارسال به واحد پستی", position: 3 }, { id: 4, title: "ارسال شده", position: 4 },
         { id: 5, title: "تحویل داده شده", position: 5 },
       ];
-      const stages = (data || []).map((row, i) => ({
-        ...row,
-        position: Number(row.position || row.id || i + 1),
+      const stages = (data || []).filter((row) => row.is_active).map((row) => ({
+        id: row.id, title: row.stage_name, position: Number(row.stage_order || row.id),
       })).sort((a, b) => a.position - b.position);
       return json({ stages: stages.length ? stages : defaults });
     }
     if (action === "admin-save-order") {
-      const id = body.id;
-      const stage_id = body.stage_id;
-      const tracking_code = body.tracking_code || null;
-      const { error } = await service.from("mahigir_orders").update({ stage_id, tracking_code }).eq("id", id);
+      const { data: stage, error: stageError } = await service.from("mahigir_order_stages")
+        .select("stage_name").eq("id", Number(body.stage_id)).maybeSingle();
+      if (stageError) return json({ error: stageError.message }, 400);
+      if (!stage) return json({ error: "مرحلهٔ انتخاب‌شده پیدا نشد." }, 400);
+      const { error } = await service.from("mahigir_orders")
+        .update({ status: stage.stage_name, tracking_code: String(body.tracking_code || "") }).eq("id", body.id);
       if (error) return json({ error: error.message }, 400);
       return json({ ok: true });
     }
     if (action === "admin-rename-stage") {
-      const { error } = await service.from("mahigir_order_stages").update({ title: String(body.title || "").trim() }).eq("id", body.id);
+      const { error } = await service.from("mahigir_order_stages").update({ stage_name: String(body.title || "").trim() }).eq("id", body.id);
       if (error) return json({ error: error.message }, 400);
       return json({ ok: true });
     }
