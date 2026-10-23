@@ -681,6 +681,15 @@ const COMING_BOOK={
  color:"linear-gradient(145deg,#242c59,#7655b7,#e58db8)",
  comingSoon:true
 };
+const COMING_BOOKS=[
+ COMING_BOOK,
+ {
+  id:"amme-shorte-baba",title:"عمه‌ام و شورت بابام",category:"طنز",
+  description:"یک عنوان طنز و عجیب که به‌زودی به فروشگاه ماهیگیر اضافه می‌شود.",
+  color:"linear-gradient(145deg,#e8a23c,#d64d75,#7655b7)",
+  comingSoon:true
+ }
+];
 const BESTSELLER_IDS=["dota-khafe","shabhaye-zakiabad","dokhtar-darchini"];
 const db=window.supabase?.createClient(PROJECT_URL,PUBLIC_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}})||null;
 
