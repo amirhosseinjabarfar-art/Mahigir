@@ -752,7 +752,7 @@ function bookCard(b,i=0,options={}){
 function renderBestsellers(){
  const list=BESTSELLER_IDS.map(id=>getBook(id)).filter(Boolean);
  document.getElementById("bestsellerGrid").innerHTML=list.map((b,i)=>bookCard(b,i)).join("");
- document.getElementById("comingSoonGrid").innerHTML=bookCard(COMING_BOOK,0,{soon:true});
+ document.getElementById("comingSoonGrid").innerHTML=COMING_BOOKS.map((b,i)=>bookCard(b,i,{soon:true})).join("");
 }
 function renderBooks(){
  const q=(document.getElementById("search")?.value||"").trim().toLowerCase();
@@ -762,7 +762,7 @@ function renderBooks(){
 function safeColor(c){return typeof c==="string"&&c.startsWith("linear-gradient(")&&c.length<200?c:PALETTES[0]}
 function quickQty(id,d){if(d>0)addCart(id);else if(productQty(id)>0)changeQty(id,-1);else notify("این کتاب هنوز در سبد خرید نیست.")}
 function openBook(id){
- const b=String(id)===COMING_BOOK.id?COMING_BOOK:getBook(id);
+ const b=COMING_BOOKS.find(x=>String(x.id)===String(id))||getBook(id);
  if(!b)return;
  const soon=!!b.comingSoon;
  document.getElementById("detailContent").innerHTML=`
@@ -796,7 +796,7 @@ function detailQty(d){
 function addCart(id,amount=1){
  const b=getBook(id);
  if(!b){notify("این کتاب در دسترس نیست.");return}
- if(b.comingSoon||String(id)===COMING_BOOK.id){notify("این کتاب هنوز منتشر نشده است.");return}
+ if(b.comingSoon||COMING_BOOKS.some(x=>String(x.id)===String(id))){notify("این کتاب هنوز منتشر نشده است.");return}
  amount=Math.max(1,Math.min(99,Math.floor(Number(amount)||1)));
  let item=cart.find(x=>String(x.id)===String(id));
  if(item)item.qty=Math.min(99,item.qty+amount);else cart.push({id:String(id),qty:amount});
