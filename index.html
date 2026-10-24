@@ -856,9 +856,11 @@ async function submitAuth(e,mode){
  try{
   let result;
   if(mode==="signup"){
-   result=await db.auth.signUp({email:usernameEmail(username),password,options:{data:{username,display_name:displayName}}});
+   const {data:created,error:createError}=await db.functions.invoke("admin-api",{body:{action:"create-account",username,password,display_name:displayName}});
+   if(createError)throw new Error(created?.error||createError.message||"ساخت حساب انجام نشد.");
+   if(created?.error)throw new Error(created.error);
+   result=await db.auth.signInWithPassword({email:usernameEmail(username),password});
    if(result.error)throw result.error;
-   if(!result.data.session||!result.data.user){notify("حساب ساخته شد؛ برای ورود خودکار باید تأیید ایمیل در تنظیمات Supabase غیرفعال باشد.");return}
    currentUser=result.data.user;
    const {data:saved,error}=await db.from("mahigir_profiles").upsert({id:currentUser.id,username,display_name:displayName},{onConflict:"id"}).select().single();
    if(error)throw error;
@@ -867,7 +869,7 @@ async function submitAuth(e,mode){
    result=await db.auth.signInWithPassword({email:usernameEmail(username),password});
    if(result.error)throw result.error;
    currentUser=result.data.user;
-   const {data,error}=await db.from("mahigir_profiles").select("*").eq("id",currentUser.id).maybeSingle();
+   const {data,error}=await db.from("mahigir_profiles").upsert({id:currentUser.id,username:currentUser.user_metadata?.username||username,display_name:currentUser.user_metadata?.display_name||username},{onConflict:"id"}).select().single();
    if(error)throw error;
    profile={...(data||{}),id:currentUser.id,username:data?.username||currentUser.user_metadata?.username||username,display_name:data?.display_name||currentUser.user_metadata?.display_name||username};
   }
