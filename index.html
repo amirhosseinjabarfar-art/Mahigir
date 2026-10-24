@@ -1091,9 +1091,9 @@ async function loadStages(){
    stages=STAGES;
   }
  }else if(db){
-  const {data,error}=await db.from("mahigir_order_stages").select("*").order("position");
+  const {data,error}=await db.from("mahigir_order_stages").select("*").order("stage_order");
   if(error){console.warn(error);stages=STAGES;return}
-  stages=data?.length?data.map((x,i)=>({...x,position:Number(x.position||i+1),title:STAGES[Math.min(4,Math.max(0,Number(x.position||i+1)-1))].title})):STAGES;
+  stages=data?.length?data.map((x,i)=>({...x,position:Number(x.stage_order||i+1),title:x.stage_name||STAGES[Math.min(4,Math.max(0,Number(x.stage_order||i+1)-1))].title})):STAGES;
  }
 }
 function renderAdmin(){
