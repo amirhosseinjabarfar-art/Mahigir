@@ -81,6 +81,43 @@ Deno.serve(async (req: Request) => {
       return json({ ok: true, id: inserted.data.order_number ?? inserted.data.id });
     }
 
+    if (action === "create-account") {
+      const username = String(body.username || "").trim().toLowerCase();
+      const password = String(body.password || "");
+      const displayName = String(body.display_name || username).trim().slice(0, 60) || username;
+      if (!/^[a-z0-9_.-]{3,30}$/.test(username)) return json({ error: "نام کاربری معتبر نیست." }, 400);
+      if (password.length < 8 || password.length > 72) return json({ error: "رمز عبور باید بین ۸ تا ۷۲ کاراکتر باشد." }, 400);
+
+      const ip = (req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "unknown").split(",")[0].trim();
+      const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("mahigir-signup-v1:" + ip));
+      const ipHash = Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, "0")).join("");
+      const since = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+      const { count, error: rateError } = await service.from("mahigir_signup_attempts")
+        .select("id", { count: "exact", head: true }).eq("ip_hash", ipHash).gte("created_at", since);
+      if (rateError) {
+        console.error("signup rate-limit check failed:", rateError.message);
+        return json({ error: "سامانه ثبت‌نام موقتاً در دسترس نیست؛ کمی بعد دوباره تلاش کن." }, 503);
+      }
+      if ((count || 0) >= 5) return json({ error: "تعداد تلاش‌های ثبت‌نام زیاد است؛ یک ساعت دیگر دوباره امتحان کن." }, 429);
+      const { error: attemptError } = await service.from("mahigir_signup_attempts").insert({ ip_hash: ipHash });
+      if (attemptError) return json({ error: "ثبت‌نام موقتاً در دسترس نیست." }, 503);
+
+      const email = username + "@mahigir.ir";
+      const { data: created, error: createError } = await service.auth.admin.createUser({
+        email,
+        password,
+        email_confirm: true,
+        user_metadata: { username, display_name: displayName },
+      });
+      if (createError) {
+        if (/already|registered|exists/i.test(createError.message)) return json({ error: "این نام کاربری قبلاً ثبت شده؛ نام دیگری انتخاب کن." }, 409);
+        console.error("signup createUser failed:", createError.message);
+        return json({ error: "ساخت حساب انجام نشد؛ دوباره تلاش کن." }, 400);
+      }
+      if (!created.user) return json({ error: "ساخت حساب انجام نشد؛ دوباره تلاش کن." }, 500);
+      return json({ ok: true, user_id: created.user.id });
+    }
+
     if (!adminPassword) {
       return json({ error: "رمز مدیریت در تنظیمات تابع تعریف نشده است." }, 500);
     }
