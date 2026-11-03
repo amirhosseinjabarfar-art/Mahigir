@@ -1,0 +1,34 @@
+/* Mahigir unified green & white visual system */
+:root{--bg:#f4faf5;--paper:#fff;--ink:#173326;--muted:#718477;--blue:#16834b;--purple:#16834b;--cyan:#55b978;--line:#dcebe0;--shadow:0 22px 65px #174b2b12}
+html,body{background-color:#f4faf5!important;color:#173326}
+body{background-image:radial-gradient(ellipse at 0 0,#e0f2e5 0,transparent 34%),radial-gradient(ellipse at 100% 22%,#eaf6ed 0,transparent 30%),linear-gradient(135deg,#f8fcf8,#f1f8f2)!important}
+header{background:#fbfefbdd!important;border-bottom:1px solid #dcebe0!important;backdrop-filter:blur(24px)}
+.nav{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{color:#173326!important;font-family:Lalezar,Vazirmatn,sans-serif!important;font-size:32px;display:flex;align-items:center;gap:11px;white-space:nowrap}
+.logo,.mark{background:linear-gradient(140deg,#147b45,#31a963 65%,#78c98b)!important;box-shadow:0 10px 28px #278c4c35!important}
+.navlinks,.actions{display:flex;align-items:center;gap:10px;min-width:0}
+.navlinks a{padding:10px 13px;border-radius:12px;color:#557261!important;font-size:12px;font-weight:800;background:transparent!important;border:0!important;transition:.2s}
+.navlinks a:hover{background:#e8f5eb!important;color:#147b45!important}
+.btn.primary,.primary,.checkout-continue,.action{color:#fff!important;background:linear-gradient(120deg,#147b45,#2da65e)!important;box-shadow:0 10px 25px #238c4b2b!important}
+.btn.soft,.soft,.iconbtn{background:#eaf5ec!important;color:#197b47!important;border-color:#d7eadc!important}
+.btn.white,.white{background:#fff!important;color:#244c34!important;border:1px solid #dcebe0!important}
+.profile-hero,.route-hero,.checkout-hero,.page-hero-card,.intro{background:linear-gradient(115deg,#124c31,#187847 55%,#42a966)!important;box-shadow:0 25px 65px #1d794032!important}
+.profile-hero p,.checkout-hero p,.page-hero-card p,.intro p{color:#e3f5e8!important}
+.profile-hero,.checkout-hero,.page-hero-card,.intro{border:1px solid #ffffff75!important}
+.gradient{background:linear-gradient(95deg,#147b45,#2ba45a 55%,#75c98a)!important;color:transparent!important;background-clip:text!important}
+.tag,.eyebrow{color:#197b47!important;background:#edf8ef!important;border-color:#d7eadc!important}
+.hub-card,.card,.book-card,.checkout-panel,.auth-card,.profile-info,.order-card,.address-card,.panel,.info-panel{border-color:#dcebe0!important;box-shadow:0 12px 35px #245b3510!important}
+.hub-card:hover,.card:hover,.book-card:hover,.order-card:hover,.address-card:hover{border-color:#a9d4b5!important;box-shadow:0 24px 55px #238c4b20!important}
+.hub-icon,.filter,.cat,.search,.address-select-card,.pay-choice{border-color:#dcebe0!important}
+.filter.active,.cat.active{background:linear-gradient(120deg,#147b45,#2da65e)!important;color:white!important}
+.price,.book-price,.hub-card b,.hub-kicker{color:#197b47!important}
+.shipping,.cart-total,footer{background:linear-gradient(115deg,#123f2a,#176c40 65%,#2e9255)!important}
+.admin-fab{background:linear-gradient(140deg,#145b36,#2da65e)!important;box-shadow:0 12px 35px #238c4b35!important}
+.route-page{background:radial-gradient(ellipse at 10% 0%,#236d43,transparent 35%),radial-gradient(ellipse at 95% 80%,#347f4e,transparent 34%),#102b1c!important}
+.status{background:#eaf5ec!important;color:#197b47!important}
+.step.active span,.step.done span{background:linear-gradient(130deg,#16834b,#52b978)!important;border-color:#a8e3b6!important;box-shadow:0 0 25px #36b96c55!important}
+.checkout-tip,.pay-choice,.value,.notice{background:#edf7ef!important;color:#315b3e!important;border-color:#dcebe0!important}
+.choice-check{background:linear-gradient(120deg,#147b45,#2da65e)!important}
+.toast{background:#17482d!important}
+@media(max-width:850px){.navlinks{display:none!important}}
+@media(max-width:560px){.nav{min-height:68px}.brand{font-size:25px}.logo,.mark{width:40px;height:40px}.actions .btn{padding:10px 12px;font-size:11px}}
