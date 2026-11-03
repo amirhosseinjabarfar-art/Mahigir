@@ -95,12 +95,13 @@ Deno.serve(async (req: Request) => {
       const { count, error: rateError } = await service.from("mahigir_signup_attempts")
         .select("id", { count: "exact", head: true }).eq("ip_hash", ipHash).gte("created_at", since);
       if (rateError) {
-        console.error("signup rate-limit check failed:", rateError.message);
-        return json({ error: "سامانه ثبت‌نام موقتاً در دسترس نیست؛ کمی بعد دوباره تلاش کن." }, 503);
+        // Rate-limit storage is auxiliary: an unavailable table must not block legitimate signups.
+        console.error("signup rate-limit unavailable; continuing signup:", rateError.message);
+      } else {
+        if ((count || 0) >= 5) return json({ error: "تعداد تلاش‌های ثبت‌نام زیاد است؛ یک ساعت دیگر دوباره امتحان کن." }, 429);
+        const { error: attemptError } = await service.from("mahigir_signup_attempts").insert({ ip_hash: ipHash });
+        if (attemptError) console.error("signup rate-limit write failed; continuing signup:", attemptError.message);
       }
-      if ((count || 0) >= 5) return json({ error: "تعداد تلاش‌های ثبت‌نام زیاد است؛ یک ساعت دیگر دوباره امتحان کن." }, 429);
-      const { error: attemptError } = await service.from("mahigir_signup_attempts").insert({ ip_hash: ipHash });
-      if (attemptError) return json({ error: "ثبت‌نام موقتاً در دسترس نیست." }, 503);
 
       const email = username + "@mahigir.ir";
       const { data: created, error: createError } = await service.auth.admin.createUser({
