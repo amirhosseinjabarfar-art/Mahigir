@@ -1,9 +1,60 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#5367f5"><title>پیگیری سفارش‌ها | ماهیگیر</title>
-<style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f6f7ff}iframe{display:block;width:100%;height:100%;height:100dvh;border:0}</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111a3b">
+<title>پیگیری سفارش‌ها | ماهیگیر</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#101936}
+iframe{display:block;width:100%;height:100%;height:100dvh;border:0;background:#101936}
+</style>
 </head>
-<body><iframe title="پیگیری سفارش‌های ماهیگیر" src="index.html?open=orders"></iframe></body>
+<body>
+<iframe id="mahigirApp" title="پیگیری سفارش‌ها | ماهیگیر" src="index.html?open=orders"></iframe>
+<script>
+(function(){
+ const frame=document.getElementById("mahigirApp");
+ function isolate(){
+  try{
+   const d=frame.contentDocument;if(!d||!d.body)return;
+   if(!d.getElementById("mahigir-isolated-style")){
+    const style=d.createElement("style");style.id="mahigir-isolated-style";
+    style.textContent=`
+      html,body{width:100%!important;height:100%!important;min-height:100%!important;overflow:hidden!important;background:#101936!important}
+      body>*{display:none!important}
+      body>#accountModal,body>#addressPage,body>#orderDetailPage,body>#toast,body>#particleField,body>script{display:revert!important}
+      #accountModal{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:99999!important;background:radial-gradient(ellipse at 12% 8%,#394b9b 0,transparent 38%),radial-gradient(ellipse at 90% 90%,#633b91 0,transparent 38%),#101936!important;backdrop-filter:none!important;align-items:stretch!important;justify-content:stretch!important;padding:0!important}
+      #accountModal .modal{width:100%!important;max-width:none!important;height:100%!important;max-height:none!important;min-height:100%!important;margin:0!important;border:0!important;border-radius:0!important;overflow-y:auto!important;background:linear-gradient(145deg,#f8f9ff,#eef1ff)!important;box-shadow:none!important;padding:clamp(18px,4vw,42px)!important}
+      #accountModal .modalhead{position:sticky!important;top:0!important;z-index:5!important;background:#f8f9ffed!important;backdrop-filter:blur(18px)!important;padding:10px 0 16px!important}
+      #accountModal #accountContent{width:min(100%,1050px)!important;margin:0 auto!important}
+      #addressPage,#orderDetailPage{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:100000!important;overflow-y:auto!important}
+      #orderDetailPage.open{animation:mahigirPageIn .65s cubic-bezier(.2,.8,.2,1) both!important}
+      #orderDetailContent .od-hero{animation:mahigirRise .7s .08s both!important}
+      #orderDetailContent .od-track-card{animation:mahigirRise .75s .18s both!important}
+      #orderDetailContent .od-bottom-grid{animation:mahigirRise .8s .28s both!important}
+      #orderDetailContent .od-node{animation:mahigirNode .55s both!important;animation-delay:calc(var(--node-index,0)*.09s)!important}
+      #orderDetailContent .od-node:nth-child(1){--node-index:1}#orderDetailContent .od-node:nth-child(2){--node-index:2}#orderDetailContent .od-node:nth-child(3){--node-index:3}#orderDetailContent .od-node:nth-child(4){--node-index:4}#orderDetailContent .od-node:nth-child(5){--node-index:5}#orderDetailContent .od-node:nth-child(6){--node-index:6}
+      @keyframes mahigirPageIn{from{opacity:0;transform:translateY(18px) scale(.985);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+      @keyframes mahigirRise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+      @keyframes mahigirNode{from{opacity:0;transform:scale(.72) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+      @media(prefers-reduced-motion:reduce){#orderDetailPage.open,#orderDetailContent *{animation:none!important}}
+    `;
+    d.head.appendChild(style);
+   }
+   const close=d.querySelector("#accountModal .modalhead .close");
+   if(close&&!close.dataset.pageBack){close.dataset.pageBack="1";close.textContent="← بازگشت به فروشگاه";close.style.width="auto";close.style.padding="8px 14px";close.style.fontSize="12px";close.onclick=()=>{location.href="index.html"}}
+   const title=d.querySelector("#accountModal .modalhead h2");
+   if(title&&"orders"==="orders")title.textContent="پیگیری سفارش‌ها";
+   if("orders"==="orders"){
+    const tabs=[...d.querySelectorAll("#accountContent .tab")];const orderTab=tabs.find(x=>x.textContent.includes("سفارش"));
+    if(orderTab&&!orderTab.classList.contains("active"))orderTab.click();
+   }
+  }catch(e){console.warn("Mahigir isolated page:",e)}
+ }
+ frame.addEventListener("load",isolate);
+ setTimeout(isolate,500);setTimeout(isolate,1200);setTimeout(isolate,2400);
+})();
+</script>
+</body>
 </html>
