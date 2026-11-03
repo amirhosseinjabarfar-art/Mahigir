@@ -1151,6 +1151,7 @@ function dismissStudentPromo(){document.getElementById("studentPromo")?.remove()
   if(target==="checkout"&&typeof openCheckoutPage==="function")openCheckoutPage();
   if(target==="addresses"&&typeof openAddresses==="function")openAddresses();
   if(target==="contact"&&typeof openContactPage==="function")openContactPage();
+   if(target==="admin"&&typeof openAdmin==="function")openAdmin();
  }catch(e){console.warn("Page shortcut:",e)}};
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(run,250),{once:true});else setTimeout(run,250);
 })();
