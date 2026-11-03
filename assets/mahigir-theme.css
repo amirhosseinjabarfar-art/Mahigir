@@ -32,3 +32,15 @@ header{background:#fbfefbdd!important;border-bottom:1px solid #dcebe0!important;
 .toast{background:#17482d!important}
 @media(max-width:850px){.navlinks{display:none!important}}
 @media(max-width:560px){.nav{min-height:68px}.brand{font-size:25px}.logo,.mark{width:40px;height:40px}.actions .btn{padding:10px 12px;font-size:11px}}
+
+.wrap{width:min(1320px,calc(100% - 48px));margin-inline:auto}
+.brand:before{display:none!important}
+.art{background:linear-gradient(145deg,#dff1e3,#eff9f0 55%,#d7efdf)!important}
+.orb{background:linear-gradient(140deg,#64b77d,#b8e3c1 65%,#e1f5e5)!important;box-shadow:0 25px 70px #5baf7655!important}
+.fakebook{background:linear-gradient(145deg,#176c40,#31a963 60%,#78c98b)!important;border-right-color:#145b36!important;box-shadow:18px 25px 48px #174b2b30!important}
+.bestseller-tag{background:#eaf5ec!important;color:#197b47!important}
+.section-bestsellers .heading h2{color:#197b47!important}
+.hub-books,.hub-cart,.hub-account,.hub-orders,.hub-address,.hub-contact{--glow:#a8dcb4!important;--accent:#197b47!important}
+.soon-card{border-color:#dcebe0!important;background:linear-gradient(160deg,#fff,#f1f8f2)!important}
+.soon-ribbon,.soon-notice{color:#197b47!important;background:#eaf5ec!important;border-color:#dcebe0!important}
+.card:nth-child(2){--accent:#16834b!important;--tint:#eaf5ec!important}
