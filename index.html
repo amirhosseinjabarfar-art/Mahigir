@@ -805,6 +805,68 @@ body:not(.motion-ready) .hero,body:not(.motion-ready) .section-bestsellers,body:
 #accountModal #accountContent>.muted a{color:#24783a!important}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
+
+/* MAHIGIR — complete Adineh-inspired green redesign */
+:root{--bg:#f5fbf7;--paper:#fff;--ink:#101b15;--muted:#64756a;--blue:#159b61;--purple:#49c98b;--line:#e0eee5;--shadow:0 14px 38px #164b2a12;--green:#159b61;--green-light:#e8f8ee}
+html{scroll-behavior:smooth;background:#f7fcf8}
+body{background:#fff!important;color:#101b15!important;font-family:Vazirmatn,sans-serif}
+header,.admin-top{background:#fffffff2!important;border-color:#e3eee7!important}
+.brand{color:#126b43!important}.logo,.primary,.cat.active,.tab.active{background:linear-gradient(125deg,#159b61,#4acb8c)!important;color:#fff!important;box-shadow:0 8px 24px #159b6128!important}
+.soft,.iconbtn,.white,.cat,.tab{background:#f3faf5!important;color:#153d29!important;border-color:#dcece1!important}
+.tag{background:#f1fbf4!important;color:#167447!important;border-color:#d6eddf!important}
+.hero{padding-top:42px}.hero h1{color:#102319}.gradient{background:linear-gradient(100deg,#148b55,#48bf80)!important;background-clip:text!important}
+.art{background:linear-gradient(140deg,#effbf2,#d8f4e2,#f7fff9)!important}
+.orb{background:linear-gradient(140deg,#55c887,#b2edc8)!important}.fakebook{background:linear-gradient(145deg,#168f58,#64ce91)!important}
+.card{border:1px solid #e2eee6!important;box-shadow:0 7px 24px #164b2a0a!important;background:#fff!important}
+.card:hover{box-shadow:0 18px 38px #164b2a18!important}
+.cover{background:linear-gradient(145deg,#188e58,#65c88c)!important}
+.book-info h3,.heading h2,.detailbody h2{color:#14251a!important}
+.book-info p,.hero p,.heading p{color:#66756b!important}
+.shipping{background:linear-gradient(110deg,#073e2b,#0e7048,#24a66a)!important}
+footer{background:#083d2a!important}
+.admin-fab{background:linear-gradient(140deg,#087347,#35b879)!important}
+.modal,.backdrop,.field input,.field textarea,.field select{color:#132219}
+.modalhead,.modal{border-color:#e2eee6}
+.totals,.track,.adminstat,.detailbullets,.noticebar,th{background:#eff9f2!important;color:#183d28!important}
+.status{background:#e3f7e9!important;color:#147344!important}
+.primary:hover,.btn:hover{filter:brightness(1.04)}
+/* neutralize old purple/gray address and contact themes */
+.address-page,.admin-page{background:#f5fbf7!important;color:#102319!important}
+.address-glow{opacity:.2!important;background:#a6e8bd!important}
+.address-brand,.address-hero h1,.address-panel h2{color:#143b27!important}
+.address-brand-mark,.address-back span{background:linear-gradient(140deg,#159b61,#58cc8b)!important}
+.address-hero{background:linear-gradient(120deg,#fff,#f0fbf3)!important}
+.address-hero h1 span{background:linear-gradient(90deg,#16834e,#54bd7d)!important;-webkit-background-clip:text!important;background-clip:text!important}
+.address-kicker,.address-perks span{color:#187b49!important}
+.address-back,.address-panel,.address-card,.address-form-panel{background:#fff!important;border-color:#e0eee5!important}
+.address-pin,.address-panel-icon{background:#e8f8ee!important;color:#16834f!important}
+.address-page *{--address-accent:#159b61}
+#contactPage,.contact-page{background:#f5fbf7!important;color:#102319!important}
+#contactPage .contact-card,#contactPage .contact-panel{background:#fff!important;border-color:#e0eee5!important}
+#contactPage h1,#contactPage h2,#contactPage h3,#contactPage p{color:#102319}
+#contactPage a,#contactPage button{background-color:#159b61!important;color:white!important}
+/* individual book page — no modal */
+.book-page{position:fixed;inset:0;z-index:1500;display:none;overflow:auto;background:#f6fcf8;color:#122219}
+.book-page.open{display:block;animation:pageEnter .55s cubic-bezier(.2,.8,.2,1) both}
+.book-page-top{position:sticky;top:0;z-index:4;background:#ffffffed;backdrop-filter:blur(16px);border-bottom:1px solid #e1eee5;padding:13px max(18px,calc((100vw - 1160px)/2));display:flex;justify-content:space-between;align-items:center;gap:14px}
+.book-page-top .brand{font-size:25px}
+.book-page-inner{width:min(1160px,92%);margin:30px auto 70px}
+.book-page-back{border:1px solid #dcece1;background:#fff;color:#176b42;border-radius:13px;padding:11px 16px;font-weight:800}
+.book-page .detail-layout{grid-template-columns:minmax(280px,420px) minmax(0,1fr);gap:clamp(28px,5vw,65px);padding:25px 0}
+.book-page .detailcover{min-height:520px;top:95px;background:linear-gradient(145deg,#188e58,#65c88c)!important;border-radius:8px 24px 24px 8px;box-shadow:18px 20px 40px #154d2b1b}
+.book-page .detailbody{background:white;border:1px solid #e3eee6;border-radius:25px;padding:clamp(22px,4vw,42px)}
+.book-page .detailbody h2{font-size:clamp(35px,5vw,55px)}
+.book-page .detailbullets{border:1px solid #e2f0e6;border-radius:17px}
+.book-page .bigprice{color:#11804b}
+.book-page .qty button{background:#e8f8ee;color:#147748}
+@keyframes pageEnter{from{opacity:0;filter:blur(14px);transform:translateY(18px)}to{opacity:1;filter:blur(0);transform:none}}
+@keyframes wordFocus{from{opacity:0;filter:blur(9px);transform:translateY(8px)}to{opacity:1;filter:blur(0);transform:none}}
+.word-reveal{display:inline-block;animation:wordFocus .55s both;animation-delay:var(--word-delay,0ms)}
+.card,.heading,.hero-grid,.shipping,.address-panel,.address-card,.contact-card{animation:pageEnter .7s both}
+.card:nth-child(2n){animation-delay:.07s}.card:nth-child(3n){animation-delay:.13s}
+@media(max-width:650px){.book-page .detail-layout{grid-template-columns:1fr}.book-page .detailcover{position:relative;top:auto;min-height:330px}.book-page-inner{margin-top:14px}.book-page-top{padding:10px 13px}}
+@media(prefers-reduced-motion:reduce){.word-reveal,.book-page.open,.card,.heading,.hero-grid,.shipping{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -891,9 +953,7 @@ body:not(.motion-ready) .hero,body:not(.motion-ready) .section-bestsellers,body:
 <div class="backdrop" id="accountModal" onclick="backdrop(event,'accountModal')"><div class="modal">
  <div class="modalhead"><h2 id="accountTitle">حساب کاربری</h2><button class="close" onclick="closeModal('accountModal')">×</button></div><div id="accountContent"></div>
 </div></div>
-<div class="backdrop" id="detailModal" onclick="backdrop(event,'detailModal')"><div class="modal wide">
- <div class="modalhead"><h2>معرفی کتاب</h2><button class="close" onclick="closeModal('detailModal')">×</button></div><div id="detailContent"></div>
-</div></div>
+<div class="book-page" id="bookPage" aria-hidden="true"><header class="book-page-top"><a class="brand" href="#home" onclick="closeBookPage()">ماهیگیر</a><button class="book-page-back" onclick="closeBookPage()">← بازگشت به فروشگاه</button></header><main class="book-page-inner"><div id="detailContent"></div></main></div>
 <section class="address-page" id="addressPage" aria-hidden="true">
  <div class="address-glow ag-one"></div><div class="address-glow ag-two"></div><div class="address-noise"></div>
  <header class="address-top"><a class="address-brand" href="#home" onclick="closeAddressPage()"><span class="address-brand-mark">م</span><span>ماهیگیر<small>نشانی‌های من</small></span></a><button class="address-back" onclick="closeAddressPage()">بازگشت به فروشگاه <span>←</span></button></header>
@@ -1050,27 +1110,25 @@ function openBook(id){
  const soon=!!b.comingSoon;
  document.getElementById("detailContent").innerHTML=`
  <div class="detail-layout">
-  <div class="detailcover" style="background:${safeColor(b.color)}">
-   <div>${esc(b.title)}<div style="font:12px Vazirmatn;margin-top:15px">${soon?"کتاب بزودی":"ماهیگیر"}</div></div>
-  </div>
+  <div class="detailcover" style="background:${safeColor(b.color)}"><div>${esc(b.title)}<div style="font:12px Vazirmatn;margin-top:15px">${soon?"کتاب به‌زودی":"ماهیگیر"}</div></div></div>
   <div class="detailbody">
-   <span style="color:var(--blue);font-size:12px;font-weight:800">${soon?"به‌زودی در فروشگاه ماهیگیر":"کتاب‌های ماهیگیر"}</span>
+   <span style="color:#16834f;font-size:12px;font-weight:900">${soon?"به‌زودی در فروشگاه ماهیگیر":"کتاب‌های ماهیگیر"}</span>
    <h2>${esc(b.title)}</h2>
-   ${soon?'<div class="soon-notice" style="font-size:15px;padding:16px">✨ کتاب بزودی ✨</div>':`<div class="bigprice">${money(b.price)}</div>`}
+   ${soon?'<div class="soon-notice" style="font-size:15px;padding:16px">✨ کتاب به‌زودی ✨</div>':`<div class="bigprice">${money(b.price)}</div>`}
    <p>${esc(b.description||"کتابی از مجموعه ماهیگیر.")}</p>
-   <div class="detailbullets">
-    <div>📚 عنوان: ${esc(b.title)}</div>
-    <div>🏷️ دسته‌بندی: ${esc(b.category||"متفرقه")}</div>
-    ${soon?'<div>🗓️ وضعیت: به‌زودی منتشر می‌شود</div>':'<div>📦 روش ارسال: تیپاکس</div><div>🚚 هزینه ارسال: '+money(SHIPPING)+'</div>'}
-   </div>
-   ${soon?'<div class="noticebar">این کتاب هنوز برای خرید موجود نیست. پس از عرضه، اطلاعات سفارش از همین صفحه در دسترس خواهد بود.</div>':`
-   <p>تعداد موردنظرت را انتخاب کن و سپس به سبد خرید اضافه کن.</p>
-   <div class="qty"><button onclick="detailQty(-1)">−</button><strong id="detailQty">۱</strong><button onclick="detailQty(1)">+</button></div>
-   <button class="btn primary" style="margin-top:14px" onclick="addCart('${esc(b.id)}',window.detailAmount||1)">افزودن به سبد خرید 🛒</button>`}
+   <div class="detailbullets"><div>📚 عنوان: ${esc(b.title)}</div><div>🏷️ دسته‌بندی: ${esc(b.category||"متفرقه")}</div>${soon?'<div>🗓️ وضعیت: به‌زودی منتشر می‌شود</div>':'<div>📦 روش ارسال: تیپاکس</div><div>🚚 هزینه ارسال: '+money(SHIPPING)+'</div>'}</div>
+   ${soon?'<div class="noticebar">این کتاب هنوز برای خرید موجود نیست.</div>':`<p>تعداد موردنظرت را انتخاب کن و سپس به سبد خرید اضافه کن.</p><div class="qty"><button onclick="detailQty(-1)">−</button><strong id="detailQty">۱</strong><button onclick="detailQty(1)">+</button></div><button class="btn primary" style="margin-top:14px" onclick="addCart('${esc(b.id)}',window.detailAmount||1)">افزودن به سبد خرید 🛒</button>`}
   </div>
  </div>`;
  window.detailBookId=String(id);window.detailAmount=1;
- openModal("detailModal");
+ const page=document.getElementById("bookPage");page.classList.add("open");page.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+ history.pushState({mahigirBook:String(id)},"","?book="+encodeURIComponent(String(id)));
+ revealWords(page);
+}
+function closeBookPage(){
+ const page=document.getElementById("bookPage");if(!page)return;
+ page.classList.remove("open");page.setAttribute("aria-hidden","true");document.body.style.overflow="";
+ if(new URLSearchParams(location.search).has("book"))history.pushState({},"",location.pathname+location.hash);
 }
 function detailQty(d){
  window.detailAmount=Math.max(1,Math.min(99,(window.detailAmount||1)+d));
@@ -1669,6 +1727,28 @@ async function saveAddress(e){
   openCheckoutPage();
  },450);
 }
+
+
+/* Word-by-word entrance animation for all visible site copy, including dynamically rendered cards */
+function revealWords(root=document){
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(node){
+  const p=node.parentElement;if(!p||!node.nodeValue.trim())return NodeFilter.FILTER_REJECT;
+  if(p.closest("script,style,textarea,input,select,option,svg,.word-reveal,[contenteditable=true]"))return NodeFilter.FILTER_REJECT;
+  if(node.nodeValue.trim().length<2)return NodeFilter.FILTER_REJECT;
+  return NodeFilter.FILTER_ACCEPT;
+ }});
+ const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+ nodes.forEach(node=>{
+  const parts=node.nodeValue.split(/(\s+)/);const frag=document.createDocumentFragment();let n=0;
+  parts.forEach(part=>{if(!part)return;if(/^\s+$/.test(part)){frag.appendChild(document.createTextNode(part));return}
+   const span=document.createElement("span");span.className="word-reveal";span.style.setProperty("--word-delay",Math.min(n++*24,360)+"ms");span.textContent=part;frag.appendChild(span);
+  });node.parentNode.replaceChild(frag,node);
+ });
+}
+document.addEventListener("DOMContentLoaded",()=>revealWords());
+const wordObserver=new MutationObserver(records=>{for(const rec of records)for(const node of rec.addedNodes)if(node.nodeType===1)revealWords(node)});
+wordObserver.observe(document.documentElement,{childList:true,subtree:true});
+window.addEventListener("popstate",()=>{const id=new URLSearchParams(location.search).get("book");if(id)openBook(id);else closeBookPage()});
 
 </script>
 </body>
