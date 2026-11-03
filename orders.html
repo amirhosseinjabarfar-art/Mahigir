@@ -106,5 +106,17 @@ header:not(.address-top):not(.checkout-top):not(.tracking-top):not(.contact-top)
 .toast{background:#17482d!important}
 @media(max-width:850px){.navlinks,.links{display:none!important}}
 @media(max-width:560px){.nav{min-height:68px}.brand{font-size:25px}.logo,.mark{width:40px;height:40px}.actions .btn{padding:10px 12px;font-size:11px}}
+
+/* Order tabs and large shipment tracking code */
+.customer-order-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0 20px}
+.customer-order-tab{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 17px;border:1px solid #dcebe0;border-radius:17px;background:#fff;color:#315b40;font:900 13px Vazirmatn;cursor:pointer;transition:.2s}
+.customer-order-tab b{display:grid;place-items:center;min-width:29px;height:29px;padding:0 7px;border-radius:10px;background:#edf7ef;color:#167b47}
+.customer-order-tab.active{background:linear-gradient(120deg,#147b45,#2da65e);border-color:#16834b;color:#fff;box-shadow:0 10px 25px #238c4b25}
+.customer-order-tab.active b{background:#ffffff28;color:#fff}
+.tracking-code-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin:17px 0;padding:23px 18px;border:2px dashed #9bcbaa;border-radius:20px;background:linear-gradient(135deg,#f2fbf3,#e8f6eb);text-align:center;min-height:125px}
+.tracking-code-box small{font-size:12px;font-weight:900;color:#477956}
+.tracking-code-box strong{font-size:clamp(22px,4vw,34px);font-weight:900;letter-spacing:1.5px;color:#145c36;direction:ltr;overflow-wrap:anywhere;max-width:100%}
+.tracking-code-box.waiting{border-color:#dcebe0;background:#f8fbf8}.tracking-code-box.waiting strong{font-size:18px;color:#788b7d}
+@media(max-width:600px){.customer-order-tabs{gap:6px}.customer-order-tab{padding:12px 9px;font-size:11px;flex-direction:column}.tracking-code-box{padding:18px 12px}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="assets/customer-portal.js"></script></head>
 <body data-page="orders"><header><div class="wrap nav"><a href="index.html" class="brand"><span class="logo">م</span> ماهیگیر</a><nav class="navlinks"><a href="index.html">خانه</a><a href="books.html">کتابخانه</a><a href="orders.html">سفارش‌ها</a><a href="addresses.html">نشانی‌ها</a><a href="contact.html">ارتباط</a></nav><div class="actions"><a class="iconbtn" href="cart.html" aria-label="سبد خرید">🛒<span class="count" id="cartCount">۰</span></a><a class="btn primary" id="accountBtn" href="account.html">حساب من</a></div></div></header><main class="shell"><div id="portal"><span class="eyebrow">MAHIGIR ORDER CENTER</span><h1 class="section-title">سفارش‌های من</h1><div id="orderList" class="order-list"><div class="empty">در حال دریافت سفارش‌ها…</div></div></div></main><a class="admin-fab" href="index.html?open=admin" title="پنل مدیریت" aria-label="ورود به پنل مدیریت">⚙</a><div class="route-page" id="routePage"><div class="route-inner"></div></div><div class="toast" id="toast" role="status"></div><script>(function(){try{const items=JSON.parse(localStorage.getItem("mh_cart")||"[]");const count=items.reduce((n,x)=>n+Math.max(0,Number(x.qty)||0),0);const el=document.getElementById("cartCount");if(el)el.textContent=count.toLocaleString("fa-IR")}catch(e){}})();</script></body></html>
