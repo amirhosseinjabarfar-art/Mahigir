@@ -1,60 +1,8 @@
 <!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111a3b">
-<title>پیگیری سفارش‌ها | ماهیگیر</title>
-<style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#101936}
-iframe{display:block;width:100%;height:100%;height:100dvh;border:0;background:#101936}
-</style>
-</head>
-<body>
-<iframe id="mahigirApp" title="پیگیری سفارش‌ها | ماهیگیر" src="index.html?open=orders"></iframe>
-<script>
-(function(){
- const frame=document.getElementById("mahigirApp");
- function isolate(){
-  try{
-   const d=frame.contentDocument;if(!d||!d.body)return;
-   if(!d.getElementById("mahigir-isolated-style")){
-    const style=d.createElement("style");style.id="mahigir-isolated-style";
-    style.textContent=`
-      html,body{width:100%!important;height:100%!important;min-height:100%!important;overflow:hidden!important;background:#101936!important}
-      body>*{display:none!important}
-      body>#accountModal,body>#addressPage,body>#orderDetailPage,body>#toast,body>#particleField,body>script{display:revert!important}
-      #accountModal{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:99999!important;background:radial-gradient(ellipse at 12% 8%,#394b9b 0,transparent 38%),radial-gradient(ellipse at 90% 90%,#633b91 0,transparent 38%),#101936!important;backdrop-filter:none!important;align-items:stretch!important;justify-content:stretch!important;padding:0!important}
-      #accountModal .modal{width:100%!important;max-width:none!important;height:100%!important;max-height:none!important;min-height:100%!important;margin:0!important;border:0!important;border-radius:0!important;overflow-y:auto!important;background:linear-gradient(145deg,#f8f9ff,#eef1ff)!important;box-shadow:none!important;padding:clamp(18px,4vw,42px)!important}
-      #accountModal .modalhead{position:sticky!important;top:0!important;z-index:5!important;background:#f8f9ffed!important;backdrop-filter:blur(18px)!important;padding:10px 0 16px!important}
-      #accountModal #accountContent{width:min(100%,1050px)!important;margin:0 auto!important}
-      #addressPage,#orderDetailPage{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:100000!important;overflow-y:auto!important}
-      #orderDetailPage.open{animation:mahigirPageIn .65s cubic-bezier(.2,.8,.2,1) both!important}
-      #orderDetailContent .od-hero{animation:mahigirRise .7s .08s both!important}
-      #orderDetailContent .od-track-card{animation:mahigirRise .75s .18s both!important}
-      #orderDetailContent .od-bottom-grid{animation:mahigirRise .8s .28s both!important}
-      #orderDetailContent .od-node{animation:mahigirNode .55s both!important;animation-delay:calc(var(--node-index,0)*.09s)!important}
-      #orderDetailContent .od-node:nth-child(1){--node-index:1}#orderDetailContent .od-node:nth-child(2){--node-index:2}#orderDetailContent .od-node:nth-child(3){--node-index:3}#orderDetailContent .od-node:nth-child(4){--node-index:4}#orderDetailContent .od-node:nth-child(5){--node-index:5}#orderDetailContent .od-node:nth-child(6){--node-index:6}
-      @keyframes mahigirPageIn{from{opacity:0;transform:translateY(18px) scale(.985);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
-      @keyframes mahigirRise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-      @keyframes mahigirNode{from{opacity:0;transform:scale(.72) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
-      @media(prefers-reduced-motion:reduce){#orderDetailPage.open,#orderDetailContent *{animation:none!important}}
-    `;
-    d.head.appendChild(style);
-   }
-   const close=d.querySelector("#accountModal .modalhead .close");
-   if(close&&!close.dataset.pageBack){close.dataset.pageBack="1";close.textContent="← بازگشت به فروشگاه";close.style.width="auto";close.style.padding="8px 14px";close.style.fontSize="12px";close.onclick=()=>{location.href="index.html"}}
-   const title=d.querySelector("#accountModal .modalhead h2");
-   if(title&&"orders"==="orders")title.textContent="پیگیری سفارش‌ها";
-   if("orders"==="orders"){
-    const tabs=[...d.querySelectorAll("#accountContent .tab")];const orderTab=tabs.find(x=>x.textContent.includes("سفارش"));
-    if(orderTab&&!orderTab.classList.contains("active"))orderTab.click();
-   }
-  }catch(e){console.warn("Mahigir isolated page:",e)}
- }
- frame.addEventListener("load",isolate);
- setTimeout(isolate,500);setTimeout(isolate,1200);setTimeout(isolate,2400);
-})();
-</script>
-</body>
-</html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#18264c"><title>پیگیری سفارش‌ها | ماهیگیر</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Lalezar&display=swap');
+:root{--ink:#182344;--muted:#7782a2;--blue:#5368f5;--purple:#9659e5;--line:#e5e9fb}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Vazirmatn,sans-serif;color:var(--ink);background:radial-gradient(ellipse at 8% 0%,#e1e8ff,transparent 35%),radial-gradient(ellipse at 95% 30%,#f0e2ff,transparent 32%),#f6f7ff}body{min-height:100vh;padding:24px}.shell{width:min(1050px,100%);margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 auto 28px}.brand{font:32px Lalezar;color:#293c82;text-decoration:none}.links{display:flex;gap:8px;flex-wrap:wrap}.links a,.ghost,.secondary{border:1px solid #dce2fb;background:#ffffffc9;color:#5263bd;border-radius:13px;padding:10px 14px;text-decoration:none;font-size:12px;font-weight:900}.eyebrow{font-size:10px;font-weight:900;letter-spacing:2px;color:#9ca8ee}.profile-hero,.auth-card,.profile-info,.order-card,.address-card{background:#ffffffd9;border:1px solid #e3e8fc;box-shadow:0 20px 60px #31458d12;border-radius:28px}.profile-hero{padding:clamp(25px,5vw,55px);background:linear-gradient(120deg,#1b2b5b,#4659b4 55%,#9258d2);color:white;position:relative;overflow:hidden;animation:rise .7s both}.profile-hero h1,.auth-card h1,.route-hero h2{font:clamp(36px,6vw,60px) Lalezar;margin:12px 0}.profile-hero p,.auth-card p{line-height:2;color:#e2e7ff}.profile-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.primary,.secondary,.logout{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:14px;padding:13px 18px;font:900 13px Vazirmatn;text-decoration:none;cursor:pointer}.primary{color:#fff;background:linear-gradient(120deg,var(--blue),var(--purple));box-shadow:0 10px 25px #5969dc55}.profile-hero .secondary{color:white;background:#ffffff18;border-color:#ffffff44}.profile-info{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px;padding:22px}.profile-info div{display:grid;gap:8px}.profile-info small{color:var(--muted)}.profile-info b{font-size:16px}.logout{margin-top:18px;background:#fff0f2;color:#c44b68}.auth-card{width:min(520px,100%);margin:8vh auto;padding:clamp(24px,5vw,42px);animation:rise .7s both}.auth-card h1{font-size:42px}.auth-card label{display:grid;gap:8px;font-size:12px;font-weight:900;margin:15px 0}.auth-card input,.address-form input,.address-form textarea{width:100%;border:1px solid #dfe4f7;border-radius:13px;padding:14px;background:#fff;font:14px Vazirmatn;outline:none}.auth-card input:focus,.address-form input:focus,.address-form textarea:focus{border-color:var(--blue);box-shadow:0 0 0 4px #5367f418}.auth-card form .primary{width:100%;margin-top:10px}.text-btn{display:block;border:0;background:none;color:#5367d7;font:800 12px Vazirmatn;margin:18px auto;cursor:pointer}.section-title{font:36px Lalezar;margin:24px 0 16px}.order-list{display:grid;gap:14px}.order-card{padding:22px;animation:rise .55s both}.order-head,.order-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.status{border-radius:20px;padding:7px 11px;background:#edf0ff;color:#5967c8;font-size:11px;font-weight:900}.order-card h3{font:26px Lalezar;margin:15px 0 4px}.order-card p,.address-card p{color:var(--muted);font-size:12px;line-height:2}.small{padding:10px 14px;font-size:11px}.empty{padding:35px;text-align:center;color:var(--muted);background:#fff;border:1px dashed #d5dcf4;border-radius:22px}.address-layout{display:grid;grid-template-columns:1fr 1fr;gap:18px}.panel{background:#ffffffd9;border:1px solid #e3e8fc;box-shadow:0 20px 60px #31458d12;border-radius:25px;padding:24px}.panel h2{font:27px Lalezar;margin:0 0 16px}.address-form label{display:grid;gap:7px;font-size:12px;font-weight:900;margin:12px 0}.address-form textarea{min-height:100px;resize:vertical}.address-form .primary{width:100%;margin-top:12px}.address-card{padding:18px;margin-bottom:12px}.danger{border:0;background:#fff0f2;color:#c44b68;border-radius:10px;padding:8px 11px;cursor:pointer;font:800 11px Vazirmatn}.route-page{position:fixed;inset:0;z-index:50;overflow:auto;padding:25px;background:radial-gradient(ellipse at 10% 0%,#394d9b,transparent 35%),radial-gradient(ellipse at 95% 80%,#69429a,transparent 34%),#101936;color:white;display:none}.route-page.open{display:block;animation:routeIn .6s cubic-bezier(.2,.8,.2,1) both}.route-inner{width:min(1050px,100%);margin:auto}.route-head{display:flex;justify-content:space-between;align-items:center;gap:15px}.route-head h1{font:38px Lalezar;margin:8px 0}.route-head .ghost{color:white;background:#ffffff15;border-color:#ffffff35}.route-hero{margin:28px 0;padding:30px;border:1px solid #ffffff2b;border-radius:25px;background:linear-gradient(120deg,#ffffff19,#ffffff08);animation:rise .7s .1s both}.route-hero h2{font-size:43px}.route-id{color:#c6d0ff;font-size:12px}.timeline{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:35px 12px 24px;border-radius:25px;background:#ffffff10;border:1px solid #ffffff20;animation:rise .7s .2s both}.timeline-line{position:absolute;top:58px;left:9%;right:9%;height:4px;background:#ffffff28;border-radius:5px}.timeline-line i{display:block;height:100%;background:linear-gradient(90deg,#42e2ce,#8e9cff);border-radius:5px;transition:width 1.2s ease}.step{position:relative;z-index:1;display:flex;align-items:center;flex-direction:column;gap:12px;text-align:center;animation:stepIn .6s both}.step:nth-of-type(2){animation-delay:.12s}.step:nth-of-type(3){animation-delay:.22s}.step:nth-of-type(4){animation-delay:.32s}.step:nth-of-type(5){animation-delay:.42s}.step:nth-of-type(6){animation-delay:.52s}.step:nth-of-type(7){animation-delay:.62s}.step span{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:#27355f;border:2px solid #7180ba;font-weight:900}.step.done span{background:linear-gradient(130deg,#21b99e,#4e8de5);border-color:#9af5e4;box-shadow:0 0 25px #36d7bd55}.step.active span{background:linear-gradient(130deg,#5368f5,#a45ce0);border-color:#d9c5ff;box-shadow:0 0 28px #8a70ff99}.step b{font-size:11px;color:#dfe5ff}.route-details{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:18px}.route-details article{padding:22px;border-radius:22px;background:#ffffff12;border:1px solid #ffffff20;animation:rise .7s .35s both}.route-details h3{font:24px Lalezar;margin:0 0 10px}.route-details p{font-size:12px;line-height:2;color:#dce3ff}.toast{position:fixed;bottom:20px;left:20px;z-index:100;background:#18264c;color:white;border-radius:13px;padding:13px 18px;opacity:0;transform:translateY(12px);transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:none}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}@keyframes routeIn{from{opacity:0;transform:scale(.985);filter:blur(9px)}to{opacity:1;transform:none;filter:none}}@keyframes stepIn{from{opacity:0;transform:translateY(14px) scale(.8)}to{opacity:1;transform:none}}
+@media(max-width:700px){body{padding:15px}.top{align-items:flex-start;flex-direction:column}.profile-info,.address-layout,.route-details{grid-template-columns:1fr}.timeline{grid-template-columns:repeat(3,1fr);row-gap:24px}.timeline-line{display:none}.route-head{align-items:flex-start;flex-direction:column}.route-page{padding:16px}.step b{font-size:10px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="assets/customer-portal.js"></script></head>
+<body data-page="orders"><main class="shell"><header class="top"><a class="brand" href="orders.html">ماهیگیر</a><nav class="links"><a href="account.html">حساب کاربری</a><a href="orders.html">پیگیری سفارش‌ها</a><a href="addresses.html">نشانی‌ها</a></nav></header><div id="portal"><span class="eyebrow">MAHIGIR ORDER CENTER</span><h1 class="section-title">سفارش‌های من</h1><div id="orderList" class="order-list"><div class="empty">در حال دریافت سفارش‌ها…</div></div></div></main><div class="route-page" id="routePage"><div class="route-inner"></div></div><div class="toast" id="toast" role="status"></div></body></html>
