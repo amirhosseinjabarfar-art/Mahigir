@@ -304,46 +304,40 @@ body>*:not(#particleField){position:relative;z-index:1}body>.backdrop,body>.admi
 <div id="studentPromo" aria-label="تخفیف روز دانش آموز"><button class="promo-close" onclick="dismissStudentPromo()" aria-label="بستن پیشنهاد">×</button><div class="promo-inner"><div class="promo-copy"><div class="promo-stamp">۱۰٪</div><div><div class="promo-tag">MAHIGIR SPECIAL OFFER ✦</div><h2>جشن روز دانش‌آموز در ماهیگیر!</h2><p>برای خرید کتاب‌ها، کد تخفیف ویژه را وارد کن.<span class="promo-discount">۱۰ درصد تخفیف</span></p></div></div><div class="promo-code"><div><small>کد تخفیف اختصاصی</small><strong>daneshcode</strong></div><button class="btn primary" onclick="copyText('daneshcode')">کپی کد</button></div></div></div>
 <header>
  <div class="wrap nav">
-  <a href="#home" class="brand"><span class="logo">م</span> ماهیگیر</a>
-  <nav class="navlinks"><a href="#home">خانه</a><a href="#bestsellers">پرفروش‌ها</a><a href="#books">کتابخانه</a><a href="#" onclick="openAddresses();return false">نشانی‌ها</a><a href="#" onclick="openContactPage();return false">ارتباط</a></nav>
+  <a href="index.html" class="brand"><span class="logo">م</span> ماهیگیر</a>
+  <nav class="navlinks"><a href="index.html">خانه</a><a href="books.html">کتابخانه</a><a href="orders.html">سفارش‌ها</a><a href="addresses.html">نشانی‌ها</a><a href="contact.html">ارتباط</a></nav>
   <div class="actions">
-   <button class="iconbtn" onclick="openCart()" aria-label="سبد خرید">🛒<span class="count" id="cartCount">۰</span></button>
-   <button class="btn primary" id="accountBtn" onclick="openAccount()">ورود / حساب من</button>
+   <a class="iconbtn" href="cart.html" aria-label="سبد خرید">🛒<span class="count" id="cartCount">۰</span></a>
+   <a class="btn primary" id="accountBtn" href="account.html">حساب من</a>
   </div>
  </div>
 </header>
-<main id="home">
+<main id="home" class="home-hub">
  <section class="hero"><div class="wrap hero-grid">
-  <div>
+  <div class="hero-copy">
    <span class="tag">✦ کتابخانه آنلاین ماهیگیر</span>
    <h1>هر کتاب،<br><span class="gradient">یک جهان تازه.</span></h1>
-   <p>از میان داستان‌ها و ماجراجویی‌ها انتخاب کن؛ خریدت را ساده انجام بده و مسیر رسیدن کتاب‌ها را از حساب کاربری دنبال کن.</p>
-   <div class="hero-buttons"><a href="#books" class="btn primary">ورود به کتابخانه <span>←</span></a><button class="btn white" onclick="openAccount()">پیگیری سفارش‌ها</button></div>
+   <p>به دنیای داستان‌ها خوش آمدی؛ هر بخش ماهیگیر صفحه مستقل خودش را دارد. کتابت را پیدا کن، سفارش را مدیریت کن و مسیر خرید را دنبال کن.</p>
+   <div class="hero-buttons"><a href="books.html" class="btn primary">ورود به کتابخانه ←</a><a href="orders.html" class="btn white">پیگیری سفارش‌ها</a></div>
   </div>
-  <div class="art"><div class="orb"></div><div class="fakebook">ماهیگیر<small>قصه‌های خوب، همراه تو</small></div><div class="bubble b1">📚 انتخاب کتاب دلخواه</div><div class="bubble b2">📦 مسیر سفارش تا خانه</div></div>
+  <div class="art"><div class="orb"></div><div class="fakebook">ماهیگیر<small>قصه‌های خوب، همراه تو</small></div><div class="bubble b1">📚 کتابخانه مستقل</div><div class="bubble b2">✨ تجربه‌ای تازه</div></div>
  </div></section>
- <section id="bestsellers" class="section-bestsellers"><div class="wrap">
-  <div class="heading"><div><span class="bestseller-tag">🔥 انتخاب‌های محبوب</span><h2>پرفروش‌های ماهیگیر</h2><p>کتاب‌هایی که بیشتر از همه دوست داشته شده‌اند.</p></div><a class="btn soft" href="#books">همه کتاب‌ها ←</a></div>
-  <div class="grid" id="bestsellerGrid"></div>
- </div></section>
- <section id="comingSoon"><div class="wrap">
-  <div class="heading"><div><span class="bestseller-tag">✨ به‌زودی</span><h2>در راه کتابخانه</h2><p>انتشارهای تازه را از این قسمت دنبال کن.</p></div></div>
-  <div class="grid" id="comingSoonGrid"></div>
- </div></section>
- <section id="books"><div class="wrap">
-  <div class="heading"><div><span class="bestseller-tag">کتابخانه کامل</span><h2>کتاب بعدی‌ات را پیدا کن</h2><p>جست‌وجو کن، دسته‌بندی را انتخاب کن و وارد جزئیات هر کتاب شو.</p></div></div>
-  <input class="search" id="search" placeholder="⌕ جست‌وجو در عنوان کتاب‌ها..." oninput="renderBooks()">
-  <div class="categories">
-   <button class="cat active" onclick="setCategory('همه',this)">همه کتاب‌ها</button><button class="cat" onclick="setCategory('داستانی',this)">داستانی</button><button class="cat" onclick="setCategory('ماجراجویی',this)">ماجراجویی</button><button class="cat" onclick="setCategory('متفرقه',this)">سایر کتاب‌ها</button>
+ <section class="hub-section"><div class="wrap"><div class="heading"><div><span class="bestseller-tag">✦ دسترسی سریع</span><h2>همه‌چیز در صفحه خودش</h2><p>برای ورود به هر بخش، کارت مربوط به آن را انتخاب کن.</p></div></div>
+  <div class="hub-grid">
+   <a class="hub-card hub-books" href="books.html"><span class="hub-icon">📚</span><span class="hub-kicker">DISCOVER</span><h3>کتابخانه</h3><p>جست‌وجو، دسته‌بندی و مشاهده کتاب‌ها؛ بدون عنوان تکراری.</p><b>مشاهده کتاب‌ها ←</b></a>
+   <a class="hub-card hub-cart" href="cart.html"><span class="hub-icon">🛒</span><span class="hub-kicker">YOUR SELECTION</span><h3>سبد خرید</h3><p>تعداد کتاب‌ها و مبلغ سفارش را در یک صفحه جدا ببین.</p><b>رفتن به سبد خرید ←</b></a>
+   <a class="hub-card hub-account" href="account.html"><span class="hub-icon">👤</span><span class="hub-kicker">MY ACCOUNT</span><h3>حساب کاربری</h3><p>ورود، اطلاعات حساب و دسترسی به بخش‌های شخصی.</p><b>ورود به حساب ←</b></a>
+   <a class="hub-card hub-orders" href="orders.html"><span class="hub-icon">📦</span><span class="hub-kicker">TRACKING</span><h3>پیگیری سفارش</h3><p>مشاهده وضعیت و مراحل سفارش‌های ثبت‌شده.</p><b>پیگیری سفارش ←</b></a>
+   <a class="hub-card hub-address" href="addresses.html"><span class="hub-icon">📍</span><span class="hub-kicker">DELIVERY</span><h3>نشانی‌ها</h3><p>مدیریت نشانی‌های تحویل و اطلاعات گیرنده.</p><b>مدیریت نشانی ←</b></a>
+   <a class="hub-card hub-contact" href="contact.html"><span class="hub-icon">✉️</span><span class="hub-kicker">SUPPORT</span><h3>ارتباط با ماهیگیر</h3><p>راه‌های ارتباط و ارسال پیام به فروشگاه.</p><b>ارتباط با ما ←</b></a>
   </div>
-  <div class="grid" id="bookGrid"></div>
-  <div class="shipping"><div class="shipping-left"><div class="tipax-logo">TIPAX</div><div><h2>ارسال مطمئن با تیپاکس</h2><p>هزینه ارسال هنگام ثبت سفارش به مبلغ نهایی اضافه می‌شود.</p></div></div><div class="cost">۳۰۰٬۰۰۰ تومان<small>هزینه ارسال هر سفارش</small></div></div>
  </div></section>
+ <div hidden><input id="search"><div id="bestsellerGrid"></div><div id="comingSoonGrid"></div><div id="bookGrid"></div></div>
 </main>
 
 <footer><div class="wrap footer-row">
  <div><div class="brand" style="color:white"><span class="logo">م</span> ماهیگیر</div><p>قصه‌های خوب، همراه لحظه‌های تو.</p></div>
- <div><strong>سفارش‌های من</strong><p>از حساب کاربری، وضعیت سفارش و کد رهگیری را مشاهده کن.</p></div>
+ <div><strong>صفحه‌های مستقل ماهیگیر</strong><p>کتابخانه، سبد خرید و حساب کاربری هرکدام در صفحه جداگانه.</p></div>
  <div style="display:flex;gap:9px;flex-wrap:wrap"><button class="btn soft" onclick="openContactPage()">تماس با ما</button><button class="btn white" onclick="openAccount()">حساب کاربری</button></div>
 </div></footer>
 
@@ -1162,6 +1156,20 @@ window.addEventListener("popstate",()=>{const id=new URLSearchParams(location.se
 (function(){const c=document.createElement("canvas");c.id="particleField";c.setAttribute("aria-hidden","true");document.body.prepend(c);const x=c.getContext("2d");if(!x)return;let w=0,h=0,d=1,pts=[],mouse={x:-1000,y:-1000},reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;function size(){d=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*d;c.height=h*d;c.style.width=w+"px";c.style.height=h+"px";x.setTransform(d,0,0,d,0,0);let n=Math.min(100,Math.max(34,Math.round(w*h/14500)));pts=Array.from({length:n},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3}))}function draw(){x.clearRect(0,0,w,h);for(let i=0;i<pts.length;i++){let p=pts[i],dx=p.x-mouse.x,dy=p.y-mouse.y,dist=Math.hypot(dx,dy);if(!reduce&&dist<130&&dist>0){let f=(130-dist)/130;p.vx+=dx/dist*f*.65;p.vy+=dy/dist*f*.65}p.vx*=.985;p.vy*=.985;let sp=Math.hypot(p.vx,p.vy);if(sp>.7){p.vx=p.vx/sp*.7;p.vy=p.vy/sp*.7}if(!reduce){p.x+=p.vx;p.y+=p.vy}if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;p.x=Math.max(0,Math.min(w,p.x));p.y=Math.max(0,Math.min(h,p.y));for(let j=i+1;j<pts.length;j++){let q=pts[j],dd=Math.hypot(p.x-q.x,p.y-q.y);if(dd<115){x.strokeStyle="rgba(30,135,70,"+(1-dd/115)*.19+")";x.lineWidth=.8;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}if(dist<150){x.strokeStyle="rgba(27,142,75,"+(1-dist/150)*.35+")";x.lineWidth=1;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(mouse.x,mouse.y);x.stroke()}x.fillStyle="rgba(37,145,77,.35)";x.beginPath();x.arc(p.x,p.y,1.7,0,Math.PI*2);x.fill()}if(!reduce)requestAnimationFrame(draw)}addEventListener("resize",size,{passive:true});addEventListener("pointermove",e=>{mouse.x=e.clientX;mouse.y=e.clientY},{passive:true});addEventListener("pointerleave",()=>{mouse.x=-1000;mouse.y=-1000});size();draw()})();
 function dismissStudentPromo(){document.getElementById("studentPromo")?.remove()}
 (function(){const el=document.getElementById("studentPromo");if(el&&Date.now()>new Date("2026-11-04T23:59:59+03:30").getTime())el.remove()})();
+</script>
+<script>
+(function(){
+ const params=new URLSearchParams(location.search),target=params.get("open");
+ if(!target)return;
+ const run=()=>{try{
+  if(target==="account"&&typeof openAccount==="function")openAccount();
+  if(target==="cart"&&typeof openCart==="function")openCart();
+  if(target==="checkout"&&typeof openCheckoutPage==="function")openCheckoutPage();
+  if(target==="addresses"&&typeof openAddresses==="function")openAddresses();
+  if(target==="contact"&&typeof openContactPage==="function")openContactPage();
+ }catch(e){console.warn("Page shortcut:",e)}};
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(run,250),{once:true});else setTimeout(run,250);
+})();
 </script>
 </body>
 </html>
