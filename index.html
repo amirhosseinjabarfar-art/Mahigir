@@ -1002,6 +1002,7 @@ function closeContactPage(){
 
 async function initialize(){
  renderBooks();renderBestsellers();updateCount();
+ document.getElementById("search")?.addEventListener("input",renderBooks);
  if(!db){notify("کتاب‌ها به‌صورت محلی نمایش داده می‌شوند؛ اتصال Supabase در دسترس نیست.");return}
  try{
   const {data:{session},error:sessionError}=await db.auth.getSession();if(sessionError)throw sessionError;
