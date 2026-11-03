@@ -1029,10 +1029,7 @@ function GenUIUnavailableReceiptCopy(orderId){try{const area=document.createElem
 selectedCheckoutAddress=0;let selectedPaymentMethod="card",checkoutSubmitting=false;
 function openCheckoutPage(){
  if(!currentUser){openAccount();notify("برای خرید ابتدا وارد حساب کاربری شو.");return}
- const page=document.getElementById("checkoutPage");page.classList.add("open");page.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
- const saved=readAddresses();const stored=Number(localStorage.getItem("mh_checkout_address_"+currentUser.id)||0);
- if(!saved[selectedCheckoutAddress])selectedCheckoutAddress=Math.max(0,Math.min(Math.max(0,saved.length-1),stored));
- renderCheckoutPage();
+ location.href="checkout.html";
 }
 function closeCheckoutPage(){
  const page=document.getElementById("checkoutPage");if(!page)return;
