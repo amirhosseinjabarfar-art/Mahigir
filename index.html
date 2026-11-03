@@ -921,10 +921,7 @@ function renderTrackingOrder(o){
 async function refreshTrackingOrder(orderId){try{await loadOrders();const o=orders.find(x=>String(x.id)===String(orderId));if(!o){notify("سفارش پیدا نشد.");return}renderTrackingOrder(o);notify("وضعیت سفارش تازه شد.");}catch(err){console.error(err);notify("بروزرسانی انجام نشد: "+String(err.message||"").slice(0,100))}}
 
 
-function openContactPage(){
- const page=document.getElementById("contactPage");if(!page)return;
- page.classList.add("open");page.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
-}
+function openContactPage(){window.location.href="contact.html"}
 function closeContactPage(){
  const page=document.getElementById("contactPage");if(!page)return;
  page.classList.remove("open");page.setAttribute("aria-hidden","true");
@@ -1149,6 +1146,7 @@ function dismissStudentPromo(){document.getElementById("studentPromo")?.remove()
  if(!target)return;
  const run=()=>{try{
   if(target==="account"&&typeof openAccount==="function")openAccount();
+  if(target==="orders"&&typeof openAccount==="function")openAccount();
   if(target==="cart"&&typeof openCart==="function")openCart();
   if(target==="checkout"&&typeof openCheckoutPage==="function")openCheckoutPage();
   if(target==="addresses"&&typeof openAddresses==="function")openAddresses();
