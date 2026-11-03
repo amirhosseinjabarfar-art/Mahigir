@@ -157,12 +157,22 @@ Deno.serve(async (req: Request) => {
       return json({ stages: stages.length ? stages : defaults });
     }
     if (action === "admin-save-order") {
+      const stageId = Number(body.stage_id);
       const { data: stage, error: stageError } = await service.from("mahigir_order_stages")
-        .select("stage_name").eq("id", Number(body.stage_id)).maybeSingle();
+        .select("stage_name").eq("id", stageId).maybeSingle();
       if (stageError) return json({ error: stageError.message }, 400);
-      if (!stage) return json({ error: "مرحلهٔ انتخاب‌شده پیدا نشد." }, 400);
+      const fallbackStages: Record<number, string> = {
+        1: "ثبت سفارش",
+        2: "تأیید سفارش",
+        3: "آماده‌سازی",
+        4: "تحویل به تیپاکس",
+        5: "ارسال شده",
+        6: "تحویل به مشتری",
+      };
+      const stageName = stage?.stage_name || fallbackStages[stageId];
+      if (!stageName) return json({ error: "مرحلهٔ انتخاب‌شده معتبر نیست." }, 400);
       const { error } = await service.from("mahigir_orders")
-        .update({ status: stage.stage_name, tracking_code: String(body.tracking_code || "") }).eq("id", body.id);
+        .update({ status: stageName, tracking_code: String(body.tracking_code || "").trim() }).eq("id", body.id);
       if (error) return json({ error: error.message }, 400);
       return json({ ok: true });
     }
