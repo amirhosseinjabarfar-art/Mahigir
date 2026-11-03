@@ -8,19 +8,6 @@
 <title>ماهیگیر | کتابخانه آنلاین</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Lalezar&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-function renderOtpPreview(){
- const host=document.getElementById("accountContent");
- document.getElementById("accountTitle").textContent="ورود با کد یک‌بارمصرف";
- host.innerHTML=`<section class="otp-shell"><div class="otp-brand-mark">م</div><div class="otp-eyebrow">MAHIGIR · SECURE SIGN IN</div><h2>ورود ساده، سریع و امن ✨</h2><p class="otp-description">شماره موبایلت را وارد کن تا در نسخه نهایی، کد ورود برایت پیامک شود.</p><label class="field"><span>شماره موبایل</span><div class="otp-phone-field"><span>☎</span><input id="otpPhonePreview" inputmode="tel" autocomplete="tel" placeholder="0912 345 6789" maxlength="15" dir="ltr"></div></label><button class="otp-primary" type="button" onclick="showOtpCodePreview()">ادامه و مشاهده مرحله تأیید ←</button><div class="otp-preview-warning">پیش‌نمایش طراحی: هنوز سرویس ارسال پیامک متصل نشده و هیچ پیامکی ارسال نمی‌شود. ورود فعلی با رمز عبور فعال است.</div><button class="otp-back" type="button" onclick="renderAuth('login')">← بازگشت به ورود قبلی</button></section>`;
-}
-function showOtpCodePreview(){
- const input=document.getElementById("otpPhonePreview"),phone=String(input?.value||"").replace(/[^0-9+]/g,"");
- if(!/^\+?[0-9]{10,14}$/.test(phone)){notify("شماره موبایل را درست وارد کن.");return}
- const host=document.getElementById("accountContent");
- host.innerHTML=`<section class="otp-shell"><div class="otp-brand-mark">✓</div><div class="otp-eyebrow">VERIFY YOUR NUMBER</div><h2>کد تأیید را وارد کن</h2><p class="otp-description">در نسخه نهایی، کد ۶ رقمی به این شماره ارسال می‌شود.</p><div class="otp-destination">${phone}</div><div class="otp-digits" dir="ltr">${Array.from({length:6},(_,i)=>'<input aria-label="رقم '+(i+1)+' کد" inputmode="numeric" maxlength="1" autocomplete="one-time-code" oninput="otpPreviewNext(this)" onkeydown="otpPreviewBack(event,this)">').join("")}</div><button class="otp-primary" type="button" disabled style="opacity:.5;cursor:not-allowed">تأیید و ورود (پس از اتصال پیامک)</button><div class="otp-preview-warning">این صفحه فعلاً فقط پیش‌نمایش ظاهر تأیید است؛ کد واقعی ارسال یا بررسی نمی‌شود.</div><button class="otp-resend" type="button" disabled>ارسال مجدد کد · پس از اتصال سرویس فعال می‌شود</button><br><button class="otp-back" type="button" onclick="renderOtpPreview()">← ویرایش شماره موبایل</button></section>`;
-}
-function otpPreviewNext(el){el.value=el.value.replace(/\D/g,"").slice(0,1);if(el.value&&el.nextElementSibling)el.nextElementSibling.focus()}
-function otpPreviewBack(e,el){if(e.key==="Backspace"&&!el.value&&el.previousElementSibling)el.previousElementSibling.focus()}
 
 </script>
 <style>
@@ -599,9 +586,7 @@ function renderAuth(mode){
  <div class="field"><label>رمز عبور</label><input name="password" type="password" required minlength="8" autocomplete="${mode==="login"?"current-password":"new-password"}" placeholder="حداقل ۸ کاراکتر"></div>
  <button type="submit" class="btn primary" style="width:100%">${mode==="login"?"ورود":"ساخت حساب کاربری"}</button></form>
  <p class="muted" style="text-align:center">${mode==="login"?"حساب نداری؟":"قبلاً حساب ساخته‌ای؟"} <a style="color:var(--blue);font-weight:800;cursor:pointer" onclick="renderAuth('${mode==="login"?"signup":"login"}')">${mode==="login"?"ثبت‌نام":"ورود"}</a></p>
- <div class="noticebar">نام کاربری با حروف انگلیسی، عدد، نقطه، خط تیره یا زیرخط؛ رمز حداقل ۸ کاراکتر.</div>
- <button type="button" class="otp-entry-button" onclick="renderOtpPreview()">ورود با کد یک‌بارمصرف پیامکی <span>↗</span></button>
- <p class="otp-entry-note">ورود فعلی با نام کاربری و رمز عبور همچنان فعال است.</p>`;
+ <div class="noticebar">نام کاربری با حروف انگلیسی، عدد، نقطه، خط تیره یا زیرخط؛ رمز حداقل ۸ کاراکتر.</div>`;
 }
 async function submitAuth(e,mode){
  e.preventDefault();if(authBusy)return;
