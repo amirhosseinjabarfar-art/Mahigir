@@ -291,12 +291,6 @@ footer{margin-top:45px;background:linear-gradient(125deg,#131f42,#263b78 65%,#59
 <section class="checkout-panel"><h2>📦 روش ارسال</h2><p>روش ارسال فروشگاه تیپاکس است؛ هزینه ارسال در جمع نهایی محاسبه می‌شود.</p><div class="pay-choice selected"><div class="choice-title"><span class="choice-icon">📦</span><span>ارسال با تیپاکس</span><span class="choice-check">✓</span></div><div class="choice-detail">هزینه ارسال: ۳۰۰٬۰۰۰ تومان · کد پستی و نشانی انتخاب‌شده همراه سفارش ثبت می‌شود.</div></div></section>
 <section class="checkout-panel"><h2>💳 روش پرداخت</h2><p>روش پرداخت فروشگاه فقط کارت‌به‌کارت است.</p><div class="checkout-tip" style="text-align:center;padding:24px"><strong style="display:block;font-size:16px;margin-bottom:12px">شماره کارت مقصد</strong><div dir="ltr" style="font-size:clamp(23px,5vw,34px);font-weight:1000;letter-spacing:1.5px;color:#fff;margin:12px 0;overflow-wrap:anywhere">5047 0616 6322 7839</div><strong style="display:block;font-size:17px">به نام جبارفر</strong><button type="button" class="checkout-continue" style="width:100%;margin-top:16px" onclick="copyText(&quot;5047061663227839&quot;)">کپی شماره کارت ⧉</button></div><div class="checkout-tip" style="margin-top:14px"><strong style="font-size:16px">آیدی فروشگاه در روبیکا</strong><div dir="ltr" style="font-size:24px;font-weight:1000;text-align:center;margin:12px 0">@amirtbpedit</div><button type="button" class="checkout-back" style="width:100%" onclick="copyText(&quot;@amirtbpedit&quot;)">کپی آیدی ⧉</button><p class="payment-warning" style="margin-top:12px">حتماً پس از کارت‌به‌کارت، تصویر رسید پرداخت را برای آیدی بالا ارسال کن. ثبت سفارش به معنی تأیید پرداخت نیست؛ سفارش پس از بررسی مدیر تأیید می‌شود.</p></div></section>
 <section class="checkout-panel"><h2>🧾 خلاصه خرید</h2><div id="checkoutSummary"></div><div class="checkout-actions"><button class="checkout-back" onclick="openCart()">بازگشت به سبد خرید</button><button class="checkout-continue" onclick="submitCheckoutOrder()">تأیید و ثبت سفارش ✨</button></div></section></main></section>
-<section class="tracking-page" id="trackingPage" aria-hidden="true">
- <div class="tracking-glow tg-one"></div><div class="tracking-glow tg-two"></div><div class="tracking-grid-bg"></div>
- <header class="tracking-top"><a class="tracking-brand" href="#home" onclick="closeTracking()"><span class="tracking-brand-mark">م</span><span>ماهیگیر<small>مرکز رهگیری سفارش</small></span></a><button class="tracking-back" onclick="closeTracking()">بازگشت به حساب <span>←</span></button></header>
- <main class="tracking-shell" id="trackingContent"><div class="tracking-loading"><span class="tracking-loader"></span><h2>در حال آماده‌سازی مسیر سفارش...</h2></div></main>
- <footer class="tracking-footer"><span>✦ هر سفارش، یک مسیر تا رسیدن به خانه</span><span>MAHIGIR ORDER EXPERIENCE</span></footer>
-</section>
 <div class="backdrop" id="checkoutModal" onclick="backdrop(event,'checkoutModal')"><div class="modal">
  <div class="modalhead"><h2>ثبت سفارش</h2><button class="close" onclick="closeModal('checkoutModal')">×</button></div><div id="checkoutContent"></div>
 </div></div>
@@ -313,10 +307,11 @@ const PUBLIC_KEY="sb_publishable_gd2B7ZWcbE1x6yo-JedAeQ_LTcK7dVk";
 const SHIPPING=300000;
 const STAGES=[
  {id:1,title:"ثبت سفارش",position:1},
- {id:2,title:"در حال انجام",position:2},
- {id:3,title:"ارسال به واحد پستی",position:3},
- {id:4,title:"ارسال شده",position:4},
- {id:5,title:"تحویل داده شده",position:5}
+ {id:2,title:"تأیید سفارش",position:2},
+ {id:3,title:"آماده‌سازی",position:3},
+ {id:4,title:"تحویل به تیپاکس",position:4},
+ {id:5,title:"ارسال شده",position:5},
+ {id:6,title:"تحویل به مشتری",position:6}
 ];
 function stagePosition(stage){const list=Array.isArray(stages)&&stages.length?stages:STAGES;const n=Number(stage?.position||stage?.stage_order||stage?.id||1);return Math.max(1,Math.min(list.length,n))}
 function stageLabel(stage){return String(stage?.title||stage?.stage_name||stage?.label||"ثبت سفارش")}
@@ -828,7 +823,7 @@ async function renameStage(id){
 }
 
 function openTracking(id){const order=orders.find(x=>String(x.id)===String(id));if(!order)return;openAccount();notify("مسیر سفارش در همین صفحه حساب کاربری نمایش داده می‌شود.");}
-function closeTracking(){stopCustomerTrackingSync();const page=document.getElementById("trackingPage");page.classList.remove("open");page.setAttribute("aria-hidden","true");document.body.style.overflow=""}
+function closeTracking(){stopCustomerTrackingSync()}
 
 let customerTrackingTimer=null;
 function stopCustomerTrackingSync(){if(customerTrackingTimer){clearInterval(customerTrackingTimer);customerTrackingTimer=null}}
