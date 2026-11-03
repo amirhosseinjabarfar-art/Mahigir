@@ -380,7 +380,7 @@ body{background:radial-gradient(ellipse at 0% 0%,#e0f2e5 0,transparent 32%),radi
    </div>
    <div class="grid" id="bookGrid"></div>
    <div class="coming-section"><div class="coming-title"><span>✨</span><div><h3>به‌زودی در ماهیگیر</h3><p>عنوان‌هایی که به‌زودی به مجموعه اضافه می‌شوند.</p></div></div><div class="grid" id="comingSoonGrid"></div></div>
-   <div hidden id="bestsellerGrid"></div>
+   
   </div>
  </section>
  <section class="hub-section"><div class="wrap"><div class="heading"><div><span class="bestseller-tag">✦ خدمات ماهیگیر</span><h2>دسترسی به بخش‌های حساب</h2><p>برای مدیریت خرید و اطلاعاتت، بخش موردنظر را باز کن.</p></div></div>
@@ -546,8 +546,9 @@ function updateCount(){
 function getBook(id){return books.find(b=>String(b.id)===String(id))}
 function subtotal(){return cart.reduce((n,i)=>n+(Number(getBook(i.id)?.price)||0)*i.qty,0)}
 function setCategory(c,el){
- category=c;document.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));
- el.classList.add("active");renderBooks();
+ category=c;
+ document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x===el));
+ renderBooks();
 }
 function productQty(id){return cart.find(x=>x.id===String(id))?.qty||0}
 function bookCard(b,i=0,options={}){
@@ -565,15 +566,40 @@ function bookCard(b,i=0,options={}){
   </div>
  </article>`;
 }
+function normalizeBookTitle(value){
+ return String(value||"").normalize("NFKC").replace(/[يى]/g,"ی").replace(/ك/g,"ک")
+  .replace(/[\u064B-\u065F\u0670\u200c\u200f\u200e]/g,"")
+  .replace(/[^\p{L}\p{N}]+/gu,"").toLowerCase();
+}
+function uniqueBooks(items){
+ const ids=new Set(),titles=new Set(),out=[];
+ for(const book of items){
+  if(!book||!book.id||!String(book.title||"").trim())continue;
+  const id=String(book.id),title=normalizeBookTitle(book.title);
+  if(ids.has(id)||titles.has(title))continue;
+  ids.add(id);titles.add(title);out.push(book);
+ }
+ return out;
+}
 function renderBestsellers(){
- const list=BESTSELLER_IDS.map(id=>getBook(id)).filter(Boolean);
- document.getElementById("bestsellerGrid").innerHTML=list.map((b,i)=>bookCard(b,i)).join("");
- document.getElementById("comingSoonGrid").innerHTML=COMING_BOOKS.map((b,i)=>bookCard(b,i,{soon:true})).join("");
+ const grid=document.getElementById("bestsellerGrid");
+ if(grid)grid.replaceChildren();
+ const seen=new Set(books.map(b=>normalizeBookTitle(b.title)));
+ const upcoming=uniqueBooks(COMING_BOOKS).filter(b=>!seen.has(normalizeBookTitle(b.title)));
+ const target=document.getElementById("comingSoonGrid");
+ if(target)target.innerHTML=upcoming.map((b,i)=>bookCard(b,i,{soon:true})).join("");
+}
+function normalizeSearchText(value){
+ return String(value||"").normalize("NFKC").replace(/[يى]/g,"ی").replace(/ك/g,"ک")
+  .replace(/[\u064B-\u065F\u0670\u200c\u200f\u200e]/g,"").toLowerCase().trim();
 }
 function renderBooks(){
- const q=(document.getElementById("search")?.value||"").trim().toLowerCase();
- const list=books.filter(b=>(category==="همه"||b.category===category)&&b.title.toLowerCase().includes(q));
- document.getElementById("bookGrid").innerHTML=list.length?list.map((b,i)=>bookCard(b,i)).join(""):'<div class="empty" style="grid-column:1/-1">کتابی پیدا نشد.</div>';
+ const q=normalizeSearchText(document.getElementById("search")?.value||"");
+ const list=uniqueBooks(books).filter(b=>(category==="همه"||b.category===category)&&normalizeSearchText(b.title).includes(q));
+ const target=document.getElementById("bookGrid");
+ if(target)target.innerHTML=list.length?list.map((b,i)=>bookCard(b,i)).join(""):'<div class="empty" style="grid-column:1/-1">کتابی پیدا نشد.</div>';
+ const count=document.querySelector(".catalog-count");
+ if(count)count.textContent=list.length.toLocaleString("fa-IR")+" کتاب";
 }
 function safeColor(c){return typeof c==="string"&&c.startsWith("linear-gradient(")&&c.length<200?c:PALETTES[0]}
 function quickQty(id,d){if(d>0)addCart(id);else if(productQty(id)>0)changeQty(id,-1);else notify("این کتاب هنوز در سبد خرید نیست.")}
@@ -1016,10 +1042,11 @@ async function initialize(){
   const {data:remoteBooks,error:booksError}=await db.from("mahigir_books").select("*").eq("is_active",true).order("sort_order");
   if(booksError)console.warn("Remote books unavailable; using built-in books:",booksError);
   if(remoteBooks?.length){
-   const mapped=remoteBooks.map((b,i)=>({...b,color:PALETTES[i%PALETTES.length],category:b.category||"متفرقه"}));
-   /* کتاب‌های پیش‌فرضی که در دیتابیس نیستند، حذف نمی‌شوند. */
-   const ids=new Set(mapped.map(b=>String(b.id)));
-   books=[...mapped,...INITIAL_BOOKS.filter(b=>!ids.has(String(b.id)))];
+   const mapped=uniqueBooks(remoteBooks.map((b,i)=>({...b,color:PALETTES[i%PALETTES.length],category:b.category||"متفرقه"})));
+   /* رکوردهای پیش‌فرض فقط وقتی اضافه می‌شوند که عنوان مشابهی از دیتابیس وجود نداشته باشد. */
+   const knownIds=new Set(mapped.map(b=>String(b.id)));
+   const knownTitles=new Set(mapped.map(b=>normalizeBookTitle(b.title)));
+   books=uniqueBooks([...mapped,...INITIAL_BOOKS.filter(b=>!knownIds.has(String(b.id))&&!knownTitles.has(normalizeBookTitle(b.title)))]);
   }
   renderBooks();renderBestsellers();
  }catch(e){console.warn("Store initialization incomplete:",e)}
