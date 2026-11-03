@@ -660,7 +660,7 @@ function renderCart(){
  updateCount();
  const valid=cart.filter(i=>getBook(i.id)&&!getBook(i.id).comingSoon);
  if(!valid.length){
-  el.innerHTML='<div class="empty">🛒<br>سبد خرید خالی است.<br><br><button class="btn primary" onclick="closeModal(\'cartModal\');document.getElementById(\'books\').scrollIntoView()">انتخاب کتاب</button></div>';
+  el.innerHTML='<div class="empty">🛒<br>سبد خرید خالی است.<br><br><button class="btn primary" onclick="closeModal(\'cartModal\');document.getElementById(\'catalog\')?.scrollIntoView({behavior:\'smooth\',block:\'start\'})">انتخاب کتاب</button></div>';
   return;
  }
  el.innerHTML=valid.map(i=>{const b=getBook(i.id);return `<div class="cartitem">
