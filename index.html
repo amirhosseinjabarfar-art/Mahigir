@@ -339,13 +339,14 @@ body{background:radial-gradient(ellipse at 0% 0%,#e0f2e5 0,transparent 32%),radi
 .od-code strong{display:block!important;font-size:clamp(23px,4vw,36px)!important;line-height:1.5!important;color:#145c36!important;letter-spacing:1.5px!important;overflow-wrap:anywhere!important;max-width:100%!important}
 </style>
 <link rel="stylesheet" href="assets/mahigir.css">
+<link rel="stylesheet" href="assets/mahigir-header.css">
 </head>
 <body>
 <div id="studentPromo" aria-label="تخفیف روز دانش آموز"><button class="promo-close" onclick="dismissStudentPromo()" aria-label="بستن پیشنهاد">×</button><div class="promo-inner"><div class="promo-copy"><div class="promo-stamp">۱۰٪</div><div><div class="promo-tag">MAHIGIR SPECIAL OFFER ✦</div><h2>جشن روز دانش‌آموز در ماهیگیر!</h2><p>برای خرید کتاب‌ها، کد تخفیف ویژه را وارد کن.<span class="promo-discount">۱۰ درصد تخفیف</span></p></div></div><div class="promo-code"><div><small>کد تخفیف اختصاصی</small><strong>daneshcode</strong></div><button class="btn primary" onclick="copyText('daneshcode')">کپی کد</button></div></div></div>
 <header>
  <div class="wrap nav">
   <a href="index.html" class="brand"><span class="logo">م</span> ماهیگیر</a>
-  <nav class="navlinks"><a href="index.html">خانه</a><a href="books.html">کتابخانه</a><a href="orders.html">سفارش‌ها</a><a href="addresses.html">نشانی‌ها</a><a href="contact.html">ارتباط</a></nav>
+  <nav class="navlinks"><a href="index.html">خانه</a><a href="index.html#catalog">کتاب‌ها</a><a href="orders.html">سفارش‌ها</a><a href="addresses.html">نشانی‌ها</a><a href="contact.html">ارتباط</a></nav>
   <div class="actions">
    <a class="iconbtn" href="cart.html" aria-label="سبد خرید">🛒<span class="count" id="cartCount">۰</span></a>
    <a class="btn primary" id="accountBtn" href="account.html">حساب من</a>
@@ -357,27 +358,46 @@ body{background:radial-gradient(ellipse at 0% 0%,#e0f2e5 0,transparent 32%),radi
   <div class="hero-copy">
    <span class="tag">✦ کتابخانه آنلاین ماهیگیر</span>
    <h1>هر کتاب،<br><span class="gradient">یک جهان تازه.</span></h1>
-   <p>به دنیای داستان‌ها خوش آمدی؛ هر بخش ماهیگیر صفحه مستقل خودش را دارد. کتابت را پیدا کن، سفارش را مدیریت کن و مسیر خرید را دنبال کن.</p>
-   <div class="hero-buttons"><a href="books.html" class="btn primary">ورود به کتابخانه ←</a><a href="orders.html" class="btn white">پیگیری سفارش‌ها</a></div>
+   <p>به دنیای کتاب‌های ماهیگیر خوش آمدی؛ عنوان دلخواهت را انتخاب کن، به سبد خرید اضافه کن و سفارشت را پیگیری کن.</p>
+   <div class="hero-buttons"><a href="#catalog" class="btn primary">دیدن کتاب‌ها ←</a><a href="orders.html" class="btn white">پیگیری سفارش‌ها</a></div>
   </div>
-  <div class="art"><div class="orb"></div><div class="fakebook">ماهیگیر<small>قصه‌های خوب، همراه تو</small></div><div class="bubble b1">📚 کتابخانه مستقل</div><div class="bubble b2">✨ تجربه‌ای تازه</div></div>
+  <div class="art"><div class="orb"></div><div class="fakebook">ماهیگیر<small>قصه‌های خوب، همراه تو</small></div><div class="bubble b1">📚 مجموعه کتاب‌ها</div><div class="bubble b2">✨ تجربه‌ای تازه</div></div>
  </div></section>
- <section class="hub-section"><div class="wrap"><div class="heading"><div><span class="bestseller-tag">✦ دسترسی سریع</span><h2>همه‌چیز در صفحه خودش</h2><p>برای ورود به هر بخش، کارت مربوط به آن را انتخاب کن.</p></div></div>
+ <section class="catalog-section" id="catalog">
+  <div class="wrap">
+   <div class="catalog-head">
+    <div><span class="bestseller-tag">✦ مجموعه کتاب‌های ماهیگیر</span><h2>کتاب موردعلاقه‌ات را پیدا کن</h2><p>همه عنوان‌ها، قیمت‌ها و دسته‌بندی‌ها همین‌جا در دسترس‌اند.</p></div>
+    <div class="catalog-count">۷ عنوان برای انتخاب</div>
+   </div>
+   <div class="catalog-tools">
+    <input id="search" class="search" type="search" placeholder="نام کتاب را جست‌وجو کن..." aria-label="جست‌وجوی کتاب">
+    <div class="categories" aria-label="دسته‌بندی کتاب‌ها">
+     <button class="cat active" onclick="setCategory('همه',this)">همه کتاب‌ها</button>
+     <button class="cat" onclick="setCategory('داستانی',this)">داستانی</button>
+     <button class="cat" onclick="setCategory('ماجراجویی',this)">ماجراجویی</button>
+     <button class="cat" onclick="setCategory('متفرقه',this)">متفرقه</button>
+    </div>
+   </div>
+   <div class="grid" id="bookGrid"></div>
+   <div class="coming-section"><div class="coming-title"><span>✨</span><div><h3>به‌زودی در ماهیگیر</h3><p>عنوان‌هایی که به‌زودی به مجموعه اضافه می‌شوند.</p></div></div><div class="grid" id="comingSoonGrid"></div></div>
+   <div hidden id="bestsellerGrid"></div>
+  </div>
+ </section>
+ <section class="hub-section"><div class="wrap"><div class="heading"><div><span class="bestseller-tag">✦ خدمات ماهیگیر</span><h2>دسترسی به بخش‌های حساب</h2><p>برای مدیریت خرید و اطلاعاتت، بخش موردنظر را باز کن.</p></div></div>
   <div class="hub-grid">
-   <a class="hub-card hub-books" href="books.html"><span class="hub-icon">📚</span><span class="hub-kicker">DISCOVER</span><h3>کتابخانه</h3><p>جست‌وجو، دسته‌بندی و مشاهده کتاب‌ها؛ بدون عنوان تکراری.</p><b>مشاهده کتاب‌ها ←</b></a>
-   <a class="hub-card hub-cart" href="cart.html"><span class="hub-icon">🛒</span><span class="hub-kicker">YOUR SELECTION</span><h3>سبد خرید</h3><p>تعداد کتاب‌ها و مبلغ سفارش را در یک صفحه جدا ببین.</p><b>رفتن به سبد خرید ←</b></a>
-   <a class="hub-card hub-account" href="account.html"><span class="hub-icon">👤</span><span class="hub-kicker">MY ACCOUNT</span><h3>حساب کاربری</h3><p>ورود، اطلاعات حساب و دسترسی به بخش‌های شخصی.</p><b>ورود به حساب ←</b></a>
-   <a class="hub-card hub-orders" href="orders.html"><span class="hub-icon">📦</span><span class="hub-kicker">TRACKING</span><h3>پیگیری سفارش</h3><p>مشاهده وضعیت و مراحل سفارش‌های ثبت‌شده.</p><b>پیگیری سفارش ←</b></a>
-   <a class="hub-card hub-address" href="addresses.html"><span class="hub-icon">📍</span><span class="hub-kicker">DELIVERY</span><h3>نشانی‌ها</h3><p>مدیریت نشانی‌های تحویل و اطلاعات گیرنده.</p><b>مدیریت نشانی ←</b></a>
+   <a class="hub-card hub-cart" href="cart.html"><span class="hub-icon">🛒</span><span class="hub-kicker">YOUR SELECTION</span><h3>سبد خرید</h3><p>تعداد کتاب‌ها و مبلغ سفارش را بررسی کن.</p><b>رفتن به سبد خرید ←</b></a>
+   <a class="hub-card hub-account" href="account.html"><span class="hub-icon">👤</span><span class="hub-kicker">MY ACCOUNT</span><h3>حساب کاربری</h3><p>اطلاعات حساب و دسترسی‌های شخصی.</p><b>ورود به حساب ←</b></a>
+   <a class="hub-card hub-orders" href="orders.html"><span class="hub-icon">📦</span><span class="hub-kicker">TRACKING</span><h3>پیگیری سفارش</h3><p>وضعیت و مراحل سفارش‌های ثبت‌شده.</p><b>پیگیری سفارش ←</b></a>
+   <a class="hub-card hub-address" href="addresses.html"><span class="hub-icon">📍</span><span class="hub-kicker">DELIVERY</span><h3>نشانی‌های من</h3><p>مدیریت نشانی‌های تحویل و گیرنده.</p><b>مدیریت نشانی ←</b></a>
    <a class="hub-card hub-contact" href="contact.html"><span class="hub-icon">✉️</span><span class="hub-kicker">SUPPORT</span><h3>ارتباط با ماهیگیر</h3><p>راه‌های ارتباط و ارسال پیام به فروشگاه.</p><b>ارتباط با ما ←</b></a>
   </div>
  </div></section>
- <div hidden><input id="search"><div id="bestsellerGrid"></div><div id="comingSoonGrid"></div><div id="bookGrid"></div></div>
+ 
 </main>
 
 <footer><div class="wrap footer-row">
  <div><div class="brand" style="color:white"><span class="logo">م</span> ماهیگیر</div><p>قصه‌های خوب، همراه لحظه‌های تو.</p></div>
- <div><strong>صفحه‌های مستقل ماهیگیر</strong><p>کتابخانه، سبد خرید و حساب کاربری هرکدام در صفحه جداگانه.</p></div>
+ <div><strong>ماهیگیر؛ همراه قصه‌ها</strong><p>انتخاب کتاب، ثبت سفارش و پیگیری خرید در یک تجربه منظم.</p></div>
  <div style="display:flex;gap:9px;flex-wrap:wrap"><button class="btn soft" onclick="openContactPage()">تماس با ما</button><button class="btn white" onclick="openAccount()">حساب کاربری</button></div>
 </div></footer>
 
