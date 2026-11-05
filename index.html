@@ -346,7 +346,7 @@ body{background:radial-gradient(ellipse at 0% 0%,#e0f2e5 0,transparent 32%),radi
 <header>
  <div class="wrap nav">
   <a href="index.html" class="brand"><span class="logo">م</span> ماهیگیر</a>
-  <nav class="navlinks"><a href="index.html">خانه</a><a href="index.html#catalog">کتاب‌ها</a><a href="orders.html">سفارش‌ها</a><a href="addresses.html">نشانی‌ها</a><a href="contact.html">ارتباط</a></nav>
+  <nav class="navlinks"><a href="index.html">خانه</a><a href="books.html">کتاب‌ها</a><a href="orders.html">سفارش‌ها</a><a href="addresses.html">نشانی‌ها</a><a href="contact.html">ارتباط</a></nav>
   <div class="actions">
    <a class="iconbtn" href="cart.html" aria-label="سبد خرید">🛒<span class="count" id="cartCount">۰</span></a>
    <a class="btn primary" id="accountBtn" href="account.html">حساب من</a>
@@ -359,30 +359,11 @@ body{background:radial-gradient(ellipse at 0% 0%,#e0f2e5 0,transparent 32%),radi
    <span class="tag">✦ کتابخانه آنلاین ماهیگیر</span>
    <h1>هر کتاب،<br><span class="gradient">یک جهان تازه.</span></h1>
    <p>به دنیای کتاب‌های ماهیگیر خوش آمدی؛ عنوان دلخواهت را انتخاب کن، به سبد خرید اضافه کن و سفارشت را پیگیری کن.</p>
-   <div class="hero-buttons"><a href="#catalog" class="btn primary">دیدن کتاب‌ها ←</a><a href="orders.html" class="btn white">پیگیری سفارش‌ها</a></div>
+   <div class="hero-buttons"><a href="books.html" class="btn primary">دیدن کتاب‌ها ←</a><a href="orders.html" class="btn white">پیگیری سفارش‌ها</a></div>
   </div>
   <div class="art"><div class="orb"></div><div class="fakebook">ماهیگیر<small>قصه‌های خوب، همراه تو</small></div><div class="bubble b1">📚 مجموعه کتاب‌ها</div><div class="bubble b2">✨ تجربه‌ای تازه</div></div>
  </div></section>
- <section class="catalog-section" id="catalog">
-  <div class="wrap">
-   <div class="catalog-head">
-    <div><span class="bestseller-tag">✦ مجموعه کتاب‌های ماهیگیر</span><h2>کتاب موردعلاقه‌ات را پیدا کن</h2><p>همه عنوان‌ها، قیمت‌ها و دسته‌بندی‌ها همین‌جا در دسترس‌اند.</p></div>
-    <div class="catalog-count">۷ عنوان برای انتخاب</div>
-   </div>
-   <div class="catalog-tools">
-    <input id="search" class="search" type="search" placeholder="نام کتاب را جست‌وجو کن..." aria-label="جست‌وجوی کتاب">
-    <div class="categories" aria-label="دسته‌بندی کتاب‌ها">
-     <button class="cat active" onclick="setCategory('همه',this)">همه کتاب‌ها</button>
-     <button class="cat" onclick="setCategory('داستانی',this)">داستانی</button>
-     <button class="cat" onclick="setCategory('ماجراجویی',this)">ماجراجویی</button>
-     <button class="cat" onclick="setCategory('متفرقه',this)">متفرقه</button>
-    </div>
-   </div>
-   <div class="grid" id="bookGrid"></div>
-   <div class="coming-section"><div class="coming-title"><span>✨</span><div><h3>به‌زودی در ماهیگیر</h3><p>عنوان‌هایی که به‌زودی به مجموعه اضافه می‌شوند.</p></div></div><div class="grid" id="comingSoonGrid"></div></div>
-   
-  </div>
- </section>
+ 
  <section class="hub-section"><div class="wrap"><div class="heading"><div><span class="bestseller-tag">✦ خدمات ماهیگیر</span><h2>دسترسی به بخش‌های حساب</h2><p>برای مدیریت خرید و اطلاعاتت، بخش موردنظر را باز کن.</p></div></div>
   <div class="hub-grid">
    <a class="hub-card hub-cart" href="cart.html"><span class="hub-icon">🛒</span><span class="hub-kicker">YOUR SELECTION</span><h3>سبد خرید</h3><p>تعداد کتاب‌ها و مبلغ سفارش را بررسی کن.</p><b>رفتن به سبد خرید ←</b></a>
@@ -660,7 +641,7 @@ function renderCart(){
  updateCount();
  const valid=cart.filter(i=>getBook(i.id)&&!getBook(i.id).comingSoon);
  if(!valid.length){
-  el.innerHTML='<div class="empty">🛒<br>سبد خرید خالی است.<br><br><button class="btn primary" onclick="closeModal(\'cartModal\');document.getElementById(\'catalog\')?.scrollIntoView({behavior:\'smooth\',block:\'start\'})">انتخاب کتاب</button></div>';
+  el.innerHTML='<div class="empty">🛒<br>سبد خرید خالی است.<br><br><button class="btn primary" onclick="closeModal(\'cartModal\');location.href=\'books.html\'">انتخاب کتاب</button></div>';
   return;
  }
  el.innerHTML=valid.map(i=>{const b=getBook(i.id);return `<div class="cartitem">
