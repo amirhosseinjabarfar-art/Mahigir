@@ -602,24 +602,6 @@ function openBook(id){
  const b=COMING_BOOKS.find(x=>String(x.id)===String(id))||getBook(id);
  if(!b)return;
  location.href="book.html?id="+encodeURIComponent(String(b.id));
- return;
- const soon=!!b.comingSoon;
- document.getElementById("detailContent").innerHTML=`
- <div class="detail-layout">
-  <div class="detailcover" style="background:${safeColor(b.color)}"><div>${esc(b.title)}<div style="font:12px Vazirmatn;margin-top:15px">${soon?"کتاب به‌زودی":"ماهیگیر"}</div></div></div>
-  <div class="detailbody">
-   <span style="color:#16834f;font-size:12px;font-weight:900">${soon?"به‌زودی در فروشگاه ماهیگیر":"کتاب‌های ماهیگیر"}</span>
-   <h2>${esc(b.title)}</h2>
-   ${soon?'<div class="soon-notice" style="font-size:15px;padding:16px">✨ کتاب به‌زودی ✨</div>':`<div class="bigprice">${money(b.price)}</div>`}
-   <p>${esc(b.description||"کتابی از مجموعه ماهیگیر.")}</p>
-   <div class="detailbullets"><div>📚 عنوان: ${esc(b.title)}</div><div>🏷️ دسته‌بندی: ${esc(b.category||"متفرقه")}</div>${soon?'<div>🗓️ وضعیت: به‌زودی منتشر می‌شود</div>':'<div>📦 روش ارسال: تیپاکس</div><div>🚚 هزینه ارسال: '+money(SHIPPING)+'</div>'}</div>
-   ${soon?'<div class="noticebar">این کتاب هنوز برای خرید موجود نیست.</div>':`<p>تعداد موردنظرت را انتخاب کن و سپس به سبد خرید اضافه کن.</p><div class="qty"><button onclick="detailQty(-1)">−</button><strong id="detailQty">۱</strong><button onclick="detailQty(1)">+</button></div><button class="btn primary" style="margin-top:14px" onclick="addCart('${esc(b.id)}',window.detailAmount||1)">افزودن به سبد خرید 🛒</button>`}
-  </div>
- </div>`;
- window.detailBookId=String(id);window.detailAmount=1;
- const page=document.getElementById("bookPage");page.classList.add("open");page.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
- history.pushState({mahigirBook:String(id)},"","?book="+encodeURIComponent(String(id)));
- revealWords(page);
 }
 function closeBookPage(){
  const page=document.getElementById("bookPage");if(!page)return;
