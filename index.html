@@ -337,6 +337,13 @@ body{background:radial-gradient(ellipse at 0% 0%,#e0f2e5 0,transparent 32%),radi
 .od-code{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:12px!important;padding:25px 18px!important;min-height:145px!important;border:2px dashed #9bcbaa!important;border-radius:20px!important;background:linear-gradient(135deg,#f2fbf3,#e8f6eb)!important;text-align:center!important}
 .od-code small{font-size:12px!important;font-weight:900!important;color:#477956!important}
 .od-code strong{display:block!important;font-size:clamp(23px,4vw,36px)!important;line-height:1.5!important;color:#145c36!important;letter-spacing:1.5px!important;overflow-wrap:anywhere!important;max-width:100%!important}
+#catalog{padding:64px 0 50px;background:linear-gradient(180deg,#f8fbff 0%,#fff 100%);scroll-margin-top:95px}
+#catalog .catalog-heading{align-items:center;margin-bottom:18px}
+#catalog .catalog-heading h2{font-size:clamp(32px,4vw,45px)}
+#catalog .catalog-count{display:inline-flex;align-items:center;white-space:nowrap;padding:10px 15px;border:1px solid #dfe7fb;border-radius:14px;background:#fff;color:#5267f5;font-size:12px;font-weight:900}
+#catalog .coming-section{margin-top:52px;padding-top:30px;border-top:1px solid #e7eaf7}
+#catalog .coming-section .heading{margin-bottom:18px}
+@media(max-width:680px){#catalog{padding:42px 0 35px}#catalog .catalog-heading{align-items:flex-start;flex-direction:column;gap:12px}}
 </style>
 <link rel="stylesheet" href="assets/mahigir.css">
 <link rel="stylesheet" href="assets/mahigir-header.css">
@@ -346,7 +353,7 @@ body{background:radial-gradient(ellipse at 0% 0%,#e0f2e5 0,transparent 32%),radi
 <header>
  <div class="wrap nav">
   <a href="index.html" class="brand"><span class="logo">م</span> ماهیگیر</a>
-  <nav class="navlinks"><a href="index.html">خانه</a><a href="books.html">کتاب‌ها</a><a href="orders.html">سفارش‌ها</a><a href="addresses.html">نشانی‌ها</a><a href="contact.html">ارتباط</a></nav>
+  <nav class="navlinks"><a href="index.html">خانه</a><a href="index.html#catalog">کتاب‌ها</a><a href="orders.html">سفارش‌ها</a><a href="addresses.html">نشانی‌ها</a><a href="contact.html">ارتباط</a></nav>
   <div class="actions">
    <a class="iconbtn" href="cart.html" aria-label="سبد خرید">🛒<span class="count" id="cartCount">۰</span></a>
    <a class="btn primary" id="accountBtn" href="account.html">حساب من</a>
@@ -359,10 +366,19 @@ body{background:radial-gradient(ellipse at 0% 0%,#e0f2e5 0,transparent 32%),radi
    <span class="tag">✦ کتابخانه آنلاین ماهیگیر</span>
    <h1>هر کتاب،<br><span class="gradient">یک جهان تازه.</span></h1>
    <p>به دنیای کتاب‌های ماهیگیر خوش آمدی؛ عنوان دلخواهت را انتخاب کن، به سبد خرید اضافه کن و سفارشت را پیگیری کن.</p>
-   <div class="hero-buttons"><a href="books.html" class="btn primary">دیدن کتاب‌ها ←</a><a href="orders.html" class="btn white">پیگیری سفارش‌ها</a></div>
+   <div class="hero-buttons"><a href="index.html#catalog" class="btn primary">دیدن کتاب‌ها ←</a><a href="orders.html" class="btn white">پیگیری سفارش‌ها</a></div>
   </div>
   <div class="art"><div class="orb"></div><div class="fakebook">ماهیگیر<small>قصه‌های خوب، همراه تو</small></div><div class="bubble b1">📚 مجموعه کتاب‌ها</div><div class="bubble b2">✨ تجربه‌ای تازه</div></div>
  </div></section>
+<section class="catalog-section" id="catalog">
+<div class="wrap">
+<div class="heading catalog-heading"><div><span class="bestseller-tag">✦ فروشگاه کتاب ماهیگیر</span><h2>کتاب‌های ماهیگیر</h2><p>کتاب دلخواهت را انتخاب کن؛ هر کتاب صفحه اختصاصی خودش را دارد.</p></div><span class="catalog-count">در حال بارگذاری</span></div>
+<input id="search" class="search" type="search" placeholder="جست‌وجوی نام کتاب..." aria-label="جست‌وجوی کتاب">
+<div class="categories" aria-label="دسته‌بندی کتاب‌ها"><button class="cat active" onclick="setCategory('همه',this)">همه کتاب‌ها</button><button class="cat" onclick="setCategory('داستانی',this)">داستانی</button><button class="cat" onclick="setCategory('ماجراجویی',this)">ماجراجویی</button><button class="cat" onclick="setCategory('متفرقه',this)">متفرقه</button></div>
+<div class="grid" id="bookGrid" aria-live="polite"><div class="empty">در حال دریافت کتاب‌ها...</div></div>
+<div class="coming-section"><div class="heading"><div><span class="bestseller-tag">✨ به‌زودی</span><h2>کتاب‌های آینده</h2><p>عنوان‌هایی که به‌زودی به فروشگاه اضافه می‌شوند.</p></div></div><div class="grid" id="comingSoonGrid"></div></div>
+</div></section>
+
  
  <section class="hub-section"><div class="wrap"><div class="heading"><div><span class="bestseller-tag">✦ خدمات ماهیگیر</span><h2>دسترسی به بخش‌های حساب</h2><p>برای مدیریت خرید و اطلاعاتت، بخش موردنظر را باز کن.</p></div></div>
   <div class="hub-grid">
@@ -464,16 +480,16 @@ const PALETTES=[
  "linear-gradient(145deg,#dd7858,#7d5cc8)"
 ];
 const INITIAL_BOOKS=[
- {id:"dota-khafe",title:"دوتا خفن",price:200000,category:"ماجراجویی",description:"کتابی از مجموعه ماهیگیر؛ برای آشنایی با داستان و جزئیات بیشتر این کتاب را انتخاب کن.",color:PALETTES[0]},
- {id:"shabhaye-zakiabad",title:"شب‌های زکی‌آباد",price:190000,category:"داستانی",description:"یکی از کتاب‌های مجموعه ماهیگیر؛ کتاب را انتخاب کن و اطلاعات آن را بخوان.",color:PALETTES[1]},
- {id:"dokhtar-darchini",title:"دختر دارچینی",price:200000,category:"داستانی",description:"کتابی از مجموعه ماهیگیر با صفحه اختصاصی و امکان افزودن به سبد خرید.",color:PALETTES[2]},
- {id:"jashnvare-hasan",title:"جشنواره حسن",price:250000,category:"متفرقه",description:"کتابی از مجموعه ماهیگیر؛ اطلاعات بیشتر در صفحه معرفی کتاب قرار می‌گیرد.",color:PALETTES[3]},
- {id:"edvard-munk",title:"ادوارد مونک",price:50000,category:"متفرقه",description:"کتابی درباره ادوارد مونک، هنرمند شناخته‌شده نروژی.",color:PALETTES[4]},
- {id:"ghavvasan-chernobyl",title:"غواصان چرنوبیل",price:50000,category:"داستانی",description:"کتابی درباره غواصان عملیات چرنوبیل و رویدادهای پیرامون آن.",color:PALETTES[5]},
- {id:"arno-rubik",title:"ارنو روبیک",price:50000,category:"متفرقه",description:"کتابی با موضوع ارنو روبیک، مخترع مکعب روبیک.",color:PALETTES[6]}
+ {id:"ab85e2c3-8032-45d9-b826-c182966f1642",title:"دوتا خفن",price:200000,category:"ماجراجویی",description:"کتابی از مجموعه ماهیگیر؛ برای آشنایی با داستان و جزئیات بیشتر این کتاب را انتخاب کن.",color:PALETTES[0]},
+ {id:"b5209694-c890-4c43-a636-dde1720b309a",title:"شب‌های زکی‌آباد",price:190000,category:"داستانی",description:"یکی از کتاب‌های مجموعه ماهیگیر؛ کتاب را انتخاب کن و اطلاعات آن را بخوان.",color:PALETTES[1]},
+ {id:"2a0eb094-1c09-4e9e-b616-bde11a88a7f0",title:"دختر دارچینی",price:200000,category:"داستانی",description:"کتابی از مجموعه ماهیگیر با صفحه اختصاصی و امکان افزودن به سبد خرید.",color:PALETTES[2]},
+ {id:"274e3312-3604-4139-89e1-64ed98a7de18",title:"جشنواره حسن",price:250000,category:"متفرقه",description:"کتابی از مجموعه ماهیگیر؛ اطلاعات بیشتر در صفحه معرفی کتاب قرار می‌گیرد.",color:PALETTES[3]},
+ {id:"1afe6a90-1c40-44bc-8a75-5de4791e0d4d",title:"ادوارد مونک",price:50000,category:"متفرقه",description:"کتابی درباره ادوارد مونک، هنرمند شناخته‌شده نروژی.",color:PALETTES[4]},
+ {id:"074eb2bd-8cd7-40e2-a380-fdca1f2c4f00",title:"غواصان چرنوبیل",price:50000,category:"داستانی",description:"کتابی درباره غواصان عملیات چرنوبیل و رویدادهای پیرامون آن.",color:PALETTES[5]},
+ {id:"ca5a991c-b93d-4a09-8df1-da3fb06950e8",title:"ارنو روبیک",price:50000,category:"متفرقه",description:"کتابی با موضوع ارنو روبیک، مخترع مکعب روبیک.",color:PALETTES[6]}
 ];
 const COMING_BOOK={
- id:"dota-khafe-2",title:"دوتا خفن ۲",category:"ماجراجویی",
+ id:"b58f08a1-690d-4c1a-b064-bd6d0105ad08",title:"دوتا خفن ۲",category:"ماجراجویی",
  description:"کتاب دوتا خفن ۲ در آینده منتشر می‌شود. کتاب بزودی!",
  color:"linear-gradient(145deg,#242c59,#7655b7,#e58db8)",
  comingSoon:true
@@ -496,10 +512,8 @@ let category="همه",adminUnlocked=false,adminOrders=[],adminSelectedUser=null,
 let toastTimer=null,authBusy=false;
 
 function readCart(){
- try{return JSON.parse(localStorage.getItem("mh_cart")||"[]")
-  .filter(x=>x&&typeof x.id==="string"&&Number.isFinite(+x.qty)&&+x.qty>0)
-  .map(x=>({id:x.id,qty:Math.min(99,Math.floor(+x.qty))}))
- }catch{return []}
+ const legacy={"dota-khafe":"ab85e2c3-8032-45d9-b826-c182966f1642","shabhaye-zakiabad":"b5209694-c890-4c43-a636-dde1720b309a","dokhtar-darchini":"2a0eb094-1c09-4e9e-b616-bde11a88a7f0","jashnvare-hasan":"274e3312-3604-4139-89e1-64ed98a7de18","edvard-munk":"1afe6a90-1c40-44bc-8a75-5de4791e0d4d","ghavvasan-chernobyl":"074eb2bd-8cd7-40e2-a380-fdca1f2c4f00","arno-rubik":"ca5a991c-b93d-4a09-8df1-da3fb06950e8","dota-khafe-2":"b58f08a1-690d-4c1a-b064-bd6d0105ad08"};
+ try{const merged=new Map();JSON.parse(localStorage.getItem("mh_cart")||"[]").filter(x=>x&&typeof x.id==="string"&&Number.isFinite(+x.qty)&&+x.qty>0).forEach(x=>{const id=legacy[x.id]||x.id;merged.set(id,Math.min(99,(merged.get(id)||0)+Math.floor(+x.qty)))});return [...merged].map(([id,qty])=>({id,qty}))}catch{return []}
 }
 function saveCart(){
  localStorage.setItem("mh_cart",JSON.stringify(cart));
@@ -587,6 +601,8 @@ function quickQty(id,d){if(d>0)addCart(id);else if(productQty(id)>0)changeQty(id
 function openBook(id){
  const b=COMING_BOOKS.find(x=>String(x.id)===String(id))||getBook(id);
  if(!b)return;
+ location.href="book.html?id="+encodeURIComponent(String(b.id));
+ return;
  const soon=!!b.comingSoon;
  document.getElementById("detailContent").innerHTML=`
  <div class="detail-layout">
@@ -1023,11 +1039,13 @@ async function initialize(){
   const {data:remoteBooks,error:booksError}=await db.from("mahigir_books").select("*").eq("is_active",true).order("sort_order");
   if(booksError)console.warn("Remote books unavailable; using built-in books:",booksError);
   if(remoteBooks?.length){
-   const mapped=uniqueBooks(remoteBooks.map((b,i)=>({...b,color:PALETTES[i%PALETTES.length],category:b.category||"متفرقه"})));
-   /* رکوردهای پیش‌فرض فقط وقتی اضافه می‌شوند که عنوان مشابهی از دیتابیس وجود نداشته باشد. */
-   const knownIds=new Set(mapped.map(b=>String(b.id)));
-   const knownTitles=new Set(mapped.map(b=>normalizeBookTitle(b.title)));
-   books=uniqueBooks([...mapped,...INITIAL_BOOKS.filter(b=>!knownIds.has(String(b.id))&&!knownTitles.has(normalizeBookTitle(b.title)))]);
+   const categoryMap={"ab85e2c3-8032-45d9-b826-c182966f1642":"ماجراجویی","b5209694-c890-4c43-a636-dde1720b309a":"داستانی","2a0eb094-1c09-4e9e-b616-bde11a88a7f0":"داستانی","274e3312-3604-4139-89e1-64ed98a7de18":"متفرقه","1afe6a90-1c40-44bc-8a75-5de4791e0d4d":"متفرقه","074eb2bd-8cd7-40e2-a380-fdca1f2c4f00":"داستانی","ca5a991c-b93d-4a09-8df1-da3fb06950e8":"متفرقه","b58f08a1-690d-4c1a-b064-bd6d0105ad08":"ماجراجویی"};
+   const mapped=uniqueBooks(remoteBooks.map((b,i)=>({...b,id:String(b.id),price:Number(b.price)||0,stock:Number(b.stock)||0,comingSoon:!!b.is_coming_soon,color:PALETTES[i%PALETTES.length],category:categoryMap[String(b.id)]||b.category||"متفرقه"})));
+   const available=mapped.filter(b=>!b.comingSoon),upcoming=mapped.filter(b=>b.comingSoon);
+   const knownIds=new Set(available.map(b=>String(b.id)));
+   const knownTitles=new Set(available.map(b=>normalizeBookTitle(b.title)));
+   books=uniqueBooks([...available,...INITIAL_BOOKS.filter(b=>!knownIds.has(String(b.id))&&!knownTitles.has(normalizeBookTitle(b.title)))]);
+   COMING_BOOKS.splice(0,COMING_BOOKS.length,...uniqueBooks([...upcoming,...COMING_BOOKS]));
   }
   renderBooks();renderBestsellers();
  }catch(e){console.warn("Store initialization incomplete:",e)}
