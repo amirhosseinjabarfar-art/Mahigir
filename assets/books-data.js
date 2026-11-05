@@ -22,7 +22,7 @@ const fallback=[
  {id:"ca5a991c-b93d-4a09-8df1-da3fb06950e8",title:"ارنو روبیک",price:50000,category:"متفرقه",description:"کتاب ارنو روبیک",stock:100,color:colors[6]},
  {id:"b58f08a1-690d-4c1a-b064-bd6d0105ad08",title:"دوتا خفن ۲",price:0,category:"ماجراجویی",description:"کتاب دوتا خفن ۲ در آینده منتشر می‌شود.",stock:0,color:colors[7],comingSoon:true}
 ];
-const extraSoon={id:"amme-shorte-baba",title:"عمه‌ام و شورت بابام",price:0,category:"طنز",description:"یک عنوان طنز که به‌زودی به فروشگاه ماهیگیر اضافه می‌شود.",stock:0,color:"linear-gradient(145deg,#e8a23c,#d64d75,#7655b7)",comingSoon:true};
+
 const legacy={
  "dota-khafe":"ab85e2c3-8032-45d9-b826-c182966f1642",
  "shabhaye-zakiabad":"b5209694-c890-4c43-a636-dde1720b309a",
@@ -44,8 +44,7 @@ window.MAHIGIR_BOOKS_READY=(async()=>{
   if(Array.isArray(data)&&data.length){
    const categoryById=new Map(fallback.map(b=>[b.id,b.category]));
    const mapped=data.map((b,i)=>({...b,id:String(b.id),price:Number(b.price)||0,stock:Number(b.stock)||0,category:categoryById.get(String(b.id))||b.category||"متفرقه",color:colors[i%colors.length],comingSoon:!!b.is_coming_soon}));
-   const extra=mapped.some(b=>b.title===extraSoon.title)?[]:[extraSoon];
-   window.MAHIGIR_BOOKS.splice(0,window.MAHIGIR_BOOKS.length,...mapped,...extra);
+   window.MAHIGIR_BOOKS.splice(0,window.MAHIGIR_BOOKS.length,...mapped);
   }
  }catch(error){console.warn("Mahigir catalogue fallback is active:",error)}
  return window.MAHIGIR_BOOKS;
