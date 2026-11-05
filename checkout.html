@@ -90,7 +90,7 @@ const PROJECT_URL="https://drwydadydhkdkrcdndrq.supabase.co",PUBLIC_KEY="sb_publ
 const db=window.supabase.createClient(PROJECT_URL,PUBLIC_KEY);
 const money=n=>Number(n||0).toLocaleString("fa-IR")+" تومان";
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const normalizeDigits=s=>String(s??"").replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d));
+const normalizeDigits=s=>String(s??"").replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[^0-9]/g,"");
 let currentUser=null,selectedAddress=0,submitting=false;
 function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");clearTimeout(window.__mhToast);window.__mhToast=setTimeout(()=>el.classList.remove("show"),2600)}
 function readCart(){const legacy=window.MAHIGIR_LEGACY_BOOK_IDS||{};try{const merged=new Map();JSON.parse(localStorage.getItem("mh_cart")||"[]").filter(x=>x&&typeof x.id==="string"&&Number(x.qty)>0).forEach(x=>{const id=legacy[x.id]||x.id;merged.set(id,Math.min(99,(merged.get(id)||0)+Math.floor(Number(x.qty)||1)))});return [...merged].map(([id,qty])=>({id,qty}))}catch{return[]}}
