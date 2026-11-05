@@ -777,15 +777,16 @@ function addressForm(a={}){
  <div class="address-field"><label>شماره تماس</label><input name="phone" autocomplete="tel" inputmode="tel" placeholder="شماره تماس گیرنده" required maxlength="20" value="${esc(a.phone||"")}"></div>
  <div class="address-field"><label>استان و شهر</label><input name="city" autocomplete="address-level2" placeholder="مثلاً تهران، تهران" required maxlength="100" value="${esc(a.city||"")}"></div>
  <div class="address-field"><label>نشانی کامل</label><textarea name="address" autocomplete="street-address" placeholder="خیابان، کوچه، پلاک، واحد..." required maxlength="1000">${esc(a.address||"")}</textarea></div>
- <div class="address-field"><label>کد پستی ۱۰ رقمی</label><input name="postal_code" autocomplete="postal-code" inputmode="numeric" pattern="[0-9۰-۹٠-٩]{10}" placeholder="۱۰ رقم کد پستی" required maxlength="10" value="${esc(a.postal_code||"")}"></div>
+ <div class="address-field"><label>کد پستی ۱۰ رقمی</label><input name="postal_code" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{10}" oninput="this.value=normalizePostalCode(this.value)" placeholder="۱۰ رقم کد پستی" required maxlength="10" value="${esc(a.postal_code||"")}"></div>
  <div class="address-form-actions"><button type="submit" class="address-save">${editingAddressIndex>=0?"ذخیره تغییرات ✓":"ذخیره نشانی ✨"}</button>${editingAddressIndex>=0?'<button type="button" class="address-cancel" onclick="cancelAddressEdit()">انصراف</button>':""}</div></form>`;
 }
 function editAddress(i){addresses=readAddresses();if(!addresses[i])return;editingAddressIndex=i;addressForm(addresses[i]);document.getElementById("addressFormContent").scrollIntoView({behavior:"smooth",block:"start"})}
 function cancelAddressEdit(){editingAddressIndex=-1;addressForm();notify("ویرایش لغو شد.")}
 function normalizeDigits(s){return String(s).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d))}
+function normalizePostalCode(s){return normalizeDigits(s).replace(/[^0-9]/g,"").slice(0,10)}
 function saveAddress(e){
  e.preventDefault();const f=new FormData(e.target);
- const a={recipient:String(f.get("recipient")).trim(),phone:String(f.get("phone")).trim(),city:String(f.get("city")).trim(),address:String(f.get("address")).trim(),postal_code:normalizeDigits(f.get("postal_code")).trim(),shipping_method:"تیپاکس"};
+ const a={recipient:String(f.get("recipient")).trim(),phone:String(f.get("phone")).trim(),city:String(f.get("city")).trim(),address:String(f.get("address")).trim(),postal_code:normalizePostalCode(f.get("postal_code")),shipping_method:"تیپاکس"};
  if(!/^\\d{10}$/.test(a.postal_code)){notify("کد پستی باید ۱۰ رقم باشد.");return}
  addresses=readAddresses();
  if(editingAddressIndex>=0&&addresses[editingAddressIndex]){addresses[editingAddressIndex]=a;notify("نشانی با موفقیت ویرایش شد.")}
