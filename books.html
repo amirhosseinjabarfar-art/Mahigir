@@ -1,1 +1,1235 @@
-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=index.html#catalog"><title>کتاب‌ها | ماهیگیر</title><link rel="canonical" href="https://amirhosseinjabarfar-art.github.io/Mahigir/#catalog"><script>location.replace("index.html#catalog");</script></head><body><p><a href="index.html#catalog">مشاهده کتاب‌ها در صفحه اصلی</a></p></body></html>
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#16834b">
+<title>کتاب‌ها | ماهیگیر</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Lalezar&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Lalezar&display=swap');
+:root{--bg:#f5f6ff;--paper:#fff;--ink:#182344;--muted:#7782a2;--blue:#5267f5;--purple:#9b5ee8;--cyan:#39c4d6;--line:#e5e9fb;--shadow:0 24px 70px #293c8c18;--radius:26px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px;max-width:100%;overflow-x:hidden}
+body{margin:0;max-width:100%;overflow-x:hidden;background:radial-gradient(ellipse at 0% 0%,#dfe7ff 0,transparent 32%),radial-gradient(ellipse at 100% 20%,#f1ddff 0,transparent 27%),var(--bg);color:var(--ink);font-family:Vazirmatn,sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer;transition:transform .25s,box-shadow .25s,background .25s}button:hover{transform:translateY(-2px)}button:disabled{opacity:.55;cursor:not-allowed;transform:none}
+a{color:inherit;text-decoration:none}h1,h2,h3,.brand{font-family:Lalezar,Vazirmatn,sans-serif;font-weight:400}
+.wrap{width:min(1320px,calc(100% - 48px));margin-inline:auto;min-width:0}
+header:not(.address-top):not(.checkout-top):not(.tracking-top):not(.contact-top):not(.book-page-top):not(.admin-top){position:sticky;top:0;z-index:30;background:#f8f9ffdc;backdrop-filter:blur(24px);border-bottom:1px solid #dfe5fa}
+.nav{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-size:32px;color:var(--ink);display:flex;align-items:center;gap:11px;white-space:nowrap}
+.logo{width:48px;height:48px;border-radius:17px;background:linear-gradient(140deg,var(--blue),var(--purple) 65%,var(--cyan));display:grid;place-items:center;color:white;box-shadow:0 10px 28px #6978ef55;font-size:25px}
+.navlinks,.actions{display:flex;align-items:center;gap:10px;min-width:0}
+.navlinks a{padding:10px 13px;border-radius:12px;color:#687393;font-size:12px;font-weight:800;transition:.2s}
+.navlinks a:hover{background:#edf0ff;color:var(--blue)}
+.btn{border:0;border-radius:15px;padding:13px 19px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px}
+.primary{color:#fff;background:linear-gradient(120deg,var(--blue),var(--purple));box-shadow:0 10px 25px #6874f455}
+.primary:hover{box-shadow:0 15px 32px #6874f477}
+.soft{background:#edf0ff;color:var(--blue)}.white{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.iconbtn{height:48px;min-width:48px;border:1px solid var(--line);border-radius:16px;background:#fff;position:relative;font-size:19px}
+.count{position:absolute;top:-7px;left:-7px;background:#f14b76;color:#fff;border:2px solid white;border-radius:30px;min-width:22px;height:22px;display:grid!important;place-items:center;padding:1px 5px;font-size:10px;font-weight:900}
+.hero{padding:38px 0 34px;min-height:580px;display:flex;align-items:center}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);align-items:center;gap:35px}
+.hero .tag{display:inline-flex;align-items:center;gap:8px;border:1px solid #d9defc;background:#ffffffc9;padding:10px 16px;border-radius:40px;color:var(--blue);font-size:11px;font-weight:900;box-shadow:0 8px 22px #4558a20b}
+.hero h1{font-size:clamp(54px,6.5vw,90px);line-height:1.2;margin:22px 0 14px;letter-spacing:-1px}
+.gradient{background:linear-gradient(95deg,#4d66f5,#a354e4 55%,#2bbbc9);color:transparent;background-clip:text}
+.hero p{line-height:2.15;color:var(--muted);font-size:15px;max-width:610px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.art{height:455px;border-radius:38px;background:linear-gradient(145deg,#dce5ff,#f3e5ff 55%,#d9fbff);display:grid;place-items:center;position:relative;overflow:hidden;box-shadow:0 30px 85px #596bc52a;border:1px solid #ffffffb5;isolation:isolate}
+.art:before,.art:after{content:"";position:absolute;border:1px solid #fff9;border-radius:50%;width:380px;height:380px;animation:orbit 22s linear infinite;z-index:-1}
+.art:after{width:490px;height:490px;animation-direction:reverse;animation-duration:30s}
+.orb{position:absolute;width:285px;height:285px;border-radius:50%;background:linear-gradient(140deg,#7487ff,#d9a6ff 65%,#9de8ee);filter:blur(1px);box-shadow:0 25px 70px #8a7de955;animation:float 6s ease-in-out infinite}
+.fakebook{position:relative;width:205px;height:290px;border-radius:8px 22px 22px 8px;background:linear-gradient(145deg,#f77991,#7650dc 60%,#294f91);box-shadow:18px 25px 48px #252d5c55;color:white;display:grid;place-items:center;text-align:center;font:44px Lalezar;transform:rotate(-8deg);animation:bookfloat 6s ease-in-out infinite;border-right:9px solid #302c72}
+.fakebook small{display:block;font:12px Vazirmatn;margin-top:12px}
+.bubble{position:absolute;background:#ffffffed;padding:14px 18px;border:1px solid #fff;border-radius:17px;box-shadow:0 15px 38px #3a4c971c;font-size:12px;font-weight:900;animation:float 5s infinite}
+.b1{top:38px;right:25px}.b2{bottom:35px;left:22px;animation-delay:-2.2s}
+section{padding:42px 0;min-width:0}
+.heading{display:flex;justify-content:space-between;align-items:end;gap:14px;margin-bottom:25px}
+.heading h2{font-size:clamp(29px,3.5vw,42px);margin:8px 0 0}
+.heading p{font-size:12px;color:var(--muted);margin:7px 0 0;line-height:1.9}
+.bestseller-tag{display:inline-flex;align-items:center;gap:7px;background:#fff0d4;color:#986000;border-radius:40px;padding:8px 13px;font-size:11px;font-weight:900}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;min-width:0}
+.card{background:#ffffffd9;border:1px solid #e4e8fb;border-radius:27px;padding:14px;box-shadow:0 12px 35px #3344880a;animation:appear .55s both;transition:.35s;min-width:0;overflow:hidden}
+.card:hover{transform:translateY(-8px);box-shadow:0 24px 55px #5367f429;border-color:#cbd2ff}
+.cover{height:270px;border-radius:20px;display:grid;place-items:center;color:white;text-align:center;padding:18px;position:relative;overflow:hidden;cursor:pointer;box-shadow:inset 0 0 0 1px #ffffff40}
+.cover:before,.cover:after{content:"";position:absolute;width:220px;height:220px;border:1px solid #ffffff42;border-radius:50%;left:-95px;top:-105px}
+.cover:after{left:auto;top:auto;right:-90px;bottom:-120px;width:270px;height:270px}
+.cover-title{font:36px Lalezar;line-height:1.65;position:relative;z-index:1;text-shadow:0 4px 15px #0004}
+.cover-sub{font-size:10px;position:relative;z-index:1;margin-top:10px}
+.book-info{padding:15px 5px 5px}.book-info h3{font-size:25px;margin:0 0 6px;cursor:pointer}.book-info p{font-size:12px;color:var(--muted);line-height:2;min-height:48px}
+.price{font-weight:900;font-size:18px;color:#3546b2}
+.book-actions{display:flex;gap:9px;margin-top:14px;flex-wrap:wrap}.book-actions button{flex:1;font-size:11px;padding:12px 8px;border-radius:13px}
+.qty{display:flex;align-items:center;gap:9px;margin-top:10px;flex-wrap:wrap}.qty button{width:32px;height:32px;border:0;border-radius:10px;background:#edf0ff;color:var(--blue);font-weight:900}
+.section-bestsellers{position:relative}.section-bestsellers .heading h2{color:#6544bd}
+.soon-card{border:1px solid #eadcff;background:linear-gradient(160deg,#fff,#faf5ff);position:relative}
+.soon-ribbon{position:absolute;top:14px;right:14px;z-index:3;background:#fff;color:#8b43cc;border:1px solid #ead5ff;padding:8px 13px;border-radius:40px;font-size:11px;font-weight:900;box-shadow:0 5px 18px #4a247b15}
+.soon-cover{background:linear-gradient(145deg,#242c59,#7655b7,#e58db8)!important}.soon-notice{padding:12px;border-radius:13px;background:#f4eaff;color:#7d36b5;font-size:12px;font-weight:900;text-align:center;margin-top:10px}
+.search{width:100%;padding:17px 20px;border:1px solid #e0e5fb;border-radius:17px;background:#fff;margin-bottom:17px;outline:none;box-shadow:0 8px 25px #314a9708}
+.search:focus{border-color:var(--blue);box-shadow:0 0 0 4px #5367f418}
+.categories{display:flex;gap:9px;flex-wrap:wrap;overflow:visible;padding:0 0 15px;max-width:100%}
+.cat{white-space:nowrap;border:1px solid var(--line);border-radius:13px;background:white;padding:12px 17px;font-size:12px;font-weight:900;color:#687393}
+.cat.active{background:linear-gradient(120deg,var(--blue),var(--purple));color:white;border-color:transparent;box-shadow:0 8px 20px #5367f433}
+.shipping{margin-top:30px;background:linear-gradient(110deg,#172a53,#3e4d94,#7760c8);border-radius:28px;padding:27px 30px;color:white;display:flex;align-items:center;justify-content:space-between;gap:16px;overflow:hidden;position:relative}
+.shipping:after{content:"";position:absolute;width:260px;height:260px;border:1px solid #ffffff25;border-radius:50%;left:20%;top:-170px}
+.shipping-left{display:flex;align-items:center;gap:16px;min-width:0}.tipax-logo{width:70px;height:70px;border-radius:21px;background:white;color:#d72e37;display:grid;place-items:center;font-weight:900;font-size:16px;animation:pulse 3s infinite;box-shadow:0 10px 28px #0002;flex-shrink:0}
+.shipping h2{font-size:30px;margin:0 0 4px}.shipping p{font-size:11px;color:#e0e6ff;margin:0}.shipping .cost{text-align:left;font-weight:900;font-size:21px;white-space:nowrap}.shipping .cost small{display:block;font-size:10px;color:#e0e6ff}
+footer{margin-top:45px;background:linear-gradient(125deg,#131f42,#263b78 65%,#59418f);color:white;padding:38px 0}
+.footer-row{display:flex;justify-content:space-between;align-items:center;gap:20px}.footer-row>div{min-width:0}footer p{font-size:11px;line-height:2;color:#c8d0eb}
+.admin-fab{position:fixed;z-index:40;bottom:19px;left:19px;width:58px;height:58px;border:1px solid #ffffff65;border-radius:20px;color:white;background:linear-gradient(140deg,#23365e,#6575f7);font-size:22px;box-shadow:0 12px 35px #4d5ca855;animation:pulse 3s infinite}
+.backdrop{position:fixed;inset:0;z-index:70;background:#0e1730b8;backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:0}
+.backdrop.open{display:flex;animation:fade .2s}
+.modal{width:min(620px,100%);max-height:94vh;overflow:auto;background:#f8f9ff;border-radius:30px;padding:26px;box-shadow:0 30px 100px #0005;animation:modalin .3s}
+.modal.wide{width:min(1100px,100%)}
+.modalhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.modalhead h2{font-size:30px;margin:0}.close{width:42px;height:42px;border:0;border-radius:13px;background:#e9edff;color:#3446b2;font-size:22px;flex-shrink:0}
+#accountModal{padding:0;align-items:stretch;justify-content:stretch}
+#accountModal .modal{width:100%;height:100%;height:100dvh;max-width:none;max-height:none;border-radius:0;padding:clamp(18px,3vw,42px);overflow-y:auto;background:radial-gradient(ellipse at 95% 0%,#e9e3ff,transparent 30%),#f7f8ff}
+#accountModal .modalhead{position:sticky;top:-1px;z-index:4;background:#f7f8fff0;backdrop-filter:blur(16px);padding:12px 0 17px}
+#accountContent{max-width:1180px;margin:0 auto}
+#accountContent .welcome{min-height:190px;padding:30px 35px;border-radius:28px;color:white;background:linear-gradient(115deg,#263e82,#5869ef 55%,#a45fe5);position:relative;overflow:hidden;box-shadow:0 20px 55px #5968d83a}
+#accountContent .welcome:after{content:"✦";position:absolute;left:6%;top:-30px;font-size:210px;color:#ffffff15;transform:rotate(12deg)}
+#accountContent .welcome h2{font-size:36px;margin:0 0 8px;position:relative;z-index:1}
+#accountContent .welcome p{font-size:13px;line-height:2;margin:0;position:relative;z-index:1;color:#e2e7ff}
+#accountContent .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
+#accountContent .tab{padding:13px 20px;border:1px solid #e1e6fb;border-radius:14px;background:white;font-size:12px;font-weight:900;color:#667191}
+#accountContent .tab.active{background:linear-gradient(120deg,var(--blue),var(--purple));color:white;border-color:transparent;box-shadow:0 10px 24px #5367f43a}
+#profilePanel{min-width:0}
+#profilePanel .orders-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+#profilePanel .order-float-card{position:relative;min-width:0;padding:22px;border-radius:24px;border:1px solid #e1e7fb;background:linear-gradient(145deg,#fff,#f4f6ff);box-shadow:0 12px 35px #354c9b0d;overflow:hidden;animation:appear .45s both}
+#profilePanel .order-float-card:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(var(--blue),var(--purple),var(--cyan))}
+#profilePanel .order-card-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+#profilePanel .order-glyph{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:#e9edff;color:#5367f4;font-size:20px}
+#profilePanel .order-live-pill{font-size:10px;font-weight:900;color:#647095;background:#edf0ff;border-radius:30px;padding:8px 11px}
+#profilePanel .order-live-pill i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#30bf8b;margin-left:5px;box-shadow:0 0 0 4px #30bf8b22}
+#profilePanel .order-card-id{font-size:11px;color:#8a93b1;margin-top:17px}
+#profilePanel .order-card-title{font-size:25px;margin:7px 0;color:#202d58;line-height:1.5}
+#profilePanel .order-card-meta{display:flex;gap:15px;flex-wrap:wrap;color:#7883a5;font-size:10px}
+#profilePanel .order-card-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:17px 0 13px;padding-top:13px;border-top:1px solid #e7eafa}
+#profilePanel .order-card-bottom small{display:block;font-size:10px;color:#8a94b3}
+#profilePanel .order-card-bottom strong{display:block;font-size:17px;color:#3546b2;margin-top:4px}
+#profilePanel .order-status-orb{border-radius:30px;padding:8px 12px;font-size:10px;font-weight:900;background:#eaf0ff;color:#485bd2}
+#profilePanel .order-mini-track{position:relative;display:flex;justify-content:space-between;gap:3px;margin:26px 0 17px}
+#profilePanel .order-mini-line{position:absolute;right:4%;left:4%;top:12px;height:4px;background:#e4e8f8;border-radius:10px;overflow:hidden}
+#profilePanel .order-mini-line span{display:block;height:100%;background:linear-gradient(90deg,#5267f5,#a45fe5,#38bdcf);border-radius:10px;transition:width .6s}
+#profilePanel .order-mini-step{position:relative;z-index:1;display:flex;align-items:center;flex-direction:column;gap:7px;flex:1;min-width:0;color:#a0a8bf;text-align:center}
+#profilePanel .order-mini-step i{width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:#e9edf8;border:3px solid #fff;font-style:normal;font-size:10px;font-weight:900}
+#profilePanel .order-mini-step.reached{color:#5367f4;font-weight:900}
+#profilePanel .order-mini-step.reached i{background:linear-gradient(135deg,#5367f4,#9a5fe8);color:white;box-shadow:0 4px 12px #5367f433}
+#profilePanel .order-mini-step small{font-size:9px;line-height:1.5;overflow-wrap:anywhere}
+#profilePanel .order-track-button{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(110deg,#273f85,#5969ec 60%,#9a5fe8);color:white;font-weight:900;font-size:12px;box-shadow:0 10px 24px #5267f433}
+#profilePanel .order-track-button span{float:left;font-size:17px}
+#profilePanel .checkout-tip{padding:13px 15px;border-radius:14px;background:#fff4df;color:#89601a;font-size:11px;line-height:1.9}
+#profilePanel .orders-empty,.empty{padding:38px 20px;text-align:center;color:#7d88a8;background:#fff;border:1px dashed #d6ddf6;border-radius:22px;line-height:2}
+#profilePanel .orders-empty h3{font-size:25px;color:#26365f;margin:8px}
+#profilePanel .orders-empty-orb{width:65px;height:65px;margin:auto;border-radius:22px;background:linear-gradient(140deg,#e6ebff,#f3e4ff);display:grid;place-items:center;color:#5868e9;font-size:29px}
+#profilePanel .order{border:1px solid var(--line);border-radius:17px;padding:15px;margin:12px 0;background:white}
+#profilePanel .orders-grid .order-card-shine{position:absolute;right:-40px;top:-55px;width:170px;height:170px;border-radius:50%;background:#9aabff16;pointer-events:none}
+#accountContent>.btn.white{display:block;max-width:1180px;margin:22px auto 0!important;border-radius:14px}
+.field{display:grid;gap:7px;margin:14px 0}.field label{font-size:12px;font-weight:900;color:#44517a}
+.field input,.field textarea,.field select{width:100%;padding:14px;border:1px solid #e0e5f7;border-radius:14px;background:white;outline:none;min-width:0}
+.field textarea{min-height:100px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--blue);box-shadow:0 0 0 4px #6875ff18}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.muted{color:var(--muted);font-size:11px;line-height:2}
+.cartitem{display:grid;grid-template-columns:62px minmax(0,1fr) auto;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:17px;margin-bottom:10px;background:white}
+.mini{height:77px;border-radius:12px;display:grid;place-items:center;color:white;text-align:center;font:15px Lalezar;padding:4px}
+.totals{padding:17px;background:#edf0ff;border-radius:17px;margin-top:16px}.totalrow{display:flex;justify-content:space-between;gap:10px;margin:9px 0;font-size:12px}.totalrow.final{border-top:1px solid #d7def7;padding-top:12px;font-size:16px;font-weight:900}
+.status{display:inline-block;border-radius:10px;background:#edf0ff;color:var(--blue);padding:6px 9px;font-size:10px;font-weight:900}.track{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 14px;border:1px solid #e2e7fb;border-radius:13px;background:#f7f8ff;font-size:11px;color:#7782a2}.track strong{color:#3546b2;overflow-wrap:anywhere;direction:ltr}
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:14px;max-width:100%}table{border-collapse:collapse;width:100%;min-width:780px;font-size:11px}th,td{padding:12px;text-align:right;border-bottom:1px solid var(--line);vertical-align:middle}th{background:#f1f3ff}
+.adminstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}.adminstat{background:#f1f3ff;border-radius:14px;padding:15px}.adminstat strong{display:block;color:var(--blue);font-size:21px}.adminstat span{font-size:10px;color:var(--muted)}
+.toast{position:fixed;z-index:1200;bottom:23px;right:50%;transform:translate(50%,25px);opacity:0;pointer-events:none;background:#182344;color:white;padding:14px 20px;border-radius:15px;font-size:12px;transition:.3s;max-width:92%;text-align:center;box-shadow:0 12px 30px #17204444}.toast.show{opacity:1;transform:translate(50%,0)}
+.detail-layout{display:grid;grid-template-columns:minmax(240px,340px) minmax(0,1fr);gap:clamp(20px,4vw,45px);align-items:start;padding:10px 0 30px}
+.detailcover{min-height:440px;border-radius:22px;display:grid;place-items:center;text-align:center;padding:20px;color:white;font:43px Lalezar;line-height:1.7;box-shadow:var(--shadow);position:sticky;top:85px}
+.detailbody h2{font-size:clamp(32px,4vw,48px);margin:5px 0 12px}.detailbody p{line-height:2.2;font-size:14px;color:var(--muted)}
+.detailbody .bigprice{font-size:23px;font-weight:900}.detailbullets{padding:17px;background:#f0f2ff;border-radius:16px;line-height:2.5;font-size:13px;margin:17px 0}.noticebar{padding:14px;background:#f0f3ff;border-radius:13px;font-size:11px;line-height:2}
+.hidden{display:none!important}
+.admin-page{position:fixed;inset:0;width:100%;height:100%;height:100dvh;z-index:100;background:#f7f8ff;overflow:auto;display:none;animation:fade .25s;overscroll-behavior:contain}.admin-page.open{display:block}
+.admin-top{position:sticky;top:0;background:#ffffffed;backdrop-filter:blur(15px);border-bottom:1px solid var(--line);padding:14px;z-index:2}.admin-top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}.admin-main{padding:22px 0 55px}
+.address-page,.checkout-page,.contact-page,.book-page{position:fixed;inset:0;z-index:1000;display:none;overflow-y:auto;overflow-x:hidden;background:#f7f8ff;color:var(--ink);overscroll-behavior:contain}.address-page.open,.checkout-page.open,.contact-page.open,.book-page.open{display:block;animation:fade .25s}
+.address-top,.checkout-top,.contact-top,.book-page-top{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px max(20px,calc((100vw - 1180px)/2));background:#ffffffdf;backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.address-brand,.checkout-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#252e58;font-weight:900;font-size:19px}.address-brand small,.checkout-brand small{display:block;font-size:11px;color:#8790b2;font-weight:700}
+.address-brand-mark,.checkout-brand-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:15px;color:white;background:linear-gradient(140deg,#6c7cff,#a45cf2 60%,#ef83c0);box-shadow:0 9px 25px #8994f366;font-family:Lalezar;font-size:24px}
+.address-back,.checkout-back,.contact-close,.book-page-back{padding:12px 16px;border:1px solid #e0e5fb;border-radius:14px;background:#fff;color:#515d8c;font-family:inherit;font-weight:900;cursor:pointer;transition:.25s}
+.address-shell,.checkout-main,.contact-shell,.book-page-inner{max-width:1180px;margin:0 auto;padding:28px 22px 45px}
+.address-hero,.checkout-hero,.contact-intro{border-radius:30px;padding:34px;background:linear-gradient(115deg,#fff,#f1efff);box-shadow:0 20px 65px #7482bd18;border:1px solid white}
+.address-hero h1,.checkout-hero h1,.contact-intro h1{font-size:clamp(35px,5vw,55px);margin:10px 0}.address-hero p,.checkout-hero p,.contact-intro p{color:var(--muted);line-height:2}
+.address-columns{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}.address-panel,.checkout-panel{padding:24px;border-radius:23px;background:#fff;border:1px solid var(--line);box-shadow:0 12px 35px #354c9b0c;margin:18px 0}
+.address-panel-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}.address-panel-head h2,.checkout-panel h2{margin:0;font-size:24px}.address-panel-head p,.checkout-panel>p{font-size:11px;color:var(--muted);line-height:2}
+.address-panel-icon{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;background:#edf0ff;color:var(--blue);font-size:21px}
+.address-field{display:grid;gap:7px;margin:12px 0}.address-field label{font-size:11px;font-weight:900}.address-field input,.address-field textarea{width:100%;padding:13px;border:1px solid var(--line);border-radius:13px;background:#fafbff;min-width:0}.address-field textarea{min-height:90px}
+.address-save,.checkout-continue{border:0;border-radius:14px;padding:14px 20px;background:linear-gradient(120deg,var(--blue),var(--purple));color:white;font-weight:900;box-shadow:0 9px 25px #5367f433}
+.address-cards,.address-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.address-card,.address-select-card{padding:16px;border:1px solid var(--line);border-radius:17px;background:#fafbff;min-width:0;overflow-wrap:anywhere}
+.address-card-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.address-action{border:0;border-radius:10px;padding:9px;background:#edf0ff;color:#4558cc;font-size:10px;font-weight:900}
+.checkout-hero{background:linear-gradient(120deg,#172a53,#4555a1,#8660c6);color:white}.checkout-hero p{color:#dce3ff}.checkout-kicker{font-size:10px;letter-spacing:2px;color:#cbd5ff;font-weight:900}
+.checkout-stepbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.checkout-step{padding:10px 14px;border-radius:30px;background:#ffffff1a;color:#d5dcff;font-size:11px;font-weight:900}.checkout-step.active{background:#fff;color:#4e5fca}
+.pay-choice,.checkout-tip{padding:17px;border-radius:16px;background:#f0f2ff;color:#35406a;line-height:2;font-size:12px}.choice-title{display:flex;align-items:center;gap:10px;font-weight:900}.choice-icon{font-size:20px}.choice-detail{font-size:11px;color:#8790af;line-height:2;margin-top:8px}
+.checkout-actions{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:18px}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}.contact-card{padding:25px;border-radius:24px;background:white;border:1px solid var(--line);box-shadow:var(--shadow)}.contact-card h2{font-size:28px}.contact-card p{color:var(--muted);line-height:2;font-size:12px}.contact-value{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:13px;border-radius:14px;background:#f0f2ff}.contact-open{border:0;border-radius:11px;padding:10px 13px;background:var(--blue);color:white;font-weight:900}
+.tracking-page{display:none!important}
+#detailModal{padding:0;align-items:stretch;justify-content:stretch;overflow-y:auto}
+#detailModal .modal{width:100%;max-width:none;height:100dvh;max-height:none;border-radius:0;padding:clamp(16px,3vw,38px);overflow:auto}
+#detailModal .modalhead{position:sticky;top:-1px;background:#fff;z-index:5}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes bookfloat{0%,100%{transform:rotate(-8deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-13px)}}
+@keyframes appear{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes modalin{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{box-shadow:0 10px 28px #0002}50%{box-shadow:0 0 30px #818dff99}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-grid{grid-template-columns:1fr 1fr}.navlinks{gap:3px}.navlinks a{padding:9px 7px}.cover{height:230px}}
+@media(max-width:650px){
+ .wrap{width:calc(100% - 28px)}.nav{min-height:68px}.brand{font-size:25px}.logo{width:39px;height:39px}.navlinks{display:none}.nav .btn{font-size:10px;padding:10px 12px;min-height:40px}.iconbtn{height:43px;min-width:43px}
+ .hero{padding:24px 0 18px;min-height:auto}.hero-grid{grid-template-columns:1fr;gap:22px}.hero h1{font-size:51px;margin:15px 0}.hero p{font-size:13px}.art{height:300px;border-radius:27px}.orb{width:205px;height:205px}.fakebook{width:145px;height:210px;font-size:33px}.bubble{font-size:10px;padding:10px 12px}.b1{top:17px;right:12px}.b2{bottom:16px;left:12px}
+ section{padding:29px 0}.heading{align-items:flex-start;flex-direction:column}.heading h2{font-size:30px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .card{padding:8px;border-radius:17px}.cover{height:170px;border-radius:12px;padding:10px}.cover-title{font-size:23px}.cover-sub{font-size:9px}.book-info{padding:10px 2px 3px}.book-info h3{font-size:19px}.book-info p{font-size:10px;min-height:43px}.price{font-size:14px}.book-actions{flex-direction:column;gap:6px}.book-actions button{font-size:10px;padding:10px 5px}
+ .shipping{align-items:flex-start;flex-direction:column;padding:19px;border-radius:20px}.shipping h2{font-size:24px}.shipping .cost{text-align:right;font-size:18px}.tipax-logo{width:55px;height:55px}
+ .footer-row{align-items:flex-start;flex-direction:column}.modal{padding:16px;border-radius:20px}.row2{grid-template-columns:1fr}.cartitem{grid-template-columns:48px minmax(0,1fr) auto;gap:8px;padding:9px}.mini{height:62px;font-size:12px}
+ #accountModal .modal{padding:15px}.modalhead h2{font-size:25px}#accountContent .welcome{padding:23px 19px;min-height:150px;border-radius:21px}#accountContent .welcome h2{font-size:28px}#accountContent .tabs{gap:6px}#accountContent .tab{padding:10px 11px;font-size:10px}
+ #profilePanel .orders-grid{grid-template-columns:1fr}#profilePanel .order-float-card{padding:16px;border-radius:19px}#profilePanel .order-card-title{font-size:21px}#profilePanel .order-mini-step small{font-size:8px}
+ .detail-layout{grid-template-columns:1fr;gap:18px}.detailcover{position:relative;top:auto;min-height:270px}.detailbody h2{font-size:32px}
+ .address-shell,.checkout-main,.contact-shell,.book-page-inner{padding:18px 13px 35px}.address-hero,.checkout-hero,.contact-intro{padding:23px 18px;border-radius:22px}.address-columns,.contact-grid{grid-template-columns:1fr}.address-cards,.address-choice-grid{grid-template-columns:1fr}.address-top,.checkout-top,.contact-top,.book-page-top{padding:10px 13px}
+ .checkout-panel,.address-panel{padding:17px}.checkout-actions{flex-direction:column}.checkout-actions>*{width:100%}.adminstats{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+:root{--bg:#f6fbf6;--paper:#fff;--ink:#173a2b;--muted:#718b7b;--blue:#16834f;--purple:#36a66c;--cyan:#a4d9ae;--line:#dceee1;--shadow:0 24px 70px #145c3016;--green:#16834f;--green-dark:#0c5635;--green-light:#eaf7ed;--orange:#f47b35}
+html,body{background:#f7fbf7!important;color:#18392c!important}body{background:radial-gradient(ellipse at 5% 0%,#dff4e3 0,transparent 31%),radial-gradient(ellipse at 95% 30%,#e8f5e9 0,transparent 30%),#f8fcf8!important}
+header:not(.address-top):not(.checkout-top):not(.tracking-top):not(.contact-top):not(.book-page-top):not(.admin-top){background:#f9fff9e8!important;border-bottom:1px solid #d9ecdd!important}
+.brand{color:#164a31!important}.logo,.primary,.cat.active{background:linear-gradient(125deg,#0d6b40,#23a567 55%,#79c58d)!important;box-shadow:0 12px 27px #18824b32!important}
+.navlinks a:hover{background:#e7f6ea!important;color:#137746!important}.soft{background:#e8f6eb!important;color:#167848!important;border:1px solid #d5edda!important}.white{border-color:#dceee1!important;color:#194c34!important}
+.hero{min-height:610px;position:relative}.hero .tag{background:#f2fff4!important;border-color:#cfe9d4!important;color:#167747!important}.gradient{background:linear-gradient(100deg,#087343,#2caa68 55%,#8acb87)!important;color:transparent!important;background-clip:text!important}
+.art{background:linear-gradient(145deg,#e2f6e6,#f5fff5 55%,#d6f0de)!important;box-shadow:0 30px 85px #1c7a4420!important}.orb{background:linear-gradient(140deg,#7bc98c,#b7e7b8 65%,#e7f7d7)!important;box-shadow:0 25px 70px #57a56b38!important}.fakebook{background:linear-gradient(145deg,#3aa76b,#0f7048 60%,#174c37)!important;border-right-color:#0b5434!important}
+.bubble{color:#1b593a!important;border-color:#d9efdc!important}.heading h2,.section-bestsellers .heading h2{color:#164e33!important}.bestseller-tag{background:#e8f6eb!important;color:#167847!important}
+.card{border-color:#dceee1!important;box-shadow:0 12px 35px #174c2c0b!important}.card:hover{border-color:#a9d8b4!important;box-shadow:0 24px 55px #1e85432b!important}.price{color:#137747!important}
+.cat{border-color:#dceee1!important;color:#426a51!important}.cat.active{color:white!important}.search,.field input,.field textarea,.field select{border-color:#dceee1!important}.search:focus,.field input:focus,.field textarea:focus,.field select:focus{border-color:#55ad72!important;box-shadow:0 0 0 4px #4aaf6b18!important}
+.shipping{background:linear-gradient(110deg,#10472f,#17794b,#48a66b)!important}footer{background:linear-gradient(125deg,#103d2a,#155d3b 65%,#318653)!important}.admin-fab{background:linear-gradient(140deg,#145b38,#32a66a)!important}
+#accountModal .modal{background:radial-gradient(ellipse at 95% 0%,#e2f4e5,transparent 30%),#f6fcf7!important}#accountModal .modalhead{background:#f6fcf7f0!important}
+#accountContent .welcome{background:linear-gradient(115deg,#104b31,#17814d 55%,#54b878)!important;box-shadow:0 20px 55px #1a854532!important}
+#accountContent .tab.active{background:linear-gradient(120deg,#0d7042,#32a96c)!important;box-shadow:0 10px 24px #238c4b30!important}
+#profilePanel .order-float-card{border-color:#dceee1!important;background:linear-gradient(145deg,#fff,#f2faf3)!important}#profilePanel .order-float-card:before{background:linear-gradient(#1b9858,#7dc98c,#c0e7b9)!important}
+#profilePanel .order-glyph{background:#e5f5e8!important;color:#17834e!important}#profilePanel .order-live-pill{background:#e9f7eb!important;color:#39734d!important}#profilePanel .order-card-bottom strong{color:#147546!important}
+#profilePanel .order-status-orb{background:#e7f5e9!important;color:#167647!important}#profilePanel .order-mini-step.reached{color:#17844f!important}
+#profilePanel .order-mini-step.reached i{background:linear-gradient(135deg,#16814d,#62bb78)!important;box-shadow:0 4px 12px #238c4b33!important}#profilePanel .order-mini-line span{background:linear-gradient(90deg,#14834f,#4cb877,#a4d9ae)!important}
+#profilePanel .order-track-button{background:linear-gradient(110deg,#0d603a,#18834e 60%,#52b777)!important;box-shadow:0 10px 24px #238c4b33!important}
+#profilePanel .orders-empty-orb{background:linear-gradient(140deg,#e3f5e6,#eff9e9)!important;color:#19834f!important}
+.totals{background:#eaf6eb!important}.totalrow.final{border-color:#cde5d1!important}.status{background:#e8f6eb!important;color:#147747!important}.adminstat{background:#eaf6ec!important}.adminstat strong{color:#167a49!important}
+.address-brand-mark,.checkout-brand-mark{background:linear-gradient(140deg,#18834e,#5dbb77)!important}.address-hero,.checkout-hero,.contact-intro{background:linear-gradient(115deg,#f3fff5,#e5f5e8)!important}
+.checkout-hero{background:linear-gradient(120deg,#104b31,#18814d,#55b878)!important;color:white!important}.address-panel-icon{background:#e7f5e9!important;color:#18804c!important}.address-save,.checkout-continue{background:linear-gradient(120deg,#0d7042,#36a76b)!important}
+.pay-choice,.checkout-tip,.noticebar{background:#eaf6ec!important;color:#305c3f!important}.toast{background:#164b32!important}.detailbullets{background:#eaf6ec!important}
+.admin-page,.address-page,.checkout-page,.contact-page,.book-page{background:#f7fcf7!important}
+#particleField{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.85}
+body>*:not(#particleField){position:relative;z-index:1}body>.backdrop,body>.admin-page,body>.address-page,body>.checkout-page,body>.contact-page,body>.book-page{z-index:100!important}
+#studentPromo{position:relative;z-index:31;overflow:hidden;background:linear-gradient(110deg,#f36d2e,#ff9a4b 48%,#ffbd73);color:#fff;min-height:122px;display:flex;align-items:center}
+#studentPromo:before,#studentPromo:after{content:"";position:absolute;border:1px solid #ffffff55;border-radius:50%;width:250px;height:250px;top:-150px;left:7%;animation:promoOrbit 16s linear infinite}
+#studentPromo:after{width:330px;height:330px;left:72%;top:-210px;animation-direction:reverse}
+.promo-inner{width:min(1320px,calc(100% - 48px));margin:auto;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:center;position:relative;z-index:1;padding:17px 0}
+.promo-copy{display:flex;align-items:center;gap:18px;min-width:0}.promo-stamp{width:70px;height:70px;border-radius:23px;display:grid;place-items:center;flex-shrink:0;background:#fff;color:#e66b2c;font:32px Lalezar;box-shadow:0 12px 28px #8a361d30;animation:promoFloat 3s ease-in-out infinite}
+.promo-copy h2{font:32px Lalezar;margin:0 0 4px;color:#fff}.promo-copy p{margin:0;font-size:12px;color:#fff4e9;line-height:1.8}.promo-discount{display:inline-block;margin-right:8px;background:#fff3e7;color:#a8461c;border-radius:20px;padding:4px 9px;font-size:11px;font-weight:900}
+.promo-code{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#fff;border-radius:18px;color:#a64b20;box-shadow:0 12px 30px #8a361d30}.promo-code strong{font-size:19px;letter-spacing:1px;direction:ltr}.promo-code small{display:block;font-size:10px;color:#9c775f}
+.promo-close{position:absolute;left:0;top:9px;border:0;background:#ffffff30;color:#fff;border-radius:10px;width:30px;height:30px;font-size:19px}.promo-tag{font-size:10px;font-weight:900;letter-spacing:1px;color:#fff4e9}
+@keyframes promoOrbit{to{transform:rotate(360deg)}}@keyframes promoFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-7px) rotate(4deg)}}
+#orderDetailPage{position:fixed;inset:0;z-index:1300;display:none;overflow:auto;overflow-x:hidden;background:radial-gradient(ellipse at 90% 0%,#dff3e3,transparent 34%),#f6fcf7;overscroll-behavior:contain}
+#orderDetailPage.open{display:block;animation:fade .25s}.od-top{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px max(18px,calc((100vw - 1180px)/2));background:#fafffff0;border-bottom:1px solid #dceee1;backdrop-filter:blur(18px)}
+.od-brand{display:flex;align-items:center;gap:10px;font-weight:900;color:#164c32}.od-brand-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#0f7043,#54b878);color:white;display:grid;place-items:center;font:24px Lalezar}
+.od-main{max-width:1180px;margin:auto;padding:28px 20px 65px}.od-hero{padding:30px;border-radius:30px;color:white;background:linear-gradient(115deg,#104b31,#16804c 55%,#58b978);box-shadow:0 22px 60px #177c4533;position:relative;overflow:hidden}
+.od-hero:after{content:"✦";position:absolute;left:3%;top:-65px;font-size:250px;color:#ffffff16}.od-kicker{font-size:10px;letter-spacing:2px;color:#c9f1d2;font-weight:900}
+.od-hero h1{font:42px Lalezar;margin:10px 0}.od-hero p{color:#e0f4e5;font-size:12px;line-height:2;margin:0}.od-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.od-meta span{padding:9px 12px;border-radius:12px;background:#ffffff1b;font-size:11px}
+.od-track-card{margin-top:22px;padding:clamp(18px,3vw,34px);border-radius:28px;background:#fff;border:1px solid #dceee1;box-shadow:0 16px 45px #1c623010;overflow:hidden}
+.od-track-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.od-track-head h2{font:30px Lalezar;color:#174c32;margin:0}.od-track-head p{font-size:11px;color:#78917f}
+.od-route{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:44px 0 22px}.od-route-line{position:absolute;top:34px;right:8%;left:8%;height:7px;background:#e5f1e7;border-radius:20px;overflow:hidden}
+.od-route-fill{height:100%;width:0;background:linear-gradient(90deg,#14834f,#55bb75,#9bd99c);border-radius:20px;transition:width 1.3s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 15px #58b97980}
+.od-node{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;min-width:0;color:#9aafa0}
+.od-node-circle{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:#f1f7f1;border:5px solid white;box-shadow:0 0 0 2px #dceee1;color:#9aafa0;font-size:22px;font-weight:900;transition:.5s}
+.od-node.done{color:#18804c;font-weight:900}.od-node.done .od-node-circle{background:linear-gradient(140deg,#12804b,#66c17b);box-shadow:0 0 0 3px #d5efda,0 12px 28px #248e4b30;color:white;transform:translateY(-5px)}
+.od-node.current .od-node-circle{animation:nodePulse 2s infinite;box-shadow:0 0 0 4px #bce6c4,0 0 0 11px #e4f5e7;color:#137948;background:#fff}
+.od-node small{font-size:10px;line-height:1.7;max-width:110px}@keyframes nodePulse{0%,100%{box-shadow:0 0 0 4px #bce6c4,0 0 0 11px #e4f5e7}50%{box-shadow:0 0 0 6px #a8ddb4,0 0 0 17px #e4f5e7}}
+.od-status-banner{padding:16px;border-radius:17px;background:#eaf6ec;color:#255c3c;font-size:12px;line-height:2}.od-status-banner.cancelled{background:#fff0ed;color:#a34635}
+.od-bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}.od-info{padding:22px;border-radius:23px;background:white;border:1px solid #dceee1;box-shadow:0 12px 35px #1b663010;min-width:0}
+.od-info h3{font:24px Lalezar;margin:0 0 14px;color:#174d32}.od-info p{font-size:12px;line-height:2.1;color:#718879;overflow-wrap:anywhere}.od-info strong{color:#285d3c}
+.od-code{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:13px;border-radius:13px;background:#f0f8f1;color:#176b40}.od-code strong{font-size:17px;direction:ltr;letter-spacing:1px}.od-code button{border:0;background:#dff1e2;color:#167747;border-radius:10px;padding:9px 12px;font-weight:900}
+.customer-order-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:20px 0}.customer-order-tab{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:15px 17px;border:1px solid #dceee1;border-radius:16px;background:#fff;color:#426a51;font-size:12px;font-weight:900;transition:.25s}
+.customer-order-tab b{min-width:25px;height:25px;border-radius:50%;display:grid;place-items:center;background:#edf7ef;color:#197b49}.customer-order-tab.active{background:linear-gradient(120deg,#0d7042,#32a96c);color:white;border-color:transparent;box-shadow:0 10px 24px #238c4b30}.customer-order-tab.active b{background:#ffffff30;color:white}
+.coupon-panel{margin:15px 0;padding:18px;border:1px dashed #e8a16c;background:linear-gradient(120deg,#fff8f1,#fff);border-radius:17px}.coupon-heading{font-weight:900;color:#a65325;margin-bottom:10px}
+.coupon-row{display:flex;gap:9px}.coupon-row input{flex:1;min-width:0;padding:13px;border:1px solid #f0d4c0;border-radius:12px;background:white;color:#a34c20;font-weight:900}.coupon-feedback{font-size:10px;color:#a16b4b;margin-top:9px;line-height:1.8}.coupon-saving{color:#16834f;font-weight:900}
+.admin-order-search{padding:16px;background:#f1f8f2;border:1px solid #dceee1;border-radius:18px;margin:14px 0}.admin-order-search label{display:block;font-size:12px;font-weight:900;color:#245d3b;margin-bottom:9px}
+.admin-order-search>div{display:flex;gap:9px}.admin-order-search input{flex:1;min-width:0;border:1px solid #dceee1;border-radius:12px;padding:13px;background:#fff}.admin-order-summary{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}.admin-order-summary span{background:#eaf6ec;color:#267044;padding:9px 12px;border-radius:12px;font-size:10px;font-weight:900}
+@media(max-width:700px){.promo-inner{width:calc(100% - 28px);grid-template-columns:1fr;gap:10px;padding:14px 0}.promo-copy{gap:11px}.promo-stamp{width:52px;height:52px;border-radius:17px;font-size:24px}.promo-copy h2{font-size:25px}.promo-code{justify-content:space-between;padding:10px 13px}.hero{min-height:0}.od-main{padding:16px 12px 45px}.od-hero{padding:22px 18px;border-radius:22px}.od-hero h1{font-size:32px}.od-track-card{padding:17px 10px;border-radius:21px}.od-track-head h2{font-size:24px}.od-route{gap:2px;margin:36px 0 20px}.od-route-line{top:25px;right:7%;left:7%;height:5px}.od-node-circle{width:50px;height:50px;font-size:17px;border-width:4px}.od-node small{font-size:8px;max-width:58px}.od-bottom-grid{grid-template-columns:1fr}.od-info{padding:18px}.customer-order-tabs{gap:6px}.customer-order-tab{padding:12px 8px;font-size:10px;flex-direction:column}.coupon-row,.admin-order-search>div{flex-direction:column}}
+@media(max-width:430px){.od-node-circle{width:42px;height:42px;font-size:15px}.od-route-line{top:21px}.od-node small{font-size:7px}}
+@media(prefers-reduced-motion:reduce){#studentPromo:before,#studentPromo:after,.promo-stamp,.od-node.current .od-node-circle{animation:none!important}}
+
+
+.otp-entry-button{width:100%;margin-top:16px;padding:16px 18px;border:1px solid #b9dfc2;border-radius:17px;background:linear-gradient(110deg,#effaf0,#fff);color:#176d42;font-weight:900;font-family:inherit;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:transform .25s,box-shadow .25s,border-color .25s}
+.otp-entry-button:hover{transform:translateY(-3px);border-color:#63b77b;box-shadow:0 14px 30px #1d8c4b20}
+.otp-entry-note{text-align:center!important;color:#839b89!important;font-size:10px!important;margin:9px 0 0!important}
+.otp-shell{position:relative;overflow:hidden;border:1px solid #d9eddd;border-radius:27px;padding:clamp(19px,4vw,32px);background:radial-gradient(circle at 95% 0%,#dff4e4 0,transparent 34%),linear-gradient(145deg,#fff,#f6fcf7);box-shadow:0 22px 60px #145c3014;animation:otpRise .5s cubic-bezier(.2,.8,.2,1) both}
+.otp-shell:before{content:"";position:absolute;width:190px;height:190px;left:-100px;bottom:-120px;border:1px solid #b8dfc1;border-radius:50%;box-shadow:0 0 0 20px #eaf7ec,0 0 0 42px #f2faf3;pointer-events:none}
+.otp-brand-mark{width:62px;height:62px;border-radius:21px;background:linear-gradient(140deg,#0c693e,#39a76a 65%,#83cc8b);color:#fff;display:grid;place-items:center;font:32px Lalezar;box-shadow:0 12px 28px #16804b35;margin-bottom:18px;position:relative}
+.otp-eyebrow{font-size:10px;font-weight:900;letter-spacing:2px;color:#429263}
+.otp-shell h2{font:31px Lalezar;color:#174b31;margin:7px 0}
+.otp-shell .otp-description{font-size:12px;line-height:2;color:#718879;margin:0 0 22px}
+.otp-phone-field{display:flex;align-items:center;gap:10px;border:1px solid #d8eadc;border-radius:16px;background:#fff;padding:0 14px;transition:.2s}
+.otp-phone-field:focus-within{border-color:#53ae70;box-shadow:0 0 0 4px #4aaf6b18}
+.otp-phone-field span{color:#18814e;font-size:20px}
+.otp-phone-field input{flex:1;min-width:0;border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;padding:16px 3px!important;direction:ltr;text-align:left;font-size:16px;font-weight:800;color:#194b32}
+.otp-primary{width:100%;border:0;border-radius:16px;padding:16px 18px;margin-top:14px;background:linear-gradient(110deg,#0d603a,#18834e 60%,#58b878);color:white;font:900 13px inherit;box-shadow:0 12px 25px #238c4b2b;cursor:pointer;transition:.25s}
+.otp-primary:hover{transform:translateY(-2px);box-shadow:0 17px 32px #238c4b3a}
+.otp-back{border:0;background:transparent;color:#43835b;font:800 11px inherit;padding:12px 0;cursor:pointer}
+.otp-preview-warning{margin-top:17px;padding:12px 14px;border:1px dashed #e5c18c;background:#fff9ed;border-radius:13px;color:#91652d;font-size:10px;line-height:1.9}
+.otp-digits{display:flex;justify-content:center;gap:9px;direction:ltr;margin:23px 0}
+.otp-digits input{width:clamp(39px,10vw,52px);height:58px;border:1px solid #d6e9da;border-radius:14px;background:white;text-align:center;font-size:23px;font-weight:900;color:#176e42;outline:none;transition:.2s}
+.otp-digits input:focus{border-color:#45a86a;box-shadow:0 0 0 4px #4aaf6b18;transform:translateY(-3px)}
+.otp-destination{padding:12px 14px;border-radius:13px;background:#edf8ef;color:#39724c;font-size:11px;text-align:center;direction:ltr}
+.otp-resend{border:0;background:transparent;color:#18804d;font:900 11px inherit;cursor:pointer;padding:10px}
+@keyframes otpRise{from{opacity:0;transform:translateY(13px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:480px){.otp-shell{border-radius:21px;padding:20px 16px}.otp-shell h2{font-size:27px}.otp-digits{gap:6px}.otp-digits input{height:52px;border-radius:11px}}
+
+/* Mahigir unified green & white visual system */
+:root{--bg:#f4faf5;--paper:#fff;--ink:#173326;--muted:#718477;--blue:#16834b;--purple:#16834b;--cyan:#55b978;--line:#dcebe0;--shadow:0 22px 65px #174b2b12}
+html,body{background-color:#f4faf5!important;color:#173326}
+body{background-image:radial-gradient(ellipse at 0 0,#e0f2e5 0,transparent 34%),radial-gradient(ellipse at 100% 22%,#eaf6ed 0,transparent 30%),linear-gradient(135deg,#f8fcf8,#f1f8f2)!important}
+header:not(.address-top):not(.checkout-top):not(.tracking-top):not(.contact-top):not(.book-page-top):not(.admin-top){background:#fbfefbdd!important;border-bottom:1px solid #dcebe0!important;backdrop-filter:blur(24px)}
+.nav{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{color:#173326!important;font-family:Lalezar,Vazirmatn,sans-serif!important;font-size:32px;display:flex;align-items:center;gap:11px;white-space:nowrap}
+.logo,.mark{background:linear-gradient(140deg,#147b45,#31a963 65%,#78c98b)!important;box-shadow:0 10px 28px #278c4c35!important}
+.navlinks,.actions{display:flex;align-items:center;gap:10px;min-width:0}
+.navlinks a,.links a{padding:10px 13px;border-radius:12px;color:#557261!important;font-size:12px;font-weight:800;background:transparent!important;border:0!important;transition:.2s}
+.navlinks a:hover,.links a:hover{background:#e8f5eb!important;color:#147b45!important}
+.btn.primary,.primary,.checkout-continue,.action{color:#fff!important;background:linear-gradient(120deg,#147b45,#2da65e)!important;box-shadow:0 10px 25px #238c4b2b!important}
+.btn.soft,.soft,.iconbtn{background:#eaf5ec!important;color:#197b47!important;border-color:#d7eadc!important}
+.btn.white,.white,.ghost,.secondary{background:#fff!important;color:#244c34!important;border:1px solid #dcebe0!important}
+.profile-hero,.route-hero,.checkout-hero,.page-hero-card,.intro{background:linear-gradient(115deg,#124c31,#187847 55%,#42a966)!important;box-shadow:0 25px 65px #1d794032!important}
+.profile-hero p,.checkout-hero p,.page-hero-card p,.intro p{color:#e3f5e8!important}
+.profile-hero,.checkout-hero,.page-hero-card,.intro{border:1px solid #ffffff75!important}
+.gradient{background:linear-gradient(95deg,#147b45,#2ba45a 55%,#75c98a)!important;color:transparent!important;background-clip:text!important}
+.tag,.eyebrow{color:#197b47!important;background:#edf8ef!important;border-color:#d7eadc!important}
+.nav .brand:before{background:linear-gradient(140deg,#147b45,#31a963 65%,#78c98b)!important}
+.hub-card,.card,.book-card,.checkout-panel,.auth-card,.profile-info,.order-card,.address-card,.panel,.info-panel{border-color:#dcebe0!important;box-shadow:0 12px 35px #245b3510!important}
+.hub-card:hover,.card:hover,.book-card:hover,.order-card:hover,.address-card:hover{border-color:#a9d4b5!important;box-shadow:0 24px 55px #238c4b20!important}
+.hub-icon,.filter,.cat,.search,.address-select-card,.pay-choice{border-color:#dcebe0!important}
+.filter.active,.cat.active{background:linear-gradient(120deg,#147b45,#2da65e)!important;color:white!important}
+.price,.book-price,.hub-card b,.hub-kicker{color:#197b47!important}
+.shipping,.cart-total,footer{background:linear-gradient(115deg,#123f2a,#176c40 65%,#2e9255)!important}
+.admin-fab{background:linear-gradient(140deg,#145b36,#2da65e)!important;box-shadow:0 12px 35px #238c4b35!important}
+.route-page{background:radial-gradient(ellipse at 10% 0%,#236d43,transparent 35%),radial-gradient(ellipse at 95% 80%,#347f4e,transparent 34%),#102b1c!important}
+.status{background:#eaf5ec!important;color:#197b47!important}
+.step.active span,.step.done span{background:linear-gradient(130deg,#16834b,#52b978)!important;border-color:#a8e3b6!important;box-shadow:0 0 25px #36b96c55!important}
+.checkout-tip,.pay-choice,.value,.notice{background:#edf7ef!important;color:#315b3e!important;border-color:#dcebe0!important}
+.choice-check{background:linear-gradient(120deg,#147b45,#2da65e)!important}
+.toast{background:#17482d!important}
+@media(max-width:850px){.navlinks,.links{display:none!important}}
+@media(max-width:560px){.nav{min-height:68px}.brand{font-size:25px}.logo,.mark{width:40px;height:40px}.actions .btn{padding:10px 12px;font-size:11px}}
+
+/* Final green-only home palette */
+:root{--bg:#f4faf5;--ink:#173326;--muted:#718477;--blue:#16834b;--purple:#16834b;--cyan:#55b978;--line:#dcebe0}
+body{background:radial-gradient(ellipse at 0% 0%,#e0f2e5 0,transparent 32%),radial-gradient(ellipse at 100% 20%,#eaf6ed 0,transparent 27%),#f4faf5!important}
+.art{background:linear-gradient(145deg,#dff1e3,#eff9f0 55%,#d7efdf)!important}
+.orb{background:linear-gradient(140deg,#64b77d,#b8e3c1 65%,#e1f5e5)!important}
+.fakebook{background:linear-gradient(145deg,#176c40,#31a963 60%,#78c98b)!important;border-right-color:#145b36!important}
+.bestseller-tag{background:#eaf5ec!important;color:#197b47!important}
+.section-bestsellers .heading h2{color:#197b47!important}
+.hub-books,.hub-cart,.hub-account,.hub-orders,.hub-address,.hub-contact{--glow:#a8dcb4!important;--accent:#197b47!important}
+.soon-card{border-color:#dcebe0!important;background:linear-gradient(160deg,#fff,#f1f8f2)!important}
+.soon-ribbon,.soon-notice{color:#197b47!important;background:#eaf5ec!important;border-color:#dcebe0!important}
+
+/* Large, easy-to-read shipment tracking code */
+.od-code{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:12px!important;padding:25px 18px!important;min-height:145px!important;border:2px dashed #9bcbaa!important;border-radius:20px!important;background:linear-gradient(135deg,#f2fbf3,#e8f6eb)!important;text-align:center!important}
+.od-code small{font-size:12px!important;font-weight:900!important;color:#477956!important}
+.od-code strong{display:block!important;font-size:clamp(23px,4vw,36px)!important;line-height:1.5!important;color:#145c36!important;letter-spacing:1.5px!important;overflow-wrap:anywhere!important;max-width:100%!important}
+</style>
+<link rel="stylesheet" href="assets/mahigir.css">
+<link rel="stylesheet" href="assets/mahigir-header.css">
+<style>.catalog-intro{padding:38px 0 8px;background:linear-gradient(130deg,#eaf6ed,#f8fcf8 60%,#e2f2e6)}.catalog-intro .wrap{display:grid;justify-items:start;gap:10px}.catalog-back{display:inline-flex;align-items:center;padding:10px 15px;border:1px solid #d5e8d9;border-radius:12px;background:#fff;color:#197b47;font-size:12px;font-weight:900;margin-bottom:8px}.catalog-intro h1{font:400 clamp(38px,5vw,58px) Lalezar,Vazirmatn,sans-serif;color:#173326;margin:0}.catalog-intro p{color:#718477;font-size:13px;line-height:2;margin:0}.book-catalog-page .catalog-section{padding-top:30px}</style></head>
+<body class="books-page">
+<div id="studentPromo" aria-label="تخفیف روز دانش آموز"><button class="promo-close" onclick="dismissStudentPromo()" aria-label="بستن پیشنهاد">×</button><div class="promo-inner"><div class="promo-copy"><div class="promo-stamp">۱۰٪</div><div><div class="promo-tag">MAHIGIR SPECIAL OFFER ✦</div><h2>جشن روز دانش‌آموز در ماهیگیر!</h2><p>برای خرید کتاب‌ها، کد تخفیف ویژه را وارد کن.<span class="promo-discount">۱۰ درصد تخفیف</span></p></div></div><div class="promo-code"><div><small>کد تخفیف اختصاصی</small><strong>daneshcode</strong></div><button class="btn primary" onclick="copyText('daneshcode')">کپی کد</button></div></div></div>
+<header>
+ <div class="wrap nav">
+  <a href="index.html" class="brand"><span class="logo">م</span> ماهیگیر</a>
+  <nav class="navlinks"><a href="index.html">خانه</a><a href="books.html" aria-current="page">کتاب‌ها</a><a href="orders.html">سفارش‌ها</a><a href="addresses.html">نشانی‌ها</a><a href="contact.html">ارتباط</a></nav>
+  <div class="actions">
+   <a class="iconbtn" href="cart.html" aria-label="سبد خرید">🛒<span class="count" id="cartCount">۰</span></a>
+   <a class="btn primary" id="accountBtn" href="account.html">حساب من</a>
+  </div>
+ </div<main id="book-catalog" class="book-catalog-page"><section class="catalog-intro"><div class="wrap"><a class="catalog-back" href="index.html">← بازگشت به خانه</a><span class="bestseller-tag">✦ فروشگاه ماهیگیر</span><h1>کتابخانه ماهیگیر</h1><p>کتاب موردعلاقه‌ات را جست‌وجو کن، دسته‌بندی‌ها را ببین و به سبد خرید اضافه کن.</p></div></section><section class="catalog-section" id="catalog">
+  <div class="wrap">
+   <div class="catalog-head">
+    <div><span class="bestseller-tag">✦ مجموعه کتاب‌های ماهیگیر</span><h2>کتاب موردعلاقه‌ات را پیدا کن</h2><p>همه عنوان‌ها، قیمت‌ها و دسته‌بندی‌ها در یک صفحه مستقل.</p></div>
+    <div class="catalog-count">۷ عنوان برای انتخاب</div>
+   </div>
+   <div class="catalog-tools">
+    <input id="search" class="search" type="search" placeholder="نام کتاب را جست‌وجو کن..." aria-label="جست‌وجوی کتاب">
+    <div class="categories" aria-label="دسته‌بندی کتاب‌ها">
+     <button class="cat active" onclick="setCategory('همه',this)">همه کتاب‌ها</button>
+     <button class="cat" onclick="setCategory('داستانی',this)">داستانی</button>
+     <button class="cat" onclick="setCategory('ماجراجویی',this)">ماجراجویی</button>
+     <button class="cat" onclick="setCategory('متفرقه',this)">متفرقه</button>
+    </div>
+   </div>
+   <div class="grid" id="bookGrid"></div>
+   <div class="coming-section"><div class="coming-title"><span>✨</span><div><h3>به‌زودی در ماهیگیر</h3><p>عنوان‌هایی که به‌زودی به مجموعه اضافه می‌شوند.</p></div></div><div class="grid" id="comingSoonGrid"></div></div>
+  </div>
+ </section></main>n>
+ 
+</main>
+
+<footer><div class="wrap footer-row">
+ <div><div class="brand" style="color:white"><span class="logo">م</span> ماهیگیر</div><p>قصه‌های خوب، همراه لحظه‌های تو.</p></div>
+ <div><strong>ماهیگیر؛ همراه قصه‌ها</strong><p>انتخاب کتاب، ثبت سفارش و پیگیری خرید در یک تجربه منظم.</p></div>
+ <div style="display:flex;gap:9px;flex-wrap:wrap"><button class="btn soft" onclick="openContactPage()">تماس با ما</button><button class="btn white" onclick="openAccount()">حساب کاربری</button></div>
+</div></footer>
+
+<section class="contact-page" id="contactPage" aria-hidden="true">
+ <header class="contact-top"><div class="contact-title">ماهیگیر | تماس با ما</div><button class="contact-close" onclick="closeContactPage()">✕ بستن</button></header>
+ <main class="contact-shell">
+  <div class="contact-intro">
+   <h1><span class="contact-word">تماس</span> <span class="contact-word" style="animation-delay:.12s">با</span> <span class="contact-word" style="animation-delay:.24s">ما</span></h1>
+   <p><span class="contact-word" style="animation-delay:.32s">برای</span> <span class="contact-word" style="animation-delay:.38s">ارتباط،</span> <span class="contact-word" style="animation-delay:.44s">پرسش</span> <span class="contact-word" style="animation-delay:.5s">و</span> <span class="contact-word" style="animation-delay:.56s">پیگیری</span> <span class="contact-word" style="animation-delay:.62s">سفارش‌ها</span> <span class="contact-word" style="animation-delay:.68s">از</span> <span class="contact-word" style="animation-delay:.74s">راه‌های</span> <span class="contact-word" style="animation-delay:.8s">زیر</span> <span class="contact-word" style="animation-delay:.86s">با</span> <span class="contact-word" style="animation-delay:.92s">ما</span> <span class="contact-word" style="animation-delay:.98s">در</span> <span class="contact-word" style="animation-delay:1.04s">ارتباط</span> <span class="contact-word" style="animation-delay:1.1s">باشید.</span></p>
+  </div>
+  <div class="contact-grid">
+   <article class="contact-card contact-rubika" style="animation-delay:.15s">
+    <div class="contact-card-top"><div class="contact-icon">✈</div><span class="contact-chip">RUBIKA CHANNEL</span></div>
+    <div><h2>کانال روبیکای ما</h2><p>تازه‌ترین خبرها، معرفی کتاب‌ها و اطلاعیه‌های ماهیگیر را دنبال کن.</p>
+     <div class="contact-value"><span>@nashrmahigir</span><button class="contact-open" onclick="window.open('https://rubika.ir/nashrmahigir','_blank','noopener')">مشاهده کانال ↗</button></div>
+    </div>
+   </article>
+   <article class="contact-card contact-phone" style="animation-delay:.3s">
+    <div class="contact-card-top"><div class="contact-icon">☎</div><span class="contact-chip">PHONE SUPPORT</span></div>
+    <div><h2>ارتباط تلفنی</h2><p>برای ارتباط مستقیم با فروشگاه، با شماره زیر تماس بگیر.</p>
+     <div class="contact-value"><span>09904710488</span><button class="contact-open" onclick="window.location.href='tel:09904710488'">تماس ↗</button></div>
+    </div>
+   </article>
+  </div>
+  <div class="contact-footnote">ماهیگیر؛ قصه‌های خوب، همراه لحظه‌های تو. ✦</div>
+ </main>
+</section>
+
+<button class="admin-fab" onclick="openAdmin()" title="پنل مدیریت">⚙</button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="backdrop" id="cartModal" onclick="backdrop(event,'cartModal')"><div class="modal">
+ <div class="modalhead"><h2>سبد خرید 🛒</h2><button class="close" onclick="closeModal('cartModal')">×</button></div><div id="cartContent"></div>
+</div></div>
+<div class="backdrop" id="accountModal" onclick="backdrop(event,'accountModal')"><div class="modal">
+ <div class="modalhead"><h2 id="accountTitle">حساب کاربری</h2><button class="close" onclick="closeModal('accountModal')">×</button></div><div id="accountContent"></div>
+</div></div>
+<div class="book-page" id="bookPage" aria-hidden="true"><header class="book-page-top"><a class="brand" href="#home" onclick="closeBookPage()">ماهیگیر</a><button class="book-page-back" onclick="closeBookPage()">← بازگشت به فروشگاه</button></header><main class="book-page-inner"><div id="detailContent"></div></main></div>
+<section class="address-page" id="addressPage" aria-hidden="true">
+ <div class="address-glow ag-one"></div><div class="address-glow ag-two"></div><div class="address-noise"></div>
+ <header class="address-top"><a class="address-brand" href="#home" onclick="closeAddressPage()"><span class="address-brand-mark">م</span><span>ماهیگیر<small>نشانی‌های من</small></span></a><button class="address-back" onclick="closeAddressPage()">بازگشت به فروشگاه <span>←</span></button></header>
+ <main class="address-shell">
+  <section class="address-hero"><div class="address-hero-copy"><span class="address-kicker"><i></i> MY SHIPPING ADDRESSES</span><h1>نشانی‌ها،<br><span>با خیال راحت ✨</span></h1><p>نشانی‌های موردعلاقه‌ات را ذخیره کن تا موقع سفارش، سریع‌تر و راحت‌تر خریدت را نهایی کنی.</p><div class="address-perks"><span>✦ ذخیره و ویرایش آسان</span><span>⌁ آماده برای سفارش بعدی</span></div></div><div class="address-hero-art"><div class="address-ring ring-a"></div><div class="address-ring ring-b"></div><div class="address-pin">⌖</div><span class="address-float af-one">آدرس‌های تو، یک‌جا</span><span class="address-float af-two">امن و مرتب ✨</span></div></section>
+  <div class="address-columns"><section class="address-panel address-form-panel"><div class="address-panel-head"><span class="address-panel-icon">＋</span><div><h2 id="addressFormTitle">افزودن نشانی تازه</h2><p>اطلاعات گیرنده را با دقت وارد کن.</p></div></div><div id="addressFormContent"></div></section>
+  <section class="address-panel address-list-panel"><div class="address-panel-head"><span class="address-panel-icon list-icon">⌂</span><div><h2>نشانی‌های ذخیره‌شده</h2><p>برای سفارش، نشانی دلخواهت را انتخاب کن.</p></div><span class="address-counter" id="addressCounter">۰</span></div><div id="addressListContent"></div></section></div>
+  <footer class="address-footer"><span>✦ ماهیگیر؛ هر داستان، یک مقصد تازه</span><span>نشانی‌های تو برای حساب فعلی</span></footer>
+ </main>
+</section>
+<section class="checkout-page" id="checkoutPage" aria-hidden="true">
+<header class="checkout-top"><a class="checkout-brand" href="#home" onclick="closeCheckoutPage();return false"><span class="checkout-brand-mark">م</span><span>ماهیگیر<small style="display:block;font:11px Vazirmatn;color:#b7c2e6">مسیر خرید ویژه</small></span></a><button class="checkout-back" onclick="closeCheckoutPage()">بازگشت ←</button></header>
+<main class="checkout-main"><section class="checkout-hero"><span class="checkout-kicker">MAHIGIR · PREMIUM CHECKOUT</span><h1>فقط چند قدم تا کتابت ✨</h1><p>نشانی را انتخاب کن، روش ارسال و پرداخت را مشخص کن و سفارش را با خیال راحت ثبت کن.</p><div class="checkout-stepbar"><div class="checkout-step active" id="checkoutStep1">۱ · نشانی ارسال</div><div class="checkout-step active" id="checkoutStep2">۲ · روش پرداخت</div><div class="checkout-step" id="checkoutStep3">۳ · تأیید سفارش</div></div></section>
+<section class="checkout-panel"><h2>⌖ انتخاب نشانی</h2><p>روی کادر نشانی دلخواه بزن تا انتخاب شود. همه نشانی‌های ذخیره‌شده در همین صفحه نمایش داده می‌شوند.</p><div id="checkoutAddressChoices" class="address-choice-grid"></div><div class="checkout-actions"><button class="checkout-back" onclick="closeCheckoutPage();openAddresses()">＋ افزودن یا مدیریت نشانی‌ها</button></div></section>
+<section class="checkout-panel"><h2>📦 روش ارسال</h2><p>روش ارسال فروشگاه تیپاکس است؛ هزینه ارسال در جمع نهایی محاسبه می‌شود.</p><div class="pay-choice selected"><div class="choice-title"><span class="choice-icon">📦</span><span>ارسال با تیپاکس</span><span class="choice-check">✓</span></div><div class="choice-detail">هزینه ارسال: ۳۰۰٬۰۰۰ تومان · کد پستی و نشانی انتخاب‌شده همراه سفارش ثبت می‌شود.</div></div></section>
+<section class="checkout-panel"><h2>💳 روش پرداخت</h2><p>روش پرداخت فروشگاه فقط کارت‌به‌کارت است.</p><div class="checkout-tip" style="text-align:center;padding:24px"><strong style="display:block;font-size:16px;margin-bottom:12px">شماره کارت مقصد</strong><div dir="ltr" style="font-size:clamp(23px,5vw,34px);font-weight:1000;letter-spacing:1.5px;color:#fff;margin:12px 0;overflow-wrap:anywhere">5047 0616 6322 7839</div><strong style="display:block;font-size:17px">به نام جبارفر</strong><button type="button" class="checkout-continue" style="width:100%;margin-top:16px" onclick="copyText(&quot;5047061663227839&quot;)">کپی شماره کارت ⧉</button></div><div class="checkout-tip" style="margin-top:14px"><strong style="font-size:16px">آیدی فروشگاه در روبیکا</strong><div dir="ltr" style="font-size:24px;font-weight:1000;text-align:center;margin:12px 0">@amirtbpedit</div><button type="button" class="checkout-back" style="width:100%" onclick="copyText(&quot;@amirtbpedit&quot;)">کپی آیدی ⧉</button><p class="payment-warning" style="margin-top:12px">حتماً پس از کارت‌به‌کارت، تصویر رسید پرداخت را برای آیدی بالا ارسال کن. ثبت سفارش به معنی تأیید پرداخت نیست؛ سفارش پس از بررسی مدیر تأیید می‌شود.</p></div></section>
+<section class="checkout-panel"><h2>🧾 خلاصه خرید</h2><div id="checkoutSummary"></div><div class="checkout-actions"><button class="checkout-back" onclick="openCart()">بازگشت به سبد خرید</button><button class="checkout-continue" onclick="submitCheckoutOrder()">تأیید و ثبت سفارش ✨</button></div></section></main></section>
+<div class="backdrop" id="checkoutModal" onclick="backdrop(event,'checkoutModal')"><div class="modal">
+ <div class="modalhead"><h2>ثبت سفارش</h2><button class="close" onclick="closeModal('checkoutModal')">×</button></div><div id="checkoutContent"></div>
+</div></div>
+
+<div class="admin-page" id="adminPage">
+ <div class="admin-top"><div class="wrap"><div class="brand">⚙ پنل مدیریت ماهیگیر</div><button class="btn white" onclick="closeAdmin()">بستن پنل ✕</button></div></div>
+ <div class="wrap admin-main" id="adminContent"></div>
+</div>
+
+<script>
+"use strict";
+const PROJECT_URL="https://drwydadydhkdkrcdndrq.supabase.co";
+const PUBLIC_KEY="sb_publishable_gd2B7ZWcbE1x6yo-JedAeQ_LTcK7dVk";
+const SHIPPING=300000;
+const STAGES=[
+ {id:1,title:"ثبت سفارش",position:1},{id:2,title:"تأیید سفارش",position:2},{id:3,title:"آماده‌سازی",position:3},
+ {id:4,title:"تحویل به تیپاکس",position:4},{id:5,title:"ارسال شده",position:5},{id:6,title:"تحویل داده شده",position:6},{id:7,title:"لغو شده",position:7}
+];
+function stagePosition(stage){const s=String(stage?.status||stage?.title||stage?.stage_name||"ثبت سفارش").trim();const m={"ثبت سفارش":1,"تأیید سفارش":2,"تایید سفارش":2,"آماده‌سازی":3,"تحویل به تیپاکس":4,"ارسال شده":5,"تحویل داده شده":6,"لغو شده":7};return m[s]||1}
+function stageLabel(stage){return String(stage?.status||stage?.title||stage?.stage_name||"ثبت سفارش")}
+const PALETTES=[
+ "linear-gradient(145deg,#f77991,#7b4edb)",
+ "linear-gradient(145deg,#16a6a6,#174f81)",
+ "linear-gradient(145deg,#e8a23c,#cf526f)",
+ "linear-gradient(145deg,#6479ed,#35b7bd)",
+ "linear-gradient(145deg,#a75ccf,#f28eae)",
+ "linear-gradient(145deg,#293e67,#6b85ca)",
+ "linear-gradient(145deg,#dd7858,#7d5cc8)"
+];
+const INITIAL_BOOKS=[
+ {id:"dota-khafe",title:"دوتا خفن",price:200000,category:"ماجراجویی",description:"کتابی از مجموعه ماهیگیر؛ برای آشنایی با داستان و جزئیات بیشتر این کتاب را انتخاب کن.",color:PALETTES[0]},
+ {id:"shabhaye-zakiabad",title:"شب‌های زکی‌آباد",price:190000,category:"داستانی",description:"یکی از کتاب‌های مجموعه ماهیگیر؛ کتاب را انتخاب کن و اطلاعات آن را بخوان.",color:PALETTES[1]},
+ {id:"dokhtar-darchini",title:"دختر دارچینی",price:200000,category:"داستانی",description:"کتابی از مجموعه ماهیگیر با صفحه اختصاصی و امکان افزودن به سبد خرید.",color:PALETTES[2]},
+ {id:"jashnvare-hasan",title:"جشنواره حسن",price:250000,category:"متفرقه",description:"کتابی از مجموعه ماهیگیر؛ اطلاعات بیشتر در صفحه معرفی کتاب قرار می‌گیرد.",color:PALETTES[3]},
+ {id:"edvard-munk",title:"ادوارد مونک",price:50000,category:"متفرقه",description:"کتابی درباره ادوارد مونک، هنرمند شناخته‌شده نروژی.",color:PALETTES[4]},
+ {id:"ghavvasan-chernobyl",title:"غواصان چرنوبیل",price:50000,category:"داستانی",description:"کتابی درباره غواصان عملیات چرنوبیل و رویدادهای پیرامون آن.",color:PALETTES[5]},
+ {id:"arno-rubik",title:"ارنو روبیک",price:50000,category:"متفرقه",description:"کتابی با موضوع ارنو روبیک، مخترع مکعب روبیک.",color:PALETTES[6]}
+];
+const COMING_BOOK={
+ id:"dota-khafe-2",title:"دوتا خفن ۲",category:"ماجراجویی",
+ description:"کتاب دوتا خفن ۲ در آینده منتشر می‌شود. کتاب بزودی!",
+ color:"linear-gradient(145deg,#242c59,#7655b7,#e58db8)",
+ comingSoon:true
+};
+const COMING_BOOKS=[
+ COMING_BOOK,
+ {
+  id:"amme-shorte-baba",title:"عمه‌ام و شورت بابام",category:"طنز",
+  description:"یک عنوان طنز و عجیب که به‌زودی به فروشگاه ماهیگیر اضافه می‌شود.",
+  color:"linear-gradient(145deg,#e8a23c,#d64d75,#7655b7)",
+  comingSoon:true
+ }
+];
+const BESTSELLER_IDS=["dota-khafe","shabhaye-zakiabad","dokhtar-darchini"];
+const db=window.supabase?.createClient(PROJECT_URL,PUBLIC_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}})||null;
+
+let books=INITIAL_BOOKS.map(b=>({...b}));
+let cart=readCart(),currentUser=null,profile=null,orders=[],stages=STAGES.map(s=>({...s}));
+let category="همه",adminUnlocked=false,adminOrders=[],adminSelectedUser=null,adminUsers=[];
+let toastTimer=null,authBusy=false;
+
+function readCart(){
+ try{return JSON.parse(localStorage.getItem("mh_cart")||"[]")
+  .filter(x=>x&&typeof x.id==="string"&&Number.isFinite(+x.qty)&&+x.qty>0)
+  .map(x=>({id:x.id,qty:Math.min(99,Math.floor(+x.qty))}))
+ }catch{return []}
+}
+function saveCart(){
+ localStorage.setItem("mh_cart",JSON.stringify(cart));
+ updateCount();
+}
+function money(n){return Number(n||0).toLocaleString("fa-IR")+" تومان"}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function notify(s){
+ const e=document.getElementById("toast");
+ e.textContent=s;e.classList.add("show");
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>e.classList.remove("show"),3200);
+}
+function openModal(id){document.getElementById(id).classList.add("open");document.body.style.overflow="hidden"}
+function closeModal(id){
+ document.getElementById(id).classList.remove("open");
+ if(!document.querySelector(".backdrop.open")&&!document.getElementById("adminPage").classList.contains("open"))document.body.style.overflow="";
+}
+function backdrop(e,id){if(e.target.id===id)closeModal(id)}
+function updateCount(){
+ const count=cart.reduce((n,i)=>n+i.qty,0);
+ const badge=document.getElementById("cartCount");
+ badge.textContent=count.toLocaleString("fa-IR");
+ badge.setAttribute("aria-label","تعداد اقلام سبد خرید: "+count);
+}
+function getBook(id){return books.find(b=>String(b.id)===String(id))}
+function subtotal(){return cart.reduce((n,i)=>n+(Number(getBook(i.id)?.price)||0)*i.qty,0)}
+function setCategory(c,el){
+ category=c;
+ document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x===el));
+ renderBooks();
+}
+function productQty(id){return cart.find(x=>x.id===String(id))?.qty||0}
+function bookCard(b,i=0,options={}){
+ const soon=!!options.soon;
+ return `<article class="card ${soon?"soon-card":""}" style="animation-delay:${i*.05}s">
+  ${soon?'<span class="soon-ribbon">✨ کتاب بزودی</span>':""}
+  <div class="cover ${soon?"soon-cover":""}" style="background:${safeColor(b.color)}" onclick="openBook('${esc(b.id)}')">
+   <div><div class="cover-title">${esc(b.title)}</div><div class="cover-sub">${soon?"به‌زودی در ماهیگیر":"فروشگاه کتاب ماهیگیر"}</div></div>
+  </div>
+  <div class="book-info"><h3 onclick="openBook('${esc(b.id)}')">${esc(b.title)}</h3>
+   <p>${esc(b.description||"کتابی از مجموعه ماهیگیر.")}</p>
+   ${soon?'<div class="soon-notice">📚 کتاب بزودی</div>':`<div class="price">${money(b.price)}</div>
+   <div class="qty"><button aria-label="کم کردن تعداد" onclick="quickQty('${esc(b.id)}',-1)">−</button><strong id="qty-${esc(b.id)}">${productQty(b.id).toLocaleString("fa-IR")}</strong><button aria-label="افزایش تعداد" onclick="quickQty('${esc(b.id)}',1)">+</button><span class="muted">تعداد در سبد</span></div>
+   <div class="book-actions"><button class="btn soft" onclick="openBook('${esc(b.id)}')">مشاهده کتاب</button><button class="btn primary" onclick="addCart('${esc(b.id)}')">＋ سبد خرید</button></div>`}
+  </div>
+ </article>`;
+}
+function normalizeBookTitle(value){
+ return String(value||"").normalize("NFKC").replace(/[يى]/g,"ی").replace(/ك/g,"ک")
+  .replace(/[\u064B-\u065F\u0670\u200c\u200f\u200e]/g,"")
+  .replace(/[^\p{L}\p{N}]+/gu,"").toLowerCase();
+}
+function uniqueBooks(items){
+ const ids=new Set(),titles=new Set(),out=[];
+ for(const book of items){
+  if(!book||!book.id||!String(book.title||"").trim())continue;
+  const id=String(book.id),title=normalizeBookTitle(book.title);
+  if(ids.has(id)||titles.has(title))continue;
+  ids.add(id);titles.add(title);out.push(book);
+ }
+ return out;
+}
+function renderBestsellers(){
+ const grid=document.getElementById("bestsellerGrid");
+ if(grid)grid.replaceChildren();
+ const seen=new Set(books.map(b=>normalizeBookTitle(b.title)));
+ const upcoming=uniqueBooks(COMING_BOOKS).filter(b=>!seen.has(normalizeBookTitle(b.title)));
+ const target=document.getElementById("comingSoonGrid");
+ if(target)target.innerHTML=upcoming.map((b,i)=>bookCard(b,i,{soon:true})).join("");
+}
+function normalizeSearchText(value){
+ return String(value||"").normalize("NFKC").replace(/[يى]/g,"ی").replace(/ك/g,"ک")
+  .replace(/[\u064B-\u065F\u0670\u200c\u200f\u200e]/g,"").toLowerCase().trim();
+}
+function renderBooks(){
+ const q=normalizeSearchText(document.getElementById("search")?.value||"");
+ const list=uniqueBooks(books).filter(b=>(category==="همه"||b.category===category)&&normalizeSearchText(b.title).includes(q));
+ const target=document.getElementById("bookGrid");
+ if(target)target.innerHTML=list.length?list.map((b,i)=>bookCard(b,i)).join(""):'<div class="empty" style="grid-column:1/-1">کتابی پیدا نشد.</div>';
+ const count=document.querySelector(".catalog-count");
+ if(count)count.textContent=list.length.toLocaleString("fa-IR")+" کتاب";
+}
+function safeColor(c){return typeof c==="string"&&c.startsWith("linear-gradient(")&&c.length<200?c:PALETTES[0]}
+function quickQty(id,d){if(d>0)addCart(id);else if(productQty(id)>0)changeQty(id,-1);else notify("این کتاب هنوز در سبد خرید نیست.")}
+function openBook(id){
+ const b=COMING_BOOKS.find(x=>String(x.id)===String(id))||getBook(id);
+ if(!b)return;
+ const soon=!!b.comingSoon;
+ document.getElementById("detailContent").innerHTML=`
+ <div class="detail-layout">
+  <div class="detailcover" style="background:${safeColor(b.color)}"><div>${esc(b.title)}<div style="font:12px Vazirmatn;margin-top:15px">${soon?"کتاب به‌زودی":"ماهیگیر"}</div></div></div>
+  <div class="detailbody">
+   <span style="color:#16834f;font-size:12px;font-weight:900">${soon?"به‌زودی در فروشگاه ماهیگیر":"کتاب‌های ماهیگیر"}</span>
+   <h2>${esc(b.title)}</h2>
+   ${soon?'<div class="soon-notice" style="font-size:15px;padding:16px">✨ کتاب به‌زودی ✨</div>':`<div class="bigprice">${money(b.price)}</div>`}
+   <p>${esc(b.description||"کتابی از مجموعه ماهیگیر.")}</p>
+   <div class="detailbullets"><div>📚 عنوان: ${esc(b.title)}</div><div>🏷️ دسته‌بندی: ${esc(b.category||"متفرقه")}</div>${soon?'<div>🗓️ وضعیت: به‌زودی منتشر می‌شود</div>':'<div>📦 روش ارسال: تیپاکس</div><div>🚚 هزینه ارسال: '+money(SHIPPING)+'</div>'}</div>
+   ${soon?'<div class="noticebar">این کتاب هنوز برای خرید موجود نیست.</div>':`<p>تعداد موردنظرت را انتخاب کن و سپس به سبد خرید اضافه کن.</p><div class="qty"><button onclick="detailQty(-1)">−</button><strong id="detailQty">۱</strong><button onclick="detailQty(1)">+</button></div><button class="btn primary" style="margin-top:14px" onclick="addCart('${esc(b.id)}',window.detailAmount||1)">افزودن به سبد خرید 🛒</button>`}
+  </div>
+ </div>`;
+ window.detailBookId=String(id);window.detailAmount=1;
+ const page=document.getElementById("bookPage");page.classList.add("open");page.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+ history.pushState({mahigirBook:String(id)},"","?book="+encodeURIComponent(String(id)));
+ revealWords(page);
+}
+function closeBookPage(){
+ const page=document.getElementById("bookPage");if(!page)return;
+ page.classList.remove("open");page.setAttribute("aria-hidden","true");document.body.style.overflow="";
+ if(new URLSearchParams(location.search).has("book"))history.pushState({},"",location.pathname+location.hash);
+}
+function detailQty(d){
+ window.detailAmount=Math.max(1,Math.min(99,(window.detailAmount||1)+d));
+ const el=document.getElementById("detailQty");if(el)el.textContent=window.detailAmount.toLocaleString("fa-IR");
+}
+function addCart(id,amount=1){
+ const b=getBook(id);
+ if(!b){notify("این کتاب در دسترس نیست.");return}
+ if(b.comingSoon||COMING_BOOKS.some(x=>String(x.id)===String(id))){notify("این کتاب هنوز منتشر نشده است.");return}
+ amount=Math.max(1,Math.min(99,Math.floor(Number(amount)||1)));
+ let item=cart.find(x=>String(x.id)===String(id));
+ if(item)item.qty=Math.min(99,item.qty+amount);else cart.push({id:String(id),qty:amount});
+ saveCart();renderBooks();renderBestsellers();
+ if(document.getElementById("cartModal").classList.contains("open"))renderCart();
+ notify("✅ کتاب به سبد خرید اضافه شد");
+}
+function changeQty(id,d){
+ const item=cart.find(x=>String(x.id)===String(id));if(!item)return;
+ item.qty=Math.min(99,item.qty+d);
+ if(item.qty<=0)cart=cart.filter(x=>String(x.id)!==String(id));
+ saveCart();renderCart();renderBooks();renderBestsellers();
+}
+function removeCart(id){
+ cart=cart.filter(x=>String(x.id)!==String(id));
+ saveCart();renderCart();renderBooks();renderBestsellers();
+}
+function openCart(){renderCart();openModal("cartModal")}
+function renderCart(){
+ const el=document.getElementById("cartContent");
+ updateCount();
+ const valid=cart.filter(i=>getBook(i.id)&&!getBook(i.id).comingSoon);
+ if(!valid.length){
+  el.innerHTML='<div class="empty">🛒<br>سبد خرید خالی است.<br><br><button class="btn primary" onclick="closeModal(\'cartModal\');location.href=\'books.html\'">انتخاب کتاب</button></div>';
+  return;
+ }
+ el.innerHTML=valid.map(i=>{const b=getBook(i.id);return `<div class="cartitem">
+  <div class="mini" style="background:${safeColor(b.color)}">${esc(b.title)}</div>
+  <div><strong>${esc(b.title)}</strong><div class="muted">${money(b.price)} برای هر جلد</div>
+   <div class="qty"><button aria-label="کم کردن تعداد" onclick="changeQty('${esc(i.id)}',-1)">−</button><strong>${i.qty.toLocaleString("fa-IR")}</strong><button aria-label="افزایش تعداد" onclick="changeQty('${esc(i.id)}',1)">+</button></div>
+   <div class="muted">جمع این کتاب: ${money(b.price*i.qty)}</div>
+  </div><button class="close" aria-label="حذف کتاب" onclick="removeCart('${esc(i.id)}')">×</button>
+ </div>`}).join("")+
+ `<div class="totals"><div class="totalrow"><span>جمع کتاب‌ها</span><strong>${money(subtotal())}</strong></div><div class="totalrow"><span>ارسال تیپاکس</span><strong>${money(SHIPPING)}</strong></div><div class="totalrow final"><span>مبلغ نهایی</span><strong>${money(subtotal()+SHIPPING)}</strong></div></div><button class="btn primary" style="width:100%;margin-top:14px" onclick="startCheckout()">ادامه و ثبت سفارش ←</button>`;
+}
+
+/* ورود و ثبت‌نام */
+function usernameEmail(u){return u.trim().toLowerCase()+"@mahigir.ir"}
+function openAccount(){if(currentUser){renderProfile();openModal("accountModal")}else{renderAuth("login");openModal("accountModal")}}
+function renderAuth(mode){
+ document.getElementById("accountTitle").textContent=mode==="login"?"ورود به ماهیگیر":"ثبت‌نام";
+ document.getElementById("accountContent").innerHTML=`<div class="welcome"><h2>${mode==="login"?"خوش برگشتی!":"به ماهیگیر خوش آمدی!"}</h2><p>وارد شو تا سفارش‌ها و نشانی‌های خودت را مدیریت کنی.</p></div>
+ <form onsubmit="submitAuth(event,'${mode}')">${mode==="signup"?'<div class="field"><label>نام نمایشی</label><input name="display" maxlength="60" placeholder="نامی که نمایش داده می‌شود"></div>':""}
+ <div class="field"><label>نام کاربری</label><input name="username" required minlength="3" maxlength="30" pattern="[A-Za-z0-9_.-]+" autocomplete="username" dir="ltr" placeholder="username"></div>
+ <div class="field"><label>رمز عبور</label><input name="password" type="password" required minlength="8" autocomplete="${mode==="login"?"current-password":"new-password"}" placeholder="حداقل ۸ کاراکتر"></div>
+ <button type="submit" class="btn primary" style="width:100%">${mode==="login"?"ورود":"ساخت حساب کاربری"}</button></form>
+ <p class="muted" style="text-align:center">${mode==="login"?"حساب نداری؟":"قبلاً حساب ساخته‌ای؟"} <a style="color:var(--blue);font-weight:800;cursor:pointer" onclick="renderAuth('${mode==="login"?"signup":"login"}')">${mode==="login"?"ثبت‌نام":"ورود"}</a></p>
+ <div class="noticebar">نام کاربری با حروف انگلیسی، عدد، نقطه، خط تیره یا زیرخط؛ رمز حداقل ۸ کاراکتر.</div>`;
+}
+async function submitAuth(e,mode){
+ e.preventDefault();if(authBusy)return;
+ if(!db){notify("اتصال Supabase در دسترس نیست.");return}
+ const f=new FormData(e.target),username=String(f.get("username")||"").trim().toLowerCase(),password=String(f.get("password")||""),displayName=String(f.get("display")||"").trim()||username;
+ if(!/^[a-z0-9_.-]{3,30}$/.test(username)){notify("نام کاربری معتبر نیست.");return}
+ if(password.length<8){notify("رمز عبور باید حداقل ۸ کاراکتر باشد.");return}
+ authBusy=true;const btn=e.target.querySelector('button[type="submit"]');if(btn){btn.disabled=true;btn.textContent="در حال انجام..."}
+ try{
+  let result;
+  if(mode==="signup"){
+   const {data:created,error:createError}=await db.functions.invoke("admin-api",{body:{action:"create-account",username,password,display_name:displayName}});
+   if(createError)throw new Error(created?.error||createError.message||"ساخت حساب انجام نشد.");
+   if(created?.error)throw new Error(created.error);
+   result=await db.auth.signInWithPassword({email:usernameEmail(username),password});
+   if(result.error)throw result.error;
+   currentUser=result.data.user;
+   const {data:saved,error}=await db.from("mahigir_profiles").upsert({id:currentUser.id,username,display_name:displayName},{onConflict:"id"}).select().maybeSingle();
+   if(error)console.warn("Profile sync after signup failed; auth account is still active:",error);
+   profile=saved||{id:currentUser.id,username,display_name:displayName};
+  }else{
+   result=await db.auth.signInWithPassword({email:usernameEmail(username),password});
+   if(result.error)throw result.error;
+   currentUser=result.data.user;
+   const {data,error}=await db.from("mahigir_profiles").upsert({id:currentUser.id,username:currentUser.user_metadata?.username||username,display_name:currentUser.user_metadata?.display_name||username},{onConflict:"id"}).select().maybeSingle();
+   if(error)console.warn("Profile sync after login failed; auth session remains active:",error);
+   profile={...(data||{}),id:currentUser.id,username:data?.username||currentUser.user_metadata?.username||username,display_name:data?.display_name||currentUser.user_metadata?.display_name||username};
+  }
+  document.getElementById("accountBtn").textContent=profile.display_name||profile.username||"حساب کاربری";
+  renderProfile();notify(mode==="signup"?"ثبت‌نام موفق بود؛ خوش اومدی ✨":"خوش برگشتی ✨");
+ }catch(err){
+  console.error(err);const m=String(err?.message||"");
+  if(/already registered|already been registered|user already exists/i.test(m))notify("این نام کاربری قبلاً ثبت شده؛ وارد حساب شو.");
+  else if(/invalid login credentials/i.test(m))notify("نام کاربری یا رمز عبور صحیح نیست.");
+  else if(/email not confirmed/i.test(m))notify("تأیید ایمیل فعال است؛ تنظیمات Auth را بررسی کن.");
+  else if(/row-level security|permission denied/i.test(m))notify("ورود انجام شد اما مجوز جدول پروفایل درست نیست.");
+  else notify("عملیات ناموفق بود: "+m);
+ }finally{authBusy=false;if(btn){btn.disabled=false;btn.textContent=mode==="signup"?"ساخت حساب کاربری":"ورود"}}
+}
+async function logout(){
+ if(db){const {error}=await db.auth.signOut();if(error)console.error(error)}
+ currentUser=null;profile=null;orders=[];adminUnlocked=false;
+ document.getElementById("accountBtn").textContent="ورود / ثبت‌نام";
+ renderAuth("login");notify("از حساب خارج شدی.");
+}
+async function loadOrders(){
+ if(!db||!currentUser)return;
+ const {data,error}=await db.from("mahigir_orders").select("*").eq("user_id",currentUser.id).order("created_at",{ascending:false});
+ if(error)throw error;orders=data||[];
+}
+async function loadStages(){
+ if(!db){stages=STAGES;return}
+ const {data,error}=await db.from("mahigir_order_stages").select("*").order("stage_order");
+ if(error){console.warn(error);stages=STAGES;return}
+ stages=data?.length?data.map((x,i)=>({...x,position:Number(x.stage_order||x.id||i+1),title:x.stage_name||STAGES[Math.min(4,Math.max(0,i))].title})):STAGES;
+}
+function renderProfile(){
+ const name=profile?.display_name||profile?.username||"دوست عزیز";
+ document.getElementById("accountTitle").textContent="حساب کاربری ماهیگیر";
+ document.getElementById("accountContent").innerHTML=`<div class="welcome"><h2>سلام ${esc(name)} عزیز ✨</h2><p>به مرکز اختصاصی ماهیگیر خوش آمدی؛ همه سفارش‌ها و مسیرهایشان اینجا هستند.</p></div>
+ <div class="tabs"><button class="tab active" onclick="profileTab('orders',this)">سفارش‌ها</button><button class="tab" onclick="profileTab('addresses',this)">نشانی‌های من</button><button class="tab" onclick="profileTab('info',this)">اطلاعات حساب</button></div><div id="profilePanel"><div class="empty">در حال دریافت سفارش‌ها...</div></div><button class="btn white" style="width:100%;margin-top:14px" onclick="logout()">خروج از حساب</button>`;
+ Promise.all([loadOrders(),loadStages()]).then(()=>{const p=document.getElementById("profilePanel");if(p)p.innerHTML=ordersHTML();startCustomerOrderRealtime()}).catch(err=>{console.error(err);const p=document.getElementById("profilePanel");if(p)p.innerHTML='<div class="empty">دریافت سفارش‌ها ممکن نشد؛ دوباره تلاش کن.</div>'});
+}
+function profileTab(tab,el){document.querySelectorAll("#accountContent .tab").forEach(x=>x.classList.remove("active"));if(el)el.classList.add("active");const p=document.getElementById("profilePanel");if(!p)return;if(tab==="orders")p.innerHTML=ordersHTML();if(tab==="addresses")p.innerHTML=addressesHTML();if(tab==="info")p.innerHTML=`<div class="order"><p><strong>نام کاربری:</strong> ${esc(profile?.username||"")}</p><p><strong>نام نمایشی:</strong> ${esc(profile?.display_name||"")}</p></div>`;}
+function addressesHTML(){
+ const saved=readAddresses();
+ if(!saved.length)return `<div class="orders-empty"><div class="orders-empty-orb">⌂</div><h3>هنوز نشانی‌ای ذخیره نکرده‌ای</h3><p>یک نشانی ذخیره کن تا هنگام سفارش همان را انتخاب کنی و دوباره واردش نکنی.</p><button class="btn primary" onclick="openAddresses()">افزودن نشانی ✨</button></div>`;
+ return `<div class="orders-grid">${saved.map((a,i)=>`<article class="order-float-card" style="--card-index:${i%6}"><div class="order-card-top"><span class="order-glyph">⌂</span><span class="order-live-pill"><i></i> نشانی ذخیره‌شده</span></div><h3 class="order-card-title">${esc(a.recipient||"گیرنده")}</h3><div class="order-card-meta"><span>☎ ${esc(a.phone||"")}</span></div><p>${esc(a.city||"")}<br>${esc(a.address||"")}<br>کد پستی: ${esc(a.postal_code||"")}</p><button class="order-track-button" onclick="openAddresses()">مدیریت و ویرایش نشانی‌ها <span>↗</span></button></article>`).join("")}</div><button class="btn primary" style="margin-top:16px" onclick="openAddresses()">افزودن یا مدیریت نشانی‌ها ✨</button>`;
+}
+let customerOrderFilter="current",customerOrdersChannel=null;
+function orderBucket(o){const s=String(o.status||"ثبت سفارش").trim();if(/لغو|cancel/i.test(s)||Number(o.stage_id)===7)return "cancelled";if(/تحویل داده شده|تکمیل|delivered/i.test(s)||Number(o.stage_id)===6)return "delivered";return "current"}
+function stageIndexForOrder(o){const p=stagePosition(o);return p===7?-1:Math.max(0,Math.min(5,p-1))}
+function ordersHTML(){const counts={current:orders.filter(o=>orderBucket(o)==="current").length,delivered:orders.filter(o=>orderBucket(o)==="delivered").length,cancelled:orders.filter(o=>orderBucket(o)==="cancelled").length};const tabs=[["current","جاری"],["delivered","تحویل داده شده"],["cancelled","لغو شده"]];return '<div class="customer-order-tabs">'+tabs.map(([k,t])=>'<button class="customer-order-tab '+(customerOrderFilter===k?'active':'')+'" onclick="setCustomerOrderFilter(\''+k+'\',this)"><span>'+t+'</span><b>'+counts[k].toLocaleString("fa-IR")+'</b></button>').join("")+'</div><div id="customerOrderCards">'+customerOrderCards(customerOrderFilter)+'</div>'}
+function setCustomerOrderFilter(k,el){customerOrderFilter=k;document.querySelectorAll(".customer-order-tab").forEach(x=>x.classList.remove("active"));if(el)el.classList.add("active");const host=document.getElementById("customerOrderCards");if(host)host.innerHTML=customerOrderCards(k)}
+function customerOrderCards(bucket){const list=orders.filter(o=>orderBucket(o)===bucket);if(!list.length){const c={current:["سفارش جاری نداری","هر وقت سفارشی ثبت کنی، مسیرش همین‌جا ظاهر می‌شود.","◷"],delivered:["هنوز سفارشی تحویل نگرفته‌ای","سفارش‌های تکمیل‌شده در این قسمت نگهداری می‌شوند.","✓"],cancelled:["سفارش لغوشده‌ای وجود ندارد","اگر سفارشی لغو شود، سابقه‌اش اینجا می‌ماند.","×"]}[bucket];return '<div class="orders-empty"><div class="orders-empty-orb">'+c[2]+'</div><h3>'+c[0]+'</h3><p>'+c[1]+'</p></div>'}return '<div class="orders-grid">'+list.map((o,i)=>{const items=Array.isArray(o.items)?o.items:[],status=String(o.status||"ثبت سفارش"),no=o.order_number||String(o.id||"").slice(0,8),total=Number(o.total??o.total_price??0),count=items.reduce((n,x)=>n+Number(x.qty||1),0),label=bucket==="delivered"?"تحویل داده شده":bucket==="cancelled"?"لغو شده":"در حال پیگیری";return '<article class="order-float-card" style="animation-delay:'+(i*.06)+'s"><div class="order-card-top"><span class="order-glyph">📦</span><span class="order-live-pill"><i></i> '+label+'</span></div><div class="order-card-id">کد سفارش · #'+esc(String(no))+'</div><h3 class="order-card-title">'+esc(items[0]?.title||"سفارش ماهیگیر")+(items.length>1?" و "+(items.length-1).toLocaleString("fa-IR")+" عنوان دیگر":"")+'</h3><div class="order-card-meta"><span>◷ '+esc(o.created_at?new Date(o.created_at).toLocaleDateString("fa-IR"):"")+'</span><span>▣ '+count.toLocaleString("fa-IR")+' جلد</span></div><div class="order-card-bottom"><div><small>مبلغ نهایی</small><strong>'+money(total)+'</strong></div><span class="order-status-orb">'+esc(status)+'</span></div><button class="order-track-button" onclick="openCustomerOrder(\''+esc(o.id)+'\')">مشاهده کارت سفارش و مسیر کامل <span>↗</span></button></article>'}).join("")+'</div>'}
+function openCustomerOrder(id){const o=orders.find(x=>String(x.id)===String(id));if(!o)return;const page=document.getElementById("orderDetailPage"),host=document.getElementById("orderDetailContent"),bucket=orderBucket(o),idx=stageIndexForOrder(o),delivered=bucket==="delivered",cancelled=bucket==="cancelled",route=[["✓","ثبت سفارش"],["✓","تأیید سفارش"],["▣","آماده‌سازی"],["➜","تحویل به تیپاکس"],["➤","ارسال شده"],["⌂","تحویل داده شده"]],progress=delivered?100:cancelled?0:Math.max(0,idx/5*100),items=Array.isArray(o.items)?o.items:[],no=o.order_number||o.id;
+const nodes=route.map((x,i)=>'<div class="od-node '+((delivered||(!cancelled&&i<=idx))?'done ':'')+((!cancelled&&!delivered&&i===idx)?'current':'')+'"><span class="od-node-circle">'+(delivered||(!cancelled&&i<idx)?"✓":x[0])+'</span><small>'+x[1]+'</small></div>').join("");
+host.innerHTML='<section class="od-hero"><div class="od-kicker">MAHIGIR ORDER EXPERIENCE</div><h1>مسیر سفارش تو ✨</h1><p>تمام جزئیات و آخرین وضعیت این سفارش در یک صفحه اختصاصی.</p><div class="od-meta"><span>کد سفارش: #'+esc(String(no))+'</span><span>'+esc(o.created_at?new Date(o.created_at).toLocaleDateString("fa-IR"):"")+'</span><span>'+esc(o.status||"ثبت سفارش")+'</span></div></section><section class="od-track-card"><div class="od-track-head"><div><h2>نقشه مسیر سفارش</h2><p>هر تغییری که مدیر ذخیره کند، در این مسیر ثبت می‌شود.</p></div><span class="status">'+(delivered?"سفارش تکمیل شد":cancelled?"سفارش لغو شد":"در جریان")+'</span></div>'+(cancelled?'<div class="od-status-banner cancelled">این سفارش لغو شده است. سابقه آن در حساب کاربری باقی می‌ماند.</div>':'<div class="od-route"><div class="od-route-line"><div class="od-route-fill" style="width:'+progress+'%"></div></div>'+nodes+'</div><div class="od-status-banner">'+(delivered?"🎉 سفارش با موفقیت تحویل داده شده است. ممنون از خریدت!":"وضعیت فعلی: <strong>"+esc(o.status||"ثبت سفارش")+"</strong> · با هر به‌روزرسانی مدیر، دایره‌های مسیر جلو می‌روند.")+'</div>')+'</section><div class="od-bottom-grid"><section class="od-info"><h3>جزئیات سفارش</h3><p><strong>اقلام:</strong> '+items.map(x=>esc(x.title)+" × "+Number(x.qty||1)).join("، ")+'</p><p><strong>گیرنده:</strong> '+esc(o.recipient||"")+'</p><p><strong>مبلغ نهایی:</strong> '+money(o.total??o.total_price??0)+'</p><p><strong>تخفیف:</strong> '+(Number(o.discount_amount||0)?money(o.discount_amount):"ندارد")+'</p></section><section class="od-info"><h3>ارسال و رهگیری</h3><p><strong>روش ارسال:</strong> '+esc(o.shipping_method||"تیپاکس")+'</p><p><strong>نشانی:</strong> '+esc(o.city||"")+'، '+esc(o.address||"")+'</p><p><strong>کد پستی:</strong> '+esc(o.postal_code||"")+'</p><div class="od-code"><div><small>کد رهگیری مرسوله</small><br><strong>'+(o.tracking_code?esc(o.tracking_code):"در انتظار ثبت")+'</strong></div>'+(o.tracking_code?'<button onclick="copyText(\''+esc(o.tracking_code)+'\')">کپی کد</button>':"")+'</div></section></div>';
+page.classList.add("open");page.setAttribute("aria-hidden","false");document.body.style.overflow="hidden"}
+function closeCustomerOrder(){const page=document.getElementById("orderDetailPage");page.classList.remove("open");page.setAttribute("aria-hidden","true");document.body.style.overflow=""}
+function startCustomerOrderRealtime(){if(!db||!currentUser)return;if(customerOrdersChannel){db.removeChannel(customerOrdersChannel);customerOrdersChannel=null}customerOrdersChannel=db.channel("mahigir-orders-"+currentUser.id).on("postgres_changes",{event:"*",schema:"public",table:"mahigir_orders",filter:"user_id=eq."+currentUser.id},async()=>{try{await loadOrders();const panel=document.getElementById("profilePanel");if(panel&&document.getElementById("accountModal")?.classList.contains("open")){const active=document.querySelector("#accountContent .tab.active");if(active?.textContent.includes("سفارش"))panel.innerHTML=ordersHTML()}const detail=document.getElementById("orderDetailPage");if(detail?.classList.contains("open")){const no=document.querySelector("#orderDetailContent .od-meta span")?.textContent?.replace("کد سفارش: #","");const match=orders.find(x=>String(x.order_number||x.id)===no);if(match)openCustomerOrder(match.id)}}catch(err){console.warn("Order realtime refresh failed",err)}}).subscribe()}
+async function copyText(s){try{await navigator.clipboard.writeText(s);notify("کپی شد.")}catch{notify("کد رهگیری را انتخاب و کپی کن.")}}
+
+/* دفتر نشانی تمام‌صفحه ماهیگیر */
+function addressKey(){return "mh_addresses_"+(currentUser?.id||"guest")}
+function readAddresses(){try{return JSON.parse(localStorage.getItem(addressKey())||"[]")}catch{return []}}
+function saveAddresses(){localStorage.setItem(addressKey(),JSON.stringify(addresses))}
+let addresses=[],editingAddressIndex=-1;
+function openAddresses(){
+ if(!currentUser){openAccount();notify("برای مدیریت نشانی‌ها وارد حساب شو.");return}
+ addresses=readAddresses();
+ const page=document.getElementById("addressPage");
+ page.classList.add("open");page.setAttribute("aria-hidden","false");
+ document.body.style.overflow="hidden";
+ renderAddresses();addressForm();
+}
+function closeAddressPage(){
+ const page=document.getElementById("addressPage");
+ page.classList.remove("open");page.setAttribute("aria-hidden","true");
+ document.body.style.overflow="";
+}
+function renderAddresses(){
+ addresses=readAddresses();
+ const count=document.getElementById("addressCounter");
+ if(count)count.textContent=String(addresses.length).replace(/\\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+ const target=document.getElementById("addressListContent");
+ if(!target)return;
+ if(!addresses.length){
+  target.innerHTML='<div class="address-empty"><div class="address-empty-icon">⌖</div><strong>هنوز نشانی‌ای ذخیره نکرده‌ای</strong><p>از فرم کناری، اولین نشانی‌ات را اضافه کن تا برای سفارش بعدی آماده باشد.</p></div>';
+  return;
+ }
+ target.innerHTML='<div class="address-cards">'+addresses.map((a,i)=>`<article class="address-card"><div class="address-card-top"><span class="address-avatar">⌂</span><div><div class="address-recipient">${esc(a.recipient)}</div><div class="address-phone">${esc(a.phone)}</div></div></div><div class="address-details"><strong>${esc(a.city)}</strong><br>${esc(a.address)}<br>کد پستی: ${esc(a.postal_code)}</div><div class="address-card-actions"><button class="address-action choose" onclick="useAddress(${i})">انتخاب برای سفارش ←</button><button class="address-action" onclick="editAddress(${i})">ویرایش ✎</button><button class="address-action delete" onclick="deleteAddress(${i})">حذف</button></div></article>`).join("")+'</div>';
+}
+function addressForm(a={}){
+ const title=document.getElementById("addressFormTitle");
+ if(title)title.textContent=editingAddressIndex>=0?"ویرایش نشانی":"افزودن نشانی تازه";
+ document.getElementById("addressFormContent").innerHTML=`<form class="address-form" onsubmit="saveAddress(event)">
+ <div class="address-field"><label>نام و نام خانوادگی گیرنده</label><input name="recipient" autocomplete="name" placeholder="مثلاً امیر جبارفر" required maxlength="100" value="${esc(a.recipient||"")}"></div>
+ <div class="address-field"><label>شماره تماس</label><input name="phone" autocomplete="tel" inputmode="tel" placeholder="شماره تماس گیرنده" required maxlength="20" value="${esc(a.phone||"")}"></div>
+ <div class="address-field"><label>استان و شهر</label><input name="city" autocomplete="address-level2" placeholder="مثلاً تهران، تهران" required maxlength="100" value="${esc(a.city||"")}"></div>
+ <div class="address-field"><label>نشانی کامل</label><textarea name="address" autocomplete="street-address" placeholder="خیابان، کوچه، پلاک، واحد..." required maxlength="1000">${esc(a.address||"")}</textarea></div>
+ <div class="address-field"><label>کد پستی ۱۰ رقمی</label><input name="postal_code" autocomplete="postal-code" inputmode="numeric" pattern="[0-9۰-۹٠-٩]{10}" placeholder="۱۰ رقم کد پستی" required maxlength="10" value="${esc(a.postal_code||"")}"></div>
+ <div class="address-form-actions"><button type="submit" class="address-save">${editingAddressIndex>=0?"ذخیره تغییرات ✓":"ذخیره نشانی ✨"}</button>${editingAddressIndex>=0?'<button type="button" class="address-cancel" onclick="cancelAddressEdit()">انصراف</button>':""}</div></form>`;
+}
+function editAddress(i){addresses=readAddresses();if(!addresses[i])return;editingAddressIndex=i;addressForm(addresses[i]);document.getElementById("addressFormContent").scrollIntoView({behavior:"smooth",block:"start"})}
+function cancelAddressEdit(){editingAddressIndex=-1;addressForm();notify("ویرایش لغو شد.")}
+function normalizeDigits(s){return String(s).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d))}
+function saveAddress(e){
+ e.preventDefault();const f=new FormData(e.target);
+ const a={recipient:String(f.get("recipient")).trim(),phone:String(f.get("phone")).trim(),city:String(f.get("city")).trim(),address:String(f.get("address")).trim(),postal_code:normalizeDigits(f.get("postal_code")).trim(),shipping_method:"تیپاکس"};
+ if(!/^\\d{10}$/.test(a.postal_code)){notify("کد پستی باید ۱۰ رقم باشد.");return}
+ addresses=readAddresses();
+ if(editingAddressIndex>=0&&addresses[editingAddressIndex]){addresses[editingAddressIndex]=a;notify("نشانی با موفقیت ویرایش شد.")}
+ else{addresses.push(a);notify("نشانی تازه ذخیره شد.")}
+ localStorage.setItem(addressKey(),JSON.stringify(addresses));editingAddressIndex=-1;renderAddresses();addressForm();
+}
+function deleteAddress(i){
+ addresses=readAddresses();if(!addresses[i])return;
+ if(!confirm("این نشانی حذف شود؟"))return;
+ addresses.splice(i,1);localStorage.setItem(addressKey(),JSON.stringify(addresses));
+ if(editingAddressIndex===i){editingAddressIndex=-1;addressForm()}
+ else if(editingAddressIndex>i)editingAddressIndex--;
+ renderAddresses();notify("نشانی حذف شد.");
+}
+function useAddress(i){const a=readAddresses()[i];if(!a)return;closeAddressPage();renderCheckout(a);openModal("checkoutModal")}
+let selectedCheckoutAddress=0;
+function startCheckout(){
+ if(!cart.some(i=>getBook(i.id)&&!getBook(i.id).comingSoon)){notify("سبد خرید خالی است.");return}
+ if(!currentUser){closeModal("cartModal");openAccount();notify("برای ثبت سفارش ابتدا وارد حساب شو.");return}
+ closeModal("cartModal");
+ openCheckoutPage();
+}
+function checkoutAddressChanged(){
+ const sel=document.getElementById("checkoutAddressSelect");if(!sel)return;
+ selectedCheckoutAddress=Number(sel.value)||0;
+ if(currentUser)localStorage.setItem("mh_checkout_address_"+currentUser.id,String(selectedCheckoutAddress));
+ renderCheckout();
+}
+function renderCheckout(){
+ const saved=readAddresses();if(!saved.length){document.getElementById("checkoutContent").innerHTML='<div class="address-empty"><div class="address-empty-icon">⌖</div><strong>هنوز نشانی‌ای ذخیره نکرده‌ای</strong><p>برای ثبت سفارش، ابتدا یک نشانی بساز.</p><button type="button" class="btn primary" onclick="closeModal(\'checkoutModal\');openAddresses()">افزودن نشانی</button></div>';return}
+ if(selectedCheckoutAddress>=saved.length)selectedCheckoutAddress=0;const a=saved[selectedCheckoutAddress]||saved[0];
+ document.getElementById("checkoutContent").innerHTML=`<div class="checkout-address-wrap"><div class="address-panel-head"><span class="address-panel-icon list-icon">⌖</span><div><h2>انتخاب نشانی ارسال</h2><p>نشانی را از موارد ذخیره‌شده انتخاب کن.</p></div></div><div class="field"><label for="checkoutAddressSelect">نشانی‌های ذخیره‌شده</label><select id="checkoutAddressSelect" onchange="checkoutAddressChanged()">${saved.map((x,i)=>`<option value="${i}" ${i===selectedCheckoutAddress?"selected":""}>${esc(x.recipient)} — ${esc(x.city)} — ${esc(x.phone)}</option>`).join("")}</select></div><div class="checkout-address-card"><strong>${esc(a.recipient)}</strong><p>${esc(a.phone)}</p><p>${esc(a.city)}، ${esc(a.address)}</p><p>کد پستی: ${esc(a.postal_code)}</p></div><button type="button" class="address-action" onclick="closeModal('checkoutModal');openAddresses()">مدیریت نشانی‌ها ✎</button></div>
+ <div class="coupon-panel"><div class="coupon-heading">🎁 کد تخفیف روز دانش‌آموز</div><div class="coupon-row"><input id="checkoutCoupon" placeholder="کد تخفیف" value="daneshcode" autocomplete="off" dir="ltr"><button type="button" class="btn soft" onclick="applyCouponPreview()">اعمال کد</button></div><div id="couponFeedback" class="coupon-feedback"></div></div><div id="checkoutTotals" class="totals"></div>
+ <form onsubmit="submitOrder(event)"><div class="field"><label>روش ارسال</label><select name="shipping_method"><option value="تیپاکس">تیپاکس</option></select></div><button type="submit" class="btn primary" style="width:100%">ثبت سفارش نهایی ✨</button></form>`;
+ updateCheckoutTotals();
+}
+function couponIsActive(){return Date.now()<=new Date("2026-11-04T23:59:59+03:30").getTime()}
+function currentCoupon(){return String(document.getElementById("checkoutCoupon")?.value||"").trim().toLowerCase()==="daneshcode"&&couponIsActive()}
+function couponDiscount(){return currentCoupon()?Math.round(subtotal()*.10):0}
+function updateCheckoutTotals(){const box=document.getElementById("checkoutTotals");if(!box)return;const active=currentCoupon(),discount=couponDiscount(),feedback=document.getElementById("couponFeedback");if(feedback)feedback.textContent=active?"کد تخفیف فعال شد؛ ۱۰٪ از مبلغ کتاب‌ها کم شد.":(couponIsActive()?"کد تخفیف معتبر نیست. کد را بررسی کن.":"مهلت استفاده از کد روز دانش‌آموز به پایان رسیده است.");box.innerHTML='<div class="totalrow"><span>جمع کتاب‌ها</span><strong>'+money(subtotal())+'</strong></div>'+(discount?'<div class="totalrow coupon-saving"><span>تخفیف ۱۰٪</span><strong>−'+money(discount)+'</strong></div>':'')+'<div class="totalrow"><span>ارسال تیپاکس</span><strong>'+money(SHIPPING)+'</strong></div><div class="totalrow final"><span>مبلغ نهایی</span><strong>'+money(subtotal()-discount+SHIPPING)+'</strong></div>'}
+function applyCouponPreview(){updateCheckoutTotals();if(currentCoupon())notify("کد تخفیف ۱۰ درصدی اعمال شد ✨")}
+async function submitOrder(e){
+ e.preventDefault();
+ if(!db){notify("اتصال Supabase برقرار نیست.");return}
+ if(!currentUser){notify("برای ثبت سفارش وارد حساب شو.");return}
+ if(!cart.length){notify("سبد خرید خالی است.");return}
+ const saved=readAddresses(),idx=Number(document.getElementById("checkoutAddressSelect")?.value),a=saved[idx];
+ if(!a){notify("یک نشانی ذخیره‌شده انتخاب کن.");return}
+ const items=cart.map(i=>{const b=getBook(i.id);return b&&!b.comingSoon?{id:i.id,title:b.title,price:Number(b.price),qty:i.qty}:null}).filter(Boolean);
+ if(!items.length){notify("سبد خرید خالی است.");return}
+ const itemsTotal=items.reduce((n,i)=>n+i.price*i.qty,0);
+ const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:normalizeDigits(a.postal_code).trim(),shipping_method:"تیپاکس",items,total_price:itemsTotal+SHIPPING,approval_status:"pending_review",coupon_code:currentCoupon()?"daneshcode":""};
+ const btn=e.target.querySelector('button[type="submit"]');if(btn){btn.disabled=true;btn.textContent="در حال ثبت سفارش..."}
+ try{
+  const {data:sessionData,error:sessionError}=await db.auth.getSession();
+  if(sessionError)throw sessionError;
+  if(!sessionData?.session?.access_token)throw new Error("نشست ورود پیدا نشد؛ دوباره وارد حساب شو.");
+  const response=await fetch(PROJECT_URL+"/functions/v1/admin-api",{
+   method:"POST",
+   headers:{"Content-Type":"application/json","apikey":PUBLIC_KEY,"Authorization":"Bearer "+sessionData.session.access_token},
+   body:JSON.stringify({action:"create-order",payload})
+  });
+  let result={};try{result=await response.json()}catch{}
+  if(!response.ok||result.error)throw new Error(result.error||("خطای سرور ("+response.status+")"));
+  cart=[];saveCart();renderCart();renderBooks();renderBestsellers();closeCheckoutPage();showPurchaseSuccess(result.id||"ثبت‌شده",selectedPaymentMethod,{items,total:Number(result.total??(total-couponDiscount()+SHIPPING)),shipping:SHIPPING,recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:a.postal_code});notify("سفارش با موفقیت ثبت شد ✨");
+  try{await loadOrders()}catch(err){console.warn("Order saved but order list could not refresh:",err)}
+  openAccount();
+ }catch(err){
+  console.error("Mahigir order insert failed:",err);const msg=String(err?.message||err?.details||err?.hint||"");
+  if(/row-level security|permission denied|policy/i.test(msg))notify("ثبت سفارش به‌دلیل مجوزهای Supabase انجام نشد (RLS).");
+  else if(/column .* does not exist|schema cache/i.test(msg))notify("ساختار جدول سفارش‌ها با کد هماهنگ نیست: "+msg.slice(0,130));
+  else if(/not-null|null value/i.test(msg))notify("یک ستون اجباری در جدول سفارش‌ها مقدار ندارد: "+msg.slice(0,130));
+  else notify("ثبت سفارش ناموفق بود: "+(msg||"خطای نامشخص؛ کنسول مرورگر را بررسی کن.").slice(0,170));
+ }finally{if(btn){btn.disabled=false;btn.textContent="ثبت سفارش نهایی ✨"}}
+}
+
+/* پنل مدیریت: رمز فقط از طریق Edge Function سمت سرور */
+let adminPassword="";
+async function adminApi(action,extra={}){
+ const response=await fetch(PROJECT_URL+"/functions/v1/admin-api",{method:"POST",headers:{"Content-Type":"application/json","apikey":PUBLIC_KEY,"Authorization":"Bearer "+PUBLIC_KEY},body:JSON.stringify({password:adminPassword,action,...extra})});
+ let result={};try{result=await response.json()}catch{}
+ if(!response.ok||result.error)throw new Error(result.error||("خطای سرور ("+response.status+")"));
+ return result;
+}
+function openAdmin(){
+ const page=document.getElementById("adminPage");page.classList.add("open");document.body.style.overflow="hidden";adminUnlocked=false;adminPassword="";
+ document.getElementById("adminContent").innerHTML=`<div class="admin-login-card"><div class="address-brand-mark">م</div><span class="address-kicker"><i></i> SECURE ADMIN ACCESS</span><h1>ورود به پنل مدیریت</h1><p>برای دسترسی به سفارش‌ها و تنظیمات، رمز اختصاصی مدیریت را وارد کن.</p><form onsubmit="submitAdminPassword(event)"><div class="field"><label>رمز مدیریت</label><input name="admin_password" type="password" autocomplete="current-password" required autofocus placeholder="رمز اختصاصی" dir="ltr"></div><button class="btn primary" type="submit" style="width:100%">ورود امن ←</button></form><p class="muted">رمز در کد صفحه ذخیره نمی‌شود و باید سمت سرور بررسی شود.</p></div>`;
+}
+function closeAdmin(){document.getElementById("adminPage").classList.remove("open");document.body.style.overflow="";adminUnlocked=false;adminPassword="";adminOrders=[]}
+async function submitAdminPassword(e){
+ e.preventDefault();const input=e.target.elements.admin_password,candidate=String(input?.value||"");if(!candidate)return;
+ adminPassword=candidate;const host=document.getElementById("adminContent"),btn=e.target.querySelector('button[type="submit"]');if(btn){btn.disabled=true;btn.textContent="در حال بررسی..."}
+ try{await adminApi("admin-login");adminUnlocked=true;await loadStages();await loadAdminOrders();renderAdmin();notify("ورود مدیر موفق بود.");}
+ catch(err){
+  console.error("Admin login failed:",err);adminPassword="";adminUnlocked=false;const message=String(err?.message||"");
+  if(/Failed to fetch|NetworkError/i.test(message)){host.innerHTML='<div class="admin-login-card"><h2>اتصال پنل برقرار نشد</h2><p>تابع امن admin-api روی پروژه Supabase هنوز در دسترس نیست یا منتشر نشده است.</p><button class="btn soft" onclick="openAdmin()">تلاش دوباره</button><button class="btn white" onclick="closeAdmin()">بستن</button></div>';}
+  else{notify("ورود ناموفق بود: "+message.slice(0,150));if(input)input.value="";if(btn){btn.disabled=false;btn.textContent="ورود امن ←"}}
+ }
+}
+async function loadAdminOrders(){if(!adminUnlocked)throw new Error("ابتدا رمز مدیریت را وارد کن.");const result=await adminApi("admin-orders");adminOrders=Array.isArray(result.orders)?result.orders:[]}
+async function loadStages(){
+ if(adminUnlocked){
+  try{
+   const result=await adminApi("admin-stages");
+   stages=Array.isArray(result.stages)&&result.stages.length?result.stages.map((x,i)=>({...x,position:Number(x.position||i+1),title:STAGES[Math.min(4,Math.max(0,Number(x.position||i+1)-1))].title})):STAGES;
+  }catch(error){
+   // نبودن ستون position نباید ورود مدیر را متوقف کند.
+   console.warn("Admin stages unavailable; using built-in stages:",error);
+   stages=STAGES;
+  }
+ }else if(db){
+  const {data,error}=await db.from("mahigir_order_stages").select("*").order("stage_order");
+  if(error){console.warn(error);stages=STAGES;return}
+  stages=data?.length?data.map((x,i)=>({...x,position:Number(x.stage_order||i+1),title:x.stage_name||STAGES[Math.min(4,Math.max(0,Number(x.stage_order||i+1)-1))].title})):STAGES;
+ }
+}
+function renderAdmin(){
+ if(!adminUnlocked)return;
+ const activeOrders=adminOrders.filter(o=>orderBucket(o)==="current");
+ const total=activeOrders.reduce((n,o)=>n+Number(o.total??o.total_price??0),0);
+ document.getElementById("adminContent").innerHTML=`<div class="welcome"><h2>پنل مدیریت ماهیگیر ✨</h2><p>روی شناسه یا نام کاربر بزن تا سفارش‌های فعال همان کاربر را ببینی. سفارش تحویل‌شده از فهرست مدیریت حذف می‌شود اما در حساب مشتری باقی می‌ماند.</p></div>
+ <div class="adminstats"><div class="adminstat"><strong>${activeOrders.length.toLocaleString("fa-IR")}</strong><span>سفارش‌های فعال</span></div><div class="adminstat"><strong>${activeOrders.filter(o=>!o.tracking_code).length.toLocaleString("fa-IR")}</strong><span>بدون کد رهگیری</span></div><div class="adminstat"><strong>${money(total)}</strong><span>جمع سفارش‌های فعال</span></div></div>
+ <div class="tabs"><button class="tab active" onclick="adminTab('orders',this)">سفارش‌ها و نشانی‌ها</button><button class="tab" onclick="adminTab('users',this)">کاربران ثبت‌نام‌شده</button><button class="tab" onclick="adminTab('stages',this)">مراحل سفارش</button><button class="tab" onclick="loadAdminOrders().then(renderAdmin).catch(e=>notify('خطا: '+e.message))">بروزرسانی</button></div>
+ <div id="adminPanel">${adminOrdersHTML()}</div><button class="btn white" style="margin-top:16px" onclick="closeAdmin()">خروج امن از پنل مدیریت</button>`;
+}
+async function adminTab(tab,el){
+ document.querySelectorAll("#adminContent .tab").forEach(x=>x.classList.remove("active"));
+ if(el)el.classList.add("active");
+ const panel=document.getElementById("adminPanel");
+ if(tab==="orders"){adminSelectedUser=null;panel.innerHTML=adminOrdersHTML();return}
+ if(tab==="stages"){panel.innerHTML=adminStagesHTML();return}
+ panel.innerHTML='<div class="orders-empty">در حال دریافت فهرست کاربران...</div>';
+ try{const result=await adminApi("admin-users");adminUsers=Array.isArray(result.users)?result.users:[];panel.innerHTML=adminUsersHTML()}
+ catch(err){console.error(err);panel.innerHTML='<div class="orders-empty"><h3>فهرست کاربران دریافت نشد</h3><p>'+esc(err.message||"خطای نامشخص")+'</p></div>'}
+}
+function adminUsersHTML(){
+ if(!adminUsers.length)return '<div class="orders-empty"><h3>هنوز کاربری پیدا نشد</h3><p>برای دریافت فهرست کاربران، تابع admin-api باید با موفقیت Deploy شده باشد.</p></div>';
+ return '<div class="admin-order-list">'+adminUsers.map((u,i)=>'<button type="button" class="admin-order-card" data-user="'+esc(u.id||"")+'" onclick="viewAdminUserOrders(this.dataset.user)" style="--card-index:'+i%6+';display:block;width:100%;text-align:right;cursor:pointer;color:inherit"><div class="admin-order-head"><div><h3 style="margin:0 0 5px">'+esc(u.display_name||u.username||"کاربر")+'</h3><small>نام کاربری: '+esc(u.username||"—")+'</small></div><span class="order-live-pill"><i></i> ثبت‌نام‌شده</span></div><div style="margin-top:12px;color:#635bdb;font-weight:800">مشاهده سفارش‌های این کاربر ←</div></button>').join("")+'</div>';
+}
+function viewAdminUserOrders(id){
+ if(!id)return notify("شناسه این کاربر پیدا نشد.");
+ adminSelectedUser=String(id);
+ const tabs=document.querySelectorAll("#adminContent .tabs .tab");
+ tabs.forEach(x=>x.classList.remove("active"));
+ if(tabs[0])tabs[0].classList.add("active");
+ const panel=document.getElementById("adminPanel");
+ if(panel)panel.innerHTML=adminOrdersHTML();
+}
+let adminOrderSearch="";
+function filterAdminOrders(){adminOrderSearch=String(document.getElementById("adminOrderSearch")?.value||"").trim().toLowerCase();const host=document.getElementById("adminOrderResults");if(host)host.innerHTML=adminOrdersCards()}
+function adminOrdersCards(){const visible=adminOrders.filter(o=>{if(adminSelectedUser&&String(o.user_id||"")!==adminSelectedUser)return false;if(!adminOrderSearch)return true;return [o.order_number,o.id,o.recipient,o.phone,o.username].some(v=>String(v||"").toLowerCase().includes(adminOrderSearch))});if(!visible.length)return '<div class="orders-empty"><div class="orders-empty-orb">⌕</div><h3>سفارشی پیدا نشد</h3><p>کد یا شماره سفارش، نام یا شماره تماس را بررسی کن.</p></div>';return '<div class="admin-order-list">'+visible.map((o,i)=>{const status=String(o.status||"ثبت سفارش"),bucket=orderBucket(o),isClosed=bucket!=="current";return '<article class="admin-order-card" style="--card-index:'+(i%6)+'"><div class="admin-order-head"><div><span class="admin-order-kicker">ORDER · #'+esc(String(o.order_number||o.id))+'</span><h3>'+esc(o.recipient||"گیرنده سفارش")+'</h3><small>کاربر: '+esc(o.username||o.user_id||"—")+' · '+esc(o.created_at?new Date(o.created_at).toLocaleDateString("fa-IR"):"")+'</small></div><strong class="admin-order-price">'+money(o.total??o.total_price??0)+'</strong></div><div class="admin-order-info"><div><small>تماس و نشانی</small><p>'+esc(o.phone||"")+' · '+esc(o.city||"")+'</p><p>'+esc(o.address||"")+' · کد پستی '+esc(o.postal_code||"")+'</p></div><div><small>محصولات</small><p>'+(Array.isArray(o.items)?o.items:[]).map(x=>esc(x.title)+" × "+Number(x.qty||1)).join("، ")+'</p><p>کد تخفیف: '+esc(o.discount_code||"—")+' · تخفیف: '+money(o.discount_amount||0)+'</p></div></div><div class="admin-order-controls"><div class="approval-state">وضعیت فعلی: <strong>'+esc(status)+'</strong> · '+(o.approval_status==="approved"?"تأیید شده":"در انتظار بررسی")+'</div>'+(!isClosed&&o.approval_status!=="approved"?'<button class="btn primary" data-order="'+esc(o.id)+'" onclick="approveOrder(this.dataset.order)">تأیید سفارش ✓</button>':"")+'<label>وضعیت سفارش<select id="stage-'+esc(o.id)+'">'+STAGES.map(st=>'<option value="'+st.id+'" '+(status===st.title||Number(o.stage_id)===Number(st.id)?"selected":"")+'>'+st.title+'</option>').join("")+'</select></label><label>کد رهگیری<input id="track-'+esc(o.id)+'" value="'+esc(o.tracking_code||"")+'" placeholder="کد رهگیری تیپاکس"></label><button class="btn primary" onclick="saveOrder(\''+esc(o.id)+'\')">ذخیره وضعیت و ارسال به مشتری ✨</button></div></article>'}).join("")+'</div>'}
+function adminOrdersHTML(){const active=adminOrders.filter(o=>orderBucket(o)==="current").length,delivered=adminOrders.filter(o=>orderBucket(o)==="delivered").length,cancelled=adminOrders.filter(o=>orderBucket(o)==="cancelled").length;const back=adminSelectedUser?'<button class="btn white" style="margin-bottom:14px" onclick="adminSelectedUser=null;document.getElementById(\'adminPanel\').innerHTML=adminOrdersHTML()">← نمایش همه سفارش‌ها</button>':"";return back+'<div class="admin-order-search"><label for="adminOrderSearch">جست‌وجوی سفارش با کد یا شماره سفارش</label><div><input id="adminOrderSearch" placeholder="مثلاً ۱۰۲۴ یا بخشی از کد سفارش" oninput="filterAdminOrders()" dir="auto"><button class="btn soft" onclick="document.getElementById(\'adminOrderSearch\').value=\'\';filterAdminOrders()">پاک کردن</button></div></div><div class="admin-order-summary"><span>جاری: '+active.toLocaleString("fa-IR")+'</span><span>تحویل‌شده: '+delivered.toLocaleString("fa-IR")+'</span><span>لغوشده: '+cancelled.toLocaleString("fa-IR")+'</span></div><div id="adminOrderResults">'+adminOrdersCards()+'</div>'}
+async function approveOrder(id){if(!adminUnlocked)return;if(!confirm("این سفارش تأیید شود و در حساب مشتری نمایش داده شود؟"))return;try{await adminApi("admin-approve-order",{id});await loadAdminOrders();renderAdmin();notify("سفارش تأیید شد و برای مشتری قابل مشاهده است.");}catch(err){console.error(err);notify("تأیید سفارش ناموفق بود: "+String(err.message||"").slice(0,180))}}
+async function saveOrder(id){
+ if(!adminUnlocked)return;const stage_id=document.getElementById("stage-"+id).value,tracking_code=document.getElementById("track-"+id).value.trim()||"";
+ try{await adminApi("admin-save-order",{id,stage_id,tracking_code});await loadAdminOrders();renderAdmin();notify("وضعیت سفارش ذخیره و برای مشتری ثبت شد.");}
+ catch(err){console.error(err);notify("ذخیره سفارش ناموفق بود: "+String(err.message||"").slice(0,150))}
+}
+function adminStagesHTML(){
+ return `<div class="admin-order-card"><div class="admin-order-kicker">ORDER TRACKING WORKFLOW</div><h2 style="font-family:Lalezar,Vazirmatn,sans-serif;color:#394166;font-size:28px">مراحل ثابت رهگیری سفارش</h2><p class="muted">برای تغییر وضعیت یک مشتری، از بخش سفارش‌ها همان سفارش را پیدا کن و وضعیت مخصوص همان سفارش را ذخیره کن. تغییر وضعیت یک سفارش، سفارش‌های دیگر را تغییر نمی‌دهد.</p><div class="admin-stage-list">${STAGES.map((st,i)=>`<div class="admin-stage-item"><span>${i+1}</span><strong>${esc(st.title)}</strong><small>${i===0?"سفارش دریافت شد":i===1?"در حال پردازش سفارش":i===2?"آماده ارسال به پست":i===3?"مرسوله ارسال شده":"سفارش به مشتری رسیده"}</small></div>`).join("")}</div></div>`;
+}
+async function renameStage(id){
+ if(!adminUnlocked)return;const title=document.getElementById("stageName-"+id).value.trim();if(!title)return;
+ try{await adminApi("admin-rename-stage",{id,title});await loadStages();renderAdmin();notify("مرحله ذخیره شد.");}
+ catch(err){console.error(err);notify("ذخیره مرحله ناموفق بود: "+String(err.message||"").slice(0,150))}
+}
+
+function openTracking(id){const order=orders.find(x=>String(x.id)===String(id));if(!order)return;openAccount();notify("مسیر سفارش در همین صفحه حساب کاربری نمایش داده می‌شود.");}
+function closeTracking(){stopCustomerTrackingSync()}
+
+let customerTrackingTimer=null;
+function stopCustomerTrackingSync(){if(customerTrackingTimer){clearInterval(customerTrackingTimer);customerTrackingTimer=null}}
+function startCustomerTrackingSync(orderId){
+ stopCustomerTrackingSync();
+ customerTrackingTimer=setInterval(async()=>{
+  if(!currentUser||!document.getElementById("trackingPage")?.classList.contains("open")){stopCustomerTrackingSync();return}
+  try{
+   await loadOrders();
+   const latest=orders.find(x=>String(x.id)===String(orderId));
+   if(latest){
+    const old=window.__trackingStageSnapshot;
+    const next=String(latest.stage_id)+"|"+String(latest.tracking_code||"");
+    if(old!==next){window.__trackingStageSnapshot=next;renderTrackingOrder(latest);notify("وضعیت سفارش به‌روزرسانی شد ✨")}
+   }
+  }catch(err){console.warn("Customer tracking refresh:",err)}
+ },10000);
+}
+function renderTrackingOrder(o){
+ const target=document.getElementById("trackingContent");if(!target)return;
+ const st=stages.find(x=>String(x.id)===String(o.stage_id))||stages.find(x=>stagePosition(x)===Number(o.stage_id))||STAGES[0],pos=stagePosition(st),items=Array.isArray(o.items)?o.items:[];
+ const timeline=STAGES.map((x,i)=>{const done=i<pos,current=i===pos-1,descriptions=["سفارش در سیستم ماهیگیر ثبت شده است.","سفارش در حال آماده‌سازی و انجام است.","بسته به واحد پستی تحویل داده می‌شود.","بسته از مبدأ ارسال شده و در مسیر است.","سفارش به مقصد رسیده و تحویل داده شده است."];return `<div class="tracking-timeline-step ${done?"done":""} ${current?"current":""}" style="--step-index:${i}"><div class="tracking-step-icon">${done?"✓":["✦","⚙","⌂","➤","♧"][i]}</div><div class="tracking-step-copy"><strong>${x.title}</strong><small>${descriptions[i]}</small></div><span class="tracking-step-badge">${done?(current?"وضعیت فعلی":"تکمیل‌شده"):"در انتظار"}</span></div>`}).join("");
+ target.innerHTML=`<section class="tracking-hero"><div><span class="tracking-kicker"><i></i> MAHIGIR ORDER TRACKING</span><h1>مسیر سفارش،<br><span>قدم‌به‌قدم ✨</span></h1><p>تمام لحظه‌های سفارش خودت را در یک مسیر زیبا ببین؛ هر بار که وضعیت در پنل مدیریت تغییر کند، این صفحه هم به‌روزرسانی می‌شود.</p><span class="tracking-order-no">ORDER #${esc(String(o.id))}</span></div><div class="tracking-orbit-art"><div class="tracking-orbit o1"></div><div class="tracking-orbit o2"></div><div class="tracking-orbit o3"></div><div class="tracking-package">▣</div><span class="tracking-float-label fl1">سفارش تو ✨</span><span class="tracking-float-label fl2">${esc(stageLabel(st))}</span></div></section>
+ <div class="tracking-summary"><div class="tracking-stat"><small>وضعیت فعلی</small><strong>${esc(stageLabel(st))}</strong></div><div class="tracking-stat"><small>تاریخ ثبت سفارش</small><strong>${esc(o.created_at?new Date(o.created_at).toLocaleDateString("fa-IR"):"—")}</strong></div><div class="tracking-stat"><small>مبلغ کل</small><strong>${money(o.total_price)}</strong></div></div>
+ <div class="tracking-section-title"><div><h2>نقشه مسیر سفارش</h2><p>پیشرفت سفارش در پنج مرحله</p></div><span class="tracking-kicker">${pos.toLocaleString("fa-IR")} از ۵ مرحله</span></div>
+ <section class="tracking-timeline"><div class="tracking-timeline-progress" style="height:calc((100% - 98px) * ${(pos-1)/4})"></div>${timeline}</section>
+ <div class="tracking-section-title"><div><h2>داخل بسته تو 📦</h2><p>کتاب‌هایی که در این سفارش ثبت کرده‌ای</p></div></div>
+ <div class="tracking-products">${items.map((it,i)=>`<article class="tracking-product" style="animation-delay:${i*70}ms"><div class="tracking-product-art">▤</div><div><strong>${esc(it.title||"کتاب ماهیگیر")}</strong><small>${Number(it.qty||1).toLocaleString("fa-IR")} عدد · ${money(Number(it.price||0)*Number(it.qty||1))}</small></div></article>`).join("")||'<div class="tracking-support-note">اطلاعات اقلام این سفارش موجود نیست.</div>'}</div>
+ <section class="tracking-code-card"><div><small>کد رهگیری مرسوله</small><strong>${esc(o.tracking_code||"هنوز ثبت نشده")}</strong></div>${o.tracking_code?`<button onclick="copyText('${esc(o.tracking_code)}')">کپی کد رهگیری ⧉</button>`:"<small>در صورت ثبت کد توسط مدیریت، اینجا نمایش داده می‌شود.</small>"}</section>
+ <div class="tracking-support-note">نشانی گیرنده: <strong>${esc(o.recipient||"")}</strong> · ${esc(o.phone||"")}<br>${esc(o.city||"")}، ${esc(o.address||"")}<br>کد پستی: ${esc(o.postal_code||"")} · روش ارسال: ${esc(o.shipping_method||"پستی")}</div>
+ <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px"><button class="btn soft" onclick="closeTracking();openAccount()">بازگشت به حساب کاربری</button><button class="btn white" onclick="refreshTrackingOrder('${esc(o.id)}')">بروزرسانی وضعیت ↻</button></div>`;
+}
+async function refreshTrackingOrder(orderId){try{await loadOrders();const o=orders.find(x=>String(x.id)===String(orderId));if(!o){notify("سفارش پیدا نشد.");return}renderTrackingOrder(o);notify("وضعیت سفارش تازه شد.");}catch(err){console.error(err);notify("بروزرسانی انجام نشد: "+String(err.message||"").slice(0,100))}}
+
+
+function openContactPage(){window.location.href="contact.html"}
+function closeContactPage(){
+ const page=document.getElementById("contactPage");if(!page)return;
+ page.classList.remove("open");page.setAttribute("aria-hidden","true");
+ if(!document.querySelector(".backdrop.open")&&!document.getElementById("addressPage")?.classList.contains("open")&&!document.getElementById("adminPage")?.classList.contains("open")&&!document.getElementById("trackingPage")?.classList.contains("open"))document.body.style.overflow="";
+}
+
+async function initialize(){
+ renderBooks();renderBestsellers();updateCount();
+ document.getElementById("search")?.addEventListener("input",renderBooks);
+ if(!db){notify("کتاب‌ها به‌صورت محلی نمایش داده می‌شوند؛ اتصال Supabase در دسترس نیست.");return}
+ try{
+  const {data:{session},error:sessionError}=await db.auth.getSession();if(sessionError)throw sessionError;
+  if(session?.user){
+   currentUser=session.user;
+   const {data,error}=await db.from("mahigir_profiles").select("*").eq("id",currentUser.id).maybeSingle();
+   if(error)console.warn("Profile could not load:",error);
+   profile={...(data||{}),id:currentUser.id,username:data?.username||currentUser.user_metadata?.username||"",display_name:data?.display_name||currentUser.user_metadata?.display_name||data?.username||currentUser.user_metadata?.username||""};
+   document.getElementById("accountBtn").textContent=profile.display_name||profile.username||"حساب کاربری";
+  }
+  const {data:remoteBooks,error:booksError}=await db.from("mahigir_books").select("*").eq("is_active",true).order("sort_order");
+  if(booksError)console.warn("Remote books unavailable; using built-in books:",booksError);
+  if(remoteBooks?.length){
+   const mapped=uniqueBooks(remoteBooks.map((b,i)=>({...b,color:PALETTES[i%PALETTES.length],category:b.category||"متفرقه"})));
+   /* رکوردهای پیش‌فرض فقط وقتی اضافه می‌شوند که عنوان مشابهی از دیتابیس وجود نداشته باشد. */
+   const knownIds=new Set(mapped.map(b=>String(b.id)));
+   const knownTitles=new Set(mapped.map(b=>normalizeBookTitle(b.title)));
+   books=uniqueBooks([...mapped,...INITIAL_BOOKS.filter(b=>!knownIds.has(String(b.id))&&!knownTitles.has(normalizeBookTitle(b.title)))]);
+  }
+  renderBooks();renderBestsellers();
+ }catch(e){console.warn("Store initialization incomplete:",e)}
+}
+if(db)db.auth.onAuthStateChange((event,session)=>{
+ if(event==="SIGNED_OUT"){currentUser=null;profile=null;orders=[];document.getElementById("accountBtn").textContent="ورود / ثبت‌نام"}
+ if(event==="SIGNED_IN"&&session?.user)currentUser=session.user;
+});
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"){
+  if(document.getElementById("contactPage")?.classList.contains("open"))closeContactPage();
+  document.querySelectorAll(".backdrop.open").forEach(el=>closeModal(el.id));
+  if(document.getElementById("addressPage")?.classList.contains("open"))closeAddressPage();
+  if(document.getElementById("adminPage").classList.contains("open"))closeAdmin();
+  if(document.getElementById("trackingPage")?.classList.contains("open"))closeTracking();
+ }
+});
+initialize();
+
+/* Reliable address persistence + purchase animation patch */
+function readAddresses(){
+ try{
+  const local=JSON.parse(localStorage.getItem(addressKey())||"null");
+  if(Array.isArray(local))return local;
+ }catch{}
+ const remote=currentUser?.user_metadata?.mahigir_addresses;
+ return Array.isArray(remote)?remote:[];
+}
+async function persistAddresses(next){
+ addresses=next;
+ localStorage.setItem(addressKey(),JSON.stringify(next));
+ if(db&&currentUser){
+  try{
+   const {data,error}=await db.auth.updateUser({data:{mahigir_addresses:next}});
+   if(error)throw error;
+   if(data?.user)currentUser=data.user;
+   return true;
+  }catch(err){console.warn("Address cloud sync unavailable; local copy retained:",err);return false}
+ }
+ return false;
+}
+async function saveAddress(e){
+ e.preventDefault();
+ const form=e.currentTarget||e.target;
+ if(!form.reportValidity())return;
+ const f=new FormData(form);
+ const a={id:crypto?.randomUUID?.()||("addr-"+Date.now()),recipient:String(f.get("recipient")||"").trim(),phone:normalizeDigits(String(f.get("phone")||"")).trim(),city:String(f.get("city")||"").trim(),address:String(f.get("address")||"").trim(),postal_code:normalizeDigits(String(f.get("postal_code")||"")).trim(),shipping_method:"تیپاکس"};
+ if(!/^\d{10}$/.test(a.postal_code)){notify("کد پستی باید دقیقاً ۱۰ رقم باشد.");return}
+ if(!a.recipient||!a.phone||!a.city||!a.address){notify("لطفاً همه اطلاعات نشانی را کامل کن.");return}
+ const old=readAddresses();
+ if(editingAddressIndex>=0&&old[editingAddressIndex])old[editingAddressIndex]=a;else old.push(a);
+ const btn=form.querySelector('button[type="submit"]');
+ if(btn){btn.disabled=true;btn.dataset.original=btn.textContent;btn.textContent="در حال ذخیره امن..."}
+ const synced=await persistAddresses(old);
+ editingAddressIndex=-1;renderAddresses();addressForm();
+ if(synced)notify("نشانی ذخیره شد و به حساب کاربری همگام‌سازی شد ✨");
+ else notify("نشانی ذخیره شد؛ برای اطمینان در همین دستگاه هم نگه‌داری شد. اگر اینترنت وصل است دوباره وارد حساب شو تا همگام‌سازی شود.");
+}
+async function deleteAddress(i){
+ const list=readAddresses();if(!list[i])return;
+ if(!confirm("این نشانی حذف شود؟"))return;
+ list.splice(i,1);await persistAddresses(list);
+ if(editingAddressIndex===i){editingAddressIndex=-1;addressForm()}else if(editingAddressIndex>i)editingAddressIndex--;
+ renderAddresses();notify("نشانی حذف شد.");
+}
+function showPurchaseSuccess(orderId="ثبت‌شده",payment="card",receipt={}){
+ const previous=document.getElementById("purchaseSuccessOverlay");if(previous)previous.remove();
+ const lines=(receipt.items||[]).map((x,i)=>'<div class="receipt-row"><span class="receipt-index">'+String(i+1).padStart(2,"0")+'</span><span class="receipt-name">'+esc(x.title||"کتاب")+' <small>× '+Number(x.qty||1)+'</small></span><strong>'+money(Number(x.price||0)*Number(x.qty||1))+'</strong></div>').join("");
+ const total=Number(receipt.total||0),ship=Number(receipt.shipping||SHIPPING);
+ const message="سلام، سفارش ماهیگیر ثبت شد. شماره سفارش: "+orderId+". مبلغ: "+money(total)+". پرداخت با کارت‌به‌کارت به شماره 5047061663227839 به نام جبارفر انجام می‌شود. حتماً تصویر رسید پرداخت را برای @amirtbpedit ارسال می‌کنم."
+ const el=document.createElement("div");el.id="purchaseSuccessOverlay";el.className="purchase-success receipt-overlay";
+ el.innerHTML='<div class="purchase-success-box receipt-card"><div class="receipt-confetti" aria-hidden="true">✦　✧　✦</div><div class="success-mark">✓</div><div class="success-number">MAHIGIR · DIGITAL RECEIPT</div><h2>رسید سفارش شما ثبت شد!</h2><p class="receipt-subtitle">وضعیت سفارش: در حال بررسی ... رسید را نگه دار و پس از کارت‌به‌کارت، تصویر رسید پرداخت را حتماً برای فروشگاه بفرست.</p><div class="receipt-number"><span>شماره سفارش</span><strong dir="ltr">#'+esc(String(orderId))+'</strong></div><div class="receipt-lines">'+(lines||'<div class="receipt-row"><span class="receipt-name">اقلام سفارش</span><strong>ثبت‌شده</strong></div>')+'</div><div class="receipt-row"><span>ارسال با تیپاکس</span><strong>'+money(ship)+'</strong></div><div class="receipt-row receipt-total"><span>مبلغ کل</span><strong>'+money(total)+'</strong></div><div class="receipt-meta"><span>روش پرداخت</span><strong>فقط کارت‌به‌کارت</strong><span>وضعیت سفارش</span><strong>در حال بررسی ...</strong></div><div style="margin-top:14px;padding:20px;border:1px solid #8c9bff66;border-radius:20px;background:linear-gradient(135deg,#17254b,#251b4c);text-align:center"><div style="font-size:12px;color:#bdc9f0">شماره کارت مقصد</div><strong dir="ltr" style="display:block;font-size:clamp(22px,5vw,31px);letter-spacing:1px;margin:12px 0;color:#fff">5047 0616 6322 7839</strong><div style="font-size:15px;color:#dce4ff">به نام جبارفر</div><button type="button" class="receipt-copy" style="margin-top:12px;padding:11px 18px" onclick="GenUIUnavailableReceiptCopy(&quot;5047061663227839&quot;)">کپی شماره کارت ⧉</button><div dir="ltr" style="font-size:23px;font-weight:1000;margin-top:18px;color:#a9f5f0">@amirtbpedit</div><p class="payment-warning" style="margin-bottom:0">حتماً پس از پرداخت، تصویر رسید کارت‌به‌کارت را به آیدی روبیکا ارسال کن.</p></div><div class="receipt-address"><strong>نشانی گیرنده</strong><p>'+esc(receipt.recipient||"")+' · '+esc(receipt.phone||"")+'</p><p>'+esc(receipt.city||"")+'، '+esc(receipt.address||"")+'</p><p>کد پستی: '+esc(receipt.postal_code||"")+'</p></div><p class="payment-warning">این رسید تأیید پرداخت بانکی نیست. پس از هماهنگی با فروشگاه، رسید کارت‌به‌کارت را در روبیکا ارسال کن.</p><button class="btn primary" id="receiptRubikaBtn">هماهنگی و ارسال رسید در روبیکا ←</button><button class="btn white" style="margin-right:8px" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove();openAccount()">مشاهده سفارش در حساب</button><button class="btn white" style="margin-top:10px;width:100%" onclick="document.getElementById(\'purchaseSuccessOverlay\')?.remove()">ادامه خرید</button></div>';
+ document.body.appendChild(el);
+ document.getElementById("receiptRubikaBtn").onclick=()=>{try{navigator.clipboard?.writeText(message)}catch{};window.open("https://rubika.ir/amirtbpedit","_blank","noopener")};
+ setTimeout(()=>{if(el.isConnected)el.querySelector(".success-mark")?.classList.add("success-mark-ready")},80);
+}
+function GenUIUnavailableReceiptCopy(orderId){try{const area=document.createElement("textarea");area.value=String(orderId);area.style.position="fixed";area.style.opacity="0";document.body.appendChild(area);area.select();document.execCommand("copy");area.remove();notify("شماره سفارش کپی شد.")}catch{notify("شماره سفارش: "+orderId)}}
+
+
+selectedCheckoutAddress=0;let selectedPaymentMethod="card",checkoutSubmitting=false;
+function openCheckoutPage(){
+ if(!currentUser){openAccount();notify("برای خرید ابتدا وارد حساب کاربری شو.");return}
+ location.href="checkout.html";
+}
+function closeCheckoutPage(){
+ const page=document.getElementById("checkoutPage");if(!page)return;
+ page.classList.remove("open");page.setAttribute("aria-hidden","true");
+ if(!document.querySelector(".backdrop.open")&&!document.getElementById("addressPage")?.classList.contains("open")&&!document.getElementById("adminPage").classList.contains("open"))document.body.style.overflow="";
+}
+function startCheckout(){
+ if(!cart.some(i=>getBook(i.id)&&!getBook(i.id).comingSoon)){notify("سبد خرید خالی است.");return}
+ if(!currentUser){closeModal("cartModal");openAccount();notify("برای ثبت سفارش وارد حساب شو.");return}
+ closeModal("cartModal");openCheckoutPage();
+}
+function useAddress(i){const a=readAddresses()[i];if(!a)return;selectedCheckoutAddress=i;closeAddressPage();openCheckoutPage()}
+function chooseCheckoutAddress(i){
+ const saved=readAddresses();if(!saved[i])return;selectedCheckoutAddress=i;
+ localStorage.setItem("mh_checkout_address_"+currentUser.id,String(i));renderCheckoutPage();
+ const card=document.querySelector('[data-address-choice="'+i+'"]');if(card)card.animate([{transform:"scale(.97)"},{transform:"scale(1.02)"},{transform:"scale(1)"}],{duration:350,easing:"ease-out"});
+}
+function selectPayment(method){
+ selectedPaymentMethod=method;
+ ["paymentCard","paymentCoord"].forEach(id=>{const b=document.getElementById(id);if(!b)return;b.classList.toggle("selected",id===(method==="card"?"paymentCard":"paymentCoord"));const check=b.querySelector(".choice-check");if(check)check.remove()});
+ const target=document.getElementById(method==="card"?"paymentCard":"paymentCoord");if(target)target.querySelector(".choice-title")?.insertAdjacentHTML("beforeend",'<span class="choice-check">✓</span>');
+}
+function renderCheckoutPage(){
+ const saved=readAddresses(),choices=document.getElementById("checkoutAddressChoices");
+ if(choices){
+  if(!saved.length)choices.innerHTML='<div class="checkout-empty" style="grid-column:1/-1"><h3>هنوز نشانی ثبت نکرده‌ای</h3><p>یک نشانی اضافه کن تا برای سفارش انتخابش کنی.</p><button class="checkout-continue" onclick="closeCheckoutPage();openAddresses()">＋ افزودن نشانی</button></div>';
+  else{if(!saved[selectedCheckoutAddress])selectedCheckoutAddress=0;
+   choices.innerHTML=saved.map((a,i)=>'<button type="button" class="address-select-card '+(i===selectedCheckoutAddress?'selected':'')+'" data-address-choice="'+i+'" onclick="chooseCheckoutAddress('+i+')"><div class="choice-title"><span class="choice-icon">⌂</span><span>'+esc(a.recipient||"گیرنده")+'</span>'+(i===selectedCheckoutAddress?'<span class="choice-check">✓</span>':'')+'</div><div class="choice-detail">'+esc(a.phone||"")+'<br>'+esc(a.city||"")+'<br>'+esc(a.address||"")+'<br>کد پستی: '+esc(a.postal_code||"")+'</div><div style="margin-top:12px;color:#aebcff;font-size:11px">انتخاب این نشانی ←</div></button>').join("");
+  }
+ }
+ const summary=document.getElementById("checkoutSummary");
+ if(summary){
+  const valid=cart.map(i=>({item:i,book:getBook(i.id)})).filter(x=>x.book&&!x.book.comingSoon);
+  const total=valid.reduce((n,x)=>n+(Number(x.book.price)||0)*x.item.qty,0);
+  summary.innerHTML='<div class="checkout-tip">'+valid.map(x=>'<div style="display:flex;justify-content:space-between;gap:12px;padding:7px 0"><span>'+esc(x.book.title)+' × '+x.item.qty+'</span><strong>'+money(x.book.price*x.item.qty)+'</strong></div>').join("")+'<hr style="border-color:#7185d933"><div style="display:flex;justify-content:space-between;padding:7px 0"><span>جمع کتاب‌ها</span><strong>'+money(total)+'</strong></div><div style="display:flex;justify-content:space-between;padding:7px 0"><span>ارسال تیپاکس</span><strong>'+money(SHIPPING)+'</strong></div><div style="display:flex;justify-content:space-between;padding:12px 0 0;color:#fff;font-size:17px"><strong>مبلغ نهایی</strong><strong>'+money(total+SHIPPING)+'</strong></div></div>';
+ }
+}
+async function submitCheckoutOrder(){
+ if(checkoutSubmitting)return;
+ if(!db){notify("اتصال Supabase برقرار نیست؛ سفارش ثبت نشد.");return}
+ if(!currentUser){notify("برای ثبت سفارش وارد حساب شو.");return}
+ const saved=readAddresses(),a=saved[selectedCheckoutAddress];
+ if(!a){notify("ابتدا یک نشانی اضافه و انتخاب کن.");return}
+ const items=cart.map(i=>{const b=getBook(i.id);return b&&!b.comingSoon?{id:i.id,title:b.title,price:Number(b.price),qty:i.qty}:null}).filter(Boolean);
+ if(!items.length){notify("سبد خرید خالی است.");return}
+ const total=items.reduce((n,i)=>n+i.price*i.qty,0);
+ const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:normalizeDigits(a.postal_code).trim(),shipping_method:"تیپاکس",items,total_price:total+SHIPPING,stage_id:stages[0]?.id||1,approval_status:"pending_review"};
+ const btn=document.querySelector(".checkout-continue");checkoutSubmitting=true;if(btn){btn.disabled=true;btn.textContent="در حال ثبت سفارش..."}
+ try{
+  const {data:sessionData,error:sessionError}=await db.auth.getSession();if(sessionError)throw sessionError;
+  if(!sessionData?.session?.access_token)throw new Error("نشست ورود پیدا نشد؛ دوباره وارد حساب شو.");
+  const response=await fetch(PROJECT_URL+"/functions/v1/admin-api",{method:"POST",headers:{"Content-Type":"application/json","apikey":PUBLIC_KEY,"Authorization":"Bearer "+sessionData.session.access_token},body:JSON.stringify({action:"create-order",payload})});
+  let result={};try{result=await response.json()}catch{}
+  if(!response.ok||result.error)throw new Error(result.error||("خطای سرور ("+response.status+")"));
+  cart=[];saveCart();renderCart();renderBooks();renderBestsellers();closeCheckoutPage();
+  showPurchaseSuccess(result.id||"ثبت‌شده",selectedPaymentMethod,{items,total:total+SHIPPING,shipping:SHIPPING,recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:a.postal_code});
+  try{await loadOrders()}catch(err){console.warn("Order saved but order list refresh failed:",err)}
+ }catch(err){console.error("Mahigir checkout failed:",err);notify("سفارش ثبت نشد: "+String(err?.message||"خطای نامشخص").slice(0,180))}
+ finally{checkoutSubmitting=false;if(btn){btn.disabled=false;btn.textContent="تأیید و ثبت سفارش ✨"}}
+}
+function renderCheckout(a){if(a){const saved=readAddresses();const ix=saved.findIndex(x=>x.id&&x.id===a.id);if(ix>=0)selectedCheckoutAddress=ix}renderCheckoutPage()}
+/* Address persistence repair v4: local-first, cloud sync, then continue to checkout */
+function readAddresses(){
+ let local=null;
+ try{const value=JSON.parse(localStorage.getItem(addressKey())||"null");if(Array.isArray(value))local=value}catch{}
+ const remote=currentUser?.user_metadata?.mahigir_addresses;
+ if(local&&local.length)return local;
+ if(Array.isArray(remote)&&remote.length){
+  try{localStorage.setItem(addressKey(),JSON.stringify(remote))}catch{}
+  return remote;
+ }
+ return local|| (Array.isArray(remote)?remote:[]);
+}
+async function saveAddress(e){
+ e.preventDefault();
+ const form=e.currentTarget||e.target;
+ if(!form.reportValidity())return;
+ const f=new FormData(form);
+ const a={id:(window.crypto&&window.crypto.randomUUID)?window.crypto.randomUUID():"addr-"+Date.now(),recipient:String(f.get("recipient")||"").trim(),phone:normalizeDigits(String(f.get("phone")||"")).trim(),city:String(f.get("city")||"").trim(),address:String(f.get("address")||"").trim(),postal_code:normalizeDigits(String(f.get("postal_code")||"")).trim(),shipping_method:"تیپاکس"};
+ if(!/^\d{10}$/.test(a.postal_code)){notify("کد پستی باید دقیقاً ۱۰ رقم باشد.");return}
+ if(!a.recipient||!a.phone||!a.city||!a.address){notify("لطفاً همه اطلاعات نشانی را کامل کن.");return}
+ const list=readAddresses();
+ if(editingAddressIndex>=0&&list[editingAddressIndex])list[editingAddressIndex]=a;else list.push(a);
+ const btn=form.querySelector('button[type="submit"]');
+ if(btn){btn.disabled=true;btn.textContent="در حال ذخیره..."}
+ let synced=false;
+ try{synced=await persistAddresses(list)}catch(err){console.error("Address save failed:",err);try{localStorage.setItem(addressKey(),JSON.stringify(list))}catch{}}
+ editingAddressIndex=-1;
+ renderAddresses();addressForm();
+ notify(synced?"نشانی ذخیره و با حساب همگام‌سازی شد ✨":"نشانی روی همین دستگاه ذخیره شد؛ همگام‌سازی حساب هنوز تأیید نشده است.");
+ setTimeout(()=>{
+  closeAddressPage();
+  selectedCheckoutAddress=Math.max(0,readAddresses().findIndex(x=>x.id===a.id));
+  openCheckoutPage();
+ },450);
+}
+
+
+window.addEventListener("popstate",()=>{const id=new URLSearchParams(location.search).get("book");if(id)openBook(id);else closeBookPage()});
+
+</script>
+<div id="orderDetailPage" aria-hidden="true"><div class="od-top"><div class="od-brand"><span class="od-brand-mark">م</span><span>ماهیگیر <small style="display:block;font-size:10px;color:#78917f">مرکز پیگیری سفارش</small></span></div><button class="address-back" onclick="closeCustomerOrder()">← بازگشت به حساب</button></div><main class="od-main" id="orderDetailContent"></main></div>
+<script>
+(function(){const c=document.createElement("canvas");c.id="particleField";c.setAttribute("aria-hidden","true");document.body.prepend(c);const x=c.getContext("2d");if(!x)return;let w=0,h=0,d=1,pts=[],mouse={x:-1000,y:-1000},reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;function size(){d=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;c.width=w*d;c.height=h*d;c.style.width=w+"px";c.style.height=h+"px";x.setTransform(d,0,0,d,0,0);let n=Math.min(100,Math.max(34,Math.round(w*h/14500)));pts=Array.from({length:n},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3}))}function draw(){x.clearRect(0,0,w,h);for(let i=0;i<pts.length;i++){let p=pts[i],dx=p.x-mouse.x,dy=p.y-mouse.y,dist=Math.hypot(dx,dy);if(!reduce&&dist<130&&dist>0){let f=(130-dist)/130;p.vx+=dx/dist*f*.65;p.vy+=dy/dist*f*.65}p.vx*=.985;p.vy*=.985;let sp=Math.hypot(p.vx,p.vy);if(sp>.7){p.vx=p.vx/sp*.7;p.vy=p.vy/sp*.7}if(!reduce){p.x+=p.vx;p.y+=p.vy}if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;p.x=Math.max(0,Math.min(w,p.x));p.y=Math.max(0,Math.min(h,p.y));for(let j=i+1;j<pts.length;j++){let q=pts[j],dd=Math.hypot(p.x-q.x,p.y-q.y);if(dd<115){x.strokeStyle="rgba(30,135,70,"+(1-dd/115)*.19+")";x.lineWidth=.8;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}if(dist<150){x.strokeStyle="rgba(27,142,75,"+(1-dist/150)*.35+")";x.lineWidth=1;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(mouse.x,mouse.y);x.stroke()}x.fillStyle="rgba(37,145,77,.35)";x.beginPath();x.arc(p.x,p.y,1.7,0,Math.PI*2);x.fill()}if(!reduce)requestAnimationFrame(draw)}addEventListener("resize",size,{passive:true});addEventListener("pointermove",e=>{mouse.x=e.clientX;mouse.y=e.clientY},{passive:true});addEventListener("pointerleave",()=>{mouse.x=-1000;mouse.y=-1000});size();draw()})();
+function dismissStudentPromo(){document.getElementById("studentPromo")?.remove()}
+(function(){const el=document.getElementById("studentPromo");if(el&&Date.now()>new Date("2026-11-04T23:59:59+03:30").getTime())el.remove()})();
+</script>
+<script>
+(function(){
+ const params=new URLSearchParams(location.search),target=params.get("open");
+ if(!target)return;
+ const run=()=>{try{
+  if(target==="account"&&typeof openAccount==="function")openAccount();
+  if(target==="orders"&&typeof openAccount==="function")openAccount();
+  if(target==="cart"&&typeof openCart==="function")openCart();
+  if(target==="checkout"&&typeof openCheckoutPage==="function")openCheckoutPage();
+  if(target==="addresses"&&typeof openAddresses==="function")openAddresses();
+  if(target==="contact"&&typeof openContactPage==="function")openContactPage();
+   if(target==="admin"&&typeof openAdmin==="function")openAdmin();
+ }catch(e){console.warn("Page shortcut:",e)}};
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(run,250),{once:true});else setTimeout(run,250);
+})();
+</script>
+</body>
+</html>
