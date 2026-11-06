@@ -777,7 +777,7 @@ function addressForm(a={}){
  <div class="address-field"><label>شماره تماس</label><input name="phone" autocomplete="tel" inputmode="tel" placeholder="شماره تماس گیرنده" required maxlength="20" value="${esc(a.phone||"")}"></div>
  <div class="address-field"><label>استان و شهر</label><input name="city" autocomplete="address-level2" placeholder="مثلاً تهران، تهران" required maxlength="100" value="${esc(a.city||"")}"></div>
  <div class="address-field"><label>نشانی کامل</label><textarea name="address" autocomplete="street-address" placeholder="خیابان، کوچه، پلاک، واحد..." required maxlength="1000">${esc(a.address||"")}</textarea></div>
- <div class="address-field"><label>کد پستی ۱۰ رقمی</label><input name="postal_code" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{10}" oninput="this.value=normalizePostalCode(this.value)" placeholder="۱۰ رقم کد پستی" required maxlength="10" value="${esc(a.postal_code||"")}"></div>
+ <div class="address-field"><label>کد پستی ۱۰ رقمی</label><input name="postal_code" autocomplete="postal-code" inputmode="numeric"  oninput="this.value=normalizePostalCode(this.value)" placeholder="۱۰ رقم کد پستی" required maxlength="10" value="${esc(a.postal_code||"")}"></div>
  <div class="address-form-actions"><button type="submit" class="address-save">${editingAddressIndex>=0?"ذخیره تغییرات ✓":"ذخیره نشانی ✨"}</button>${editingAddressIndex>=0?'<button type="button" class="address-cancel" onclick="cancelAddressEdit()">انصراف</button>':""}</div></form>`;
 }
 function editAddress(i){addresses=readAddresses();if(!addresses[i])return;editingAddressIndex=i;addressForm(addresses[i]);document.getElementById("addressFormContent").scrollIntoView({behavior:"smooth",block:"start"})}
@@ -838,7 +838,7 @@ async function submitOrder(e){
  const items=cart.map(i=>{const b=getBook(i.id);return b&&!b.comingSoon?{id:i.id,title:b.title,price:Number(b.price),qty:i.qty}:null}).filter(Boolean);
  if(!items.length){notify("سبد خرید خالی است.");return}
  const itemsTotal=items.reduce((n,i)=>n+i.price*i.qty,0);
- const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:normalizeDigits(a.postal_code).trim(),shipping_method:"تیپاکس",items,total_price:itemsTotal+SHIPPING,approval_status:"pending_review",coupon_code:currentCoupon()?"daneshcode":""};
+ const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:normalizePostalCode(a.postal_code),shipping_method:"تیپاکس",items,total_price:itemsTotal+SHIPPING,approval_status:"pending_review",coupon_code:currentCoupon()?"daneshcode":""};
  const btn=e.target.querySelector('button[type="submit"]');if(btn){btn.disabled=true;btn.textContent="در حال ثبت سفارش..."}
  try{
   const {data:sessionData,error:sessionError}=await db.auth.getSession();
@@ -1067,7 +1067,7 @@ async function saveAddress(e){
  const form=e.currentTarget||e.target;
  if(!form.reportValidity())return;
  const f=new FormData(form);
- const a={id:crypto?.randomUUID?.()||("addr-"+Date.now()),recipient:String(f.get("recipient")||"").trim(),phone:normalizeDigits(String(f.get("phone")||"")).trim(),city:String(f.get("city")||"").trim(),address:String(f.get("address")||"").trim(),postal_code:normalizeDigits(String(f.get("postal_code")||"")).trim(),shipping_method:"تیپاکس"};
+ const a={id:crypto?.randomUUID?.()||("addr-"+Date.now()),recipient:String(f.get("recipient")||"").trim(),phone:normalizeDigits(String(f.get("phone")||"")).trim(),city:String(f.get("city")||"").trim(),address:String(f.get("address")||"").trim(),postal_code:normalizePostalCode(String(f.get("postal_code")||"")),shipping_method:"تیپاکس"};
  if(!/^\d{10}$/.test(a.postal_code)){notify("کد پستی باید دقیقاً ۱۰ رقم باشد.");return}
  if(!a.recipient||!a.phone||!a.city||!a.address){notify("لطفاً همه اطلاعات نشانی را کامل کن.");return}
  const old=readAddresses();
@@ -1150,7 +1150,7 @@ async function submitCheckoutOrder(){
  const items=cart.map(i=>{const b=getBook(i.id);return b&&!b.comingSoon?{id:i.id,title:b.title,price:Number(b.price),qty:i.qty}:null}).filter(Boolean);
  if(!items.length){notify("سبد خرید خالی است.");return}
  const total=items.reduce((n,i)=>n+i.price*i.qty,0);
- const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:normalizeDigits(a.postal_code).trim(),shipping_method:"تیپاکس",items,total_price:total+SHIPPING,stage_id:stages[0]?.id||1,approval_status:"pending_review"};
+ const payload={user_id:currentUser.id,username:profile?.username||currentUser.user_metadata?.username||"",recipient:a.recipient,phone:a.phone,city:a.city,address:a.address,postal_code:normalizePostalCode(a.postal_code),shipping_method:"تیپاکس",items,total_price:total+SHIPPING,stage_id:stages[0]?.id||1,approval_status:"pending_review"};
  const btn=document.querySelector(".checkout-continue");checkoutSubmitting=true;if(btn){btn.disabled=true;btn.textContent="در حال ثبت سفارش..."}
  try{
   const {data:sessionData,error:sessionError}=await db.auth.getSession();if(sessionError)throw sessionError;
@@ -1182,7 +1182,7 @@ async function saveAddress(e){
  const form=e.currentTarget||e.target;
  if(!form.reportValidity())return;
  const f=new FormData(form);
- const a={id:(window.crypto&&window.crypto.randomUUID)?window.crypto.randomUUID():"addr-"+Date.now(),recipient:String(f.get("recipient")||"").trim(),phone:normalizeDigits(String(f.get("phone")||"")).trim(),city:String(f.get("city")||"").trim(),address:String(f.get("address")||"").trim(),postal_code:normalizeDigits(String(f.get("postal_code")||"")).trim(),shipping_method:"تیپاکس"};
+ const a={id:(window.crypto&&window.crypto.randomUUID)?window.crypto.randomUUID():"addr-"+Date.now(),recipient:String(f.get("recipient")||"").trim(),phone:normalizeDigits(String(f.get("phone")||"")).trim(),city:String(f.get("city")||"").trim(),address:String(f.get("address")||"").trim(),postal_code:normalizePostalCode(String(f.get("postal_code")||"")),shipping_method:"تیپاکس"};
  if(!/^\d{10}$/.test(a.postal_code)){notify("کد پستی باید دقیقاً ۱۰ رقم باشد.");return}
  if(!a.recipient||!a.phone||!a.city||!a.address){notify("لطفاً همه اطلاعات نشانی را کامل کن.");return}
  const list=readAddresses();
