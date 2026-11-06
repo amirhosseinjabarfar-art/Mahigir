@@ -787,7 +787,7 @@ function normalizePostalCode(s){return normalizeDigits(s).replace(/[^0-9]/g,"").
 function saveAddress(e){
  e.preventDefault();const f=new FormData(e.target);
  const a={recipient:String(f.get("recipient")).trim(),phone:String(f.get("phone")).trim(),city:String(f.get("city")).trim(),address:String(f.get("address")).trim(),postal_code:normalizePostalCode(f.get("postal_code")),shipping_method:"تیپاکس"};
- if(!/^\\d{10}$/.test(a.postal_code)){notify("کد پستی باید ۱۰ رقم باشد.");return}
+ if(!/^[0-9]{10}$/.test(a.postal_code)){notify("کد پستی باید ۱۰ رقم باشد.");return}
  addresses=readAddresses();
  if(editingAddressIndex>=0&&addresses[editingAddressIndex]){addresses[editingAddressIndex]=a;notify("نشانی با موفقیت ویرایش شد.")}
  else{addresses.push(a);notify("نشانی تازه ذخیره شد.")}
